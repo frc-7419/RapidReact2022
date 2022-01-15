@@ -6,8 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController;  
 import frc.robot.PaddedXbox;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -19,7 +22,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final PaddedXbox joystick = new PaddedXbox();
+  // private final PaddedXbox joystick = new PaddedXbox();
+  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
+  private final GyroSubsystem gyro = new GyroSubsystem();
+  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 45);
+
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -45,9 +52,9 @@ public class RobotContainer {
 //    */
 
   // uncomment when u need to use this
-  // public Command getAutonomousCommand() {
-  //   return autonomousCommand;
-  // }
+  public Command getAutonomousCommand() {
+    return turnWithGyroClosedLoop;
+  }
 
   // schedule default commands here
   public void scheduleDefaultCommands(){
