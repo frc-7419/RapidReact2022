@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.PaddedXbox;
+import frc.robot.subsystems.autos.SolenoidForwardAndReverse;
+import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
+import frc.robot.subsystems.pneumatics.SolenoidSub;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -20,6 +23,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final PaddedXbox joystick = new PaddedXbox();
+
+  private final SolenoidSub solenoid = new SolenoidSub();
+  private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
+
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -45,9 +52,9 @@ public class RobotContainer {
 //    */
 
   // uncomment when u need to use this
-  // public Command getAutonomousCommand() {
-  //   return autonomousCommand;
-  // }
+  public Command getAutonomousCommand() {
+    return this.solenoidForwardAndReverse;
+  }
 
   // schedule default commands here
   public void scheduleDefaultCommands(){
