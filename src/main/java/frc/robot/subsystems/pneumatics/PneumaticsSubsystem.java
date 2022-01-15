@@ -2,13 +2,28 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.encoders;
+package frc.robot.subsystems.pneumatics;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class TalonSubsystem extends SubsystemBase {
+public class PneumaticsSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public TalonSubsystem() {}
+  boolean enabled = true;
+  Compressor c;
+
+  public PneumaticsSubsystem() {
+    c = new Compressor(0);
+    c.setClosedLoopControl(true);
+  }
+
+  public void start() {
+    c.start();
+  }
+
+  public void stop() {
+    c.stop();
+  }
 
   @Override
   public void periodic() {

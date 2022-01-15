@@ -20,6 +20,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final PaddedXbox joystick = new PaddedXbox();
+
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -36,6 +37,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+   
 
   }
   /**
