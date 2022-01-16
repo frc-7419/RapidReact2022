@@ -9,9 +9,8 @@ public class TemplateSequentialCommandGroup extends SequentialCommandGroup {
     /* use:
     addCommands(new FoodCommand());
     addCommands(new BarCommand());
-    to add FooCommand and BarCommand to the sequential command group 
-    */
-
+    to add FooCommand and BarCommand to the sequential command group */
+    
 
   }
 
