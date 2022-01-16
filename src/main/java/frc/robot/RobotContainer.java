@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;  
 import frc.robot.PaddedXbox;
+import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
-import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -25,9 +25,9 @@ public class RobotContainer {
   // private final PaddedXbox joystick = new PaddedXbox();
   private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
-  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 45);
 
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // instantiate your auto commands here
+  private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -53,7 +53,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return turnWithGyroClosedLoop;
+    return templateSequentialCommandGroup;
   }
 
   // schedule default commands here
