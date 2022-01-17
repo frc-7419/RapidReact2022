@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;  
-import frc.robot.PaddedXbox;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -21,8 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  // private final PaddedXbox joystick = new PaddedXbox();
+  private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
 
