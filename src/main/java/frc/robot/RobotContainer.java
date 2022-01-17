@@ -21,7 +21,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
   private final LimitSwitchSubsystem limitSwitchSubsystem = new LimitSwitchSubsystem();
-  private final TalonSubsystem talonSubsystem = new TalonSubsystem();
+  // private final TalonSubsystem talonSubsystem = new TalonSubsystem();
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
