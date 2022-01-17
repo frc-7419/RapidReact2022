@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.PaddedXbox;
 import frc.robot.subsystems.limelight.TurnOffLED;
 import frc.robot.subsystems.limelight.TurnToTargetOpenLoop;
 import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
@@ -27,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final PaddedXbox joystick = new PaddedXbox();
+  private final XboxController joystick = new XboxController(0);
 
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
@@ -51,11 +50,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // A button: limelight turn to target open loop test
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    new JoystickButton(joystick, XboxController.Button.kA.value)
     .whenPressed(new TurnToTargetOpenLoop(driveBaseSubsystem, limelightSubsystem, 0.1));
 
     //X button: limelight turn to target closed loop test
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    new JoystickButton(joystick, XboxController.Button.kX.value)
     .whenPressed(new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem));
 
   }
