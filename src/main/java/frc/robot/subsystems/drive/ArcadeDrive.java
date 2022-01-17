@@ -1,6 +1,6 @@
 package frc.robot.subsystems.drive;
 
-import frc.robot.PaddedXbox;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -14,10 +14,10 @@ public class ArcadeDrive extends CommandBase {
   private double kTurn;
   private double kSlowStraight;
   private double kSlowTurn;
-  private PaddedXbox joystick;
+  private XboxController joystick;
 
   
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSubsystem driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
+  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
     this.kStraight = kStraight;
