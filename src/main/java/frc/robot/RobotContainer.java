@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.limitSwitch.LimitSwitchSubsystem;
+import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import frc.robot.subsystems.talon.TalonSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;

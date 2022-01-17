@@ -1,4 +1,4 @@
-package frc.robot.subsystems.limitSwitch;
+package frc.robot.subsystems.limitswitch;
 // package frc.robot.subsystems.limitSwitch;
 
 // import edu.wpi.first.wpilibj2.command.CommandBase;
