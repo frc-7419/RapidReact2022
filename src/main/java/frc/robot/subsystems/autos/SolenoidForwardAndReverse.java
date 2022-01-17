@@ -1,6 +1,5 @@
 package frc.robot.subsystems.autos;
 
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.pneumatics.PneumaticsSub;
 import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
