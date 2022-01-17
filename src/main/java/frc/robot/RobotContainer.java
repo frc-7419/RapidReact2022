@@ -25,7 +25,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
-  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 45);
+  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 90);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
