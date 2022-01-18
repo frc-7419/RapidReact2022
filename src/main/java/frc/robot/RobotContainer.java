@@ -22,7 +22,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
-  private final RunServoWithJoystick runServoWithJoystick = new RunServoWithJoystick(servoSubsystem, joystick, 135);
+  private final RunServoWithJoystick runServoWithJoystick = new RunServoWithJoystick(servoSubsystem, joystick);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
