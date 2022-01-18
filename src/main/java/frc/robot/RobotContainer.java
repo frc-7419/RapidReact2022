@@ -14,7 +14,6 @@ import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
-import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.limelight.FollowTarget;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
