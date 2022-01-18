@@ -3,10 +3,8 @@ package frc.robot.subsystems.servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Servo;
 
-private Servo servo;
-
 public class ServoSubsystem extends SubsystemBase {
-  
+  private Servo servo;
 
   public ServoSubsystem() {
     servo = new Servo(0); // put the specific PWM port/channel
@@ -17,7 +15,7 @@ public class ServoSubsystem extends SubsystemBase {
 
   }
 
-  // angle in degrees
+  // angle in degrees, from 0-180
   public void setAngle(double angle) {
     servo.setAngle(angle);
   }
