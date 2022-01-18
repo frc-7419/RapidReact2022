@@ -9,9 +9,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.limelight.TurnOffLED;
 import frc.robot.subsystems.limelight.TurnToTargetOpenLoop;
+import frc.robot.subsystems.limelight.TurnToTargetWithGyro;
 import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.limelight.FollowTarget;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -30,11 +33,13 @@ public class RobotContainer {
 
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+  private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
 
   // private final TurnOffLED turnOffLED = new TurnOffLED(limelightSubsystem);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem);
   private final FollowTarget followTarget = new FollowTarget(driveBaseSubsystem, limelightSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, 0.5, 0.5, 0.5, 0.5);
+  private final TurnToTargetWithGyro = new TurnToTargetWithGyro(driveBaseSubsystem, limelight, gyro);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
