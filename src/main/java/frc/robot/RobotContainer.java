@@ -72,7 +72,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return turnWithGyroClosedLoop;
+    return turnToTargetClosedLoop;
   }
 
   // schedule default commands here
