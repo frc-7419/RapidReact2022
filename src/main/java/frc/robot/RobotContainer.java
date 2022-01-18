@@ -39,7 +39,7 @@ public class RobotContainer {
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem);
   private final FollowTarget followTarget = new FollowTarget(driveBaseSubsystem, limelightSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, 0.5, 0.5, 0.5, 0.5);
-  private final TurnToTargetWithGyro = new TurnToTargetWithGyro(driveBaseSubsystem, limelight, gyro);
+  private final TurnToTargetWithGyro turnToTargetWithGyro = new TurnToTargetWithGyro(driveBaseSubsystem, limelightSubsystem, gyroSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
