@@ -7,8 +7,8 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 public class TurnToTargetOpenLoop extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
-  private DriveBaseSubsystem driveBase;
-  private LimelightSubsystem limelight;
+  private DriveBaseSubsystem driveBaseSubsystem;
+  private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
   private double tx;
@@ -16,11 +16,11 @@ public class TurnToTargetOpenLoop extends CommandBase {
   private double power;
   private double distanceToTarget;
 
-  public TurnToTargetOpenLoop(DriveBaseSubsystem driveBase, LimelightSubsystem limelight, double power) {
-    this.driveBase = driveBase;
-    this.limelight = limelight;
+  public TurnToTargetOpenLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem, double power) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
+    this.limelightSubsystem = limelightSubsystem;
     this.power = power;
-    addRequirements(driveBase, limelight);
+    addRequirements(driveBaseSubsystem, limelightSubsystem);
   }
 
   @Override
@@ -33,15 +33,15 @@ public class TurnToTargetOpenLoop extends CommandBase {
 
     int directionalCoefficient = 1;
 
-    tx = limelight.getTx();
-    ty = limelight.getTy();
+    tx = limelightSubsystem.getTx();
+    ty = limelightSubsystem.getTy();
 
     // calculate negative coefficient based on position of target
     if (tx > 0) {directionalCoefficient = -1;}
 
     // set power to motors
-    driveBase.setRightPower(directionalCoefficient * power);
-    driveBase.setLeftPower(-directionalCoefficient * power);
+    driveBaseSubsystem.setRightPower(directionalCoefficient * power);
+    driveBaseSubsystem.setLeftPower(-directionalCoefficient * power);
 
     // distanceToTarget = (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     // distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
@@ -51,13 +51,13 @@ public class TurnToTargetOpenLoop extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // set motors to zero when it ends
-    driveBase.setAll(0);
+    driveBaseSubsystem.setAll(0);
   }
 
   @Override
   public boolean isFinished() {
     // end condition: when tx gets within .05
-    return Math.abs(limelight.getTx()) < 0.05; //threshold
+    return Math.abs(limelightSubsystem.getTx()) < 0.05; //threshold
   }
 }
  

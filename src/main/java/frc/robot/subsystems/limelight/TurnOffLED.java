@@ -7,32 +7,32 @@ package frc.robot.subsystems.limelight;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurnOffLED extends CommandBase {
-  private LimelightSubsystem limelight;
+  private LimelightSubsystem limelightSubsystem;
 
   /**
    * Turn off LED if target detected
-   * @param limesub
+   * @param limelightSubsystem
    */
-  public TurnOffLED(LimelightSubsystem limesub) {
-    this.limelight = limesub;
+  public TurnOffLED(LimelightSubsystem limelightSubsystem) {
+    this.limelightSubsystem = limelightSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(limelight);
+    addRequirements(limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     // turn on limelight in the beginning
-    limelight.setLED(3);
+    limelightSubsystem.setLED(3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // turn off if target detected
-    if (limelight.getTv() == 1) {
-      limelight.setLED(1);
+    if (limelightSubsystem.getTv() == 1) {
+      limelightSubsystem.setLED(1);
     }
   }
 
