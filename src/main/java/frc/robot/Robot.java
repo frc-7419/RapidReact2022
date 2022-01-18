@@ -45,6 +45,9 @@ public class Robot extends TimedRobot {
   
   @Override
   public void teleopInit() {
+    // This makes sure that the autonomous stops running when teleop starts running. 
+    // Uncomment this once you have an auto command to run to make sure it doesnt keep running in teleop
+    // robotContainer.getAutonomousCommand().cancel();
     robotContainer.scheduleDefaultCommands();
 
   }
