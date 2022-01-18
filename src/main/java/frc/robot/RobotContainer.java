@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.servo.RunServoWithJoystick;
+import frc.robot.subsystems.servo.ServoSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -17,9 +19,10 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final ServoSubsystem servoSubsystem = new ServoSubsystem();
+
+  private final RunServoWithJoystick runServoWithJoystick = new RunServoWithJoystick(servoSubsystem, joystick, 135);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -50,6 +53,6 @@ public class RobotContainer {
 
   // schedule default commands here
   public void scheduleDefaultCommands(){
-    
+    servoSubsystem.setDefaultCommand(runServoWithJoystick);
   }
 }
