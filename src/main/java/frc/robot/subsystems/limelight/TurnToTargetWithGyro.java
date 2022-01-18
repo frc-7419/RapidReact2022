@@ -10,7 +10,7 @@ public class TurnToTargetWithGyro extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private DriveBaseSubsystem driveBaseSubsystem;
-  private LimelightSubsystem limelight;
+  private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   private GyroSubsystem gyroSubsystem;
   
@@ -25,11 +25,11 @@ public class TurnToTargetWithGyro extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTargetWithGyro(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelight, GyroSubsystem gyroSubsystem) {
+  public TurnToTargetWithGyro(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem, GyroSubsystem gyroSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
-    this.limelight = limelight;
+    this.limelightSubsystem = limelightSubsystem;
     this.gyroSubsystem = gyroSubsystem;
-    addRequirements(driveBaseSubsystem, limelight, gyroSubsystem);
+    addRequirements(driveBaseSubsystem, limelightSubsystem, gyroSubsystem);
   }
 
   @Override
@@ -40,7 +40,7 @@ public class TurnToTargetWithGyro extends CommandBase {
     kD = 1;
     pidController = new PIDController(kP, kI, kD);
 
-    initAngle = limelight.getTx();
+    initAngle = limelightSubsystem.getTx();
     gyroAngle = gyroSubsystem.getGyroAngle();
 
     pidController.setSetpoint(initAngle + gyroAngle);

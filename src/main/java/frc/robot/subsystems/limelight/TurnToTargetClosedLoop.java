@@ -9,8 +9,8 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 public class TurnToTargetClosedLoop extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
-  private DriveBaseSubsystem driveBase;
-  private LimelightSubsystem limelight;
+  private DriveBaseSubsystem driveBaseSubsystem;
+  private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
   private double kP;
@@ -26,10 +26,10 @@ public class TurnToTargetClosedLoop extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBase, LimelightSubsystem limelight) {
-    this.driveBase = driveBase;
-    this.limelight = limelight;
-    addRequirements(driveBase, limelight);
+  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
+    this.limelightSubsystem = limelightSubsystem;
+    addRequirements(driveBaseSubsystem, limelightSubsystem);
   }
 
   @Override
@@ -47,22 +47,22 @@ public class TurnToTargetClosedLoop extends CommandBase {
   public void execute() {
     SmartDashboard.putString("command status", "pid");
 
-    tx = limelight.getTx();
-    ty = limelight.getTy();
+    tx = limelightSubsystem.getTx();
+    ty = limelightSubsystem.getTy();
 
     pidOutput = pidController.calculate(tx);
     boost = Math.abs(pidOutput) / pidOutput * .05;
     pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
-    driveBase.setLeftPower(-pidOutput);
-    driveBase.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(-pidOutput);
+    driveBaseSubsystem.setRightPower(pidOutput);
 
     distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
     SmartDashboard.putNumber("distance", distanceToTarget);
 
-    if(Math.abs(driveBase.getLeftVelocity()) < velocityThreshold){
-      if(Math.abs(driveBase.getRightVelocity()) < velocityThreshold){
+    if(Math.abs(driveBaseSubsystem.getLeftVelocity()) < velocityThreshold){
+      if(Math.abs(driveBaseSubsystem.getRightVelocity()) < velocityThreshold){
         velocityBelow = true;
       }
     }
@@ -70,7 +70,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.setAll(0);
+    driveBaseSubsystem.setAll(0);
   }
 
   @Override
