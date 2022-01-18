@@ -41,7 +41,7 @@ public class TurnToTargetWithGyro extends CommandBase {
     pidController = new PIDController(kP, kI, kD);
 
     initAngle = limelight.getTx();
-    gyroAngle = gyro.getGyroAngle();
+    gyroAngle = gyroSubsystem.getGyroAngle();
 
     pidController.setSetpoint(initAngle + gyroAngle);
     pidController.setTolerance(1);
@@ -52,7 +52,7 @@ public class TurnToTargetWithGyro extends CommandBase {
   public void execute() {
     SmartDashboard.putString("command status", "pid");
 
-    gyroAngle = gyro.getGyroAngle();
+    gyroAngle = gyroSubsystem.getGyroAngle();
 
     pidOutput = pidController.calculate(gyroAngle);
     
