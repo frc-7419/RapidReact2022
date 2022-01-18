@@ -9,7 +9,7 @@ public class ServoSubsystem extends SubsystemBase {
   
 
   public ServoSubsystem() {
-    servo = new Servo(0); // put the specific PWM port
+    servo = new Servo(0); // put the specific PWM port/channel
   }
 
   @Override
@@ -17,8 +17,12 @@ public class ServoSubsystem extends SubsystemBase {
 
   }
 
-  // Servo motors are controlled on a scale of 0.0 to 1.0
+  // angle in degrees
   public void setAngle(double angle) {
-    servo.set(angle);
+    servo.setAngle(angle);
+  }
+
+  public double getAngle() {
+    return servo.getAngle();
   }
 }
