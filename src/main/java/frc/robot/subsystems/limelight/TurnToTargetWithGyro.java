@@ -12,7 +12,7 @@ public class TurnToTargetWithGyro extends CommandBase {
   private DriveBaseSubsystem driveBaseSubsystem;
   private LimelightSubsystem limelight;
   private PIDController pidController;
-  private GyroSubsystem gyro;
+  private GyroSubsystem gyroSubsystem;
   
   private double kP;
   private double kI;
@@ -25,10 +25,11 @@ public class TurnToTargetWithGyro extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTargetWithGyro(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelight, GyroSubsystem gyro) {
+  public TurnToTargetWithGyro(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelight, GyroSubsystem gyroSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelight = limelight;
-    addRequirements(driveBaseSubsystem, limelight);
+    this.gyroSubsystem = gyroSubsystem;
+    addRequirements(driveBaseSubsystem, limelight, gyroSubsystem);
   }
 
   @Override
