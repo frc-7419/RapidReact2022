@@ -9,7 +9,7 @@ public class ServoSubsystem extends SubsystemBase {
   
 
   public ServoSubsystem() {
-    servo = new Servo(0); // put the specific PWM
+    servo = new Servo(0); // put the specific PWM port
   }
 
   @Override
