@@ -10,10 +10,9 @@ public class RunServoWithJoystick extends CommandBase {
   private double initAngle;
   private double targetAngle;
 
-  public RunServoWithJoystick(ServoSubsystem servoSubsystem, XboxController joystick, double targetAngle) {
+  public RunServoWithJoystick(ServoSubsystem servoSubsystem, XboxController joystick) {
     this.servoSubsystem = servoSubsystem;
     this.joystick = joystick;
-    this.targetAngle = targetAngle;
     addRequirements(servoSubsystem);
   }
 
@@ -21,6 +20,9 @@ public class RunServoWithJoystick extends CommandBase {
   public void initialize() {
     // angle that servo starts at
     initAngle = servoSubsystem.getAngle();
+
+    // turn by 60 degrees
+    targetAngle = initAngle + 60;
   }
 
   @Override
