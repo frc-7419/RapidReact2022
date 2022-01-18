@@ -58,6 +58,10 @@ public final class Constants {
         public static double shooterRadius = 0.5; // placeholder value, will change
     }
 
+    public static class PIDConstants {
+        
+    }
+
     public static double[][] kSpeedToFf = {
         {1000, .09},
         {2000, .065},
