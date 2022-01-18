@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.gyro.GyroSubsystem;
 
 public class TurnToTargetWithGyro extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
@@ -24,10 +25,10 @@ public class TurnToTargetWithGyro extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTargetWithGyro(DriveBaseSub driveBase, LimelightSub limelight, GyroSub gyro) {
-    this.driveBase = driveBase;
+  public TurnToTargetWithGyro(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelight, GyroSubsystem gyro) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelight = limelight;
-    addRequirements(driveBase, limelight);
+    addRequirements(driveBaseSubsystem, limelight);
   }
 
   @Override
@@ -56,11 +57,11 @@ public class TurnToTargetWithGyro extends CommandBase {
     
     SmartDashboard.putNumber("pidoutput", pidOutput);
 
-    driveBase.setLeftPower(-pidOutput);
-    driveBase.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(-pidOutput);
+    driveBaseSubsystem.setRightPower(pidOutput);
 
-    if(Math.abs(driveBase.getLeftVelocity()) < velocityThreshold){
-      if(Math.abs(driveBase.getRightVelocity()) < velocityThreshold){
+    if(Math.abs(driveBaseSubsystem.getLeftVelocity()) < velocityThreshold){
+      if(Math.abs(driveBaseSubsystem.getRightVelocity()) < velocityThreshold){
         velocityBelow = true;
       }
     }
@@ -68,7 +69,7 @@ public class TurnToTargetWithGyro extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.setAll(0);
+    driveBaseSubsystem.setAll(0);
   }
 
   @Override
