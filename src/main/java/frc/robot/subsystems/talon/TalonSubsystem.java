@@ -35,6 +35,6 @@ public class TalonSubsystem extends SubsystemBase {
     talon.set(ControlMode.PercentOutput, power);
   }
 
-  // write a method that puts the talon on brake mode, reference assignments or internet
+  // write a method that puts the talon on brake mode, reference assignments for help
 
 }
