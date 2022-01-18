@@ -58,6 +58,13 @@ public final class Constants {
         public static double shooterRadius = 0.5; // placeholder value, will change
     }
 
+    public static class PIDConstants {
+        //gyro
+        public static double GyrokP = 0.085;
+        public static double GyrokI = 0;
+        public static double GyrokD = 0;
+    }
+
     public static double[][] kSpeedToFf = {
         {1000, .09},
         {2000, .065},

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
@@ -36,10 +37,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if(target > 0){negative = 1;}
     else{negative = -1;}
     initAngle = ahrs.getGyroAngle();
-    kP = .1; 
-    kI = 0;
-    kD = 0;
-    pidController = new PIDController(kP, kI, kD);
+    pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(1); 
   } 
@@ -57,7 +55,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     driveBase.stop();
     driveBase.brake();
     Timer.delay(1);
-    SmartDashboard.putNumber("i turned", ahrs.getGyroAngle() - initAngle);
+    SmartDashboard.putNumber("robot turned", ahrs.getGyroAngle() - initAngle);
   }
 
   @Override
