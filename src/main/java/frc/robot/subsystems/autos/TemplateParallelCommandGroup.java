@@ -10,7 +10,5 @@ public class TemplateParallelCommandGroup extends ParallelCommandGroup {
     addCommands(new FooCommand());
     addCommands(new BarCommand());
     to add FooCommand and BarCommand to the parallel command group (i.e. run at same time) */
-    
   }
-
 }
