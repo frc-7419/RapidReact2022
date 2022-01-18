@@ -38,7 +38,6 @@ public final class Constants {
         ;
 
         public final int id;
-
         private CanIds(int id) {
             this.id = id;
         }
