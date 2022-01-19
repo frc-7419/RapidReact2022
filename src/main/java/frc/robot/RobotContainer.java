@@ -51,8 +51,8 @@ public class RobotContainer {
   //   return autonomousCommand;
   // }
 
-  // schedule default commands here
-  public void scheduleDefaultCommands(){
+  // set default commands here
+  public void setDefaultCommands(){
     
   }
 }
