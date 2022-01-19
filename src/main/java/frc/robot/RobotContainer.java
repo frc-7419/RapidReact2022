@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.servo.ServoSubsystem;
+import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limelight.TurnLimelightWithServoToTyClosedLoop;
@@ -30,7 +31,7 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
-  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem);
+  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem, 45);
   private final TurnLimelightWithServoToTyClosedLoop TurnLimelightWithServoToTyClosedLoop = new TurnLimelightWithServoToTyClosedLoop(servoSubsystem, limelightSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

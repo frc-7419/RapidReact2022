@@ -10,12 +10,13 @@ public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
   private ServoSubsystem servoSubsystem;
   private LimelightSubsystem limelightSubsystem;
 
-  private double initAngle = 40;
+  private double initAngle;
   private double ty;
   
-  public TurnLimelightWithServoToTyOpenLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
+  public TurnLimelightWithServoToTyOpenLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem, double initAngle) {
     this.servoSubsystem = servoSubsystem;
     this.limelightSubsystem = limelightSubsystem;
+    this.initAngle = initAngle;
     addRequirements(servoSubsystem);
   }
 
