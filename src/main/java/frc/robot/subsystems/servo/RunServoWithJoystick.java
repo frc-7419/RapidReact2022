@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RunServoWithJoystick extends CommandBase {
   private ServoSubsystem servoSubsystem;
   private XboxController joystick;
-  private double initAngle;
-  private double targetAngle;
+  private double angle1 = 0;
+  private double angle2 = 120;
 
   public RunServoWithJoystick(ServoSubsystem servoSubsystem, XboxController joystick) {
     this.servoSubsystem = servoSubsystem;
@@ -18,23 +18,16 @@ public class RunServoWithJoystick extends CommandBase {
 
   @Override
   public void initialize() {
-    // angle that servo starts at
-    initAngle = servoSubsystem.getAngle();
-
-    // turn by 60 degrees
-    targetAngle = initAngle + 60;
   }
 
   @Override
   public void execute() {
     // toggle between init angle and target angle with Y button
     if (joystick.getYButton()) {
-      if (servoSubsystem.getAngle() == initAngle) {
-        servoSubsystem.setAngle(targetAngle);
-      }
-      else {
-        servoSubsystem.setAngle(initAngle);
-      }
+      servoSubsystem.setAngle(angle1);
+    }
+    if (joystick.getXButton()) {
+      servoSubsystem.setAngle(angle2);
     }
   }
 
