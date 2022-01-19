@@ -55,8 +55,8 @@ public class RobotContainer {
     return this.solenoidForwardAndReverse;
   }
 
-  // schedule default commands here
-  public void scheduleDefaultCommands(){
+  // set default commands here
+  public void setDefaultCommands(){
     
   }
 }
