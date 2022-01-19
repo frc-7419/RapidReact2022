@@ -7,7 +7,6 @@ import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnToTargetClosedLoop extends CommandBase {
-  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private DriveBaseSubsystem driveBaseSubsystem;
   private LimelightSubsystem limelightSubsystem;
