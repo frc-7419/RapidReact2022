@@ -22,7 +22,7 @@ public class RunServoWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    // toggle between init angle and target angle with Y button
+    // toggle between init angle and target angle with Y and X button
     if (joystick.getYButton()) {
       servoSubsystem.setAngle(angle1);
     }
