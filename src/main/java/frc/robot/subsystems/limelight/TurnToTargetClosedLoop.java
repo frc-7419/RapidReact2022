@@ -29,7 +29,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
   public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    addRequirements(driveBaseSubsystem, limelightSubsystem);
+    addRequirements(driveBaseSubsystem);
   }
 
   @Override

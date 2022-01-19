@@ -20,7 +20,7 @@ public class TurnToTargetOpenLoop extends CommandBase {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     this.power = power;
-    addRequirements(driveBaseSubsystem, limelightSubsystem);
+    addRequirements(driveBaseSubsystem);
   }
 
   @Override

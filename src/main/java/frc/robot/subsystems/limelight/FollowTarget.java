@@ -29,7 +29,7 @@ public class FollowTarget extends CommandBase {
   public FollowTarget(DriveBaseSubsystem driveBase, LimelightSubsystem limelight) {
     this.driveBaseSubsystem = driveBase;
     this.limelightSubsystem = limelight;
-    addRequirements(driveBaseSubsystem, limelightSubsystem);
+    addRequirements(driveBaseSubsystem);
   }
 
   @Override

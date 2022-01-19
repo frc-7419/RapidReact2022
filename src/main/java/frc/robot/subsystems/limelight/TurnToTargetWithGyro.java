@@ -29,7 +29,7 @@ public class TurnToTargetWithGyro extends CommandBase {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     this.gyroSubsystem = gyroSubsystem;
-    addRequirements(driveBaseSubsystem, limelightSubsystem, gyroSubsystem);
+    addRequirements(driveBaseSubsystem);
   }
 
   @Override
