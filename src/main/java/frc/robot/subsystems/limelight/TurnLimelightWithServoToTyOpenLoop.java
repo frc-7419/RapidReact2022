@@ -2,7 +2,6 @@ package frc.robot.subsystems.limelight;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.servo.ServoSubsystem;
 
 public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
