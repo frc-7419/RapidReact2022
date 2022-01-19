@@ -63,11 +63,6 @@ public class RobotContainer {
 
   }
 
-  public void setDefaultCommands() {
-    //driveBaseSubsystem.setDefaultCommand(arcadeDrive);
-    limelightSubsystem.setDefaultCommand(followTarget);
-  }
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
 //    *
@@ -80,8 +75,8 @@ public class RobotContainer {
   }
 
   // schedule default commands here
-  public void scheduleDefaultCommands(){
-    
+  public void setDefaultCommands(){
+    limelightSubsystem.setDefaultCommand(followTarget);
   }
 
   
