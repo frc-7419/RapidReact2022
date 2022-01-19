@@ -6,6 +6,7 @@ package frc.robot.subsystems.talon;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class TalonSubsystem extends SubsystemBase {
@@ -35,6 +36,8 @@ public class TalonSubsystem extends SubsystemBase {
     talon.set(ControlMode.PercentOutput, power);
   }
 
+  public void setNeutralMode(NeutralMode brake) {
+  }
   // write a method that puts the talon on brake mode, reference assignments for help
 
 }
