@@ -17,35 +17,6 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         //ReadyToShoot
         //RunShooter
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
         //loadBallInShooter - load the next ball once we are ready to shoot
         //runShooter - shoot ball with desired power and at the target, make sure to account for whether we are shooting into upper or lower hub
