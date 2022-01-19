@@ -46,8 +46,8 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   public void execute() {
     SmartDashboard.putString("command status", "turn w gyro");
     pidOutput = pidController.calculate(ahrs.getGyroAngle());
-    driveBase.setLeftPower(negative * pidOutput);
-    driveBase.setRightPower(negative * -pidOutput);
+    driveBase.setLeftPower(negative * -pidOutput);
+    driveBase.setRightPower(negative * pidOutput);
   }
 
   @Override
