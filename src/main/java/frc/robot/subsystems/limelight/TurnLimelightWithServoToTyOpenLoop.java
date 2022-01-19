@@ -10,7 +10,7 @@ public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
   private ServoSubsystem servoSubsystem;
   private LimelightSubsystem limelightSubsystem;
 
-  private double initAngle = 30;
+  private double initAngle = 40;
   private double ty;
   
   public TurnLimelightWithServoToTyOpenLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
