@@ -56,8 +56,8 @@ public class RobotContainer {
     return turnWithGyroClosedLoop;
   }
 
-  // schedule default commands here
-  public void scheduleDefaultCommands(){
+  // set default commands here
+  public void setDefaultCommands(){
     
   }
 }
