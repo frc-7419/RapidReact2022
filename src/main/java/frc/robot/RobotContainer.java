@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.servo.ServoSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
-import frc.robot.subsystems.limelight.TurnLimelightWithServoToTy;
+import frc.robot.subsystems.limelight.TurnLimelightWithServoToTyClosedLoop;
+import frc.robot.subsystems.limelight.TurnLimelightWithServoToTyOpenLoop;
+import frc.robot.subsystems.limelight.TurnLimelightWithServoToTyOpenLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,7 +30,8 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
-  private final TurnLimelightWithServoToTy turnLimelightWithServoToTy = new TurnLimelightWithServoToTy(servoSubsystem, limelightSubsystem);
+  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem);
+  private final TurnLimelightWithServoToTyClosedLoop TurnLimelightWithServoToTyClosedLoop = new TurnLimelightWithServoToTyClosedLoop(servoSubsystem, limelightSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -42,12 +45,12 @@ public class RobotContainer {
 
   // schedule default commands here
   public void setDefaultCommands() {
-    servoSubsystem.setDefaultCommand(turnLimelightWithServoToTy);
+    servoSubsystem.setDefaultCommand(turnLimelightWithServoToTyOpenLoop);
   }
 
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return turnLimelightWithServoToTy;
+    return turnLimelightWithServoToTyOpenLoop;
   }
 }

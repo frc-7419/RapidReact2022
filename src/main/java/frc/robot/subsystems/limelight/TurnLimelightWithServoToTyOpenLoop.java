@@ -10,8 +10,7 @@ public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
   private ServoSubsystem servoSubsystem;
   private LimelightSubsystem limelightSubsystem;
 
-  private double initAngle;
-  private double tx;
+  private double initAngle = 30;
   private double ty;
   
   public TurnLimelightWithServoToTyOpenLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
@@ -22,15 +21,15 @@ public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
 
   @Override
   public void initialize() {
-    initAngle = servoSubsystem.getAngle();
+    servoSubsystem.setAngle(initAngle);
   }
 
   @Override
   public void execute() {
-    tx = limelightSubsystem.getTx();
-    ty = limelightSubsystem.getTy();
-
-    servoSubsystem.setAngle(ty);
+    if (limelightSubsystem.getTv() == 1) {
+      ty = limelightSubsystem.getTy();
+      servoSubsystem.setAngle(initAngle + ty);
+    }
   }
 
   @Override
