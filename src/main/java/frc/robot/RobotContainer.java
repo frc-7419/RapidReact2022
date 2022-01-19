@@ -41,7 +41,7 @@ public class RobotContainer {
   }
 
   // schedule default commands here
-  public void scheduleDefaultCommands() {
+  public void setDefaultCommands() {
     servoSubsystem.setDefaultCommand(turnLimelightWithServoToTy);
   }
 
