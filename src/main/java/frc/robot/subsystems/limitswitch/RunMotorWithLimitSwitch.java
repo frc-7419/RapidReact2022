@@ -1,7 +1,10 @@
 package frc.robot.subsystems.limitswitch;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.talon.TalonSubsystem;
+
 
 public class RunMotorWithLimitSwitch extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -25,9 +28,9 @@ public class RunMotorWithLimitSwitch extends CommandBase {
       talonSubsystem.setPower(0.2);
     }
     // add an else statement that brakes the motor
-    else talonSubsystem.setPower(0);
+    else talonSubsystem.setNeutralMode(NeutralMode.Brake);
+    }
     // ^ this sets the power to 0 but doesn't BRAKE it. check assignments for help
-  }
 
   @Override
   public void end(boolean interrupted) {
