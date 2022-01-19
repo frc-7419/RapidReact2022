@@ -54,8 +54,8 @@ public class RobotContainer {
     return templateSequentialCommandGroup;
   }
 
-  // schedule default commands here
-  public void scheduleDefaultCommands(){
+  // set default commands here
+  public void setDefaultCommands(){
     
   }
 }
