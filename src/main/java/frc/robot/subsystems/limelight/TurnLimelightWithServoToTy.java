@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.servo.ServoSubsystem;
 
-public class TurnLimelightToTy extends CommandBase {
+public class TurnLimelightWithServoToTy extends CommandBase {
 
   private ServoSubsystem servoSubsystem;
   private LimelightSubsystem limelightSubsystem;
@@ -14,10 +14,10 @@ public class TurnLimelightToTy extends CommandBase {
   private double tx;
   private double ty;
   
-  public TurnLimelightToTy(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
+  public TurnLimelightWithServoToTy(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
     this.servoSubsystem = servoSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    addRequirements(servoSubsystem, limelightSubsystem);
+    addRequirements(servoSubsystem);
   }
 
   @Override
