@@ -5,6 +5,7 @@
 package frc.robot.subsystems.potentiometer;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PotentiometerSubsystem extends SubsystemBase {
@@ -13,13 +14,13 @@ public class PotentiometerSubsystem extends SubsystemBase {
   private double angle;
   //30 is the starting point, 180 full range of motion
 
-  public PotentiometerSubsystem() {
-}
+  public PotentiometerSubsystem() {}
 
   @Override
   public void periodic() {
     // This method will be called oence per scheduler run
     angle = pot.get();
+    SmartDashboard.putNumber("current angle using potentiometer: ", angle);
   }
 
   @Override
