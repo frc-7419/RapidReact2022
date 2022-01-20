@@ -41,8 +41,14 @@ public class TalonSubsystem extends SubsystemBase {
     i would suggest naming it brake() instead, and not having a parameter
     the assignment where u write the drivebasesub (assignment 3?) has a good brake() method that u can reference
   */
+
   public void setNeutralMode(NeutralMode brake) {
   }
-
+  
+  public void brake(){
+    talon.setNeutralMode(NeutralMode.Brake);
+  }
 
 }
+
+
