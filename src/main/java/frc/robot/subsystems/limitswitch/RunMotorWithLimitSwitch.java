@@ -8,10 +8,10 @@ import frc.robot.subsystems.talon.TalonSubsystem;
 
 public class RunMotorWithLimitSwitch extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private LimitSwitchSubsystem limitSwitchSubsystem;
+  private LimitswitchSubsystem limitSwitchSubsystem;
   private TalonSubsystem talonSubsystem;
 
-  public RunMotorWithLimitSwitch(LimitSwitchSubsystem limitSwitchSubsystem, TalonSubsystem talonSubsystem) {
+  public RunMotorWithLimitSwitch(LimitswitchSubsystem limitSwitchSubsystem, TalonSubsystem talonSubsystem) {
     this.limitSwitchSubsystem = limitSwitchSubsystem;
     this.talonSubsystem = talonSubsystem;
     // uses addRequirements() instead of requires()
