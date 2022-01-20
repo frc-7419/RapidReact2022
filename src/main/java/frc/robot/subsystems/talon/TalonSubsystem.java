@@ -37,6 +37,7 @@ public class TalonSubsystem extends SubsystemBase {
   }
 
   public void setNeutralMode(NeutralMode brake) {
+    talon.setNeutralMode(NeutralMode.Brake);
   }
   // write a method that puts the talon on brake mode, reference assignments for help
 
