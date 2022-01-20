@@ -4,17 +4,26 @@
 
 package frc.robot.subsystems.encoders;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.*;
 
 public class ReadEncoderValues extends CommandBase {
   /** Creates a new ReadEncoderValues. */
-  public ReadEncoderValues() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private TalonFX talon;
+
+  public ReadEncoderValues(TalonFX talon) {
+    this.talon = talon;
+    talon.configFactoryDefault();
+    talon.setInverted(false);
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    SmartDashboard.putNumber("Talon Position", talon.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Talon Velocity", talon.getSelectedSensorVelocity());
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
