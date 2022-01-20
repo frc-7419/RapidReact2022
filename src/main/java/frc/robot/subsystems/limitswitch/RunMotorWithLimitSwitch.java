@@ -28,7 +28,7 @@ public class RunMotorWithLimitSwitch extends CommandBase {
       talonSubsystem.setPower(0.2);
     }
     // close, just change the method in TalonSubsystem
-    else talonSubsystem.setNeutralMode(NeutralMode.Brake);
+    else talonSubsystem.brake();;
     }
 
   @Override
