@@ -30,5 +30,19 @@ public class TalonSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
   }
 
+  public double getTalonPosition(){
+    return talon.getSelectedSensorPosition();
+  }
+
+  public double getTalonVelocity(){
+    return talon.getSelectedSensorVelocity();
+  }
+
+  public double inchesToTicks(double inches, int diameter){
+    //(ticks per rotation/diameter of wheels)*inches
+    //delete the diameter parameter after finding out what it is
+    double ticks = (2048 * inches)/(Math.PI * diameter);
+    return ticks;
+  }
 
 }
