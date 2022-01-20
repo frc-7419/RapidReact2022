@@ -31,7 +31,7 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
-  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem, 45);
+  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem, 70);
   private final TurnLimelightWithServoToTyClosedLoop turnLimelightWithServoToTyClosedLoop = new TurnLimelightWithServoToTyClosedLoop(servoSubsystem, limelightSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
