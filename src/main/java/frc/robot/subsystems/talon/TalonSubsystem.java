@@ -15,7 +15,7 @@ public class TalonSubsystem extends SubsystemBase {
   private TalonFX talon;
 
   public TalonSubsystem() {
-      talon = new TalonFX(0);
+      talon = new TalonFX(14);
   }
 
   @Override
@@ -36,8 +36,13 @@ public class TalonSubsystem extends SubsystemBase {
     talon.set(ControlMode.PercentOutput, power);
   }
 
+  /*
+    this is a very good start, but it's still not putting the talon in brake mode
+    i would suggest naming it brake() instead, and not having a parameter
+    the assignment where u write the drivebasesub (assignment 3?) has a good brake() method that u can reference
+  */
   public void setNeutralMode(NeutralMode brake) {
   }
-  // write a method that puts the talon on brake mode, reference assignments for help
+
 
 }
