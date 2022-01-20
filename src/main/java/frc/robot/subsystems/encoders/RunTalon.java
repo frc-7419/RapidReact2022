@@ -4,15 +4,16 @@
 
 package frc.robot.subsystems.encoders;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunTalon extends CommandBase {
   private TalonSubsystem talonSubsystem;
-  private double power;
+  private XboxController joystick;
   /** Creates a new RunTalon. */
-  public RunTalon(TalonSubsystem talonSubsystem, double power) {
+  public RunTalon(TalonSubsystem talonSubsystem, XboxController joystick) {
     this.talonSubsystem = talonSubsystem;
-    this.power = power;
+    this.joystick = joystick;
     addRequirements(talonSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,7 +25,7 @@ public class RunTalon extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSubsystem.setPower(power);
+    talonSubsystem.setPower(joystick.getRightY());
   }
 
   // Called once the command ends or is interrupted.

@@ -23,7 +23,7 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
   private final TalonSubsystem talonSubsystem = new TalonSubsystem();
-  private final RunTalon runTalon = new RunTalon(talonSubsystem, 0.2);
+  private final RunTalon runTalon = new RunTalon(talonSubsystem, joystick);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
