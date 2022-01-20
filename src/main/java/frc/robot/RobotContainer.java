@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.encoders.RunTalon;
+import frc.robot.subsystems.encoders.TalonSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -19,6 +22,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
+  private final TalonSubsystem talonSubsystem = new TalonSubsystem();
+  private final RunTalon runTalon = new RunTalon(talonSubsystem, 0.2);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -50,6 +55,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    talonSubsystem.setDefaultCommand(runTalon);
   }
 }
