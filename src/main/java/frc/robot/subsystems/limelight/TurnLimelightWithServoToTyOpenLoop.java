@@ -27,7 +27,7 @@ public class TurnLimelightWithServoToTyOpenLoop extends CommandBase {
   @Override
   public void execute() {
     ty = limelightSubsystem.getTy();
-    if (limelightSubsystem.getTv() == 1) {
+    if (limelightSubsystem.getTv() == 1.0) { 
       servoSubsystem.setAngle(servoSubsystem.getAngle() + ty);
     }
   }

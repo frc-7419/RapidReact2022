@@ -2,6 +2,7 @@ package frc.robot.subsystems.servo;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ServoSubsystem extends SubsystemBase {
   private Servo servo;
@@ -12,7 +13,7 @@ public class ServoSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
+    // SmartDashboard.putNumber("servo angle", getAngle());
   }
 
   // angle in degrees, from 0-180
