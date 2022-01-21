@@ -19,7 +19,7 @@ public class PneumaticsSub extends SubsystemBase {
     c = new Compressor(0, PneumaticsModuleType.CTREPCM); //not sure if we are usingCTREPCM or REVPH
     c.setClosedLoopControl(true);
     pressureSwitch = c.getPressureSwitchValue();
-    current = c.getCompressorCurrent();
+    current = c.getCurrent();
   }
 
   public void start() {
