@@ -1,9 +1,10 @@
-package frc.robot.subsystems.limitswitch;
+package frc.robot.subsystems.talon;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.talon.TalonSubsystem;
+import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
 
 
 public class RunMotorWithLimitSwitch extends CommandBase {
@@ -15,7 +16,7 @@ public class RunMotorWithLimitSwitch extends CommandBase {
     this.limitSwitchSubsystem = limitSwitchSubsystem;
     this.talonSubsystem = talonSubsystem;
     // uses addRequirements() instead of requires()
-    addRequirements(limitSwitchSubsystem, talonSubsystem);
+    addRequirements(talonSubsystem);
   }
 
   @Override
@@ -24,12 +25,16 @@ public class RunMotorWithLimitSwitch extends CommandBase {
 
   @Override
   public void execute() {
-    if (limitSwitchSubsystem.getLimitSwitch().get()){
-      talonSubsystem.setPower(0.2);
+    // if the limit switch is pressed, set power to zero and brake
+    if (!limitSwitchSubsystem.get()){
+      talonSubsystem.setPower(0);
+      talonSubsystem.brake();
     }
-    // close, just change the method in TalonSubsystem
-    else talonSubsystem.brake();
+    else {
+      talonSubsystem.setPower(0.1);
     }
+    SmartDashboard.putNumber("velocity", talonSubsystem.getTalon().getSelectedSensorVelocity());
+  }
 
   @Override
   public void end(boolean interrupted) {
