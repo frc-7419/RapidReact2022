@@ -53,13 +53,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // A button: limelight turn to target open loop test
-    new JoystickButton(joystick, XboxController.Button.kA.value)
-    .whenPressed(new TurnToTargetOpenLoop(driveBaseSubsystem, limelightSubsystem, 0.1));
-
-    //X button: limelight turn to target closed loop test
-    new JoystickButton(joystick, XboxController.Button.kX.value)
-    .whenPressed(new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem));
+   
 
   }
 
