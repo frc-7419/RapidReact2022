@@ -16,12 +16,12 @@ public class PneumaticsSub extends SubsystemBase {
 
   public PneumaticsSub() {
     c = new Compressor(0);
-    c.setClosedLoopControl(true);
+    c.enableDigital();
     pressureSwitch = c.getPressureSwitchValue();
-    current = c.getCompressorCurrent();
+    current = c.getCurrent();
   }
 
-  public void start() {
+  public void start() { 
     c.start();
   }
 
