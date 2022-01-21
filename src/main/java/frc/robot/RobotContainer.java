@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.servo.RunServoWithJoystick;
 import frc.robot.subsystems.servo.ServoSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
@@ -15,6 +14,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
+import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,6 +28,7 @@ public class RobotContainer {
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
   private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
+  private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
 
   public RobotContainer() {
     configureButtonBindings();
