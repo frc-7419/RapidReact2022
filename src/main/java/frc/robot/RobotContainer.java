@@ -41,7 +41,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new WaitCommand(0);
   }
-
   public void setDefaultCommands(){
 
   }
