@@ -10,24 +10,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PotentiometerSubsystem extends SubsystemBase {
 
-  private AnalogPotentiometer arduinoPot;
-  private AnalogPotentiometer vexPot;
-  private double angle1;
-  private double angle2;
+  private AnalogPotentiometer potentiometer;
+  private double angle;
   //30 is the starting point, 180 full range of motion
 
   public PotentiometerSubsystem() {
-    arduinoPot = new AnalogPotentiometer(0, 360, 0);
-    vexPot = new AnalogPotentiometer(1,180,0);
+    potentiometer = new AnalogPotentiometer(1,180,0);
   }
 
   @Override
   public void periodic() {
     // This method will be called oence per scheduler run
-    angle1 = arduinoPot.get();
-    angle2 = vexPot.get();
-    SmartDashboard.putNumber("arduinoPot: ", angle1);
-    SmartDashboard.putNumber("vexPot", angle2);
+    angle = potentiometer.get();
+    SmartDashboard.putNumber("potentiometer: ", angle);
   }
 
   @Override
