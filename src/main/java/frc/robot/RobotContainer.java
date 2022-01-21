@@ -6,13 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
-import frc.robot.subsystems.talon.RunMotorWithLimitSwitch;
-import frc.robot.subsystems.talon.TalonSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
-import frc.robot.subsystems.colorSensor.RevColorDistanceSub;
+import edu.wpi.first.wpilibj.XboxController;  
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,10 +21,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
   private final XboxController joystick = new XboxController(0);
-  private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
-  private final TalonSubsystem talonSubsystem = new TalonSubsystem();
-  private final RunMotorWithLimitSwitch runMotorWithLimitSwitch = new RunMotorWithLimitSwitch(limitSwitchSubsystem, talonSubsystem);
+  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
+  private final GyroSubsystem gyro = new GyroSubsystem();
+  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 45);
+
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -51,9 +53,9 @@ public class RobotContainer {
 //    */
 
   // uncomment when u need to use this
-  // public Command getAutonomousCommand() {
-  //   return autonomousCommand;
-  // }
+  public Command getAutonomousCommand() {
+    return turnWithGyroClosedLoop;
+  }
 
   // set default commands here
   public void setDefaultCommands(){
