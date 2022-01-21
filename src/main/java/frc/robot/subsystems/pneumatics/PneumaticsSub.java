@@ -23,11 +23,11 @@ public class PneumaticsSub extends SubsystemBase {
   }
 
   public void start() { 
-    c.start();
+    c.enableDigital();
   }
 
   public void stop() {
-    c.stop();
+    c.disable();
   }
 
   @Override
