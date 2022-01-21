@@ -23,4 +23,8 @@ public class LimitswitchSubsystem extends SubsystemBase {
   public DigitalInput getLimitSwitch() {
       return limitSwitch;
   }
+
+  public boolean get() {
+    return limitSwitch.get();
+  }
 }

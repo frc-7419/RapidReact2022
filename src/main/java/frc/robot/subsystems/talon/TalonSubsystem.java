@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class TalonSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
 
   private TalonFX talon;
 
@@ -34,15 +33,6 @@ public class TalonSubsystem extends SubsystemBase {
 
   public void setPower(double power) {
     talon.set(ControlMode.PercentOutput, power);
-  }
-
-  /*
-    this is a very good start, but it's still not putting the talon in brake mode
-    i would suggest naming it brake() instead, and not having a parameter
-    the assignment where u write the drivebasesub (assignment 3?) has a good brake() method that u can reference
-  */
-
-  public void setNeutralMode(NeutralMode brake) {
   }
   
   public void brake(){
