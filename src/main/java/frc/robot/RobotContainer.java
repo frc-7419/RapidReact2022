@@ -33,8 +33,7 @@ public class RobotContainer {
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
-  private final TurnLimelightWithServoToTyOpenLoop turnLimelightWithServoToTyOpenLoop = new TurnLimelightWithServoToTyOpenLoop(servoSubsystem, limelightSubsystem, 60);
-  private final FollowTarget followTarget = new FollowTarget(driveBaseSubsystem, limelightSubsystem);
+  private final TurnLimelightWithServoToTyClosedLoop turnLimelightWithServoToTyClosedLoop = new TurnLimelightWithServoToTyClosedLoop(servoSubsystem, limelightSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -48,13 +47,13 @@ public class RobotContainer {
 
   // schedule default commands here
   public void setDefaultCommands() {
-    servoSubsystem.setDefaultCommand(turnLimelightWithServoToTyOpenLoop);
+    servoSubsystem.setDefaultCommand(turnLimelightWithServoToTyClosedLoop);
     // driveBaseSubsystem.setDefaultCommand(followTarget);
   }
 
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return turnLimelightWithServoToTyOpenLoop;
+    return turnLimelightWithServoToTyClosedLoop;
   }
 }
