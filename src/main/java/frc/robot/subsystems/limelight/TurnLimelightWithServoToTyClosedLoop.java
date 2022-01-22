@@ -44,9 +44,14 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
     ty = limelightSubsystem.getTy();
     tv = limelightSubsystem.getTv();
 
-    if (tv == 1.0 && (ty > 0.05 || ty < 0.05)) {
-      pidOutput = pidController.calculate(ty);
-      servoSubsystem.setAngle(servoSubsystem.getAngle() + pidOutput);
+    if (tv == 1.0 && (ty > .5 || ty < .5)) {
+      // pidOutput = pidController.calculate(ty);
+      if (ty > .5) {
+        servoSubsystem.setAngle(servoSubsystem.getAngle() + .5);
+      }
+      else {
+        servoSubsystem.setAngle(servoSubsystem.getAngle() - .5);
+      }
     }
 
     SmartDashboard.putNumber("current angle", servoSubsystem.getAngle());
