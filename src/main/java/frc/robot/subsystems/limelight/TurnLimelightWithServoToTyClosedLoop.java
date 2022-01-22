@@ -12,6 +12,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   private PIDController pidController;
 
   private double ty;
+  private double tv;
   private double servoAngle;
   
   private double kP;
@@ -39,12 +40,15 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putString("command status", "pid");
     ty = limelightSubsystem.getTy();
-    pidOutput = pidController.calculate(ty);
-    SmartDashboard.putNumber("pidoutput", pidOutput);
-    servoAngle = servoSubsystem.getAngle();
-    servoSubsystem.setAngle(servoAngle + pidOutput);
+    tv = limelightSubsystem.getTv();
+
+    if (tv == 1.0 && (ty > 0.05 || ty < 0.05)) {
+      pidOutput = pidController.calculate(ty);
+      servoAngle = servoSubsystem.getAngle();
+      servoSubsystem.setAngle(servoAngle + pidOutput);
+      SmartDashboard.putNumber("current angle", servoSubsystem.getAngle());
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +58,6 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return pidController.atSetpoint();
+    return false;
   }
 }
