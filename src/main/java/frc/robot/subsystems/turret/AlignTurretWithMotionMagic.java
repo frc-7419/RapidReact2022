@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class RunTurretWithMotionMagic extends CommandBase {
+public class AlignTurretWithMotionMagic extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
@@ -25,7 +25,7 @@ public class RunTurretWithMotionMagic extends CommandBase {
   private double tolerance = 10; // in ticks (placeholder)
   private double turretPercentOutput;
 
-  public RunTurretWithMotionMagic(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithMotionMagic(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
@@ -40,6 +40,7 @@ public class RunTurretWithMotionMagic extends CommandBase {
 
     turretSubsystem.getTurretTalon().configMotionCruiseVelocity(15000, 0);
     turretSubsystem.getTurretTalon().configMotionAcceleration(6000, 0); 
+
     turretSubsystem.getTurretTalon().configAllowableClosedloopError(0, tolerance);
 
      // reset sensor position
@@ -66,7 +67,9 @@ public class RunTurretWithMotionMagic extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    turretSubsystem.setPower(0);
+  }
 
   // Returns true when the command should end.
   @Override

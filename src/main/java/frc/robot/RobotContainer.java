@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.servo.ServoSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.subsystems.turret.RunTurretWithMotionMagic;
+import frc.robot.subsystems.turret.AlignTurretWithMotionMagic;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
@@ -35,7 +35,7 @@ public class RobotContainer {
 
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
 
-  private final RunTurretWithMotionMagic runTurret = new RunTurretWithMotionMagic(turretSubsystem, limelightSubsystem);
+  private final AlignTurretWithMotionMagic runTurret = new AlignTurretWithMotionMagic(turretSubsystem, limelightSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();

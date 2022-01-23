@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
 
-public class RunTurretWithPotentiometerClosedLoop extends CommandBase {
+public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private PotentiometerSubsystem turretPotentiometer = new PotentiometerSubsystem();
@@ -28,7 +28,7 @@ public class RunTurretWithPotentiometerClosedLoop extends CommandBase {
 
   private double pidOutput;
   
-  public RunTurretWithPotentiometerClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, PotentiometerSubsystem turretPotentiometer) {
+  public AlignTurretWithPotentiometerClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, PotentiometerSubsystem turretPotentiometer) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     this.turretPotentiometer = turretPotentiometer;
