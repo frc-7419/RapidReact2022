@@ -15,6 +15,8 @@ public class StraightWithMotionMagic extends CommandBase {
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
+    private double threshold = 0.01;
+
     private long startTime;
 
    
@@ -70,8 +72,8 @@ public class StraightWithMotionMagic extends CommandBase {
         SmartDashboard.putNumber("leftMast", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
         SmartDashboard.putNumber("rightMast", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
     
-        double leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
-        double rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
+        leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
+        rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
 
         SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
         SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
@@ -82,16 +84,9 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public boolean isFinished(){
         // threshold: motor output < 0.01
-        if(Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
-            return true;
-        } 
-        else {
-            return false;
-        }
+        return (Math.abs(leftMastOutput) < threshold && Math.abs(rightMastOutput) < threshold);
     }
 
     @Override
-    public void end(boolean interrupted){
-
-    }
+    public void end(boolean interrupted) {}
 }
