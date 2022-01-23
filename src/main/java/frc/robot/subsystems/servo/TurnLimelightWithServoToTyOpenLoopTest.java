@@ -1,11 +1,11 @@
-package frc.robot.subsystems.limelight;
+package frc.robot.subsystems.servo;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.servo.ServoSubsystem;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
+public class TurnLimelightWithServoToTyOpenLoopTest extends CommandBase {
   
   private ServoSubsystem servoSubsystem;
   private LimelightSubsystem limelightSubsystem;
@@ -21,7 +21,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
 
   private double pidOutput;
   
-  public TurnLimelightWithServoToTyClosedLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
+  public TurnLimelightWithServoToTyOpenLoopTest(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
     this.servoSubsystem = servoSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(servoSubsystem);
@@ -29,12 +29,12 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
 
   @Override
   public void initialize() {
-    kP = .016;
-    kI = 0;
-    kD = 1; 
-    pidController = new PIDController(kP, kI, kD);
-    pidController.setSetpoint(0);
-    pidController.setTolerance(2);
+    // kP = .016;
+    // kI = 0;
+    // kD = 1; 
+    // pidController = new PIDController(kP, kI, kD);
+    // pidController.setSetpoint(0);
+    // pidController.setTolerance(2);
     servoSubsystem.setAngle(initAngle);
 ;  }
 
