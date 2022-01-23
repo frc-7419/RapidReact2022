@@ -13,7 +13,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
 
   private double ty;
   private double tv;
-  private double initAngle = 60;
+  private double initAngle = 70;
   
   private double kP;
   private double kI;
@@ -55,6 +55,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
     }
 
     SmartDashboard.putNumber("current angle", servoSubsystem.getAngle());
+    SmartDashboard.putNumber("ty +- mounting", ty + initAngle);
 
   }
 
