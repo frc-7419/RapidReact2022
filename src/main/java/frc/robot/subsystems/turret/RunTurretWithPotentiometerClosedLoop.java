@@ -39,11 +39,6 @@ public class RunTurretWithPotentiometerClosedLoop extends CommandBase {
   @Override
   public void initialize() {
 
-    // PID constants
-    double kP = 0;
-    double kD = 0;
-    double kI = 0;
-
     // instantiate PIDController class
     pidController = new PIDController(kP, kI, kD);
     setpoint = limelightSubsystem.getTx();
