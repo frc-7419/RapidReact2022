@@ -7,6 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.servo.ServoSubsystem;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.turret.RunTurretWithMotionMagic;
+import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
@@ -30,6 +33,10 @@ public class RobotContainer {
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
   private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
 
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
+
+  private final RunTurretWithMotionMagic runTurret = new RunTurretWithMotionMagic(turretSubsystem, limelightSubsystem);
+
   public RobotContainer() {
     configureButtonBindings();
   }
@@ -42,7 +49,7 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
   public void setDefaultCommands(){
-
+    turretSubsystem.setDefaultCommand(runTurret);
   }
 
   

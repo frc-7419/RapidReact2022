@@ -35,6 +35,9 @@ public final class Constants {
         climberFalcon(13),
         shooterFalcon(14), 
         hoodVictor(40), 
+
+        //2022 robot constants
+        turretFalcon(20);
         ;
 
         public final int id;
@@ -56,13 +59,24 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
+        public static double turretRadius = 12; // placeholder value, will change
     }
 
-    public static class PIDConstants {
+    public static class PIDFConstants {
         //gyro
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
         public static double GyrokD = 0;
+
+        //turret motion magic
+        public static double TurretMotionMagickP = 0;
+        public static double TurretMotionMagickI = 0;
+        public static double TurretMotionMagickD = 0;
+
+        //turret potentiometer
+        public static double TurretPotentiometerkP = 0;
+        public static double TurretPotentiometerkI = 0;
+        public static double TurretPotentiometerkD = 0;
     }
 
     public static double[][] kSpeedToFf = {
