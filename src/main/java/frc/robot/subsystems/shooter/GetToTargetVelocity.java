@@ -23,7 +23,7 @@ public class GetToTargetVelocity extends CommandBase {
   private double initialVelocity;
   private double targetRPM;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(shooterSubsystem);
