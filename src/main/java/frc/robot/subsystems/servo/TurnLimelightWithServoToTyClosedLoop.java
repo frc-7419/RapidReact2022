@@ -19,6 +19,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   private double tv;
   private double initAngle = 70;
 
+  private int directionalCoefficient;
   private double pidOutput;
   
   public TurnLimelightWithServoToTyClosedLoop(ServoSubsystem servoSubsystem, LimelightSubsystem limelightSubsystem) {
@@ -44,10 +45,12 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
     ty = limelightSubsystem.getTy();
     tv = limelightSubsystem.getTv();
 
-    int directionalCoefficient = 1;
+    if (ty < 0)
+        directionalCoefficient = -1;
+    else
+        directionalCoefficient = 1;
     
     if (tv == 1.0) {
-        if (ty < 0) {directionalCoefficient = -1;}
         pidOutput = pidController.calculate(ty);
         servoSubsystem.setAngle(servoSubsystem.getAngle() + (directionalCoefficient*pidOutput));
     }
