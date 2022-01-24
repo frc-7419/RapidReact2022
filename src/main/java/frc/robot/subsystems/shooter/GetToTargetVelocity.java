@@ -13,7 +13,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
-  private LimelightSubsystem limelight;
+  private LimelightSubsystem limelightSubsystem;
 
   private double kP;
   private double kI;
@@ -25,7 +25,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight) {
     this.shooterSubsystem = shooterSubsystem;
-    this.limelight = limelight;
+    this.limelightSubsystem = limelightSubsystem;
     addRequirements(shooterSubsystem);
   }
 
@@ -33,7 +33,7 @@ public class GetToTargetVelocity extends CommandBase {
   public void initialize() {
     SmartDashboard.putString("shooter", "ramping up");
 
-    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelight.getA()*(Math.pow(Math.cos(Math.toRadians(limelight.getBeta())),2))));
+    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
     targetRPM = UnitConversions.mPSToRPM(initialVelocity, RobotConstants.shooterRadius);
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(targetRPM));
