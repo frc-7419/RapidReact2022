@@ -16,10 +16,10 @@ public class ShooterSubsystem extends SubsystemBase{
     private TalonFX shooter;
     private LimelightSubsystem limelight = new LimelightSubsystem();
     private double powerOutput = 0;
-    private double kP = 0;
-    private double kI = 0;
-    private double kD = 0;
-    private double kF = 0;
+    private double kP;
+    private double kI;
+    private double kD;
+    private double kF;
     private double targetVelocity = 500;
     private double threshold = 200;
     private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
