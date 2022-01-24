@@ -13,25 +13,25 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    private TalonFX talon;
+    private TalonFX shooter;
     private LimelightSubsystem limelight = new LimelightSubsystem();
-    public double powerOutput = 0;
-    public double kP = 0;
-    public double kI = 0;
-    public double kD = 0;
-    public double kF = 0;
-    public double targetVelocity = 0;
-    public double target = 500;
+    private double powerOutput = 0;
+    private double kP = 0;
+    private double kI = 0;
+    private double kD = 0;
+    private double kF = 0;
+    private double targetVelocity = 0;
+    private double target = 500;
     private double threshold = 200;
-    public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
+    private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     private double v0 = Math.sqrt(LimelightConstants.g/(2*limelight.getA()*(Math.pow(Math.cos(Math.toRadians(limelight.getBeta())),2))));
 
     public ShooterSubsystem(){
-        talon = new TalonFX(CanIds.shooterFalcon.id);
-        talon.configFactoryDefault();
-        talon.setInverted(true);
-        talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        shooter = new TalonFX(CanIds.shooterFalcon.id);
+        shooter.configFactoryDefault();
+        shooter.setInverted(true);
+        shooter.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     }
 
     public enum ControlMethod{
@@ -42,28 +42,28 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("periodic speed", shooter.getSelectedSensorVelocity());
     }
 
     public void run(){
         ControlMethod method = this.controlMethod;
         if(method == ControlMethod.PERCENT_OUTPUT){
-            talon.set(ControlMode.PercentOutput, powerOutput);
+            shooter.set(ControlMode.PercentOutput, powerOutput);
         }
         else if(method == ControlMethod.HOLDING){
-            talon.set(ControlMode.Velocity, target);
+            shooter.set(ControlMode.Velocity, target);
         }
         else if(method == ControlMethod.SPIN_UP){
-            talon.set(ControlMode.Velocity, target);
+            shooter.set(ControlMode.Velocity, target);
         }
 
     }
 
     public void configureOutputs(){
-        talon.configNominalOutputForward(0, 0);
-		talon.configNominalOutputReverse(0, 0);
-		talon.configPeakOutputForward(1, 0);
-        talon.configPeakOutputReverse(-1, 0);
+        shooter.configNominalOutputForward(0, 0);
+		shooter.configNominalOutputReverse(0, 0);
+		shooter.configPeakOutputForward(1, 0);
+        shooter.configPeakOutputReverse(-1, 0);
     }
 
     public void setPIDF(double kP, double kI, double kD, double kF){
@@ -71,7 +71,7 @@ public class ShooterSubsystem extends SubsystemBase{
         this.kI = kI;
         this.kD = kD;
         this.kF = kF;
-        TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
+        TalonFuncs.setPIDFConstants(0, shooter, kP, kI, kD, kF);
     }
 
     public boolean onTarget(){
@@ -83,7 +83,7 @@ public class ShooterSubsystem extends SubsystemBase{
     public void setkF(double kF){this.kF = kF;}
 
     public double getOutputVoltage(){
-        return talon.getMotorOutputVoltage();
+        return shooter.getMotorOutputVoltage();
     }
 
     public void setTargetRpm(double rpm){this.target = rpm * 1.7067;}
@@ -99,16 +99,16 @@ public class ShooterSubsystem extends SubsystemBase{
         return 0; // insert regression model
     }
 
-    public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
+    public double getCurrentRawSpeed(){return shooter.getSelectedSensorVelocity(0);}
 
     public void setTargetRawSpeed(double speed){this.target = speed;}
 
     public void percentOutput(){
-        talon.set(ControlMode.PercentOutput,powerOutput);
+        shooter.set(ControlMode.PercentOutput,powerOutput);
     }
 
     public void off(){
-        talon.set(ControlMode.PercentOutput, 0);
+        shooter.set(ControlMode.PercentOutput, 0);
     }
 
     public double getkP(){return kP;}
@@ -118,6 +118,6 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public double getV0() {return v0;}
 
-    public TalonFX getShooterTalon() {return talon;}
+    public TalonFX getShooterTalon() {return shooter;}
 
 }
