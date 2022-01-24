@@ -38,6 +38,10 @@ public class TalonSubsystem extends SubsystemBase {
     return talon.getSelectedSensorVelocity();
   }
 
+  public void setTalonPosition(double sensorPosition){
+    talon.setSelectedSensorPosition(sensorPosition);
+  }
+
   public double inchesToTicks(double inches, int diameter){
     //(ticks per rotation/diameter of wheels)*inches
     //delete the diameter parameter after finding out what it is
