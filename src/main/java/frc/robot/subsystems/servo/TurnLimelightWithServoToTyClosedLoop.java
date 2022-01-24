@@ -56,7 +56,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
     }
 
     SmartDashboard.putNumber("current angle: ", servoSubsystem.getAngle());
-    SmartDashboard.putNumber("ty +- initial: ", (ty + initAngle));
+    SmartDashboard.putNumber("ty + initial: ", (ty + initAngle));
     SmartDashboard.putNumber("servo pid output: ", pidOutput);
     SmartDashboard.putNumber("closed loop error: ", pidController.getPositionError());
   }
