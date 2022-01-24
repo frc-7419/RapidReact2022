@@ -6,12 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.servo.ServoSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.intake.IntakeDefault;
+import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
 import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
@@ -30,6 +31,10 @@ public class RobotContainer {
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
   private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
 
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+
+  private final IntakeDefault intakeDefault = new IntakeDefault(intakeSubsystem, joystick);
+
   public RobotContainer() {
     configureButtonBindings();
   }
@@ -42,7 +47,7 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
   public void setDefaultCommands(){
-
+    intakeSubsystem.setDefaultCommand(intakeDefault);
   }
 
   

@@ -58,6 +58,10 @@ public final class Constants {
         public static double shooterRadius = 0.5; // placeholder value, will change
     }
 
+    public static class PowerConstants {
+        public static double intakeMultiplier = -0.9;
+    }
+
     public static class PIDConstants {
         //gyro
         public static double GyrokP = 0.085;
