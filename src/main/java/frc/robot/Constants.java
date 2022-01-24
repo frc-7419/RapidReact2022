@@ -63,6 +63,12 @@ public final class Constants {
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
         public static double GyrokD = 0;
+
+        //shooter
+        public static double ShooterkP = 0;
+        public static double ShooterkI = 0;
+        public static double ShooterkD = 0;
+        public static double ShooterkF = 0;
     }
 
     public static double[][] kSpeedToFf = {
