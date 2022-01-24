@@ -3,20 +3,31 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.pneumatics;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SolenoidSub extends SubsystemBase {
+public class CompressorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  DoubleSolenoid solenoid;
-  //boolean reversed;
-  
+  Compressor c;
+  boolean enabled = true;
+  boolean pressureSwitch;
+  double current;
 
-  public SolenoidSub() {
-    solenoid = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM,0,1);
-    //this.reversed = reversed;
+  public CompressorSubsystem() {
+    c = new Compressor(0, PneumaticsModuleType.CTREPCM);
+    c.enableDigital();
+    pressureSwitch = c.getPressureSwitchValue();
+    current = c.getCurrent();
+  }
+
+  public void start() { 
+    c.enableDigital();
+  }
+
+  public void stop() {
+    c.disable();
   }
 
   @Override
@@ -27,17 +38,5 @@ public class SolenoidSub extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-  }
-
-  public void actuateSolenoid() {
-    solenoid.set(Value.kForward);
-  }
-
-  public void retractSolenoid() {
-    solenoid.set(Value.kReverse);
-  }
-
-  public void stopSolenoid() {
-    solenoid.set(Value.kOff);
   }
 }

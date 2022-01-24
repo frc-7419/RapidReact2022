@@ -7,9 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.autos.SolenoidForwardAndReverse;
+import frc.robot.subsystems.pneumatics.CompressorSubsystem;
 import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
-import frc.robot.subsystems.pneumatics.SolenoidSub;
+import frc.robot.subsystems.pneumatics.SolenoidForwardAndReverse;
+import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,8 +24,9 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
 
-  private final SolenoidSub solenoid = new SolenoidSub();
+  private final SolenoidSubsystem solenoid = new SolenoidSubsystem();
   private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
+  private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   

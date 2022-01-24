@@ -3,12 +3,12 @@ package frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunPneumaticsSystem extends CommandBase{
-    private final SolenoidSub solenoid;
+    private SolenoidSubsystem solenoidSubsystem;
     private boolean reversed;
 
 
-    public RunPneumaticsSystem(SolenoidSub solonoid, boolean reversed) {
-        this.solenoid = solonoid;
+    public RunPneumaticsSystem(SolenoidSubsystem solonoidSubsystem, boolean reversed) {
+        this.solenoidSubsystem = solonoidSubsystem;
         this.reversed = reversed;
     }
     
@@ -20,17 +20,15 @@ public class RunPneumaticsSystem extends CommandBase{
     @Override
     public void execute() {
         if (this.reversed == true) {
-            solenoid.retractSolenoid();
+            solenoidSubsystem.retractSolenoid();
         }
         else {
-            solenoid.actuateSolenoid();
+            solenoidSubsystem.actuateSolenoid();
         }
     }
 
     @Override
-    public void end(boolean interrupted) {
-        solenoid.stopSolenoid();
-    }
+    public void end(boolean interrupted) {}
 
     public boolean isFinished() {
         return false;
