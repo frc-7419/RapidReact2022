@@ -55,11 +55,14 @@ public final class Constants {
     }
 
     public static class RobotConstants {
-        public static double shooterRadius = 0.5; // placeholder value, will change
+        public static double shooterRadius = 0.6; // placeholder value, will change
     }
 
     public static class PIDConstants {
-        
+        // straight with motion magic
+        public static double DriveBaseMotionMagickP = .3;
+        public static double DriveBaseMotionMagickI = 0;
+        public static double DriveBaseMotionMagickD = 0.05;
     }
 
     public static double[][] kSpeedToFf = {
