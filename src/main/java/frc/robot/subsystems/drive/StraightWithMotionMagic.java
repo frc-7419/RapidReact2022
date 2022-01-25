@@ -5,6 +5,8 @@ import com.team7419.TalonFuncs;
 import com.team7419.math.DriveBaseConversions;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PowerConstants;
@@ -13,14 +15,15 @@ import frc.robot.Constants.PIDConstants;
 public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSubsystem driveBaseSubsystem;
+
+    private ShuffleboardTab driveBase = Shuffleboard.getTab("Drive Base");
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
-
     private double leftMastError;
     private double rightMastError;
 
-    private double threshold = 60;
+    private double threshold = 60; // in ticks
 
     private long startTime;
 
@@ -60,8 +63,8 @@ public class StraightWithMotionMagic extends CommandBase {
         double leftSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
         double rightSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
 
-        SmartDashboard.putNumber("leftSetpoint", leftSetpoint);
-        SmartDashboard.putNumber("rightSetpoint", rightSetpoint);
+        SmartDashboard.putNumber("left setpoint", leftSetpoint);
+        SmartDashboard.putNumber("right setpoint", rightSetpoint);
 
         driveBaseSubsystem.getLeftMast().set(ControlMode.MotionMagic, leftSetpoint);
         driveBaseSubsystem.getRightMast().set(ControlMode.MotionMagic, rightSetpoint);
