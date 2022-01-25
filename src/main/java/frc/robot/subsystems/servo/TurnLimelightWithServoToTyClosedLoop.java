@@ -46,9 +46,9 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
     tv = limelightSubsystem.getTv();
 
     if (ty < 0)
-        directionalCoefficient = -1;
-    else
         directionalCoefficient = 1;
+    else
+        directionalCoefficient = -1;
     
     if (tv == 1.0) {
         pidOutput = pidController.calculate(ty);
