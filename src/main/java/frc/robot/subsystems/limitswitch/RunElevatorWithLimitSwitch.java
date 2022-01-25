@@ -14,10 +14,7 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   public RunElevatorWithLimitSwitch(RunMotorWithLimitSwitch runMotorWithLimitSwitch) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.runMotorWithLimitSwitch = runMotorWithLimitSwitch;
-
   }
-
-
 
   // Called when the command is initially scheduled.
   @Override
