@@ -5,15 +5,17 @@
 package frc.robot.subsystems.limitswitch;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.talon.RunMotorWithLimitSwitch;
+
 
 public class RunElevatorWithLimitSwitch extends CommandBase {
   /** Creates a new RunElevatorWithLimitSwitch. */
-  private RunMotorWithLimitSwitch runMotorWithLimitSwitch;
+  private LimitswitchSubsystem limitSwitchSubsystem;
+  private ElevatorSubsystem elevatorSubsystem;
 
-  public RunElevatorWithLimitSwitch(RunMotorWithLimitSwitch runMotorWithLimitSwitch) {
+  public RunElevatorWithLimitSwitch(LimitswitchSubsystem limitSwitchSubsystem, ElevatorSubsystem elevatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.runMotorWithLimitSwitch = runMotorWithLimitSwitch;
+    this.limitSwitchSubsystem = limitSwitchSubsystem;
+    this.elevatorSubsystem = elevatorSubsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -23,8 +25,9 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    runMotorWithLimitSwitch.execute();
-    
+    if (limitSwitchSubsystem.get()){
+      elevatorSubsystem.setElevatorPower(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
