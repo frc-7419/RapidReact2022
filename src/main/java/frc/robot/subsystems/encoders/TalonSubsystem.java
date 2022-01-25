@@ -13,7 +13,8 @@ public class TalonSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private TalonFX talon;
 
-  public TalonSubsystem(TalonFX talon) {
+  public TalonSubsystem() {
+    talon = new TalonFX(0);
     talon.configFactoryDefault();
     talon.setInverted(false);
     talon.setSensorPhase(false);
