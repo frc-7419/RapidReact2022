@@ -28,7 +28,9 @@ public class RunMotorWithLimitSwitch extends CommandBase {
       talonSubsystem.setPower(0.2);
     }
     // add an else statement that brakes the motor
-    else talonSubsystem.setNeutralMode(NeutralMode.Brake);
+    else {
+      talonSubsystem.setNeutralMode(NeutralMode.Brake);
+    }
     }
     // ^ this sets the power to 0 but doesn't BRAKE it. check assignments for help
 
