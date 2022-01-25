@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 public class TalonSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
   private TalonFX talon;
 
   public TalonSubsystem() {
