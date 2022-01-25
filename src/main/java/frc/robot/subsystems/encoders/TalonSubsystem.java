@@ -6,7 +6,6 @@ package frc.robot.subsystems.encoders;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -15,8 +14,6 @@ public class TalonSubsystem extends SubsystemBase {
   private TalonFX talon;
 
   public TalonSubsystem(TalonFX talon) {
-    this.talon = talon;
-
     talon.configFactoryDefault();
     talon.setInverted(false);
     talon.setSensorPhase(false);
@@ -40,6 +37,10 @@ public class TalonSubsystem extends SubsystemBase {
 
   public void setTalonPosition(double sensorPosition){
     talon.setSelectedSensorPosition(sensorPosition);
+  }
+
+  public void setPower(double power){
+    talon.set(ControlMode.PercentOutput, power);
   }
 
   public double inchesToTicks(double inches, int diameter){
