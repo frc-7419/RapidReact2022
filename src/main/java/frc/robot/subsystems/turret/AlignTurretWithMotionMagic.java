@@ -36,33 +36,33 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   public void initialize() {
 
     // initializing turret talon
-    turretSubsystem.getTurretTalon().configFactoryDefault();
+    turretSubsystem.getTurretMotor().configFactoryDefault();
 
-    turretSubsystem.getTurretTalon().configMotionCruiseVelocity(15000, 0);
-    turretSubsystem.getTurretTalon().configMotionAcceleration(6000, 0); 
+    turretSubsystem.getTurretMotor().configMotionCruiseVelocity(15000, 0);
+    turretSubsystem.getTurretMotor().configMotionAcceleration(6000, 0); 
 
-    turretSubsystem.getTurretTalon().configAllowableClosedloopError(0, tolerance);
+    turretSubsystem.getTurretMotor().configAllowableClosedloopError(0, tolerance);
 
      // reset sensor position
-    turretSubsystem.getTurretTalon().setSelectedSensorPosition(0);
+    turretSubsystem.getTurretMotor().setSelectedSensorPosition(0);
 
     // setting PIDF constants
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
     setpoint = UnitConversions.thetaToTicks(limelightSubsystem.getTx(), RobotConstants.turretRadius);
-    turretSubsystem.getTurretTalon().set(ControlMode.MotionMagic, setpoint);
+    turretSubsystem.getTurretMotor().set(ControlMode.MotionMagic, setpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretTalon().getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretMotor().getSelectedSensorPosition(0));
 
-    turretPercentOutput = turretSubsystem.getTurretTalon().getMotorOutputPercent();
+    turretPercentOutput = turretSubsystem.getTurretMotor().getMotorOutputPercent();
 
     SmartDashboard.putNumber("turret percent output", turretPercentOutput);
-    SmartDashboard.putNumber("closed loop error", turretSubsystem.getTurretTalon().getClosedLoopError());
+    SmartDashboard.putNumber("closed loop error", turretSubsystem.getTurretMotor().getClosedLoopError());
   }
 
   // Called once the command ends or is interrupted.
