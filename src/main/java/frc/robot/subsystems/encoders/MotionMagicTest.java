@@ -5,6 +5,9 @@
 package frc.robot.subsystems.encoders;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.*;
 
 public class MotionMagicTest extends CommandBase {
   /** Creates a new MotionMagicTest. */
