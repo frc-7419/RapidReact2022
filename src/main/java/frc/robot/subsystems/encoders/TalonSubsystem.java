@@ -28,6 +28,10 @@ public class TalonSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public TalonFX getTalon() {
+    return falcon;
+  }
+
   public void setPower(double power) {
     falcon.set(ControlMode.PercentOutput, power);
   }
