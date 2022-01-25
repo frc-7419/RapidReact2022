@@ -5,7 +5,6 @@
 package frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SolenoidSubsystem extends SubsystemBase {
@@ -15,7 +14,7 @@ public class SolenoidSubsystem extends SubsystemBase {
   
 
   public SolenoidSubsystem() {
-    solenoid = new Solenoid(1,PneumaticsModuleType.CTREPCM,0);
+    solenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, 0);
     //this.reversed = reversed;
   }
 
@@ -35,6 +34,9 @@ public class SolenoidSubsystem extends SubsystemBase {
 
   public void retractSolenoid() {
     solenoid.set(false);
+  }
+  public void toggleSolenoid() {
+    solenoid.toggle();
   }
 
 //  public void stopSolenoid() {

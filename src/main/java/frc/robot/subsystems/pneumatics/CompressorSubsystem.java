@@ -16,7 +16,7 @@ public class CompressorSubsystem extends SubsystemBase {
   double current;
 
   public CompressorSubsystem() {
-    c = new Compressor(0, PneumaticsModuleType.CTREPCM);
+    c = new Compressor(1, PneumaticsModuleType.CTREPCM);
     c.enableDigital();
     pressureSwitch = c.getPressureSwitchValue();
     current = c.getCurrent();

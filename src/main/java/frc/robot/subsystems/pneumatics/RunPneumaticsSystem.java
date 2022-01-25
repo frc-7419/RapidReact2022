@@ -7,8 +7,8 @@ public class RunPneumaticsSystem extends CommandBase{
     private boolean reversed;
 
 
-    public RunPneumaticsSystem(SolenoidSubsystem solonoidSubsystem, boolean reversed) {
-        this.solenoidSubsystem = solonoidSubsystem;
+    public RunPneumaticsSystem(SolenoidSubsystem solenoidSubsystem, boolean reversed) {
+        this.solenoidSubsystem = solenoidSubsystem;
         this.reversed = reversed;
     }
     
