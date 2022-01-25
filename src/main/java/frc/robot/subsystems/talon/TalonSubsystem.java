@@ -10,12 +10,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class TalonSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
 
   private TalonFX talon;
 
   public TalonSubsystem() {
-      talon = new TalonFX(0);
+      talon = new TalonFX(14);
   }
 
   @Override
@@ -35,9 +34,11 @@ public class TalonSubsystem extends SubsystemBase {
   public void setPower(double power) {
     talon.set(ControlMode.PercentOutput, power);
   }
-
-  public void setNeutralMode(NeutralMode brake) {
+  
+  public void brake(){
+    talon.setNeutralMode(NeutralMode.Brake);
   }
-  // write a method that puts the talon on brake mode, reference assignments for help
 
 }
+
+
