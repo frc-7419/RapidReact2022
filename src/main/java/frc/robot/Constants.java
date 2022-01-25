@@ -59,10 +59,10 @@ public final class Constants {
     }
 
     public static class PIDConstants {
-        //gyro
-        public static double GyrokP = 0.085;
-        public static double GyrokI = 0;
-        public static double GyrokD = 0;
+        // limelight servo
+        public static double limelightServokP = 0.019;
+        public static double limelightServokI = 0;
+        public static double limelightServokD = 0;
     }
 
     public static double[][] kSpeedToFf = {

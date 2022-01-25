@@ -3,6 +3,7 @@ package frc.robot.subsystems.servo;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
@@ -11,9 +12,9 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
 
-  private double kP = 0.02;
-  private double kI = 0;
-  private double kD = 0;
+  private double kP = PIDConstants.limelightServokP;
+  private double kI = PIDConstants.limelightServokI;
+  private double kD = PIDConstants.limelightServokD;
 
   private double ty;
   private double tv;
