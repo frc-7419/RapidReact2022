@@ -11,7 +11,7 @@ public class TurnLimelightWithServoToTyClosedLoop extends CommandBase {
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
 
-  private double kP = 0.016;
+  private double kP = 0.02;
   private double kI = 0;
   private double kD = 0;
 
