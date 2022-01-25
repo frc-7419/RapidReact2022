@@ -37,7 +37,7 @@ public final class Constants {
         hoodVictor(40), 
 
         //2022 robot constants
-        turretFalcon(20);
+        turret(20);
         ;
 
         public final int id;

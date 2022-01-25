@@ -9,6 +9,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,39 +23,62 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
-  private TalonFX turret;
+  private CANSparkMax turret;
+  private SparkMaxPIDController pidController;
+  private RelativeEncoder turretEncoder;
+  private double kP, kI, kD, kF, kMaxOutput, kMinOutput;
+
+  private double rotations;
+
+  private SparkMaxLimitSwitch forwardLimit;
+  private SparkMaxLimitSwitch reverseLimit;
 
   public TurretSubsystem() {
 
     /* initialize turret talon */
-    turret = new TalonFX(CanIds.turretFalcon.id); // insert new CAN id for turret falcon
-    turret.configFactoryDefault();
-    // talon.setInverted(true);
-    turret.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    turret = new CANSparkMax(CanIds.turret.id, MotorType.kBrushless); // insert new CAN id for turret neo
+
+    turret.restoreFactoryDefaults();
+
+    pidController = turret.getPIDController();
+
+    // Encoder object created to display position values
+    turretEncoder = turret.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);;
+
+    // set limit switches
+    forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+    reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+
+    forwardLimit.enableLimitSwitch(false);
+    reverseLimit.enableLimitSwitch(false);
+
+    pidController.setReference(rotations, CANSparkMax.ControlType.kPosition);
     
-    /* Configured forward and reverse limit switch of Talon to be from a feedback connector and be normally open */
-    turret.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    turret.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-
-    turret.overrideLimitSwitchesEnable(true);
-
+    
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Turret Reverse Limit Switch", turret.getSensorCollection().isRevLimitSwitchClosed() == 1);
-    SmartDashboard.putBoolean("Turret Forward Limit Switch", turret.getSensorCollection().isFwdLimitSwitchClosed() == 1);
+    SmartDashboard.putNumber("SetPoint", rotations);
+    SmartDashboard.putNumber("ProcessVariable", turretEncoder.getPosition());
+
+    SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimit.isLimitSwitchEnabled());
+    SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimit.isLimitSwitchEnabled());
   }
 
   public void setPIDFConstants(double kP, double kD, double kI, double kF) {
-    TalonFuncs.setPIDFConstants(0, turret, kP, kI, kD, kF);
+    pidController.setP(kP);
+    pidController.setI(kI);
+    pidController.setD(kD);
+    pidController.setFF(kF);
+    pidController.setOutputRange(kMinOutput, kMaxOutput);
   }
 
   public void setPower(double power) {
     turret.set(ControlMode.PercentOutput, power);
   }
 
-  public TalonFX getTurretTalon() {
+  public CANSparkMax getTurretMotor() {
     return turret;
   }
 }
