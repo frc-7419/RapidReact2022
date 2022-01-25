@@ -5,8 +5,10 @@
 package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.team7419.math.UnitConversions;
-import com.team7419.math.UnitConversions.MotorType;
+import com.team7419.math.UnitConversions.MotorController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -51,14 +53,14 @@ public class AlignTurretWithMotionMagic extends CommandBase {
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(MotorType.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius);
-    turretSubsystem.getTurretMotor().set(ControlMode.MotionMagic, setpoint);
+    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius);
+    turretSubsystem.getTurretPIDController().setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretMotor().getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretEncoder().getPosition());
 
     turretPercentOutput = turretSubsystem.getTurretMotor().getMotorOutputPercent();
 
@@ -76,6 +78,6 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   @Override
   public boolean isFinished() {
     // threshold: motor output < 0.01
-    return (Math.abs(turretPercentOutput) < 0.01);
+    return Math.abs(turretPercentOutput) < 0.01;
   }
 }

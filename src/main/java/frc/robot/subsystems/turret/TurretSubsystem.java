@@ -81,4 +81,12 @@ public class TurretSubsystem extends SubsystemBase {
   public CANSparkMax getTurretMotor() {
     return turret;
   }
+
+  public RelativeEncoder getTurretEncoder() {
+    return turretEncoder;
+  }
+  
+  public SparkMaxPIDController getTurretPIDController() {
+    return pidController;
+  }
 }
