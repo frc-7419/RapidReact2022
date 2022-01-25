@@ -60,7 +60,7 @@ public final class Constants {
 
     public static class PIDConstants {
         //gyro
-        public static double GyrokP = 0.085;
+        public static double GyrokP = 0.006;
         public static double GyrokI = 0;
         public static double GyrokD = 0;
     }
