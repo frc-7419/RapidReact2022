@@ -4,18 +4,27 @@
 
 package frc.robot.subsystems.limitswitch;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 public class RunElevatorWithLimitSwitch extends CommandBase {
   /** Creates a new RunElevatorWithLimitSwitch. */
-  private LimitswitchSubsystem limitSwitchSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
+  private XboxController joystick;
 
-  public RunElevatorWithLimitSwitch(LimitswitchSubsystem limitSwitchSubsystem, ElevatorSubsystem elevatorSubsystem) {
+  private DigitalInput topLimitSwitch;
+  private DigitalInput bottomLimitSwitch;
+
+  public RunElevatorWithLimitSwitch(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.limitSwitchSubsystem = limitSwitchSubsystem;
+    
     this.elevatorSubsystem = elevatorSubsystem;
+    this.joystick = joystick;
+    topLimitSwitch = new DigitalInput(0);
+    bottomLimitSwitch = new DigitalInput(0);
+
   }
 
   // Called when the command is initially scheduled.
@@ -25,8 +34,10 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (limitSwitchSubsystem.get()){
+    if (topLimitSwitch.get() || bottomLimitSwitch.get()) {
       elevatorSubsystem.setElevatorPower(0);
+    } else {
+      elevatorSubsystem.setElevatorPower(0.4 * joystick.getRightY());
     }
   }
 
