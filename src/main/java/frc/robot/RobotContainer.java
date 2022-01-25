@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.pneumatics.CompressorSubsystem;
 import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
+import frc.robot.subsystems.pneumatics.RunSolenoid;
 import frc.robot.subsystems.pneumatics.SolenoidForwardAndReverse;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,6 +28,7 @@ public class RobotContainer {
   private final SolenoidSubsystem solenoid = new SolenoidSubsystem();
   private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
   private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
+  private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
@@ -44,8 +46,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kX.value).whenPressed(new RunPneumaticsSystem(solenoid, false));
-    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new RunPneumaticsSystem(solenoid, true));
+    // new JoystickButton(joystick, XboxController.Button.kX.value).whenPressed(new RunPneumaticsSystem(solenoid, false));
+    // new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new RunPneumaticsSystem(solenoid, true));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -60,6 +62,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    this.solenoid.setDefaultCommand(runSolenoid);
   }
 }
