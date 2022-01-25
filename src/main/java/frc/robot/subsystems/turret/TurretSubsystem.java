@@ -75,7 +75,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    turret.set(ControlMode.PercentOutput, power);
+    turret.set(power);
   }
 
   public CANSparkMax getTurretMotor() {

@@ -6,6 +6,7 @@ package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.math.UnitConversions;
+import com.team7419.math.UnitConversions.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -36,7 +37,7 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   public void initialize() {
 
     // initializing turret talon
-    turretSubsystem.getTurretMotor().configFactoryDefault();
+    turretSubsystem.getTurretMotor().restoreFactoryDefaults();
 
     turretSubsystem.getTurretMotor().configMotionCruiseVelocity(15000, 0);
     turretSubsystem.getTurretMotor().configMotionAcceleration(6000, 0); 
@@ -50,7 +51,7 @@ public class AlignTurretWithMotionMagic extends CommandBase {
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
-    setpoint = UnitConversions.thetaToTicks(limelightSubsystem.getTx(), RobotConstants.turretRadius);
+    setpoint = UnitConversions.inchesToTicks(MotorType.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius);
     turretSubsystem.getTurretMotor().set(ControlMode.MotionMagic, setpoint);
   }
 
