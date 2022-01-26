@@ -3,11 +3,30 @@ package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 
 public class ShootGetSecondBallShoot extends SequentialCommandGroup {
     
-    public ShootGetSecondBallShoot() { //add parameters
-        addCommands(new WaitCommand(0.5)); //this is how the auton code should look: a series of addCommands() functions 
+    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, StraightWithMotionMagic straightWithMotionMagic, 
+    TurnWithGyroClosedLoop turnWithGyroClosedLoop) { //add parameters
+        //shoot ball command
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, null, 180));
+        addCommands(new WaitCommand(0.5));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 120));
+        //intake ball command
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 120));
+        //shoot ball command
+
+
+
+        
+        
+        
+        
+        
+        //addCommands(new WaitCommand(0.5)); //this is how the auton code should look: a series of addCommands() functions 
         //ReadyToShoot --> Load the ball into the shooter, basically get ready to shoot
         //RunShooter --> Actually shoot the ball. Power should be set accordingly for lower hub/upper hub
         //Turn robot to face one of the balls
@@ -27,5 +46,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         //loadBallInShooter - load this ball into the shooter
         //use limelight to detect the hubs, reposition robot
         //runShooter - shoot ball with desired power and at the target, accounting for whether we are shooting into upper or lower hub
+
+
     }
 }
