@@ -37,10 +37,10 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
     SmartDashboard.putString("Working?", "reached execute command");
     if (!topLimitSwitch.get() && joystick.getRightY() > 0) {
       
-      elevatorSubsystem.setPower(0);
+      elevatorSubsystem.brake();
     } else if (!bottomLimitSwitch.get() && joystick.getRightY() < 0) {
       
-      elevatorSubsystem.setPower(0);
+      elevatorSubsystem.brake();
     } else {
       elevatorSubsystem.setPower(0.4 * joystick.getRightY());
       

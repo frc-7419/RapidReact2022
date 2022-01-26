@@ -5,6 +5,7 @@
 package frc.robot.subsystems.limitswitch;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,6 +39,13 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
   }
+
+
+  public void brake() {
+
+  elevatorLeft.setNeutralMode(NeutralMode.Brake);
+  elevatorRight.setNeutralMode(NeutralMode.Brake);
+}
 }
 
 
