@@ -54,7 +54,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   public void end(boolean interrupted) {
     driveBase.stop();
     driveBase.brake();
-    Timer.delay(1);
+    // Timer.delay(1);
     SmartDashboard.putNumber("robot turned", ahrs.getGyroAngle() - initAngle);
   }
 
