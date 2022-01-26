@@ -4,22 +4,17 @@
 
 package frc.robot.subsystems.turret;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 import com.team7419.math.UnitConversions.MotorController;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
-import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
 
-public class AlignTurretWithPIDController extends CommandBase {
+public class AlignTurretWithPositionPIDController extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private AnalogPotentiometer turretPotentiometer;
 
   private PIDController pidController;
 
@@ -32,7 +27,7 @@ public class AlignTurretWithPIDController extends CommandBase {
 
   private double pidOutput;
   
-  public AlignTurretWithPIDController(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithPositionPIDController(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);

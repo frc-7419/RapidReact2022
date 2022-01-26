@@ -4,22 +4,15 @@
 
 package frc.robot.subsystems.turret;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
@@ -42,8 +35,8 @@ public class TurretSubsystem extends SubsystemBase {
     // set encoder as feedback device for pid controller
     pidController.setFeedbackDevice(turretEncoder);
 
-     // set PID controller
-     pidController = turret.getPIDController();
+    // set PID controller
+    pidController = turret.getPIDController();
 
     // set limit switches
     forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);

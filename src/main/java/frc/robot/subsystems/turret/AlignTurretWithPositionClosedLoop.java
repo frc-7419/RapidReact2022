@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems.turret;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.team7419.math.UnitConversions;

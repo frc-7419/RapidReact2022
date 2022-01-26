@@ -4,14 +4,10 @@
 
 package frc.robot.subsystems.turret;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team7419.TalonFuncs;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
-import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
 
 public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
