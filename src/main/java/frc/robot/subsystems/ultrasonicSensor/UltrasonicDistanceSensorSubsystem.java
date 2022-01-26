@@ -13,7 +13,7 @@ public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   private Ultrasonic ultrasonic;
   private double distanceInches;
   public UltrasonicDistanceSensorSubsystem() {
-    ultrasonic = new Ultrasonic(2, 3);
+    ultrasonic = new Ultrasonic(3, 2);
   }
 
   @Override
