@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  Ultrasonic ultrasonic;
-  double distanceInches;
+  private Ultrasonic ultrasonic;
+  private double distanceInches;
   public UltrasonicDistanceSensorSubsystem() {
     ultrasonic = new Ultrasonic(1, 2);
   }
