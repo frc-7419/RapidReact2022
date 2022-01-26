@@ -5,24 +5,24 @@
 package frc.robot.subsystems.limitswitch;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
 public class ElevatorSubsystem extends SubsystemBase {
-  /** Creates a new ElevatorSubsystem. */
   private TalonSRX elevatorLeft;
   private TalonSRX elevatorRight;
-
-
+  /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     elevatorLeft = new TalonSRX(50);
     elevatorRight = new TalonSRX(51);
     elevatorRight.setInverted(true);
-  }
-
+    }
   
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -34,10 +34,13 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
   }
+
+
+  public void brake() {
+    elevatorLeft.setNeutralMode(NeutralMode.Brake);
+    elevatorRight.setNeutralMode(NeutralMode.Brake);
 }
-
-
+}
