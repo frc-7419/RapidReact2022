@@ -27,6 +27,7 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   private double setpoint;
   private double tolerance = 10; // in ticks (placeholder)
   private double turretPercentOutput;
+  private double turretVelocity;
 
   public AlignTurretWithMotionMagic(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
@@ -44,6 +45,14 @@ public class AlignTurretWithMotionMagic extends CommandBase {
     turretSubsystem.getTurretMotor().configMotionCruiseVelocity(15000, 0);
     turretSubsystem.getTurretMotor().configMotionAcceleration(6000, 0); 
 
+    // velocities in rpm
+    turretSubsystem.getTurretPIDController().setSmartMotionMaxVelocity(15000, 0);
+    turretSubsystem.getTurretPIDController().setSmartMotionMinOutputVelocity(minVel, smartMotionSlot);
+    turretSubsystem.getTurretPIDController().setSmartMotionMaxAccel(6000, 0);
+
+
+    m_pidController.setSmartMotionAllowedClosedLoopError(tolerance, 0);
+
     turretSubsystem.getTurretMotor().configAllowableClosedloopError(0, tolerance);
 
      // reset sensor position
@@ -60,11 +69,12 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretEncoder().getPosition());
-
     turretPercentOutput = turretSubsystem.getTurretMotor().getMotorOutputPercent();
+    turretVelocity = turretSubsystem.getTurretEncoder().getVelocity();
 
+    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretEncoder().getPosition());
     SmartDashboard.putNumber("turret percent output", turretPercentOutput);
+    SmartDashboard.putNumber("turret velocity (rpm)",  turretVelocity);
     SmartDashboard.putNumber("closed loop error", turretSubsystem.getTurretMotor().getClosedLoopError());
   }
 

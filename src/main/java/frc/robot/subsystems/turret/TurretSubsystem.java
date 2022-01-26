@@ -43,7 +43,10 @@ public class TurretSubsystem extends SubsystemBase {
     pidController = turret.getPIDController();
 
     // Encoder object created to display position values
-    turretEncoder = turret.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);;
+    turretEncoder = turret.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+
+    // set encoder as feedback device for pid controller
+    pidController.setFeedbackDevice(turretEncoder);
 
     // set limit switches
     forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
