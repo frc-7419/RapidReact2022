@@ -5,6 +5,7 @@
 package frc.robot.subsystems.ultrasonicSensor;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
@@ -20,6 +21,7 @@ public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     distanceInches = ultrasonic.getRangeInches();
+    SmartDashboard.putNumber("Ultrasonic Sensor Distance: " , distanceInches);
   }
 
   @Override
