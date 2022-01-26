@@ -26,6 +26,9 @@ public class TalonSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
   }
+  public TalonFX getTalon(){
+    return talon;
+  }
 
   public double getTalonPosition(){
     return talon.getSelectedSensorPosition();
