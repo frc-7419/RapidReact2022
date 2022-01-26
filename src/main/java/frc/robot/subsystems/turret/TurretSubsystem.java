@@ -26,21 +26,15 @@ public class TurretSubsystem extends SubsystemBase {
   private CANSparkMax turret;
   private SparkMaxPIDController pidController;
   private RelativeEncoder turretEncoder;
-  private double kP, kI, kD, kF, kMaxOutput, kMinOutput;
-
-  private double rotations;
 
   private SparkMaxLimitSwitch forwardLimit;
   private SparkMaxLimitSwitch reverseLimit;
 
   public TurretSubsystem() {
-
-    /* initialize turret talon */
+    // initialize turret talon
     turret = new CANSparkMax(CanIds.turret.id, MotorType.kBrushless); // insert new CAN id for turret neo
 
     turret.restoreFactoryDefaults();
-
-    pidController = turret.getPIDController();
 
     // Encoder object created to display position values
     turretEncoder = turret.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
@@ -48,22 +42,20 @@ public class TurretSubsystem extends SubsystemBase {
     // set encoder as feedback device for pid controller
     pidController.setFeedbackDevice(turretEncoder);
 
+     // set PID controller
+     pidController = turret.getPIDController();
+
     // set limit switches
     forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
     reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
 
     forwardLimit.enableLimitSwitch(false);
     reverseLimit.enableLimitSwitch(false);
-
-    pidController.setReference(rotations, CANSparkMax.ControlType.kPosition);
-    
-    
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("SetPoint", rotations);
-    SmartDashboard.putNumber("ProcessVariable", turretEncoder.getPosition());
+    SmartDashboard.putNumber("Encoder Position", turretEncoder.getPosition());
 
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimit.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimit.isLimitSwitchEnabled());
@@ -74,7 +66,6 @@ public class TurretSubsystem extends SubsystemBase {
     pidController.setI(kI);
     pidController.setD(kD);
     pidController.setFF(kF);
-    pidController.setOutputRange(kMinOutput, kMaxOutput);
   }
 
   public void setPower(double power) {

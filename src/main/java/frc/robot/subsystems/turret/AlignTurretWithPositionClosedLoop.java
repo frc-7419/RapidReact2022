@@ -27,6 +27,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   private double setpoint;
   private double tolerance = 10; // in ticks (placeholder)
   private double turretPercentOutput;
+  private double turretPosition;
   private double turretVelocity;
 
   public AlignTurretWithPositionClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
@@ -47,13 +48,11 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
     // turretSubsystem.getTurretPIDController().setSmartMotionMinOutputVelocity(minVel, 0);
     turretSubsystem.getTurretPIDController().setSmartMotionMaxAccel(6000, 0);
 
-
+    // set tolerance
     turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(tolerance, 0);
 
-    turretSubsystem.getTurretMotor().configAllowableClosedloopError(0, tolerance);
-
      // reset sensor position
-    turretSubsystem.getTurretMotor().setSelectedSensorPosition(0);
+     turretSubsystem.getTurretEncoder().setPosition(0);
 
     // setting PIDF constants
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
@@ -66,13 +65,14 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turretPercentOutput = turretSubsystem.getTurretMotor().getMotorOutputPercent();
+    turretPercentOutput = turretSubsystem.getTurretMotor().get();
+    turretPosition = turretSubsystem.getTurretEncoder().getPosition();
     turretVelocity = turretSubsystem.getTurretEncoder().getVelocity();
 
-    SmartDashboard.putNumber("turret position", turretSubsystem.getTurretEncoder().getPosition());
+    SmartDashboard.putNumber("turret position", turretPosition);
     SmartDashboard.putNumber("turret percent output", turretPercentOutput);
     SmartDashboard.putNumber("turret velocity (rpm)",  turretVelocity);
-    SmartDashboard.putNumber("closed loop error", turretSubsystem.getTurretMotor().getClosedLoopError());
+    SmartDashboard.putNumber("closed loop error", (setpoint - turretPosition));
   }
 
   // Called once the command ends or is interrupted.
