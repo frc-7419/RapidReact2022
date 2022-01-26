@@ -34,12 +34,10 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putString("Working?", "reached execute command");
+    
     if (!topLimitSwitch.get() && joystick.getRightY() > 0) {
-      
       elevatorSubsystem.setPower(0);
     } else if (!bottomLimitSwitch.get() && joystick.getRightY() < 0) {
-      
       elevatorSubsystem.setPower(0);
     } else {
       elevatorSubsystem.setPower(0.4 * joystick.getRightY());
