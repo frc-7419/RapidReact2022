@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurretWithMotionMagic extends CommandBase {
+public class AlignTurretWithPositionClosedLoop extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
@@ -29,7 +29,7 @@ public class AlignTurretWithMotionMagic extends CommandBase {
   private double turretPercentOutput;
   private double turretVelocity;
 
-  public AlignTurretWithMotionMagic(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithPositionClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
@@ -42,16 +42,13 @@ public class AlignTurretWithMotionMagic extends CommandBase {
     // initializing turret talon
     turretSubsystem.getTurretMotor().restoreFactoryDefaults();
 
-    turretSubsystem.getTurretMotor().configMotionCruiseVelocity(15000, 0);
-    turretSubsystem.getTurretMotor().configMotionAcceleration(6000, 0); 
-
     // velocities in rpm
     turretSubsystem.getTurretPIDController().setSmartMotionMaxVelocity(15000, 0);
-    turretSubsystem.getTurretPIDController().setSmartMotionMinOutputVelocity(minVel, smartMotionSlot);
+    // turretSubsystem.getTurretPIDController().setSmartMotionMinOutputVelocity(minVel, 0);
     turretSubsystem.getTurretPIDController().setSmartMotionMaxAccel(6000, 0);
 
 
-    m_pidController.setSmartMotionAllowedClosedLoopError(tolerance, 0);
+    turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(tolerance, 0);
 
     turretSubsystem.getTurretMotor().configAllowableClosedloopError(0, tolerance);
 

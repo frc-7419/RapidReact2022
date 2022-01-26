@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.servo.ServoSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.subsystems.turret.AlignTurretWithMotionMagic;
+import frc.robot.subsystems.turret.AlignTurretWithPositionClosedLoop;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
@@ -31,11 +31,10 @@ public class RobotContainer {
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
   private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
-  private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
 
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
 
-  private final AlignTurretWithMotionMagic runTurret = new AlignTurretWithMotionMagic(turretSubsystem, limelightSubsystem);
+  private final AlignTurretWithPositionClosedLoop runTurret = new AlignTurretWithPositionClosedLoop(turretSubsystem, limelightSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();

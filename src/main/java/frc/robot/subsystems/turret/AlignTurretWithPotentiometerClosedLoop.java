@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.TalonFuncs;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
@@ -15,7 +16,7 @@ import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
 public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private PotentiometerSubsystem turretPotentiometer = new PotentiometerSubsystem();
+  private AnalogPotentiometer turretPotentiometer;
 
   private PIDController pidController;
 
@@ -28,10 +29,10 @@ public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
 
   private double pidOutput;
   
-  public AlignTurretWithPotentiometerClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, PotentiometerSubsystem turretPotentiometer) {
+  public AlignTurretWithPotentiometerClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    this.turretPotentiometer = turretPotentiometer;
+    turretPotentiometer = new AnalogPotentiometer(1, 180, 0);
     addRequirements(turretSubsystem);
   }
 
@@ -42,14 +43,14 @@ public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
     // instantiate PIDController class
     pidController = new PIDController(kP, kI, kD);
     setpoint = limelightSubsystem.getTx();
-    pidController.setSetpoint(turretPotentiometer.getAngle() + setpoint);
+    pidController.setSetpoint(turretPotentiometer.get() + setpoint);
     pidController.setTolerance(tolerance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pidOutput = pidController.calculate(turretPotentiometer.getAngle());
+    pidOutput = pidController.calculate(turretPotentiometer.get());
     turretSubsystem.setPower(pidOutput);
   }
 
