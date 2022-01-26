@@ -9,6 +9,10 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 
 public class ShootGetSecondBallShoot extends SequentialCommandGroup {
     
+    /* suggestions:
+        remove the dependency injectin for straightwithmotionmagic and turnwithgyro, it's unnecessary
+        you also need to inject GyroSubsystem into the constructor
+    */
     public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, StraightWithMotionMagic straightWithMotionMagic, 
     TurnWithGyroClosedLoop turnWithGyroClosedLoop) { //add parameters
         //shoot ball command
