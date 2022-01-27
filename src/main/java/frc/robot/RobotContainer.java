@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;  
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -22,6 +23,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
+  private final Dashboard dashboard = new Dashboard();
+  
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
 
