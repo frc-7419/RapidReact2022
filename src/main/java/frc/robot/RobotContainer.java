@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController;  
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.autos.TemplateParallelCommandGroup;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -26,10 +29,16 @@ public class RobotContainer {
 
   // instantiate your auto commands here
   private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
+  private final TemplateParallelCommandGroup templateParallelCommandGroup = new TemplateParallelCommandGroup();
+
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    autonChooser.setDefaultOption("Default", templateSequentialCommandGroup);
+    autonChooser.addOption("Option 1", templateParallelCommandGroup);
+    SmartDashboard.putData(autonChooser);
     // Configure the button bindings
     configureButtonBindings();
   }
