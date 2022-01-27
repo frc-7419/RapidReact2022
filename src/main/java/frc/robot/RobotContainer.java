@@ -39,6 +39,7 @@ public class RobotContainer {
     autonChooser.setDefaultOption("Default", templateSequentialCommandGroup);
     autonChooser.addOption("Option 1", templateParallelCommandGroup);
     SmartDashboard.putData(autonChooser);
+    // test
     // Configure the button bindings
     configureButtonBindings();
   }
