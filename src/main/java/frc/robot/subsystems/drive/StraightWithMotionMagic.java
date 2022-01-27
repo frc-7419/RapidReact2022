@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.TalonFuncs;
 import com.team7419.math.DriveBaseConversions;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -16,12 +17,17 @@ public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSubsystem driveBaseSubsystem;
 
-    private ShuffleboardTab driveBase = Shuffleboard.getTab("Drive Base");
+    private ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base");
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
     private double leftMastError;
     private double rightMastError;
+
+    // shuffleboard kP values
+    private NetworkTableEntry kP = driveBaseTab.add("motion magic kP", PIDConstants.DriveBaseMotionMagickP).getEntry();
+    private NetworkTableEntry kI = driveBaseTab.add("motion magic kI", PIDConstants.DriveBaseMotionMagickI).getEntry();
+    private NetworkTableEntry kD = driveBaseTab.add("motion magic kD", PIDConstants.DriveBaseMotionMagickD).getEntry();
 
     private double threshold = 60; // in ticks
 
@@ -55,9 +61,9 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBaseSubsystem.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBaseSubsystem.getRightMast().configMotionAcceleration(6000, 0);  
 
-        // set PIDF constants
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
+        // set PIDF constants, using shufflebaord
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
         
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
         double leftSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
