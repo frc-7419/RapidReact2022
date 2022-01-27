@@ -60,9 +60,9 @@ public final class Constants {
 
     public static class PIDConstants {
         // straight with motion magic
-        public static double DriveBaseMotionMagickP = .3;
+        public static double DriveBaseMotionMagickP = 0.5;
         public static double DriveBaseMotionMagickI = 0;
-        public static double DriveBaseMotionMagickD = 0.05;
+        public static double DriveBaseMotionMagickD = 0;
     }
 
     public static double[][] kSpeedToFf = {

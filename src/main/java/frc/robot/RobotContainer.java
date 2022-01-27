@@ -42,7 +42,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 48));
+    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
