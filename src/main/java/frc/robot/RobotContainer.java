@@ -61,7 +61,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return templateSequentialCommandGroup;
+    return autonChooser.getSelected();
   }
 
   // set default commands here
