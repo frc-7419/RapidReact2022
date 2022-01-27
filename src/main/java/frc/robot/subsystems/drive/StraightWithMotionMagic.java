@@ -61,7 +61,7 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBaseSubsystem.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBaseSubsystem.getRightMast().configMotionAcceleration(6000, 0);  
 
-        // set PIDF constants, using shufflebaord
+        // set PIDF constants, using shuffleboard
         TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
         TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
         
