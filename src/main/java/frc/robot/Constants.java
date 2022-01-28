@@ -60,9 +60,9 @@ public final class Constants {
 
     public static class PIDConstants {
         // limelight servo
-        public static double limelightServokP = 0.017;
+        public static double limelightServokP = 0.0135;
         public static double limelightServokI = 0;
-        public static double limelightServokD = 0.0005;
+        public static double limelightServokD = 0.0029;
     }
 
     public static double[][] kSpeedToFf = {
