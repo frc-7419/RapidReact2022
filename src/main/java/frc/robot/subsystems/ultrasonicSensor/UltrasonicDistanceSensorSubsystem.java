@@ -13,6 +13,7 @@ public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   private Ultrasonic ultrasonic;
   public UltrasonicDistanceSensorSubsystem() {
     ultrasonic = new Ultrasonic(3, 2);
+    Ultrasonic.setAutomaticMode(true);
   }
 
   @Override
