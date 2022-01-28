@@ -16,6 +16,6 @@ public class Dashboard {
 
     public static ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base Tab");
 
-    public static NetworkTableEntry motionMagicSetpoint = driveBaseTab.add("Setpoint", 0).getEntry();
+    public static NetworkTableEntry motionMagicSetpoint = driveBaseTab.add("Setpoint", 12).getEntry();
     
 }
