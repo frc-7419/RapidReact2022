@@ -9,25 +9,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
-
-    /* referencing the OffSeason code is fine, but i'd prefer if you look at documentation
-    specific for the maxbotics sensor rather than c + p */
-
-    private AnalogInput ultrasonic;
+    private Ultrasonic ultrasonic;
     
     public MaxBotixUltrasonicSensorSubsystem() {
-        ultrasonic = new AnalogInput(Constants.maxboticsUltrasonicId);
+        ultrasonic = new Ultrasonic(5,6);
     }
 
     public void periodic() {
-        SmartDashboard.putNumber("distance", getRawValue());
-    }
-
-    public double getRawValue() {
-        return ultrasonic.getValue();
-    }
-
-    public double getInces() {
-        return this.getRawValue() * 0.125;
+        SmartDashboard.putNumber("distance: ", ultrasonic.getRangeInches());
     }
 }
