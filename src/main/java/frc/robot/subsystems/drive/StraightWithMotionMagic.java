@@ -17,7 +17,7 @@ public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSubsystem driveBaseSubsystem;
 
-    private ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base");
+    private ShuffleboardTab driveBase = Shuffleboard.getTab("Drive Base");
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
@@ -25,14 +25,13 @@ public class StraightWithMotionMagic extends CommandBase {
     private double rightMastError;
 
     // shuffleboard kP values
-    private NetworkTableEntry kP = driveBaseTab.add("motion magic kP", PIDConstants.DriveBaseMotionMagickP).getEntry();
-    private NetworkTableEntry kI = driveBaseTab.add("motion magic kI", PIDConstants.DriveBaseMotionMagickI).getEntry();
-    private NetworkTableEntry kD = driveBaseTab.add("motion magic kD", PIDConstants.DriveBaseMotionMagickD).getEntry();
+    private NetworkTableEntry kP = driveBase.add("kP", PIDConstants.DriveBaseMotionMagickP).getEntry();
+    private NetworkTableEntry kI = driveBase.add("kI", PIDConstants.DriveBaseMotionMagickI).getEntry();
+    private NetworkTableEntry kD = driveBase.add("kD", PIDConstants.DriveBaseMotionMagickD).getEntry();
 
     private double threshold = 60; // in ticks
 
     private long startTime;
-
    
     public StraightWithMotionMagic(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
         this.driveBaseSubsystem = driveBaseSubsystem;

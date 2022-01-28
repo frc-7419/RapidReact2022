@@ -16,7 +16,7 @@ public class Dashboard {
 
     private DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
 
-    private ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base");
+    private ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base Tab");
 
     private NetworkTableEntry setpoint = driveBaseTab.add("Setpoint", 0).getEntry();
 
