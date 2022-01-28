@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private Ultrasonic ultrasonic;
-  private double distanceInches;
   public UltrasonicDistanceSensorSubsystem() {
     ultrasonic = new Ultrasonic(3, 2);
   }
@@ -19,8 +18,7 @@ public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    distanceInches = ultrasonic.getRangeInches();
-    SmartDashboard.putNumber("Ultrasonic Sensor Distance: " , distanceInches);
+    SmartDashboard.putNumber("Ultrasonic Sensor Distance", ultrasonic.getRangeInches());
   }
 
   @Override
