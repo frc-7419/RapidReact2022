@@ -16,7 +16,7 @@ public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
     public MaxBotixUltrasonicSensorSubsystem() {
         //input = new AnalogInput(0); error --> cannot instanitate constructor
         //input.setAverageBits(2)
-        pot = new AnalogPotentiometer(0,180,30);
+        pot = new AnalogPotentiometer(3,180,30);
     }
 
   @Override
