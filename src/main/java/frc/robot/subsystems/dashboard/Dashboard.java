@@ -14,14 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /** Add your docs here. */
 public class Dashboard {
 
-    private DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+    public static ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base Tab");
 
-    private ShuffleboardTab driveBaseTab = Shuffleboard.getTab("Drive Base Tab");
-
-    private NetworkTableEntry setpoint = driveBaseTab.add("Setpoint", 0).getEntry();
-
-    public Dashboard() {
-        SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, setpoint.getDouble(12)));
-    }
+    public static NetworkTableEntry motionMagicSetpoint = driveBaseTab.add("Setpoint", 0).getEntry();
     
 }
