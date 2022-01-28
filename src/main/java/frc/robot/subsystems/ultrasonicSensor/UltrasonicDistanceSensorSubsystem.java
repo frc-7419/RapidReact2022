@@ -4,10 +4,12 @@
 
 package frc.robot.subsystems.ultrasonicSensor;
 
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UltrasonicDistanceSensorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
+  private Ultrasonic ultrasonic;
   public UltrasonicDistanceSensorSubsystem() {}
 
   @Override
