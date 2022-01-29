@@ -6,7 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController;  
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -45,7 +46,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
+    // new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

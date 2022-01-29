@@ -12,22 +12,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PowerConstants;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.dashboard.Dashboard;
 
 public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSubsystem driveBaseSubsystem;
 
-    private ShuffleboardTab driveBase = Shuffleboard.getTab("Drive Base");
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
     private double leftMastError;
     private double rightMastError;
-
-    // shuffleboard kP values
-    private NetworkTableEntry kP = driveBase.add("kP", PIDConstants.DriveBaseMotionMagickP).getEntry();
-    private NetworkTableEntry kI = driveBase.add("kI", PIDConstants.DriveBaseMotionMagickI).getEntry();
-    private NetworkTableEntry kD = driveBase.add("kD", PIDConstants.DriveBaseMotionMagickD).getEntry();
 
     private double threshold = 60; // in ticks
 
@@ -61,8 +56,8 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBaseSubsystem.getRightMast().configMotionAcceleration(6000, 0);  
 
         // set PIDF constants, using shuffleboard
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), kP.getDouble(PIDConstants.DriveBaseMotionMagickP), kI.getDouble(PIDConstants.DriveBaseMotionMagickI), kD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), Dashboard.motionMagickP.getDouble(PIDConstants.DriveBaseMotionMagickP), Dashboard.motionMagickI.getDouble(PIDConstants.DriveBaseMotionMagickI), Dashboard.motionMagickD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), Dashboard.motionMagickP.getDouble(PIDConstants.DriveBaseMotionMagickP), Dashboard.motionMagickI.getDouble(PIDConstants.DriveBaseMotionMagickI), Dashboard.motionMagickD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
         
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
         double leftSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
