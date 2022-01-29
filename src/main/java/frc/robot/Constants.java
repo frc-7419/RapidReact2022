@@ -25,10 +25,12 @@ public final class Constants {
         // motorX(x)...
 
         // 2020 robot constants
+        // Drivetrain Constants 
         leftFalcon1(5),
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
+
         loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
