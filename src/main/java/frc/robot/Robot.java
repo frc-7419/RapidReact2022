@@ -22,8 +22,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
-
-    SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
   }
 
   
@@ -31,6 +29,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // RobotContainer.arcade.start();
     CommandScheduler.getInstance().run();
+
+    SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
   }
 
 
