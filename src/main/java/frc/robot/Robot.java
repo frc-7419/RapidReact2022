@@ -8,14 +8,22 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.StraightWithMotionMagic;
 
 public class Robot extends TimedRobot {
   private RobotContainer robotContainer;
 
+  private DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+
+    SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
   }
 
   

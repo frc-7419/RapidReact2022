@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /** Add your docs here. */
-public class Dashboard extends SubsystemBase {
+public class Dashboard {
     
     private DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
 
@@ -25,10 +25,5 @@ public class Dashboard extends SubsystemBase {
     public static NetworkTableEntry motionMagickP = driveBaseTab.add("kP", PIDConstants.DriveBaseMotionMagickP).getEntry();
     public static NetworkTableEntry motionMagickI = driveBaseTab.add("kI", PIDConstants.DriveBaseMotionMagickI).getEntry();
     public static NetworkTableEntry motionMagickD = driveBaseTab.add("kD", PIDConstants.DriveBaseMotionMagickD).getEntry();
-
-    @Override
-    public void periodic() {
-        SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
-    }
     
 }
