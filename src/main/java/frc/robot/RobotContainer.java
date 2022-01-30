@@ -37,6 +37,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
   }
 
   /**
