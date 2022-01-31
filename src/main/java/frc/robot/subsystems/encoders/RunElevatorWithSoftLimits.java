@@ -20,17 +20,41 @@ public class RunElevatorWithSoftLimits extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
+    addRequirements(elevatorSubsystem);
+    //Change value for soft limits based on the limits in ticks of elevator
     forwardSoftLimit = 1000;
     reverseSoftLimit = -1000;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    elevatorSubsystem.getElevatorLeft().configForwardSoftLimitThreshold(forwardSoftLimit);
+    elevatorSubsystem.getElevatorLeft().configReverseSoftLimitThreshold(reverseSoftLimit);
+    elevatorSubsystem.getElevatorLeft().configForwardSoftLimitEnable(true, 0);
+    elevatorSubsystem.getElevatorLeft().configReverseSoftLimitEnable(true, 0);
+
+    elevatorSubsystem.getElevatorRight().configForwardSoftLimitThreshold(forwardSoftLimit);
+    elevatorSubsystem.getElevatorRight().configReverseSoftLimitThreshold(reverseSoftLimit);
+    elevatorSubsystem.getElevatorRight().configForwardSoftLimitEnable(true, 0);
+    elevatorSubsystem.getElevatorRight().configReverseSoftLimitEnable(true, 0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    SmartDashboard.putNumber("Left Elevator Position", elevatorSubsystem.getElevatorLeft().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Right Elevator Position", elevatorSubsystem.getElevatorRight().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Joystick value", joystick.getRightY());
+
+    if (joystick.getRightY() != 0){
+      elevatorSubsystem.setPower(0.3 * joystick.getRightY());
+    }
+    else{
+      elevatorSubsystem.setPower(0);
+      elevatorSubsystem.brake();
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
