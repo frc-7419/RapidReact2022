@@ -50,5 +50,12 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void brake() {
     elevatorLeft.setNeutralMode(NeutralMode.Brake);
     elevatorRight.setNeutralMode(NeutralMode.Brake);
-}
+  }
+
+  public double inchesToTicks(double inches, double diameter){
+    //(ticks per rotation/diameter of wheels)*inches
+    //delete the diameter parameter after finding out what it is
+    double ticks = (1024 * inches)/(Math.PI * diameter);
+    return ticks;
+  }
 }
