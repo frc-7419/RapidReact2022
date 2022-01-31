@@ -22,6 +22,7 @@ public class RunElevatorWithSoftLimits extends CommandBase {
     this.joystick = joystick;
     addRequirements(elevatorSubsystem);
     //Change value for soft limits based on the limits in ticks of elevator
+    //Should be elevatorSubsystem.inchesToTicks(inches, diameter) with inches and diameter changed
     forwardSoftLimit = 1000;
     reverseSoftLimit = -1000;
   }
