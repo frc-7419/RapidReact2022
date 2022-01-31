@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 
 public class ShootGetSecondBallShoot extends SequentialCommandGroup {
@@ -13,8 +14,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         remove the dependency injectin for straightwithmotionmagic and turnwithgyro, it's unnecessary
         you also need to inject GyroSubsystem into the constructor
     */
-    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, StraightWithMotionMagic straightWithMotionMagic, 
-    TurnWithGyroClosedLoop turnWithGyroClosedLoop) { //add parameters
+    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) { //add parameters
         //shoot ball command
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, null, 180));
         addCommands(new WaitCommand(0.5));
