@@ -5,6 +5,9 @@
 package frc.robot.subsystems.rev2mDistanceSensor;
 
 import com.revrobotics.Rev2mDistanceSensor;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
+import com.revrobotics.Rev2mDistanceSensor.Unit;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,8 +15,14 @@ public class Rev2mDistanceSensorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private Rev2mDistanceSensor distanceSensor;
   
-  public Rev2mDistanceSensorSubsystem() {}
+  public Rev2mDistanceSensorSubsystem() {
+    this.distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
+  }
 
+  public double getRange() {
+    return distanceSensor.getRange();
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
