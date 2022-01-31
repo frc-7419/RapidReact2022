@@ -5,11 +5,23 @@
 package frc.robot.subsystems.encoders;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunElevatorWithSoftLimits extends CommandBase {
   /** Creates a new RunElevatorWithSoftLimits. */
-  public RunElevatorWithSoftLimits() {
+  private ElevatorSubsystem elevatorSubsystem;
+  private XboxController joystick;
+  private double forwardSoftLimit;
+  private double reverseSoftLimit;
+
+  public RunElevatorWithSoftLimits(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.elevatorSubsystem = elevatorSubsystem;
+    this.joystick = joystick;
+    forwardSoftLimit = 1000;
+    reverseSoftLimit = -1000;
   }
 
   // Called when the command is initially scheduled.
