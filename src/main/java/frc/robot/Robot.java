@@ -17,8 +17,6 @@ import frc.robot.subsystems.drive.StraightWithMotionMagic;
 public class Robot extends TimedRobot {
   private RobotContainer robotContainer;
 
-  private DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
-
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
