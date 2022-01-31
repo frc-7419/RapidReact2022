@@ -6,7 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController;  
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.autos.ShootThenMoveAway;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -21,11 +22,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
-  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
-  private final GyroSubsystem gyro = new GyroSubsystem();
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+  private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
 
   // instantiate your auto commands here
   private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
+  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -51,7 +53,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return templateSequentialCommandGroup;
+    return shootThenMoveAway;
   }
 
   // set default commands here
