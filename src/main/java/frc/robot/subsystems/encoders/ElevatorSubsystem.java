@@ -33,6 +33,14 @@ public class ElevatorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public TalonSRX getElevatorLeft(){
+    return elevatorLeft;
+  }
+
+  public TalonSRX getElevatorRight(){
+    return elevatorRight;
+  }
+
   public void setPower(double power) {
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
