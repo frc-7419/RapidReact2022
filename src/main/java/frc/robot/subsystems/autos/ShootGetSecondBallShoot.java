@@ -13,6 +13,8 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
     /* suggestions:
         remove the dependency injectin for straightwithmotionmagic and turnwithgyro, it's unnecessary
         you also need to inject GyroSubsystem into the constructor
+        update:
+        fixed!
     */
     public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) { //add parameters
         //shoot ball command
