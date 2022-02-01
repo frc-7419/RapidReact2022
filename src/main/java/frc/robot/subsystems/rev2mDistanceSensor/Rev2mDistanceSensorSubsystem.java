@@ -35,6 +35,15 @@ public class Rev2mDistanceSensorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Timestamp: ",getTimeStamp());
   }
 
+  // @Override
+  // public void testPeriodic() {
+  //   // This method will be called once per scheduler run
+  //   SmartDashboard.putNumber("Range: ",getRange());
+  //   SmartDashboard.putNumber("Timestamp: ",getTimeStamp());
+  // }
+
+
+
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
