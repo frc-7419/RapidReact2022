@@ -25,14 +25,16 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
 
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+  
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
   private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
   private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
 
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, .6, .3, .2, .4);
   private final IntakeDefault intakeDefault = new IntakeDefault(intakeSubsystem, joystick);
 
   public RobotContainer() {
@@ -48,6 +50,7 @@ public class RobotContainer {
   }
   public void setDefaultCommands(){
     intakeSubsystem.setDefaultCommand(intakeDefault);
+    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
   }
 
   
