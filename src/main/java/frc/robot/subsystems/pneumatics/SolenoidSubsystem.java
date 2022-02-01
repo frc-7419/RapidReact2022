@@ -13,8 +13,8 @@ public class SolenoidSubsystem extends SubsystemBase {
   //boolean reversed;
   
 
-  public SolenoidSubsystem() {
-    solenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, 0);
+  public SolenoidSubsystem(int id, int channel) {
+    solenoid = new Solenoid(id, PneumaticsModuleType.CTREPCM, channel); //id=1, channel=0
     //this.reversed = reversed;
   }
 

@@ -25,7 +25,7 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
 
-  private final SolenoidSubsystem solenoid = new SolenoidSubsystem();
+  private final SolenoidSubsystem solenoid = new SolenoidSubsystem(1,0);
   private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
   private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
   private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
