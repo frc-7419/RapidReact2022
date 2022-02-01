@@ -4,17 +4,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.*;
-import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class ShooterSubsystem extends SubsystemBase{
+public class ShooterSub extends SubsystemBase{
 
-    private TalonFX talon;
-    private LimelightSubsystem limelight = new LimelightSubsystem();
+	public TalonFX talon;
+    public MotorGroup motors;
     public double powerOutput = 0;
     public double kP = 0;
     public double kI = 0;
@@ -25,11 +26,10 @@ public class ShooterSubsystem extends SubsystemBase{
     private double threshold = 200;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
-    private double v0 = Math.sqrt(LimelightConstants.g/(2*limelight.getA()*(Math.pow(Math.cos(Math.toRadians(limelight.getBeta())),2))));
+    public ShooterSub(){
 
-    public ShooterSubsystem(){
         talon = new TalonFX(CanIds.shooterFalcon.id);
-        talon.configFactoryDefault();
+        // talon.configFactoryDefault();
         talon.setInverted(true);
         talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     }
@@ -43,6 +43,7 @@ public class ShooterSubsystem extends SubsystemBase{
     @Override
     public void periodic() {
         SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
+        // System.out.println(talon.getSelectedSensorVelocity());
     }
 
     public void run(){
@@ -95,8 +96,17 @@ public class ShooterSubsystem extends SubsystemBase{
         }
     }
 
+    public double lookUpkF(double nativeUnits){
+        double output = 0;
+        for(double[] pair : Constants.kSpeedToFf){
+            if(pair[0] == nativeUnits){output = pair[1];}
+        }
+        if(output == 0){output = computekF(nativeUnits);}
+        return output; 
+    }
+
     public double computekF(double nativeUnits){
-        return 0; // insert regression model
+        return 47.3172/target + .0462152;
     }
 
     public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
@@ -115,9 +125,5 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getkI(){return kI;}
     public double getkD(){return kD;}
     public double getkF(){return kF;}
-
-    public double getV0() {return v0;}
-
-    public TalonFX getShooterTalon() {return talon;}
 
 }

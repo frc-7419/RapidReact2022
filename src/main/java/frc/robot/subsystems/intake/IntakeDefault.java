@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PowerConstants;
 
 public class IntakeDefault extends CommandBase{
-  private IntakeSubsystem intakeSubsystem;
+  private IntakeSub intakeSubsystem;
   private XboxController joystick;
   
-  public IntakeDefault(IntakeSubsystem intakeSubsystem, XboxController joystick) {
+  public IntakeDefault(IntakeSub intakeSubsystem, XboxController joystick) {
     this.intakeSubsystem = intakeSubsystem;
     this.joystick = joystick;
     addRequirements(intakeSubsystem);
