@@ -59,10 +59,14 @@ public final class Constants {
     }
 
     public static class PIDConstants {
-        //gyro
-        public static double GyrokP = 0.0125;
+        //gyro 45
+        // public static double GyrokP = 0.00688;
+        // public static double GyrokI = 0;
+        // public static double GyrokD = 0.00009;
+        // gyro 90
+        public static double GyrokP = 0.005;
         public static double GyrokI = 0;
-        public static double GyrokD = 0.000875;
+        public static double GyrokD = 0.000008;
     }
 
     public static double[][] kSpeedToFf = {
