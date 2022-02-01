@@ -32,7 +32,7 @@ public class ShooterSubsystem extends SubsystemBase{
         topFalcon.configFactoryDefault();
 
         bottomFalcon.setInverted(true);
-        topFalcon.setInverted(true);
+        topFalcon.setInverted(false);
 
         bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);

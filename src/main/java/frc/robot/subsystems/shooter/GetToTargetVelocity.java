@@ -22,9 +22,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   private double initialVelocity;
   private double targetRPM;
-  //comment: since the shooter functions with two motors make 
-  //sure you add both since one spins in one direction and one goes in the other direction
-  //you might already be working on this but just wanted to let you know - period 6
+  
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelightSubsystem = limelightSubsystem;
