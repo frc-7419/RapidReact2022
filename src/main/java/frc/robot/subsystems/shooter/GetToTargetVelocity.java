@@ -44,7 +44,8 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.getShooterTalon().set(ControlMode.Velocity, targetRPM);
+    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, targetRPM);
+    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, targetRPM);
   }
 
   @Override
