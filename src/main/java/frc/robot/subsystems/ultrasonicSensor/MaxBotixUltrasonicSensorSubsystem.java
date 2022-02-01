@@ -14,7 +14,7 @@ public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
 
 
     public MaxBotixUltrasonicSensorSubsystem() {
-        input = new AnalogInput(0); 
+        input = new AnalogInput(3); 
         input.setAverageBits(2);
         pot = new AnalogPotentiometer(input, 180, 30);
     }
