@@ -23,8 +23,8 @@ public class RunElevatorWithSoftLimits extends CommandBase {
     addRequirements(elevatorSubsystem);
     //Change value for soft limits based on the limits in ticks of elevator
     //Should be elevatorSubsystem.inchesToTicks(inches, diameter) with inches and diameter changed
-    forwardSoftLimit = elevatorSubsystem.inchesToTicks(40, 0.525);
-    reverseSoftLimit = elevatorSubsystem.inchesToTicks(40, 0.525);
+    forwardSoftLimit = 4000;
+    reverseSoftLimit = 4000;
   }
 
   // Called when the command is initially scheduled.
