@@ -10,10 +10,8 @@ import com.team7419.math.UnitConversions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
-import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class ShooterSubsystem extends SubsystemBase{
-
     private TalonFX bottomFalcon;
     private TalonFX topFalcon;
     private double powerOutput = 0;
