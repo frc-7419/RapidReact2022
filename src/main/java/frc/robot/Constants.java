@@ -44,34 +44,35 @@ public final class Constants {
     }
 
     public static class LimelightConstants {
-        public static double kTargetHeight = 2.6416; //meters
-        public static double kCameraHeight = 0.8128;
-        public static double mountingAngle = 55; 
-        public static double m = 1.0; 
-        public static double n = 0.48; //arbitrary
-        public static double r1 = 0.37; //arbitrary
-        public static double g = -9.8;  
-        public static double focalLength = 2.9272781257541;
+        public static final double kTargetHeight = 2.6416; //meters
+        public static final double kCameraHeight = 0.8128;
+        public static final double mountingAngle = 55; 
+        public static final double m = 1.0; 
+        public static final double n = 0.48; //arbitrary
+        public static final double r1 = 0.37; //arbitrary
+        public static final double g = -9.8;  
+        public static final double focalLength = 2.9272781257541;
     }
 
     public static class RobotConstants {
-        public static double shooterRadius = 0.5; // placeholder value, will change
+        public static final double bottomShooterWheelRadius = 0.5; // placeholder value, will change
+        public static final double topShooterWheelRadius = 0.5;
     }
 
     public static class PIDConstants {
         //gyro
-        public static double GyrokP = 0.085;
-        public static double GyrokI = 0;
-        public static double GyrokD = 0;
+        public static final double GyrokP = 0.085;
+        public static final double GyrokI = 0;
+        public static final double GyrokD = 0;
 
         //shooter
-        public static double ShooterkP = 0;
-        public static double ShooterkI = 0;
-        public static double ShooterkD = 0;
-        public static double ShooterkF = 0;
+        public static final double ShooterkP = 0;
+        public static final double ShooterkI = 0;
+        public static final double ShooterkD = 0;
+        public static final double ShooterkF = 0;
     }
 
-    public static double[][] kSpeedToFf = {
+    public static final double[][] kSpeedToFf = {
         {1000, .09},
         {2000, .065},
         {3000, .0575},

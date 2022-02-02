@@ -15,8 +15,8 @@ public class UnitConversions {
 		return (int) Math.round(output);
 	}
 
-    public static rawSensorVelocityToRPM(double rawVelocity) {
-        return 
+    public static double rawSensorVelocityToRPM(double rawVelocity, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return rawVelocity * ticksToInches(1, radius, gearRatioMultiplier, ticksPerRotation) * (1/(2 * Math.PI * radius)) * 600;
     }
 
     public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {

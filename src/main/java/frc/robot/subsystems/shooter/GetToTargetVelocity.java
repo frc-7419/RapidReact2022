@@ -21,7 +21,9 @@ public class GetToTargetVelocity extends CommandBase {
   private double kF;
 
   private double initialVelocity;
-  private double targetRPM;
+  private double targetRPM.
+  // private double topTargetRPM;
+  // private double bottomTargetRPM;
   
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
@@ -34,7 +36,8 @@ public class GetToTargetVelocity extends CommandBase {
     SmartDashboard.putString("shooter", "ramping up");
 
     initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
-    targetRPM = UnitConversions.mPSToRPM(initialVelocity, RobotConstants.shooterRadius);
+    
+    targetRPM = UnitConversions.mPSToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(targetRPM));
 
