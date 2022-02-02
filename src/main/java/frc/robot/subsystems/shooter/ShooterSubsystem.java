@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.team7419.TalonFuncs;
+import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -46,8 +47,11 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("top falcon speed", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("bottom falcon speed", bottomFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("top falcon raw speed", topFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("bottom falcon raw speed", bottomFalcon.getSelectedSensorVelocity(0));
+
+        SmartDashboard.putNumber("top falcon rpm", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), RobotConstants.topShooterWheelRadius, 1, 2048));
+        SmartDashboard.putNumber("bottom falcon rpm", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), RobotConstants.topShooterWheelRadius, 1, 2048));
     }
 
     public void run() {

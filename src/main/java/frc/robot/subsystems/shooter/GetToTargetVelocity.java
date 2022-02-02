@@ -21,7 +21,7 @@ public class GetToTargetVelocity extends CommandBase {
   private double kF;
 
   private double initialVelocity;
-  private double targetRPM.
+  private double targetRPM;
   // private double topTargetRPM;
   // private double bottomTargetRPM;
   
