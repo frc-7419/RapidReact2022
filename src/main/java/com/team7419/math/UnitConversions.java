@@ -19,6 +19,11 @@ public class UnitConversions {
         return rawVelocity * ticksToInches(1, radius, gearRatioMultiplier, ticksPerRotation) * (1/(2 * Math.PI * radius)) * 600;
     }
 
+    public static double rpmToRawSensorVelocity(double rpm, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return rpm * (2 * Math.PI * radius) * (1/ticksToInches(1, radius, gearRatioMultiplier, ticksPerRotation)) * (60/0.1);
+        
+    }
+
     public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {
         //(ticks per rotation/diameter of wheels)*inches
         return (ticksPerRotation * inches * gearRatioMultiplier)/(2 * Math.PI * radius);

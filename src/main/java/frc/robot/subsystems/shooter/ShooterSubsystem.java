@@ -21,8 +21,9 @@ public class ShooterSubsystem extends SubsystemBase{
     private double kI;
     private double kD;
     private double kF;
-    private double targetVelocity = 500;
-    private double threshold = 200;
+    private double bottomTargetRawVelocity = 500;
+    private double topTargetRawVelocity = 500;
+    private double velocityThreshold = 200;
     private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSubsystem(){
@@ -34,6 +35,8 @@ public class ShooterSubsystem extends SubsystemBase{
 
         bottomFalcon.setInverted(true);
         topFalcon.setInverted(false);
+        
+        configureShooterOutputs();
 
         bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
@@ -61,12 +64,12 @@ public class ShooterSubsystem extends SubsystemBase{
             bottomFalcon.set(ControlMode.PercentOutput, powerOutput);
         }
         else if (method == ControlMethod.HOLDING){
-            topFalcon.set(ControlMode.Velocity, targetVelocity);
-            bottomFalcon.set(ControlMode.Velocity, targetVelocity);
+            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
+            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
         }
         else if (method == ControlMethod.SPIN_UP){
-            topFalcon.set(ControlMode.Velocity, targetVelocity);
-            bottomFalcon.set(ControlMode.Velocity, targetVelocity);
+            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
+            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
         }
     }
 
@@ -94,11 +97,11 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public boolean topOnTarget() {
-        return Math.abs(getCurrentTopVelocity() - targetVelocity) < threshold;
+        return Math.abs(getCurrentTopVelocity() - topTargetRawVelocity) < velocityThreshold;
     }
 
     public boolean bottomOnTarget() {
-        return Math.abs(getCurrentBottomVelocity() - targetVelocity) < threshold;
+        return Math.abs(getCurrentBottomVelocity() - bottomTargetRawVelocity) < velocityThreshold;
     }
 
     public boolean bothOnTarget() {
@@ -126,7 +129,8 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getCurrentTopVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
     public double getCurrentBottomVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
 
-    public void setTargetRawVelocity(double velocity){this.targetVelocity = velocity;}
+    public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
+    public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
 
     public void percentOutput() {
         topFalcon.set(ControlMode.PercentOutput, powerOutput);
