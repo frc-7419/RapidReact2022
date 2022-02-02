@@ -5,6 +5,7 @@
 package frc.robot.subsystems.encoders;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -20,6 +21,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeft = new TalonSRX(50);
     elevatorRight = new TalonSRX(51);
     elevatorRight.setInverted(true);
+    elevatorRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     }
   
 
@@ -52,10 +54,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorRight.setNeutralMode(NeutralMode.Brake);
   }
 
-  public double inchesToTicks(double inches, double diameter){
+  public double inchesToTicks(double inches, double diameter, double gearRatioMultiplier){
     //(ticks per rotation/diameter of wheels)*inches
     //delete the diameter parameter after finding out what it is
-    double ticks = (1024 * inches)/(Math.PI * diameter);
+    double ticks = (1024 * inches * gearRatioMultiplier)/(Math.PI * diameter);
     return ticks;
   }
 }

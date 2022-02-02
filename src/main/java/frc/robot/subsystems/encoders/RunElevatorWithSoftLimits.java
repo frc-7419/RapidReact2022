@@ -20,11 +20,12 @@ public class RunElevatorWithSoftLimits extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
-    addRequirements(elevatorSubsystem);
+    
     //Change value for soft limits based on the limits in ticks of elevator
     //Should be elevatorSubsystem.inchesToTicks(inches, diameter) with inches and diameter changed
-    forwardSoftLimit = 4000;
-    reverseSoftLimit = 4000;
+    forwardSoftLimit = elevatorSubsystem.inchesToTicks(20, 0.525, 21);
+    reverseSoftLimit = elevatorSubsystem.inchesToTicks(-20, 0.525, 21);
+    addRequirements(elevatorSubsystem);
   }
 
   // Called when the command is initially scheduled.
