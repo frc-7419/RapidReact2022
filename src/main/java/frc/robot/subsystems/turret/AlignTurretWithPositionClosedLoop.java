@@ -24,7 +24,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   private double kF = 0;
 
   private double setpoint;
-  private double tolerance = 10; // in ticks (placeholder)
+  private double tolerance = 50; // in ticks (placeholder)
   private double turretPercentOutput;
   private double turretPosition;
   private double turretVelocity;
@@ -57,7 +57,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius);
+    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, 100/12);
     turretSubsystem.getTurretPIDController().setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
 

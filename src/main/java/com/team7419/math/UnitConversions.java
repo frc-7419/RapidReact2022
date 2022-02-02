@@ -21,13 +21,13 @@ public class UnitConversions{
 		return (int) Math.round(output);
 	}
 
-    public static double inchesToTicks(MotorController motorController, double inches, double radius) {
+    public static double inchesToTicks(MotorController motorController, double inches, double radius, double gearRatioMultiplier) {
         //(ticks per rotation/diameter of wheels)*inches
         if (motorController == MotorController.TalonFX) {
-            return (2048 * inches)/(2 * Math.PI * radius);
+            return (2048 * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
         }
         else if (motorController == MotorController.TalonSRX || motorController == MotorController.SparkMAX) {
-            return (4096 * inches)/(2 * Math.PI * radius);
+            return (4096 * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
         }
         else {
            return 0;

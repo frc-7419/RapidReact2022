@@ -9,6 +9,8 @@ import com.team7419.math.UnitConversions.MotorController;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
@@ -44,7 +46,7 @@ public class AlignTurretWithPositionPIDController extends CommandBase {
     turretSubsystem.getTurretEncoder().setPosition(0);
 
      // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius);
+    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, RobotConstants.turretGearRatio);
     pidController.setSetpoint(setpoint);
     pidController.setTolerance(tolerance);
   }

@@ -59,7 +59,8 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
-        public static double turretRadius = 12; // placeholder value, will change
+        public static double turretRadius = 1.5625; // placeholder value, will change
+        public static double turretGearRatio = 100/12;
     }
 
     public static class PIDFConstants {
@@ -68,7 +69,7 @@ public final class Constants {
         public static double GyrokI = 0;
         public static double GyrokD = 0;
 
-        //turret motion magic
+        //turret position closed loop
         public static double TurretMotionMagickP = 0;
         public static double TurretMotionMagickI = 0;
         public static double TurretMotionMagickD = 0;
