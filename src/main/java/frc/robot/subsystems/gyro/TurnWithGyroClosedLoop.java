@@ -40,8 +40,9 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     // SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
     // SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
     double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
+    double ki = SmartDashboard.getNumber("kp", PIDConstants.GyrokI);
     double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
-    pidController = new PIDController(kp, 0, kd);
+    pidController = new PIDController(kp, ki, kd);
     // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(0.1); 
@@ -50,6 +51,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putString("command status", "turn w gyro");
+    SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     pidOutput = pidController.calculate(ahrs.getGyroAngle());
     driveBase.setLeftPower(negative * -pidOutput);
     driveBase.setRightPower(negative * pidOutput);
