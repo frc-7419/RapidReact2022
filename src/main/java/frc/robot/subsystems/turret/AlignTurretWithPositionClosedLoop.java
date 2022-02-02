@@ -7,7 +7,6 @@ package frc.robot.subsystems.turret;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.team7419.math.UnitConversions;
-import com.team7419.math.UnitConversions.MotorController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -57,7 +56,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(MotorController.SparkMAX, UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, 100/12);
+    setpoint = UnitConversions.inchesToTicks(UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, 100/12, 4096);
     turretSubsystem.getTurretPIDController().setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
 

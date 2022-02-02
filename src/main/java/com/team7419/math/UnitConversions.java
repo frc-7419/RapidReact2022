@@ -2,12 +2,6 @@ package com.team7419.math;
 
 public class UnitConversions{
 
-    public enum MotorController {
-        TalonFX,
-        TalonSRX,
-        SparkMAX,
-    }
-
     public static double rpmToRadPerSec(double rpm) {
         return rpm * 2 * Math.PI / 60;
     }
@@ -21,19 +15,14 @@ public class UnitConversions{
 		return (int) Math.round(output);
 	}
 
-    public static double inchesToTicks(MotorController motorController, double inches, double radius, double gearRatioMultiplier) {
+    public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {
         //(ticks per rotation/diameter of wheels)*inches
-        if (motorController == MotorController.TalonFX) {
-            return (2048 * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
-        }
-        else if (motorController == MotorController.TalonSRX || motorController == MotorController.SparkMAX) {
-            return (4096 * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
-        }
-        else {
-           return 0;
-        }
+        return (ticksPerRotation * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
     }
 
+    public static double ticksToInches(double ticks, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return (2 * Math.PI * radius * ticks)/(ticksPerRotation * gearRatioMultiplier);
+    }
     public static double thetaToInches(double theta, double radius) {
         // convert theta to arc length using radius
         return theta * (Math.PI/180) * radius;
