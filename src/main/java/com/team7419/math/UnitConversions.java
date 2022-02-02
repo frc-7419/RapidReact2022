@@ -1,6 +1,6 @@
 package com.team7419.math;
 
-public class UnitConversions{
+public class UnitConversions {
 
     public static double rpmToRadPerSec(double rpm){
         return rpm * 2 * Math.PI / 60;
@@ -15,9 +15,21 @@ public class UnitConversions{
 		return (int) Math.round(output);
 	}
 
-    
-
     public static rawSensorVelocityToRPM(double rawVelocity) {
         return 
+    }
+
+    public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        //(ticks per rotation/diameter of wheels)*inches
+        return (ticksPerRotation * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
+    }
+
+    public static double ticksToInches(double ticks, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return (2 * Math.PI * radius * ticks)/(ticksPerRotation * gearRatioMultiplier);
+    }
+
+    public static double thetaToInches(double theta, double radius) {
+        // convert theta to arc length using radius
+        return theta * (Math.PI/180) * radius;
     }
 }
