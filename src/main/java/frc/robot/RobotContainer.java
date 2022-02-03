@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.shooter.BasicShooterSubsystem;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,33 +28,31 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final BasicShooterSubsystem shooterBasicSubsystem = new BasicShooterSubsystem();
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterBasicSubsystem, joystick);
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterBasicSubsystem, joystick);
+  private final GetToTargetVelocity getToTargetVelocity = new GetToTargetVelocity(shooterSubsystem, limelightSubsystem);
+
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
+
+    smartDashboardBindings();
   }
 
   private void configureButtonBindings() {
+    new JoystickButton(joystick, XboxController.Button.kY.value).whileHeld(new GetToTargetVelocity(shooterSubsystem, limelightSubsystem));
    
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-//    *
-//    * @return the command to run in autonomous
-//    */
-
-  // uncomment when u need to use this
-  public Command getAutonomousCommand() {
-    return new WaitCommand(0);
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("targetRPM", 1000);
   }
 
-  // schedule default commands here
+  public Command getAutonomousCommand() {
+    return runShooterWithJoystick;
+  }
+
   public void setDefaultCommands(){
     shooterBasicSubsystem.setDefaultCommand(runShooterWithJoystick);
   }
-
-  
 }
