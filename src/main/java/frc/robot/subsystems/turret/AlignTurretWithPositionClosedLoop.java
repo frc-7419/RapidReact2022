@@ -10,6 +10,7 @@ import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
@@ -23,7 +24,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   private double kF = 0;
 
   private double setpoint;
-  private double tolerance = 50; // in ticks (placeholder)
+  private double tolerance = 0.2; // in inches (placeholder)
   private double turretPercentOutput;
   private double turretPosition;
   private double turretVelocity;
@@ -47,7 +48,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
     turretSubsystem.getTurretPIDController().setSmartMotionMaxAccel(6000, 0);
 
     // set tolerance
-    turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(tolerance, 0);
+    turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(UnitConversions.inchesToTicks(tolerance, RobotConstants.turretRadius , 100/12, 4096), 0);
 
      // reset sensor position
      turretSubsystem.getTurretEncoder().setPosition(0);
