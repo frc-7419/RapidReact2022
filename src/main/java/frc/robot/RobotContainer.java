@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
@@ -32,28 +33,24 @@ public class RobotContainer {
   private final StraightWithMotionMagic straightWithMotionMagic = new StraightWithMotionMagic(driveBaseSubsystem, 12);
   
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
-    SmartDashboard.putData("Straight With Motion Magic", new StraightWithMotionMagic(driveBaseSubsystem, Dashboard.motionMagicSetpoint.getDouble(12)));
+    smartDashboardBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
     new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
   }
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-//    *
-//    * @return the command to run in autonomous
-//    */
+
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("mmKp", PIDConstants.DriveBaseMotionMagickP);
+    SmartDashboard.putNumber("mmKi", PIDConstants.DriveBaseMotionMagickI);
+    SmartDashboard.putNumber("mmKd", PIDConstants.DriveBaseMotionMagickD);
+
+    SmartDashboard.putNumber("mmSetpoint", 12);
+  }
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
@@ -61,7 +58,7 @@ public class RobotContainer {
   }
 
   // schedule default commands here
-  public void setDefaultCommands(){
+  public void setDefaultCommands() {
     
   }
 }

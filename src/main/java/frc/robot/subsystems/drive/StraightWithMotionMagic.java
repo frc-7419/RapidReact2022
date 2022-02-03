@@ -2,17 +2,11 @@ package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.TalonFuncs;
-import com.team7419.math.DriveBaseConversions;
+import com.team7419.math.UnitConversions;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.PowerConstants;
 import frc.robot.Constants.PIDConstants;
-import frc.robot.subsystems.dashboard.Dashboard;
 
 public class StraightWithMotionMagic extends CommandBase {
   
@@ -24,7 +18,11 @@ public class StraightWithMotionMagic extends CommandBase {
     private double leftMastError;
     private double rightMastError;
 
-    private double threshold = 60; // in ticks
+    private double threshold = 0.5; // in inches
+
+    private double kP;
+    private double kI;
+    private double kD;
 
     private long startTime;
    
@@ -36,7 +34,6 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void initialize() {
-
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
         // driveBaseSubsystem.factoryResetAll();
@@ -55,13 +52,19 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBaseSubsystem.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBaseSubsystem.getRightMast().configMotionAcceleration(6000, 0);  
 
-        // set PIDF constants, using shuffleboard
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), Dashboard.motionMagickP.getDouble(PIDConstants.DriveBaseMotionMagickP), Dashboard.motionMagickI.getDouble(PIDConstants.DriveBaseMotionMagickI), Dashboard.motionMagickD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), Dashboard.motionMagickP.getDouble(PIDConstants.DriveBaseMotionMagickP), Dashboard.motionMagickI.getDouble(PIDConstants.DriveBaseMotionMagickI), Dashboard.motionMagickD.getDouble(PIDConstants.DriveBaseMotionMagickD), 0);
+        // PIDF gains from SmartDashboard
+        kP = SmartDashboard.getNumber("mmKp", PIDConstants.DriveBaseMotionMagickP);
+        kD = SmartDashboard.getNumber("mmKi", PIDConstants.DriveBaseMotionMagickI);
+        kI = SmartDashboard.getNumber("mmKd", PIDConstants.DriveBaseMotionMagickD);
+
+        // set PIDF constants
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), kP, kD, kI, 0);
+        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), kP, kD, kI, 0);
         
-        // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
-        double leftSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
-        double rightSetpoint = DriveBaseConversions.inchesToTicks(setpoint);
+        // get setpoint from SmartDashboard
+        setpoint = SmartDashboard.getNumber("mmSetpoint", 12);
+        double leftSetpoint = UnitConversions.inchesToTicks(setpoint);
+        double rightSetpoint = UnitConversions.inchesToTicks(setpoint);
 
         SmartDashboard.putNumber("left setpoint", leftSetpoint);
         SmartDashboard.putNumber("right setpoint", rightSetpoint);
@@ -77,8 +80,8 @@ public class StraightWithMotionMagic extends CommandBase {
 
         SmartDashboard.putString("command status", "executing motion magic");
 
-        SmartDashboard.putNumber("leftMast", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("rightMast", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("leftMast position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("rightMast position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
     
         leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
         rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
@@ -89,13 +92,13 @@ public class StraightWithMotionMagic extends CommandBase {
         SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
         SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
         SmartDashboard.putNumber("left closed loop error", leftMastError);
-
+        SmartDashboard.putNumber("right closed loop error", rightMastError);
     }
 
     @Override
     public boolean isFinished(){
-        // threshold: motor output < 0.01
-        return (Math.abs(leftMastError) < threshold && Math.abs(rightMastError) < threshold);
+        double thresholdInTicks = UnitConversions.inchesToTicks(threshold);
+        return (Math.abs(leftMastError) < thresholdInTicks && Math.abs(rightMastError) < thresholdInTicks);
     }
 
     @Override

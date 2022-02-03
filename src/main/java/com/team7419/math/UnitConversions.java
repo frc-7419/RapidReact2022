@@ -10,4 +10,9 @@ public class UnitConversions{
 		double output = (((input*39.3701)/6)*2048)/10;
 		return (int) Math.round(output);
 	}
+
+    public static double inchesToTicks(double input) {
+		double output = 2048*input/(6*3.14159);
+		return output;
+    }
 }
