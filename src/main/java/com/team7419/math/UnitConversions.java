@@ -14,7 +14,7 @@ public class UnitConversions {
         return (2 * Math.PI * radius) / 60;
     }
 
-    public static int mPSToTicksP100Ms(double input) { // m is meters
+    public static int mpsToTicksP100Ms(double input) { // m is meters
 		double output = (((input*39.3701)/6)*2048)/10;
 		return (int) Math.round(output);
 	}
@@ -31,8 +31,8 @@ public class UnitConversions {
         return rawVelocity * (1/ticksPerRotation) * 600;
     }
 
-    public static double rpmToRawSensorVelocity(double rpm, double radius, double gearRatioMultiplier, double ticksPerRotation) {
-        return rpm * (2 * Math.PI * radius) * (1/ticksToInches(1, radius, gearRatioMultiplier, ticksPerRotation)) * (60/0.1);
+    public static double rpmToRawSensorVelocity(double rpm, double radius, double ticksPerRotation) {
+        return rpm * ticksPerRotation * (1/600);
     }
 
     public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {
