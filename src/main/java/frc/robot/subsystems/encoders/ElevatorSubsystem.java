@@ -57,8 +57,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   public double inchesToTicks(double inches, double diameter, double gearRatioMultiplier){
     //(ticks per rotation/diameter of wheels)*inches
     //delete the diameter parameter after finding out what it is
-    //double ticks = (1024 * inches * gearRatioMultiplier)/(Math.PI * diameter);
-    double ticks = (1024 * inches)/(Math.PI * diameter);
+    double ticks = (1024 * inches)/(Math.PI * diameter * gearRatioMultiplier);
+    
     return ticks;
   }
 }
