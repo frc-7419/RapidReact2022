@@ -45,7 +45,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new WaitCommand(0);
+    return runTurret;
   }
   public void setDefaultCommands(){
     turretSubsystem.setDefaultCommand(runTurret);
