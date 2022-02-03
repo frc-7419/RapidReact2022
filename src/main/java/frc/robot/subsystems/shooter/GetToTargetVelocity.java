@@ -41,8 +41,8 @@ public class GetToTargetVelocity extends CommandBase {
     // redo math?
     initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
     
-    topTargetRPM = UnitConversions.mPSToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
-    bottomTargetRPM = UnitConversions.mPSToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
+    topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
+    bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
     
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));

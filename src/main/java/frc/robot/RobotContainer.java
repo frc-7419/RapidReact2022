@@ -7,13 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.shooter.TestRunShooterWithJoystick;
+import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.shooter.ShooterTestSubsystem;
+import frc.robot.subsystems.shooter.BasicShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,8 +25,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final ShooterTestSubsystem shooterSubsystem = new ShooterTestSubsystem();
-  private final TestRunShooterWithJoystick runShooterWithJoystick = new TestRunShooterWithJoystick(shooterSubsystem, joystick);
+  private final BasicShooterSubsystem shooterBasicSubsystem = new BasicShooterSubsystem();
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterBasicSubsystem, joystick);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,7 +51,7 @@ public class RobotContainer {
 
   // schedule default commands here
   public void setDefaultCommands(){
-    shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    shooterBasicSubsystem.setDefaultCommand(runShooterWithJoystick);
   }
 
   

@@ -51,8 +51,8 @@ public class ShooterSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("top falcon raw speed", topFalcon.getSelectedSensorVelocity(0));
         SmartDashboard.putNumber("bottom falcon raw speed", bottomFalcon.getSelectedSensorVelocity(0));
 
-        SmartDashboard.putNumber("top falcon rpm", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), RobotConstants.topShooterWheelRadius, 1, 2048));
-        SmartDashboard.putNumber("bottom falcon rpm", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), RobotConstants.bottomShooterWheelRadius, 1, 2048));
+        SmartDashboard.putNumber("top falcon rpm", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("bottom falcon rpm", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
     }
 
     public void run() {

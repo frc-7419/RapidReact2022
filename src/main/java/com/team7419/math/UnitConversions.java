@@ -6,8 +6,12 @@ public class UnitConversions {
         return rpm * 2 * Math.PI / 60;
     }
 
-    public static double mPSToRPM(double mps, double radius) { // m is meters
-        return (60*mps)/(2*Math.PI*radius);
+    public static double mpsToRPM(double mps, double radius) { // m is meters
+        return (60 * mps)/(2 * Math.PI * radius);
+    }
+
+    public static double rpmToMPS(double rpm, double radius) {
+        return (2 * Math.PI * radius) / 60;
     }
 
     public static int mPSToTicksP100Ms(double input) { // m is meters
@@ -15,8 +19,16 @@ public class UnitConversions {
 		return (int) Math.round(output);
 	}
 
-    public static double rawSensorVelocityToRPM(double rawVelocity, double radius, double gearRatioMultiplier, double ticksPerRotation) {
-        return rawVelocity * ticksToInches(1, radius, gearRatioMultiplier, ticksPerRotation) * (1/(2 * Math.PI * radius)) * 600;
+    public static double inchesToMeters(double inches) {
+        return inches * 0.0254;
+    }
+
+    public static double metersToInches(double meters) { 
+        return meters * 39.3701;
+    }
+
+    public static double rawSensorVelocityToRPM(double rawVelocity, double ticksPerRotation) {
+        return rawVelocity * (1/ticksPerRotation) * 600;
     }
 
     public static double rpmToRawSensorVelocity(double rpm, double radius, double gearRatioMultiplier, double ticksPerRotation) {
@@ -25,7 +37,6 @@ public class UnitConversions {
     }
 
     public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier, double ticksPerRotation) {
-        //(ticks per rotation/diameter of wheels)*inches
         return (ticksPerRotation * inches * gearRatioMultiplier)/(2 * Math.PI * radius);
     }
 
@@ -34,7 +45,6 @@ public class UnitConversions {
     }
 
     public static double thetaToInches(double theta, double radius) {
-        // convert theta to arc length using radius
         return theta * (Math.PI/180) * radius;
     }
 }
