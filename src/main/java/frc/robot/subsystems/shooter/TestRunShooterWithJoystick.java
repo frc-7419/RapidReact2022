@@ -7,6 +7,7 @@ package frc.robot.subsystems.shooter;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -32,7 +33,9 @@ public class TestRunShooterWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      
+      SmartDashboard.putNumber("power left", joystick.getLeftTriggerAxis());
+      SmartDashboard.putNumber("power right", joystick.getRightTriggerAxis());
+
       powerLeft = kPower * joystick.getLeftTriggerAxis();
       powerRight = kPower * joystick.getRightTriggerAxis();
       m_subsystem.setTopPower(powerLeft);
