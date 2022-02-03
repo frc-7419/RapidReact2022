@@ -63,8 +63,8 @@ public class StraightWithMotionMagic extends CommandBase {
         
         // get setpoint from SmartDashboard
         setpoint = SmartDashboard.getNumber("mmSetpoint", 12);
-        double leftSetpoint = UnitConversions.inchesToTicks(setpoint);
-        double rightSetpoint = UnitConversions.inchesToTicks(setpoint);
+        double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
+        double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
 
         SmartDashboard.putNumber("left setpoint", leftSetpoint);
         SmartDashboard.putNumber("right setpoint", rightSetpoint);
@@ -97,7 +97,7 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        double thresholdInTicks = UnitConversions.inchesToTicks(threshold);
+        double thresholdInTicks = UnitConversions.inchesToTicks(threshold, 3, 1, 2048);
         return (Math.abs(leftMastError) < thresholdInTicks && Math.abs(rightMastError) < thresholdInTicks);
     }
 
