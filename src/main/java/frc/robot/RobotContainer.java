@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -46,6 +47,8 @@ public class RobotContainer {
 
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("targetRPM", 1000);
+    SmartDashboard.putNumber("shooterKp", PIDConstants.ShooterkP);
+    SmartDashboard.putNumber("shooterKi", PIDConstants.ShooterkI);
   }
 
   public Command getAutonomousCommand() {

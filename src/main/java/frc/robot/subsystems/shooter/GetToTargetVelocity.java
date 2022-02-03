@@ -5,6 +5,7 @@ import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class GetToTargetVelocity extends CommandBase {
@@ -36,6 +37,9 @@ public class GetToTargetVelocity extends CommandBase {
     bottomTargetRPM = SmartDashboard.getNumber("targetRPM", 1000);
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
+    
+    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
+    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
 
     shooterSubsystem.setPIDF(kP, kI, 0, shooterSubsystem.getkF());
     
