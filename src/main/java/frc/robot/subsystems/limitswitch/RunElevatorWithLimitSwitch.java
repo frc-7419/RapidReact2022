@@ -36,17 +36,11 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   public void execute() {
     
     if (!topLimitSwitch.get() && joystick.getRightY() > 0) {
-<<<<<<< HEAD
-      elevatorSubsystem.setPower(0);
-    } else if (!bottomLimitSwitch.get() && joystick.getRightY() < 0) {
-      elevatorSubsystem.setPower(0);
-=======
       
       elevatorSubsystem.brake();
     } else if (!bottomLimitSwitch.get() && joystick.getRightY() < 0) {
       
       elevatorSubsystem.brake();
->>>>>>> bcf6d4c002da5f179a91389b9015b422bb1eb614
     } else {
       elevatorSubsystem.setPower(0.4 * joystick.getRightY());
       
