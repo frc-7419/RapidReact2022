@@ -29,11 +29,9 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        loaderFalcon(10),
         intakeVictor(11),
-        climberFalcon(13),
-        topShooterFalcon(14), 
-        bottomShooterFalcon(15),
+        topShooterFalcon(10), 
+        bottomShooterFalcon(13),
         hoodVictor(40), 
         ;
 
