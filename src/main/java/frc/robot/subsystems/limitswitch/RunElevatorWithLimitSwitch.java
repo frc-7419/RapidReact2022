@@ -35,17 +35,35 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   @Override
   public void execute() {
     
+<<<<<<< HEAD
     if (!topLimitSwitch.get() && joystick.getRightY() > 0) {
       
       elevatorSubsystem.brake();
     } else if (!bottomLimitSwitch.get() && joystick.getRightY() < 0) {
       
       elevatorSubsystem.brake();
+=======
+    SmartDashboard.putBoolean("Top Limit Switch", topLimitSwitch.get());
+    SmartDashboard.putBoolean("Bottom Limit Switch", bottomLimitSwitch.get());
+
+    SmartDashboard.putNumber("joystick out", joystick.getRightY());
+
+    if (!topLimitSwitch.get() && joystick.getRightY() < 0) {
+      elevatorSubsystem.setPower(0);
+      // elevatorSubsystem.brake();
+    } else if (!bottomLimitSwitch.get() && joystick.getRightY() > 0) {
+      elevatorSubsystem.setPower(0);
+      // elevatorSubsystem.brake();
+    } else if (joystick.getRightY() != 0) {
+      elevatorSubsystem.setPower(0.3 * joystick.getRightY());
+>>>>>>> 51edace422d901520a73f7c949fea7d489dbfeef
     } else {
-      elevatorSubsystem.setPower(0.4 * joystick.getRightY());
+      elevatorSubsystem.setPower(0);
+      elevatorSubsystem.brake();
+    }
       
     }
-  }
+    // elevatorSubsystem.setPower(0.3 * joystick.getRightY());
 
   // Called once the command ends or is interrupted.
   @Override
