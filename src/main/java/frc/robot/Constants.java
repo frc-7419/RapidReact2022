@@ -35,6 +35,10 @@ public final class Constants {
         climberFalcon(13),
         shooterFalcon(14), 
         hoodVictor(40), 
+
+        // change the canids below later
+        leftLift(6),
+        rightLift(7)
         ;
 
         public final int id;
