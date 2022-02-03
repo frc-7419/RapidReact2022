@@ -25,7 +25,7 @@ public class TurretSubsystem extends SubsystemBase {
 
   public TurretSubsystem() {
     // initialize turret talon
-    turret = new CANSparkMax(CanIds.turret.id, MotorType.kBrushless); // insert new CAN id for turret neo
+    turret = new CANSparkMax(1, MotorType.kBrushless); // insert new CAN id for turret neo
 
     turret.restoreFactoryDefaults();
 
