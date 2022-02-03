@@ -31,7 +31,7 @@ public class UnitConversions {
         return rawVelocity * (1/ticksPerRotation) * 600;
     }
 
-    public static double rpmToRawSensorVelocity(double rpm, double radius, double ticksPerRotation) {
+    public static double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
         return rpm * ticksPerRotation * (1/600);
     }
 
