@@ -1,6 +1,7 @@
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
 
@@ -12,21 +13,20 @@ import frc.robot.Constants.CanIds;
  */
 public class IntakeSubsystem extends SubsystemBase{
     
-    private VictorSPX intake;
+    private TalonFX talon;
 
     public IntakeSubsystem(){
-        intake = new VictorSPX(CanIds.intakeVictor.id);
-        Initers.initVictors(intake);
+        talon = new TalonFX(CanIds.intake.id);
     }
 
     @Override
     public void periodic(){}
 
-    public VictorSPX getIntake() {
-        return intake;
+    public TalonFX getTalon() {
+        return talon;
     }
 
     public void setPower(double power) {
-        intake.set(ControlMode.PercentOutput, power);
+        talon.set(ControlMode.PercentOutput, power);
     }
 }
