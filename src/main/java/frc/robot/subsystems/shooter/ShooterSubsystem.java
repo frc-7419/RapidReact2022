@@ -31,13 +31,13 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.configFactoryDefault();
         topFalcon.configFactoryDefault();
 
+        bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+
         bottomFalcon.setInverted(true);
         topFalcon.setInverted(false);
         
-        configureShooterOutputs();
-
-        bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        // configureShooterOutputs();
     }
 
     public enum ControlMethod {
