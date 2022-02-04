@@ -5,12 +5,18 @@
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 
 public class RunIntakeWithColorSensor extends CommandBase {
-  
+  private ColorSensorSubsystem colorSensorSubsystem;
+  private IntakeSubsystem intakeSubsystem;
   /** Creates a new RunIntakeWithColorSensor. */
-  public RunIntakeWithColorSensor() {
+  public RunIntakeWithColorSensor(IntakeSubsystem intakeSubsystem, ColorSensorSubsystem colorSensorSubsystem) {
+    this.intakeSubsystem = intakeSubsystem;
+    this.colorSensorSubsystem = colorSensorSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intakeSubsystem);
+    addRequirements(colorSensorSubsystem);
   }
 
   // Called when the command is initially scheduled.
