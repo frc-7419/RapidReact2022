@@ -16,14 +16,13 @@ public class GetToTargetVelocity extends CommandBase {
   private double kI;
   private double kF;
 
-  private double targetRPM;
   private double topTargetRPM;
   private double bottomTargetRPM;
 
-  
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double targetRPM) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRPM, double bottomTargetRPM) {
     this.shooterSubsystem = shooterSubsystem;
-    this.targetRPM = targetRPM;
+    this.topTargetRPM = topTargetRPM;
+    this.bottomTargetRPM = bottomTargetRPM;
     addRequirements(shooterSubsystem);
   }
 
@@ -31,8 +30,8 @@ public class GetToTargetVelocity extends CommandBase {
   public void initialize() {
     SmartDashboard.putString("shooter", "ramping up");
     
-    topTargetRPM = SmartDashboard.getNumber("targetRPM", targetRPM);
-    bottomTargetRPM = SmartDashboard.getNumber("targetRPM", targetRPM);
+    topTargetRPM = SmartDashboard.getNumber("targetRPM", topTargetRPM);
+    bottomTargetRPM = SmartDashboard.getNumber("targetRPM", bottomTargetRPM);
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
     
