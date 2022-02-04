@@ -14,13 +14,21 @@ import frc.robot.Constants;
 public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
     private AnalogInput input;
     private AnalogPotentiometer pot;
-    
+
     public MaxBotixUltrasonicSensorSubsystem() {
-        pot = new AnalogPotentiometer(3 ,180,30);
-   
+        input = new AnalogInput(3);
+        input.setAverageBits(2);
+        pot = new AnalogPotentiometer(input, 180, 30);
     }
-    
-    public void periodic() {
-        SmartDashboard.putNumber("dist",pot.get());
-    }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("distance: ", pot.get());
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
+  }
+
 }
