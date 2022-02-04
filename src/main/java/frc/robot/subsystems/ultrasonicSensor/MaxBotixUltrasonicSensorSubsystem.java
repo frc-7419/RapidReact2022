@@ -1,29 +1,34 @@
 package frc.robot.subsystems.ultrasonicSensor;
 
 /* suggestion: import AnalogInput from wpilib, not revrobotics */
-import com.revrobotics.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxAnalogSensor.Mode;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
-    private AnalogInput input;
-    private AnalogPotentiometer pot;
+    private final AnalogInput ultrasonic;
+    double value;
 
     public MaxBotixUltrasonicSensorSubsystem() {
-        input = new AnalogInput(3);
-        input.setAverageBits(2);
-        pot = new AnalogPotentiometer(input, 180, 30);
+        ultrasonic = new AnalogInput(0);
+        value = ultrasonic.getValue();
     }
 
-  @Override
+    public double voltageToDistance() {
+      double voltageDistance = 5/RobotController.getVoltage5V();
+      return value * voltageDistance * 0.0492;
+    }
+  @Override 
   public void periodic() {
-    SmartDashboard.putNumber("distance: ", pot.get());
+    SmartDashboard.putNumber("distance: ", voltageToDistance());
   }
 
   @Override
