@@ -22,7 +22,7 @@ public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
         value = ultrasonic.getValue();
     }
 
-    public double voltageToDistance() {
+    public double voltageToDistance() { //convert the value the sensor returns to an actual distance value (inches)
       double voltageDistance = 5/RobotController.getVoltage5V();
       return value * voltageDistance * 0.0492;
     }
