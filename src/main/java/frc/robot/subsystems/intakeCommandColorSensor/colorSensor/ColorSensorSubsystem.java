@@ -1,4 +1,4 @@
-package frc.robot.subsystems.colorSensor;
+package frc.robot.subsystems.intakeCommandColorSensor.colorSensor;
 
 import com.revrobotics.ColorSensorV3;
 

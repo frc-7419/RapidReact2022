@@ -2,11 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunIntakeWithColorSensor extends CommandBase {
+  
   /** Creates a new RunIntakeWithColorSensor. */
   public RunIntakeWithColorSensor() {
     // Use addRequirements() here to declare subsystem dependencies.
