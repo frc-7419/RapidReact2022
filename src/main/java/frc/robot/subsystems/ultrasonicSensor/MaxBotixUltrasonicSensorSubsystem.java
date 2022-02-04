@@ -26,7 +26,7 @@ public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
       double voltageDistance = 5/RobotController.getVoltage5V();
       return value * voltageDistance * 0.0492;
     }
-  @Override 
+  @Override
   public void periodic() {
     SmartDashboard.putNumber("distance: ", voltageToDistance());
   }
@@ -35,5 +35,4 @@ public class MaxBotixUltrasonicSensorSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
-
 }
