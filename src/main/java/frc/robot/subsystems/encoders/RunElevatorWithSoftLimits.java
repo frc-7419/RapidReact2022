@@ -31,10 +31,10 @@ public class RunElevatorWithSoftLimits extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    elevatorSubsystem.getElevatorLeft().configForwardSoftLimitThreshold(forwardSoftLimit);
-    elevatorSubsystem.getElevatorLeft().configReverseSoftLimitThreshold(reverseSoftLimit);
-    elevatorSubsystem.getElevatorLeft().configForwardSoftLimitEnable(true, 0);
-    elevatorSubsystem.getElevatorLeft().configReverseSoftLimitEnable(true, 0);
+    //elevatorSubsystem.getElevatorLeft().configForwardSoftLimitThreshold(forwardSoftLimit);
+    //elevatorSubsystem.getElevatorLeft().configReverseSoftLimitThreshold(reverseSoftLimit);
+    //elevatorSubsystem.getElevatorLeft().configForwardSoftLimitEnable(true, 0);
+    //elevatorSubsystem.getElevatorLeft().configReverseSoftLimitEnable(true, 0);
 
     elevatorSubsystem.getElevatorRight().configForwardSoftLimitThreshold(forwardSoftLimit);
     elevatorSubsystem.getElevatorRight().configReverseSoftLimitThreshold(reverseSoftLimit);
