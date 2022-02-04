@@ -40,13 +40,13 @@ public class ArrowRunShooterWithJoystick extends CommandBase {
       SmartDashboard.putNumber("power bottom", powerBottom);
       int dPadValue = joystick.getPOV();
       if (dPadValue == Direction.UP.direction) {
-        powerTop += 0.1;
+        powerTop += 0.025;
       } else if (dPadValue == Direction.DOWN.direction) {
-        powerTop -= 0.1;
+        powerTop -= 0.025;
       } else if (dPadValue == Direction.RIGHT.direction) {
-        powerBottom += 0.1;
+        powerBottom += 0.025;
       } else if (dPadValue == Direction.LEFT.direction) {
-        powerBottom -= 0.1;
+        powerBottom -= 0.025;
       }
       basicShooterSubsystem.setTopPower(powerTop);
       basicShooterSubsystem.setBottomPower(powerBottom);
