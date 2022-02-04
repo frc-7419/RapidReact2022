@@ -102,5 +102,8 @@ public class StraightWithMotionMagic extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        driveBaseSubsystem.setAll(0);
+        driveBaseSubsystem.brake();
+    }
 }
