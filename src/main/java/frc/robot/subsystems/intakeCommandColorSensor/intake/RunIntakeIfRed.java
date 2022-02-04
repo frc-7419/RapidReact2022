@@ -4,14 +4,16 @@
 
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 
-public class RunIntakeWithColorSensor extends CommandBase {
+public class RunIntakeIfRed extends CommandBase {
   private ColorSensorSubsystem colorSensorSubsystem;
   private IntakeSubsystem intakeSubsystem;
   private double power;
+
   /** Creates a new RunIntakeWithColorSensor. */
-  public RunIntakeWithColorSensor(IntakeSubsystem intakeSubsystem, ColorSensorSubsystem colorSensorSubsystem, double power) {
+  public RunIntakeIfRed(IntakeSubsystem intakeSubsystem, ColorSensorSubsystem colorSensorSubsystem, double power) {
     this.intakeSubsystem = intakeSubsystem;
     this.colorSensorSubsystem = colorSensorSubsystem;
     this.power = power;
@@ -29,9 +31,8 @@ public class RunIntakeWithColorSensor extends CommandBase {
   public void execute() {
     // assume alliance is red
     double[] colors = colorSensorSubsystem.getRgb();
-    intakeSubsystem.setPower(power);
-    if (!(colors[0] > colors[2])) {
-      intakeSubsystem.setPower(-power);
+    if (colors[0] > colors[2]) {
+      intakeSubsystem.setPower(power);
     }
   }
 

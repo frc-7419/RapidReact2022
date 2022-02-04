@@ -13,7 +13,8 @@ import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.intakeCommandColorSensor.intake.IntakeDefault;
 import frc.robot.subsystems.intakeCommandColorSensor.intake.IntakeSubsystem;
-import frc.robot.subsystems.intakeCommandColorSensor.intake.RunIntakeWithColorSensor;
+import frc.robot.subsystems.intakeCommandColorSensor.intake.RunIntakeIfBlue;
+import frc.robot.subsystems.intakeCommandColorSensor.intake.RunIntakeIfRed;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
 import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
@@ -32,7 +33,9 @@ public class RobotContainer {
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
   private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final RunIntakeWithColorSensor runIntakeWithColorSensor = new RunIntakeWithColorSensor(intakeSubsystem, colorSensorSubsystem, 0);
+  private final RunIntakeIfRed runIntakeRedWithColorSensor = new RunIntakeIfRed(intakeSubsystem, colorSensorSubsystem, 0);
+  private final RunIntakeIfBlue runIntakeBlueWithColorSensor = new RunIntakeIfBlue(intakeSubsystem, colorSensorSubsystem, 0);
+
   private final IntakeDefault intakeDefault = new IntakeDefault(intakeSubsystem, joystick);
 
   public RobotContainer() {
@@ -47,8 +50,9 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
   public void setDefaultCommands(){
-    intakeSubsystem.setDefaultCommand(runIntakeWithColorSensor);
-   
+    intakeSubsystem.setDefaultCommand(runIntakeRedWithColorSensor);
+    intakeSubsystem.setDefaultCommand(runIntakeBlueWithColorSensor);
+  
   }
 
   
