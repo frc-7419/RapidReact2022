@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.PowerConstants;
 import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 
 public class RunIntakeWithColorSensor extends CommandBase {
@@ -24,13 +22,18 @@ public class RunIntakeWithColorSensor extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    intakeSubsystem.setPower(power);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    // assume alliance is red
+    double[] colors = colorSensorSubsystem.getRgb();
+    intakeSubsystem.setPower(power);
+    if (!(colors[0] > colors[2])) {
+      intakeSubsystem.setPower(-power);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
