@@ -6,6 +6,7 @@ package frc.robot.subsystems.encoders;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -20,7 +21,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   public ElevatorSubsystem() {
     elevatorLeft = new TalonSRX(50);
     elevatorRight = new TalonSRX(51);
+    elevatorLeft.follow(elevatorRight);
     elevatorRight.setInverted(true);
+    elevatorLeft.setInverted(InvertType.OpposeMaster);
     elevatorRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     }
   
@@ -44,13 +47,13 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    elevatorLeft.set(ControlMode.PercentOutput, power);
+    //elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
   }
 
 
   public void brake() {
-    elevatorLeft.setNeutralMode(NeutralMode.Brake);
+    //elevatorLeft.setNeutralMode(NeutralMode.Brake);
     elevatorRight.setNeutralMode(NeutralMode.Brake);
   }
 
