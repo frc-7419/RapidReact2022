@@ -25,10 +25,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final BasicShooterSubsystem shooterBasicSubsystem = new BasicShooterSubsystem();
+  // private final BasicShooterSubsystem shooterBasicSubsystem = new BasicShooterSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterBasicSubsystem, joystick);
+  // private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterBasicSubsystem, joystick);
   private final GetToTargetVelocity getToTargetVelocity = new GetToTargetVelocity(shooterSubsystem, limelightSubsystem);
 
   public RobotContainer() {
@@ -49,10 +49,10 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return runShooterWithJoystick;
+    return getToTargetVelocity;
   }
 
   public void setDefaultCommands(){
-    shooterBasicSubsystem.setDefaultCommand(runShooterWithJoystick);
+    // shooterBasicSubsystem.setDefaultCommand(runShooterWithJoystick);
   }
 }

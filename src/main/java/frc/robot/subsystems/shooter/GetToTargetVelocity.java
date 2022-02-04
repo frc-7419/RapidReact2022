@@ -50,6 +50,8 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("GTV Run", true);
+
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
 
