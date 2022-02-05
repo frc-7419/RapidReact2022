@@ -53,6 +53,9 @@ public class ShooterSubsystem extends SubsystemBase{
 
         SmartDashboard.putNumber("TF RPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
         SmartDashboard.putNumber("BF RPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        
+        SmartDashboard.putNumber("Target RS", topTargetVelocity);
+        SmartDashboard.putNumber("Target RPM", UnitConversions.rawSensorVelocityToRPM(topTargetVelocity, 2048));
     }
 
     public void run() {

@@ -15,6 +15,8 @@ public class GetToTargetVelocity extends CommandBase {
   private double kI;
   private double kF;
 
+  private double targetRPM;
+
   private double topTargetRPM;
   private double bottomTargetRPM;
 
@@ -49,8 +51,8 @@ public class GetToTargetVelocity extends CommandBase {
     shooterSubsystem.setTopPIDF(kP, kI, 0, kF);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, kF);
     
-    shooterSubsystem.setTopTargetVelocity(UnitConversions.rpmToRawSensorVelocity(500, 2048));
-    shooterSubsystem.setBottomTargetVelocity(UnitConversions.rpmToRawSensorVelocity(500, 2048));
+    shooterSubsystem.setTopTargetVelocity(15000);
+    shooterSubsystem.setBottomTargetVelocity(15000);
   }
 
   @Override
@@ -60,8 +62,9 @@ public class GetToTargetVelocity extends CommandBase {
     // shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     // shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
 
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(500, ticksPerRotation));
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(500, ticksPerRotation));
+    // targetRPM = UnitConversions.rpmToRawSensorVelocity(2500, ticksPerRotation);
+    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, 15000);
+    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, 15000);
 
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
