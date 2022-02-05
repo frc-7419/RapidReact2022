@@ -66,6 +66,9 @@ public class GetToTargetVelocity extends CommandBase {
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, 15000);
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, 15000);
 
+    SmartDashboard.putNumber("top error", shooterSubsystem.getTopTalon().getClosedLoopError());
+    SmartDashboard.putNumber("bottom error", shooterSubsystem.getBottomTalon().getClosedLoopError());
+
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
     SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
