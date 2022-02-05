@@ -33,8 +33,8 @@ public class RobotContainer {
   private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
   private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final RunIntakeIfRed runIntakeRedWithColorSensor = new RunIntakeIfRed(intakeSubsystem, colorSensorSubsystem, 0);
-  private final RunIntakeIfBlue runIntakeBlueWithColorSensor = new RunIntakeIfBlue(intakeSubsystem, colorSensorSubsystem, 0);
+  private final RunIntakeIfRed runIntakeRedWithColorSensor = new RunIntakeIfRed(intakeSubsystem, colorSensorSubsystem, 0.2);
+  private final RunIntakeIfBlue runIntakeBlueWithColorSensor = new RunIntakeIfBlue(intakeSubsystem, colorSensorSubsystem, 0.2);
 
   private final IntakeDefault intakeDefault = new IntakeDefault(intakeSubsystem, joystick);
 
@@ -50,9 +50,7 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
   public void setDefaultCommands(){
-    intakeSubsystem.setDefaultCommand(runIntakeRedWithColorSensor);
     intakeSubsystem.setDefaultCommand(runIntakeBlueWithColorSensor);
-  
   }
 
   
