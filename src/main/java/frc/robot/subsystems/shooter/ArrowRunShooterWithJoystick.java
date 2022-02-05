@@ -14,6 +14,7 @@ public class ArrowRunShooterWithJoystick extends CommandBase {
   private XboxController joystick;
   private double powerTop = 0;
   private double powerBottom = 0;
+  private double stepInterval = 0.005;
 
   public ArrowRunShooterWithJoystick(BasicShooterSubsystem basicShooterSubsystem, XboxController joystick) {
     this.basicShooterSubsystem = basicShooterSubsystem;
@@ -38,18 +39,18 @@ public class ArrowRunShooterWithJoystick extends CommandBase {
   public void execute() {
       int dPadValue = joystick.getPOV();
       if (dPadValue == Direction.UP.direction) {
-        powerTop += 0.025;
+        powerTop += stepInterval;
       } else if (dPadValue == Direction.DOWN.direction) {
-        powerTop -= 0.025;
+        powerTop -= stepInterval;
       } else if (dPadValue == Direction.RIGHT.direction) {
-        powerBottom += 0.025;
+        powerBottom += stepInterval;
       } else if (dPadValue == Direction.LEFT.direction) {
-        powerBottom -= 0.025;
+        powerBottom -= stepInterval;
       }
       basicShooterSubsystem.setTopPower(powerTop);
       basicShooterSubsystem.setBottomPower(powerBottom);
-      if (joystick.getRightY() != 0) {
-        basicShooterSubsystem.setBothPower(joystick.getRightY());
+      if (-joystick.getRightY() > 0) {
+        basicShooterSubsystem.setBothPower(-joystick.getRightY());
         
       }
       if (joystick.getBButtonPressed()) {
