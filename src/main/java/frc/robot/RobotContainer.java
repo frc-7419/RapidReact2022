@@ -27,13 +27,15 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
+
+    // new JoystickButton(joystick, XboxController.Button.kY.value).whileHeld(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
    
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("targetRPM", 1000);
-    SmartDashboard.putNumber("shooterKp", PIDConstants.ShooterkP);
-    SmartDashboard.putNumber("shooterKi", PIDConstants.ShooterkI);
+    // SmartDashboard.putNumber("targetRPM", 1000);
+    // SmartDashboard.putNumber("shooterKp", PIDConstants.ShooterkP);
+    // SmartDashboard.putNumber("shooterKi", PIDConstants.ShooterkI);
   }
 
   public Command getAutonomousCommand() {

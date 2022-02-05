@@ -18,6 +18,8 @@ public class GetToTargetVelocity extends CommandBase {
   private double topTargetRPM;
   private double bottomTargetRPM;
 
+  private double ticksPerRotation = 2048;
+
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRPM, double bottomTargetRPM) {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRPM = topTargetRPM;
@@ -27,30 +29,39 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putString("shooter", "ramping up");
-    
-    topTargetRPM = SmartDashboard.getNumber("top targetRPM", topTargetRPM);
-    bottomTargetRPM = SmartDashboard.getNumber("bottom targetRPM", bottomTargetRPM);
-    
-    shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
-    
-    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
-    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+    SmartDashboard.putBoolean("GTV Running", false);
+    // SmartDashboard.putString("shooter", "ramping up");
 
-    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.getkF());
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.getkF());
+    // shooterSubsystem.configShooterOutputs();
+
+    // topTargetRPM = SmartDashboard.getNumber("top targetRPM", topTargetRPM);
+    // bottomTargetRPM = SmartDashboard.getNumber("bottom targetRPM", bottomTargetRPM);
     
-    shooterSubsystem.setTopTargetVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.setBottomTargetVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
     
+    // kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
+    // kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+
+    kP = 0;
+    kI = 0;
+    kF = 0.05;
+
+    shooterSubsystem.setTopPIDF(kP, kI, 0, kF);
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, kF);
+    
+    shooterSubsystem.setTopTargetVelocity(UnitConversions.rpmToRawSensorVelocity(500, 2048));
+    shooterSubsystem.setBottomTargetVelocity(UnitConversions.rpmToRawSensorVelocity(500, 2048));
   }
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("GTV Run", true);
+    SmartDashboard.putBoolean("GTV Running", true);
 
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    // shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
+    // shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+
+    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(500, ticksPerRotation));
+    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(500, ticksPerRotation));
 
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
@@ -60,6 +71,7 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.off();
+    SmartDashboard.putBoolean("GTV Running", false);
   }
 
   @Override

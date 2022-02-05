@@ -25,16 +25,16 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
         topFalcon = new TalonFX(CanIds.topShooterFalcon.id);
 
-        bottomFalcon.configFactoryDefault();
-        topFalcon.configFactoryDefault();
+        // bottomFalcon.configFactoryDefault();
+        // topFalcon.configFactoryDefault();
 
-        // bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        // topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
 
         bottomFalcon.setInverted(true);
         topFalcon.setInverted(false);
         
-        // configShooterOutputs();
+        configShooterOutputs();
     }
 
     public enum ControlMethod {
@@ -45,11 +45,14 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("top falcon raw speed", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("bottom falcon raw speed", bottomFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("TF RS", topFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("BF RS", bottomFalcon.getSelectedSensorVelocity(0));
 
-        SmartDashboard.putNumber("top falcon rpm", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        SmartDashboard.putNumber("bottom falcon rpm", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("TF RPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("BF RPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+
+        SmartDashboard.putNumber("TF RPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("BF RPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
     }
 
     public void run() {
