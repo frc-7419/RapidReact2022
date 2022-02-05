@@ -9,6 +9,7 @@ import com.revrobotics.Rev2mDistanceSensor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.rev2mDistanceSensor.Rev2mDistanceSensorSubsystem;
+import frc.robot.subsystems.rev2mDistanceSensor.RunRev2mDistanceSensor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -22,13 +23,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
-  private Rev2mDistanceSensorSubsystem rev2mDistanceSensorSubsystem;
+  private Rev2mDistanceSensorSubsystem rev2mDistanceSensorSubsystem = new Rev2mDistanceSensorSubsystem();
+
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final RunRev2mDistanceSensor runRev2mDistanceSensor = new RunRev2mDistanceSensor(rev2mDistanceSensorSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    this.rev2mDistanceSensorSubsystem = new Rev2mDistanceSensorSubsystem();
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -55,6 +57,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    rev2mDistanceSensorSubsystem.setDefaultCommand(runRev2mDistanceSensor);
   }
 }
