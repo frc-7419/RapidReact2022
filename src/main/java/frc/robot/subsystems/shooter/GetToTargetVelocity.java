@@ -30,18 +30,19 @@ public class GetToTargetVelocity extends CommandBase {
   public void initialize() {
     SmartDashboard.putString("shooter", "ramping up");
     
-    topTargetRPM = SmartDashboard.getNumber("targetRPM", topTargetRPM);
-    bottomTargetRPM = SmartDashboard.getNumber("targetRPM", bottomTargetRPM);
+    topTargetRPM = SmartDashboard.getNumber("top targetRPM", topTargetRPM);
+    bottomTargetRPM = SmartDashboard.getNumber("bottom targetRPM", bottomTargetRPM);
     
     shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
     
     kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
     kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
 
-    shooterSubsystem.setPIDF(kP, kI, 0, shooterSubsystem.getkF());
+    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.getkF());
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.getkF());
     
-    shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    shooterSubsystem.setTopTargetVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
+    shooterSubsystem.setBottomTargetVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
     
   }
 

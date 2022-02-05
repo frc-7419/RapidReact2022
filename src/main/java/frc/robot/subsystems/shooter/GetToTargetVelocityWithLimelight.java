@@ -42,13 +42,13 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
     bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
     
-    
     shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    shooterSubsystem.setPIDF(kP, kI, kD, shooterSubsystem.getkF());
+    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.getkF());
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.getkF());
     
-    shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    shooterSubsystem.setTopTargetVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
+    shooterSubsystem.setBottomTargetVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
     
   }
 
