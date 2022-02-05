@@ -20,6 +20,10 @@ public class StraightWithMotionMagic extends CommandBase {
 
     private double threshold = 0.5; // in inches
 
+    private int kErrThreshold = 30; // how many sensor units until its close-enough
+    private int kLoopsToSettle = 10; // how many loops sensor must be close-enough
+    private int withinThresholdLoops = 0;
+
     private double kP;
     private double kI;
     private double kD;
@@ -73,6 +77,14 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBaseSubsystem.getRightMast().set(ControlMode.MotionMagic, rightSetpoint);
 
         startTime = System.currentTimeMillis();
+
+            /* Check if closed loop error is within the threshld */
+        if ((driveBaseSubsystem.getRightMast().getClosedLoopError() < kErrThreshold && driveBaseSubsystem.getLeftMast().getClosedLoopError() < kErrThreshold) 
+            && (driveBaseSubsystem.getRightMast().getClosedLoopError() > -kErrThreshold && driveBaseSubsystem.getLeftMast().getClosedLoopError() > -kErrThreshold)) {
+            ++withinThresholdLoops;
+        } else {
+            withinThresholdLoops = 0;
+        }
     }
 
     @Override
@@ -96,9 +108,17 @@ public class StraightWithMotionMagic extends CommandBase {
     }
 
     @Override
-    public boolean isFinished(){
-        double thresholdInTicks = UnitConversions.inchesToTicks(threshold, 3, 1, 2048);
-        return (Math.abs(leftMastError) < thresholdInTicks && Math.abs(rightMastError) < thresholdInTicks);
+    public boolean isFinished() {
+
+        double rightActiveTrajectoryPosition = driveBaseSubsystem.getRightMast().getActiveTrajectoryPosition();
+        double leftActiveTrajectoryPosition = driveBaseSubsystem.getLeftMast().getActiveTrajectoryPosition();
+        return (withinThresholdLoops > kLoopsToSettle) 
+        
+            && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
+            && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold))
+
+            && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
+            && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold));
     }
 
     @Override
