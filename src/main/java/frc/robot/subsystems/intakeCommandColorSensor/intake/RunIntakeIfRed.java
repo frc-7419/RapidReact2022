@@ -34,6 +34,9 @@ public class RunIntakeIfRed extends CommandBase {
     if (colors[0] > colors[2]) {
       intakeSubsystem.setPower(power);
     }
+    else {
+      intakeSubsystem.setPower(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
