@@ -28,11 +28,17 @@ public class BasicShooterSubsystem extends SubsystemBase{
     }
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("top falcon raw speed", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("bottom falcon raw speed", bottomFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("TF PO",  topFalcon.getMotorOutputPercent());
+        SmartDashboard.putNumber("BF PO",  bottomFalcon.getMotorOutputPercent());
 
-        SmartDashboard.putNumber("top falcon rpm", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        SmartDashboard.putNumber("bottom falcon rpm", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("TF raw speed", topFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("BF raw speed", bottomFalcon.getSelectedSensorVelocity(0));
+
+        SmartDashboard.putNumber("TF RPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("BF RPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+
+        SmartDashboard.putNumber("TF RPM graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("BF RPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
     }
 
 
@@ -119,7 +125,7 @@ public class BasicShooterSubsystem extends SubsystemBase{
     // public double getkD(){return kD;}
     // public double getkF(){return kF;}
 
-    // public TalonFX getTopTalon(){return topFalcon;}
-    // public TalonFX getBottomTalon(){return bottomFalcon;}
+    public TalonFX getTopTalon(){return topFalcon;}
+    public TalonFX getBottomTalon(){return bottomFalcon;}
 
 }

@@ -36,8 +36,6 @@ public class ArrowRunShooterWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      SmartDashboard.putNumber("power top", powerTop);
-      SmartDashboard.putNumber("power bottom", powerBottom);
       int dPadValue = joystick.getPOV();
       if (dPadValue == Direction.UP.direction) {
         powerTop += 0.025;
@@ -52,6 +50,7 @@ public class ArrowRunShooterWithJoystick extends CommandBase {
       basicShooterSubsystem.setBottomPower(powerBottom);
       if (joystick.getRightY() != 0) {
         basicShooterSubsystem.setBothPower(joystick.getRightY());
+        
       }
       if (joystick.getBButtonPressed()) {
         basicShooterSubsystem.setBothPower(0);
