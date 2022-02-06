@@ -15,14 +15,8 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-    // enums are a data structure primarilly used for constants
+    
     public static enum CanIds {
-        
-        //to add a motor's can id: motorName(canId),
-        // motor1(5),
-        // motor2(3),
-        // motorX(x)...
 
         // 2020 robot constants
         leftFalcon1(5),
