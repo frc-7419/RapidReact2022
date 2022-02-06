@@ -17,7 +17,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   
-  private final GetToTargetVelocity getToTargetVelocity = new GetToTargetVelocity(shooterSubsystem, 1000, 1000);
+  private final GetToTargetVelocity getToTargetVelocity = new GetToTargetVelocity(shooterSubsystem, 20000, 20000);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -33,7 +33,8 @@ public class RobotContainer {
   }
 
   private void smartDashboardBindings() {
-    // SmartDashboard.putNumber("targetRPM", 1000);
+    SmartDashboard.putNumber("topTargetVelocity", 1000);
+    SmartDashboard.putNumber("bottomTargetVelocity", 1000);
     // SmartDashboard.putNumber("shooterKp", PIDConstants.ShooterkP);
     // SmartDashboard.putNumber("shooterKi", PIDConstants.ShooterkI);
   }

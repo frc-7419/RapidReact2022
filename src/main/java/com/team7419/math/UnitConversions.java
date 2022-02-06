@@ -36,8 +36,8 @@ public class UnitConversions {
         return rawVelocity * (1 / ticksPerRotation) * 600;
     }
 
-    public static double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
-        return roundToDecimal((rpm * ticksPerRotation * (1 / 600)), 2);
+    public static int rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
+        return (int) Math.round(rpm * ticksPerRotation * (1/600));
     }
 
     public static double inchesToTicks(double inches, double radius, double gearRatioMultiplier,
