@@ -53,9 +53,9 @@ public class ShooterSubsystem extends SubsystemBase{
 
         SmartDashboard.putNumber("TF RPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
         SmartDashboard.putNumber("BF RPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
-        
-        // SmartDashboard.putNumber("Target RS", topTargetVelocity);
-        // SmartDashboard.putNumber("Target RPM", UnitConversions.rawSensorVelocityToRPM(topTargetVelocity, 2048));
+
+        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
+        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
     }
 
     public void run() {
@@ -152,6 +152,10 @@ public class ShooterSubsystem extends SubsystemBase{
     public void off() {
         topFalcon.set(ControlMode.PercentOutput, 0);
         bottomFalcon.set(ControlMode.PercentOutput, 0);
+    }
+
+    public double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
+        return rpm * ticksPerRotation * (1/600);
     }
 
     public double getTopPercentOutput() {return topFalcon.getMotorOutputPercent();}

@@ -36,8 +36,8 @@ public class RobotContainer {
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("T TV", 1000);
-    SmartDashboard.putNumber("B TV", 1000);
+    SmartDashboard.putNumber("tTargetRPM", 1000);
+    SmartDashboard.putNumber("bTargetRPM", 1000);
     SmartDashboard.putNumber("kP", PIDConstants.ShooterkP);
     SmartDashboard.putNumber("kI", PIDConstants.ShooterkI);
     SmartDashboard.putNumber("bKf", PIDConstants.ShooterkF);
