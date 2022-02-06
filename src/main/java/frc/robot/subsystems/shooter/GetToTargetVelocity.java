@@ -13,10 +13,11 @@ public class GetToTargetVelocity extends CommandBase {
 
   private double kP;
   private double kI;
-  private double kF;
+  // private double kF;
+  private double bottomKf;
+  private double topKf;
 
-  private double targetRPM;
-
+  // private double targetRPM;
   private double topTargetVelocity;
   private double bottomTargetVelocity;
 
@@ -24,33 +25,30 @@ public class GetToTargetVelocity extends CommandBase {
 
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity, double bottomTargetVelocity) {
     this.shooterSubsystem = shooterSubsystem;
-    // this.topTargetRPM = topTargetRPM;
-    // this.bottomTargetRPM = bottomTargetRPM;
+    this.topTargetVelocity = topTargetVelocity;
+    this.bottomTargetVelocity = bottomTargetVelocity;
     addRequirements(shooterSubsystem);
   }
 
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("GTV Running", false);
-    // SmartDashboard.putString("shooter", "ramping up");
-
-    // shooterSubsystem.configShooterOutputs();
 
     topTargetVelocity = SmartDashboard.getNumber("topTargetVelocity", topTargetVelocity);
     bottomTargetVelocity = SmartDashboard.getNumber("bottomTargeVelocity", bottomTargetVelocity);
     
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
     
-    // kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
-    // kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
+    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
 
-    kP = 0;
-    kI = 0;
-    kF = 0.05;
+    bottomKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    topKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
 
-    shooterSubsystem.setTopPIDF(kP, kI, 0, kF);
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, kF);
+    shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
     
+    // instance var setter method for ShooterSubsystem
     shooterSubsystem.setTopTargetVelocity(topTargetVelocity);
     shooterSubsystem.setBottomTargetVelocity(bottomTargetVelocity);
   }
@@ -58,6 +56,16 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putBoolean("GTV Running", true);
+
+    // update PIF values from SD while running
+    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
+    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+
+    bottomKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    topKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
+
+    shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
 
     topTargetVelocity = SmartDashboard.getNumber("topTargetVelocity", topTargetVelocity);
     bottomTargetVelocity= SmartDashboard.getNumber("bottomTargetVelocity", bottomTargetVelocity);

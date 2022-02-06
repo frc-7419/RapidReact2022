@@ -15,7 +15,7 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
+
     public static enum CanIds {
 
         // 2020 robot constants
@@ -61,7 +61,7 @@ public final class Constants {
         public static final double ShooterkP = 0;
         public static final double ShooterkI = 0;
         public static final double ShooterkD = 0;
-        public static final double ShooterkF = 0;
+        public static final double ShooterkF = 0.05;
     }
 
     public static final double[][] kSpeedToFf = {
