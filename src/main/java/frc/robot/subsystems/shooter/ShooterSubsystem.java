@@ -9,6 +9,7 @@ import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.*;
 
 public class ShooterSubsystem extends SubsystemBase{
@@ -136,6 +137,15 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public double computekF(double nativeUnits) {
         return 0; // insert regression model
+    }
+
+    public double lookUpkF(double nativeUnits){
+        double output = 0;
+        for(double[] pair : Constants.kSpeedToFf){
+            if(pair[0] == nativeUnits){output = pair[1];}
+        }
+        if(output == 0){output = computekF(nativeUnits);}
+        return output; 
     }
 
     public double getCurrentTopVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
