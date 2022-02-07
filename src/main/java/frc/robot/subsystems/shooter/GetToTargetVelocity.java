@@ -1,7 +1,6 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -32,15 +31,15 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("GTV Running", false);
+    SmartDashboard.putBoolean("Shooter Running", false);
 
     topTargetRPM = SmartDashboard.getNumber("tTargetRPM", topTargetRPM);
     bottomTargetRPM = SmartDashboard.getNumber("bTargetRPM", bottomTargetRPM);
     
-    // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
-    
     kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
     kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+
+    // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
     bottomKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
     topKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
@@ -49,13 +48,13 @@ public class GetToTargetVelocity extends CommandBase {
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
     
     // instance var setter method for ShooterSubsystem
-    shooterSubsystem.setTopTargetVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
-    shooterSubsystem.setBottomTargetVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
+    shooterSubsystem.setTopTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
+    shooterSubsystem.setBottomTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
   }
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("GTV Running", true);
+    SmartDashboard.putBoolean("Shooter Running", true);
 
     // update PIF values from SD while running
     kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
@@ -70,11 +69,11 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRPM = SmartDashboard.getNumber("tTargetRPM", topTargetRPM);
     bottomTargetRPM = SmartDashboard.getNumber("bTargetRPM", bottomTargetRPM);
 
-    double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
     double topTargetVelocity = topTargetRPM * ticksPerRotation * (1/600);
-
-    SmartDashboard.putNumber("topTargetRPM", topTargetRPM);
-    SmartDashboard.putNumber("bottomTargetRPM", bottomTargetRPM);
+    double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
+    
+    SmartDashboard.putNumber("tTargetRV", topTargetVelocity);
+    SmartDashboard.putNumber("bTargetRV", bottomTargetVelocity);
     
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetVelocity);
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetVelocity);
@@ -87,7 +86,7 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.off();
-    SmartDashboard.putBoolean("GTV Running", false);
+    SmartDashboard.putBoolean("Shooter Running", false);
   }
 
   @Override
