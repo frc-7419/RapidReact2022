@@ -45,7 +45,7 @@ public class RunElevatorWithSoftLimits extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Left Elevator Position", elevatorSubsystem.getElevatorLeft().getSelectedSensorPosition());
+    //SmartDashboard.putNumber("Left Elevator Position", elevatorSubsystem.getElevatorLeft().getSelectedSensorPosition());
     SmartDashboard.putNumber("Right Elevator Position", elevatorSubsystem.getElevatorRight().getSelectedSensorPosition());
     SmartDashboard.putNumber("Joystick value", joystick.getRightY());
 
