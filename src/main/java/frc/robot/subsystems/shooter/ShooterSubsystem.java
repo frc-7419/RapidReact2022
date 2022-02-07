@@ -136,7 +136,7 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public double computekF(double nativeUnits) {
-        return 0; // insert regression model
+        return 0; // insert ff regression model
     }
 
     public double lookUpkF(double nativeUnits){
