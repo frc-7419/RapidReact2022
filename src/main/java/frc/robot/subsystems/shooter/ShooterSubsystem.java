@@ -178,8 +178,7 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public void off() {
-        topFalcon.set(ControlMode.PercentOutput, 0);
-        bottomFalcon.set(ControlMode.PercentOutput, 0);
+        setBothPower(0);
     }
 
     public double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
