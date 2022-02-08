@@ -51,9 +51,6 @@ public class GetToTargetVelocity extends CommandBase {
     // shooterSubsystem.setTopTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
     // shooterSubsystem.setBottomTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
 
-    // shooterSubsystem.setTopTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRawVelocity, ticksPerRotation));
-    // shooterSubsystem.setBottomTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(bottomTargetRawVelocity, ticksPerRotation));
-
     shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
     shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
   }
