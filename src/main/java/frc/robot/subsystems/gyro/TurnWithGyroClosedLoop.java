@@ -10,7 +10,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 public class TurnWithGyroClosedLoop extends CommandBase {
   
   private DriveBaseSubsystem driveBase;
-  private GyroSubsystem ahrs;
+  private GyroSubsystem gyroSubsystem;
   private double target;
   private double kP;
   private double kI;
@@ -26,9 +26,9 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem ahrs, double target) {
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target) {
     this.driveBase = driveBase;
-    this.ahrs = ahrs;
+    this.gyroSubsystem = gyroSubsystem;
     this.target = target;
   }
 
@@ -36,7 +36,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   public void initialize() {
     if(target > 0){negative = 1;}
     else{negative = -1;}
-    initAngle = ahrs.getGyroAngle();
+    initAngle = gyroSubsystem.getGyroAngle();
     // SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
     // SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
     double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
@@ -52,7 +52,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   public void execute() {
     SmartDashboard.putString("command status", "turn w gyro");
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
-    pidOutput = pidController.calculate(ahrs.getGyroAngle());
+    pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBase.setLeftPower(negative * -pidOutput);
     driveBase.setRightPower(negative * pidOutput);
   }
@@ -62,7 +62,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     driveBase.stop();
     driveBase.brake();
     // Timer.delay(1);
-    SmartDashboard.putNumber("robot turned", ahrs.getGyroAngle() - initAngle);
+    SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override
