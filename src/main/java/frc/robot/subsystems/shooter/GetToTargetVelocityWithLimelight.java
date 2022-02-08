@@ -57,9 +57,9 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
 
-    SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
-    SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
-    SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
+    // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
+    // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
+    // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
   }
 
   @Override

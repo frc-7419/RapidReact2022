@@ -19,7 +19,7 @@ public class ShooterSubsystem extends SubsystemBase{
     private double powerOutput = 0;
     private double bottomTargetRawVelocity = 500;
     private double topTargetRawVelocity = 500;
-    private double velocityThreshold = 200;
+    private double velocityThreshold = 30;
     private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSubsystem(){
@@ -47,13 +47,13 @@ public class ShooterSubsystem extends SubsystemBase{
     @Override
     public void periodic() {
         SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("tRV", bottomFalcon.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
 
-        SmartDashboard.putNumber("tRPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        SmartDashboard.putNumber("bRPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        // SmartDashboard.putNumber("tRPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        // SmartDashboard.putNumber("bRPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
 
-        SmartDashboard.putNumber("tRPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        SmartDashboard.putNumber("bRPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        // SmartDashboard.putNumber("tRPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
+        // SmartDashboard.putNumber("bRPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
 
         SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetRawVelocity);
         SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetRawVelocity);
