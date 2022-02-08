@@ -58,8 +58,8 @@ public class ShooterSubsystem extends SubsystemBase{
         // SmartDashboard.putNumber("tRPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
         // SmartDashboard.putNumber("bRPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
 
-        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetRawVelocity);
-        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetRawVelocity);
+        SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetRawVelocity);
+        SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetRawVelocity);
     }
 
     public void run() {
@@ -101,11 +101,11 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public boolean topOnTarget() {
-        return Math.abs(getCurrentTopVelocity() - topTargetRawVelocity) < velocityThreshold;
+        return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < velocityThreshold;
     }
 
     public boolean bottomOnTarget() {
-        return Math.abs(getCurrentBottomVelocity() - bottomTargetRawVelocity) < velocityThreshold;
+        return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < velocityThreshold;
     }
 
     public boolean bothOnTarget() {
@@ -166,8 +166,8 @@ public class ShooterSubsystem extends SubsystemBase{
         return output; 
     }
 
-    public double getCurrentTopVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
-    public double getCurrentBottomVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
+    public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
+    public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
 
     public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
     public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
