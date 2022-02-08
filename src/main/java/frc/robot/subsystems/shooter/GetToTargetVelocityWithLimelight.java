@@ -16,8 +16,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   private double kP;
   private double kI;
-  private double kD;
-  private double kF;
+  private double tkF;
+  private double bkF;
 
   private double initialVelocity;
 

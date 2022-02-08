@@ -20,9 +20,9 @@ public class ShooterSubsystem extends SubsystemBase{
     private double tkF;
     private double bkF;
     private double powerOutput = 0;
-    private double bottomTargetRawVelocity = 500;
-    private double topTargetRawVelocity = 500;
-    private double velocityThreshold = 30;
+    private double bottomTargetRawVelocity = 500; // in raw velocity units (ticks/0.1s)
+    private double topTargetRawVelocity = 500; // RV
+    private double velocityThreshold = 30;  // RV
     private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSubsystem(){
