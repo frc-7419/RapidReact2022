@@ -10,12 +10,15 @@ import com.team7419.math.UnitConversions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.*;
+import frc.robot.Constants.CanIds;
 
 public class ShooterSubsystem extends SubsystemBase{
     private TalonFX bottomFalcon;
     private TalonFX topFalcon;
-    private double kF;
+    private double kP;
+    private double kI;
+    private double tkF;
+    private double bkF;
     private double powerOutput = 0;
     private double bottomTargetRawVelocity = 500;
     private double topTargetRawVelocity = 500;
@@ -122,7 +125,9 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
 
-    public void setkF(double kF){this.kF = kF;}
+    public void setTopkF(double kF){this.tkF = tkF;}
+
+    public void setBottomkF(double kF){this.bkF = bkF;}
 
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
@@ -130,21 +135,34 @@ public class ShooterSubsystem extends SubsystemBase{
     public void setControlMethod(ControlMethod method) {
         this.controlMethod = method;
         if(method == ControlMethod.HOLDING){
-            setTopPIDF(0,0,0,kF);
-            setBottomPIDF(0,0,0,kF);
+            setTopPIDF(0,0,0,tkF);
+            setBottomPIDF(0,0,0,bkF);
         }
     }
 
-    public double computekF(double nativeUnits) {
-        return 0; // insert ff regression model
+    public double computeTopkF(double nativeUnits) {
+        return 0; // insert top ff regression model
     }
 
-    public double lookUpkF(double nativeUnits){
+    public double computeBottomkF(double nativeUnits) {
+        return 0; // insert bottom ff regression model
+    }
+
+    public double lookUpTopkF(double nativeUnits){
         double output = 0;
-        for(double[] pair : Constants.kSpeedToFf){
+        for(double[] pair : Constants.kRawVelocityToTopFf){
             if(pair[0] == nativeUnits){output = pair[1];}
         }
-        if(output == 0){output = computekF(nativeUnits);}
+        if(output == 0){output = computeTopkF(nativeUnits);}
+        return output; 
+    }
+
+    public double lookUpBottomkF(double nativeUnits){
+        double output = 0;
+        for(double[] pair : Constants.kRawVelocityToBottomFf){
+            if(pair[0] == nativeUnits){output = pair[1];}
+        }
+        if(output == 0){output = computeBottomkF(nativeUnits);}
         return output; 
     }
 
@@ -171,10 +189,10 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getTopPercentOutput() {return topFalcon.getMotorOutputPercent();}
     public double getBottomPercentOutput() {return bottomFalcon.getMotorOutputPercent();}
 
-    // public double getkP(){return kP;}
-    // public double getkI(){return kI;}
-    // public double getkD(){return kD;}
-    public double getkF(){return kF;}
+    public double getkP(){return kP;}
+    public double getkI(){return kI;}
+    public double getTopkF(){return tkF;}
+    public double getBottomkF(){return bkF;}
 
     public TalonFX getTopTalon(){return topFalcon;}
     public TalonFX getBottomTalon(){return bottomFalcon;}
