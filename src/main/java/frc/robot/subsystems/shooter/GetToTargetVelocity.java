@@ -20,8 +20,6 @@ public class GetToTargetVelocity extends CommandBase {
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
 
-  private double ticksPerRotation = 2048;
-
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity) {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRawVelocity = topTargetRawVelocity;

@@ -47,6 +47,7 @@ public final class Constants {
     }
 
     public static class RobotConstants {
+        public static final double TalonFXTicksPerRotation = 2048;
         public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
         public static final double topShooterWheelRadius = 1.5;
     }
