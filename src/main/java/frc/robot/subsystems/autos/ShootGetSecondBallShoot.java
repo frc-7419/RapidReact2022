@@ -1,6 +1,7 @@
 //period 6 file
 package frc.robot.subsystems.autos;
 
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -16,16 +17,22 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         update:
         fixed!
     */
-    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) { //add parameters
+    private GyroSubsystem gyroSubsystem;
+    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsyste, ReadyToShoot readyToShoot) { //add parameters
         //shoot ball command
+        
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, null, 180));
         addCommands(new WaitCommand(0.5));
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 120));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 99.77));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, null, 60));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 172.8));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, null, 30));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 141.7));
+
         //intake ball command
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 120));
+        
         //shoot ball command
-
-
+        
 
 
 
