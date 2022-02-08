@@ -34,7 +34,7 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putString("shooter", "ramping up");
+    // SmartDashboard.putBoolean("Shooter Running", false);
 
     // redo math?
     initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
@@ -55,6 +55,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void execute() {
+    // SmartDashboard.putBoolean("Shooter Running", true);
+
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
 
@@ -66,6 +68,7 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.off();
+    // SmartDashboard.putBoolean("Shooter Running", false);
   }
 
   @Override
