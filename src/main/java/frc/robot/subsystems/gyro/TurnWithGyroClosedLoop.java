@@ -37,8 +37,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if(target > 0){negative = 1;}
     else{negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    pidController = new PIDController(kp, ki, kd);
-    // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
+    pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(0.1); 
   } 
