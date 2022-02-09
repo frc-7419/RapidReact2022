@@ -111,7 +111,6 @@ public class StraightWithMotionMagicOld extends CommandBase {
     @Override
     public boolean isFinished(){
         if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
-            SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
         } else{return false;}
