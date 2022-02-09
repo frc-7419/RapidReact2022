@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
   
   private DriveBaseSubsystem driveBase;
-  private GyroSubsystem ahrs;
+  private GyroSubsystem gyroSubsystem;
   private double target;
   private double kP;
   private double kI;
@@ -25,9 +26,9 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem ahrs, double target) {
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target) {
     this.driveBase = driveBase;
-    this.ahrs = ahrs;
+    this.gyroSubsystem = gyroSubsystem;
     this.target = target;
   }
 
@@ -35,29 +36,27 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   public void initialize() {
     if(target > 0){negative = 1;}
     else{negative = -1;}
-    initAngle = ahrs.getGyroAngle();
-    kP = .1; 
-    kI = 0;
-    kD = 0;
-    pidController = new PIDController(kP, kI, kD);
+    initAngle = gyroSubsystem.getGyroAngle();
+    pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
-    pidController.setTolerance(1); 
+    pidController.setTolerance(0.1); 
   } 
 
   @Override
   public void execute() {
     SmartDashboard.putString("command status", "turn w gyro");
-    pidOutput = pidController.calculate(ahrs.getGyroAngle());
-    driveBase.setLeftPower(negative * pidOutput);
-    driveBase.setRightPower(negative * -pidOutput);
+    SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
+    pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
+    driveBase.setLeftPower(negative * -pidOutput);
+    driveBase.setRightPower(negative * pidOutput);
   }
 
   @Override
   public void end(boolean interrupted) {
     driveBase.stop();
     driveBase.brake();
-    Timer.delay(1);
-    SmartDashboard.putNumber("i turned", ahrs.getGyroAngle() - initAngle);
+    // Timer.delay(1);
+    SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override
