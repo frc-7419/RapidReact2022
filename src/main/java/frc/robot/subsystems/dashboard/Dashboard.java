@@ -6,7 +6,7 @@ package frc.robot.subsystems.dashboard;
 
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
-import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.drive.StraightWithMotionMagicNew;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;

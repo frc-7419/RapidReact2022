@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
-import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.drive.StraightWithMotionMagicNew;
 import frc.robot.subsystems.drive.StraightWithMotionMagicOld;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;

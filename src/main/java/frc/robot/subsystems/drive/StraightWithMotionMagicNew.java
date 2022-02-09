@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
-public class StraightWithMotionMagic extends CommandBase {
+public class StraightWithMotionMagicNew extends CommandBase {
   
     private DriveBaseSubsystem driveBaseSubsystem;
 
@@ -30,7 +30,7 @@ public class StraightWithMotionMagic extends CommandBase {
 
     private long startTime;
    
-    public StraightWithMotionMagic(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
+    public StraightWithMotionMagicNew(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
         this.driveBaseSubsystem = driveBaseSubsystem;
         this.setpoint = setpoint;
         addRequirements(driveBaseSubsystem);
