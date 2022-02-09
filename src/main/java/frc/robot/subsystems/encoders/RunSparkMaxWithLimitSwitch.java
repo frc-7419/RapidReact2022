@@ -12,7 +12,8 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   /** Creates a new RunSparkMaxWithLimitSwitch. */
   private SparkMaxSubsystem sparkMaxSubsystem;
   private DigitalInput limitSwitch;
-  public RunSparkMaxWithLimitSwitch() {
+  public RunSparkMaxWithLimitSwitch(SparkMaxSubsystem sparkMaxSubsystem) {
+    this.sparkMaxSubsystem = sparkMaxSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     limitSwitch = new DigitalInput(0);
     addRequirements(sparkMaxSubsystem);
