@@ -8,12 +8,14 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.PIDConstants;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,12 +25,13 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final XboxController joystick = new XboxController(0);
-  
-  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+
+  // private final XboxController joystick = new XboxController(0);
+  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
 
-  // instantiate your auto commands here
+
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
   public RobotContainer() {
@@ -46,8 +49,8 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
 
-  // schedule default commands here
-  public void setDefaultCommands() {
+  // set default commands here
+  public void setDefaultCommands() {}
     
   }
 }

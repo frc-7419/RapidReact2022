@@ -59,15 +59,14 @@ public final class Constants {
     }
 
     public static class PIDConstants {
-        // straight with motion magic
-        public static double DriveBaseMotionMagickP = 0.5;
-        public static double DriveBaseMotionMagickI = 0;
-        public static double DriveBaseMotionMagickD = 0;
-
-        // TurnWithGyro
-        public static double GyrokP = 0.085;
+        //gyro 45
+        // public static double GyrokP = 0.00688;
+        // public static double GyrokI = 0;
+        // public static double GyrokD = 0.00009;
+        // gyro 90
+        public static double GyrokP = 0.005;
         public static double GyrokI = 0;
-        public static double GyrokD = 0;
+        public static double GyrokD = 0.000008;
     }
 
     public static double[][] kSpeedToFf = {
