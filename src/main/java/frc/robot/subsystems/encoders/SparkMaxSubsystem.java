@@ -32,6 +32,6 @@ public class SparkMaxSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Limit Switch", limitSwitch.get());
+
   }
 }

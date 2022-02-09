@@ -17,7 +17,7 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     limitSwitch = new DigitalInput(0);
     addRequirements(sparkMaxSubsystem);
-  }
+  } 
 
   // Called when the command is initially scheduled.
   @Override
