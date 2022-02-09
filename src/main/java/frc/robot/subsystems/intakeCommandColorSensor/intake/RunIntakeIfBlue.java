@@ -4,21 +4,19 @@
 
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 
-public class RunIntakeWithColorSensor extends CommandBase {
+public class RunIntakeIfBlue extends CommandBase {
   private ColorSensorSubsystem colorSensorSubsystem;
   private IntakeSubsystem intakeSubsystem;
   private double power;
+
   /** Creates a new RunIntakeWithColorSensor. */
-  public RunIntakeWithColorSensor(IntakeSubsystem intakeSubsystem, ColorSensorSubsystem colorSensorSubsystem, double power) {
+  public RunIntakeIfBlue(IntakeSubsystem intakeSubsystem, ColorSensorSubsystem colorSensorSubsystem, double power) {
     this.intakeSubsystem = intakeSubsystem;
     this.colorSensorSubsystem = colorSensorSubsystem;
     this.power = power;
-
-
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intakeSubsystem);
     addRequirements(colorSensorSubsystem);
@@ -31,11 +29,13 @@ public class RunIntakeWithColorSensor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // assume alliance is red
+    // assume alliance is blue
     double[] colors = colorSensorSubsystem.getRgb();
-    intakeSubsystem.setPower(power);
-    if (!(colors[0] > colors[2])) {
-      intakeSubsystem.setPower(-power);
+    if (colors[0] < colors[2]) {
+      intakeSubsystem.setPower(power);
+    }
+    else {
+      intakeSubsystem.setPower(0);
     }
   }
 
