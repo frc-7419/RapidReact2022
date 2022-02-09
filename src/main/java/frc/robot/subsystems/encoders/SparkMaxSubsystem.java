@@ -4,23 +4,31 @@
 
 package frc.robot.subsystems.encoders;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SparkMaxSubsystem extends SubsystemBase {
   /** Creates a new SparkMaxSoftLimit. */
-  private Spark spark;
+  private CANSparkMax spark;
 
   public SparkMaxSubsystem() {
-    spark = new Spark(0);
+    spark = new CANSparkMax(0, MotorType.kBrushless);
+    spark.restoreFactoryDefaults();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
-  public void setPower(double power) {
-    spark.set(power);
+    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
+
+    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+    SmartDashboard.putNumber("reverse: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kReverse));
   }
   
 }

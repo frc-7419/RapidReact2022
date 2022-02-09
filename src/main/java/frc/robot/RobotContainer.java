@@ -22,7 +22,6 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
   private final SparkMaxSubsystem sparkSubsystem = new SparkMaxSubsystem();
-  private final RunSparkMax runSpark = new RunSparkMax(sparkSubsystem);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
