@@ -63,6 +63,11 @@ public final class Constants {
         public static double DriveBaseMotionMagickP = 0.5;
         public static double DriveBaseMotionMagickI = 0;
         public static double DriveBaseMotionMagickD = 0;
+
+        // TurnWithGyro
+        public static double GyrokP = 0.085;
+        public static double GyrokI = 0;
+        public static double GyrokD = 0;
     }
 
     public static double[][] kSpeedToFf = {

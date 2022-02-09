@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
-public class StraightWithMotionMagicOld extends CommandBase {
+public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSubsystem driveBase;
     private double setpoint;
@@ -25,16 +25,12 @@ public class StraightWithMotionMagicOld extends CommandBase {
     private boolean started;
     private long startTime;
 
-    private double kP;
-    private double kI;
-    private double kD;
-
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public StraightWithMotionMagicOld(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
+    public StraightWithMotionMagic(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
         // this.setpoint = setpoint;
         this.driveBase = driveBaseSubsystem;
         this.setpoint = setpoint;
@@ -42,15 +38,11 @@ public class StraightWithMotionMagicOld extends CommandBase {
 
     @Override
     public void initialize(){
-
-        SmartDashboard.putBoolean("MM Running", true);
+        SmartDashboard.putBoolean("MM Running", false);
 
         /* factory default + inversions just so nothing acts up */
         driveBase.factoryResetAll();
         driveBase.setAllDefaultInversions();
-        
-    //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
-    //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
 
         driveBase.getLeftMast().setSelectedSensorPosition(0);
         driveBase.getRightMast().setSelectedSensorPosition(0);
@@ -62,8 +54,8 @@ public class StraightWithMotionMagicOld extends CommandBase {
         driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBase.getRightMast().configMotionAcceleration(6000, 0);  
 
-        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), kP, kD, kD, 0);
-        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), kP, kD, kD, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
 
         double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
         double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
@@ -111,7 +103,6 @@ public class StraightWithMotionMagicOld extends CommandBase {
     @Override
     public void end(boolean interrupted){
         driveBase.stop();
-        SmartDashboard.putBoolean("MM Running", true);
-
+        SmartDashboard.putBoolean("MM Running", false);
     }
 }
