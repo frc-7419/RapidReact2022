@@ -12,6 +12,7 @@ import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.drive.StraightWithMotionMagicOld;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -30,7 +31,8 @@ public class RobotContainer {
   private final GyroSubsystem gyro = new GyroSubsystem();
 
   // instantiate your auto commands here
-  private final StraightWithMotionMagic straightWithMotionMagic = new StraightWithMotionMagic(driveBaseSubsystem, 12);
+  // private final StraightWithMotionMagic straightWithMotionMagic = new StraightWithMotionMagic(driveBaseSubsystem, 12);
+  private final StraightWithMotionMagicOld straightWithMotionMagicOld = new StraightWithMotionMagicOld(driveBaseSubsystem, 12);
   
 
   public RobotContainer() {
@@ -41,7 +43,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
+    new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagicOld(driveBaseSubsystem, 12));
   }
 
   private void smartDashboardBindings() {
@@ -54,7 +56,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return straightWithMotionMagic;
+    return straightWithMotionMagicOld;
   }
 
   // schedule default commands here
