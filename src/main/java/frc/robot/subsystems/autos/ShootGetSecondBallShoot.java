@@ -19,7 +19,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
 
     public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) { //add parameters
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 36));
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 90));
         
     }
 }
