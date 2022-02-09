@@ -3,6 +3,8 @@ package frc.robot.subsystems.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.team7419.TalonFuncs;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
@@ -20,6 +22,11 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right2 = new TalonFX(CanIds.rightFalcon2.id);
 
     factoryResetAll();
+
+    TalonFuncs.configEncoder(left1);
+    TalonFuncs.configEncoder(left2);
+    TalonFuncs.configEncoder(right1);
+    TalonFuncs.configEncoder(right2);
     
     right1.setInverted(true);
     right1.setSensorPhase(false);
@@ -28,7 +35,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     left2.follow(left1);
     right2.follow(right1);
-    
   }
 
   @Override

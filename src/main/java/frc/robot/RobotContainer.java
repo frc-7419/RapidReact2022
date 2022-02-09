@@ -12,6 +12,8 @@ import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,26 +32,15 @@ public class RobotContainer {
   private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem);
   
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    smartDashboardBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
+  private void configureButtonBindings() {}
 
-  }
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-//    *
-//    * @return the command to run in autonomous
-//    */
+  private void smartDashboardBindings() {}
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
@@ -57,7 +48,7 @@ public class RobotContainer {
   }
 
   // set default commands here
-  public void setDefaultCommands(){
+  public void setDefaultCommands() {
     
   }
 }
