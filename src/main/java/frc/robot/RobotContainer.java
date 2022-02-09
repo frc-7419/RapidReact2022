@@ -9,12 +9,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
-import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
-import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants.PIDConstants;
 
 
 /**
@@ -27,9 +24,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // private final XboxController joystick = new XboxController(0);
-  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
-  private final GyroSubsystem gyro = new GyroSubsystem();
-
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
+  private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
@@ -51,6 +47,4 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands() {}
-    
-  }
 }
