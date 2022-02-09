@@ -19,6 +19,10 @@ public class SparkMaxSubsystem extends SubsystemBase {
     spark.restoreFactoryDefaults();
   }
 
+  public void setSpeed(double power) {
+    spark.set(power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -26,9 +30,12 @@ public class SparkMaxSubsystem extends SubsystemBase {
     spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
     spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
     spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
-
-    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
-    SmartDashboard.putNumber("reverse: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kReverse));
   }
-  
+
+  public void getSoftLimitForward() {
+    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+  }
+  public void getSoftLimitReverse() {
+    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+  }
 }
