@@ -37,11 +37,6 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if(target > 0){negative = 1;}
     else{negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    // SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
-    // SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
-    double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
-    double ki = SmartDashboard.getNumber("kp", PIDConstants.GyrokI);
-    double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
     pidController = new PIDController(kp, ki, kd);
     // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
