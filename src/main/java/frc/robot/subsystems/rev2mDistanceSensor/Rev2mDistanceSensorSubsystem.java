@@ -17,7 +17,7 @@ public class Rev2mDistanceSensorSubsystem extends SubsystemBase {
   private Rev2mDistanceSensor distanceSensor;
   
   public Rev2mDistanceSensorSubsystem() {
-    this.distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
+    this.distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
   }
 
   public double getRange() {
@@ -26,6 +26,14 @@ public class Rev2mDistanceSensorSubsystem extends SubsystemBase {
 
   public double getTimeStamp() {
     return distanceSensor.getTimestamp();
+  }
+
+  public Rev2mDistanceSensor getDistanceSensor() {
+    return distanceSensor;
+  }
+
+  public void setAutomaticMode(boolean enabling) {
+    distanceSensor.setAutomaticMode(enabling);
   }
   
   @Override
