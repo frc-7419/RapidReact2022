@@ -38,7 +38,8 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void initialize() {
-        SmartDashboard.putString("command status", "motion magic test");
+        SmartDashboard.putBoolean("MM Running", false);
+
         /* factory default just so nothing acts up */
         // driveBaseSubsystem.factoryResetAll();
 
@@ -70,8 +71,8 @@ public class StraightWithMotionMagic extends CommandBase {
         double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
         double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
 
-        SmartDashboard.putNumber("left setpoint", leftSetpoint);
-        SmartDashboard.putNumber("right setpoint", rightSetpoint);
+        SmartDashboard.putNumber("lSetpoint", leftSetpoint);
+        SmartDashboard.putNumber("rSetpoint", rightSetpoint);
 
         driveBaseSubsystem.getLeftMast().set(ControlMode.MotionMagic, leftSetpoint);
         driveBaseSubsystem.getRightMast().set(ControlMode.MotionMagic, rightSetpoint);
@@ -90,10 +91,13 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void execute(){
 
-        SmartDashboard.putString("command status", "executing motion magic");
+        SmartDashboard.putBoolean("MM Running", true);
 
-        SmartDashboard.putNumber("leftMast position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("rightMast position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("LM Position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("RM Position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
+
+        SmartDashboard.putNumber("LM Position G", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("RM Position G", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
     
         leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
         rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
@@ -101,10 +105,10 @@ public class StraightWithMotionMagic extends CommandBase {
         leftMastError = driveBaseSubsystem.getLeftMast().getClosedLoopError();
         rightMastError = driveBaseSubsystem.getRightMast().getClosedLoopError();
 
-        SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
-        SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
-        SmartDashboard.putNumber("left closed loop error", leftMastError);
-        SmartDashboard.putNumber("right closed loop error", rightMastError);
+        SmartDashboard.putNumber("LM pOutput", leftMastOutput);
+        SmartDashboard.putNumber("RM pOutput", rightMastOutput);
+        SmartDashboard.putNumber("lCL Error", leftMastError);
+        SmartDashboard.putNumber("rCL Error", rightMastError);
     }
 
     @Override
@@ -112,18 +116,19 @@ public class StraightWithMotionMagic extends CommandBase {
 
         double rightActiveTrajectoryPosition = driveBaseSubsystem.getRightMast().getActiveTrajectoryPosition();
         double leftActiveTrajectoryPosition = driveBaseSubsystem.getLeftMast().getActiveTrajectoryPosition();
-        return (withinThresholdLoops > kLoopsToSettle) 
+        return (withinThresholdLoops > kLoopsToSettle);
         
-            && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
-            && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold))
+            // && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
+            // && (UnitConversions.ticksToInches(rightActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold))
 
-            && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
-            && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold));
+            // && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) < (setpoint + threshold)) 
+            // && (UnitConversions.ticksToInches(leftActiveTrajectoryPosition, 3, 1, 2048) > (setpoint - threshold));
     }
 
     @Override
     public void end(boolean interrupted) {
         driveBaseSubsystem.setAll(0);
         driveBaseSubsystem.brake();
+        SmartDashboard.putBoolean("MM Running", false);
     }
 }
