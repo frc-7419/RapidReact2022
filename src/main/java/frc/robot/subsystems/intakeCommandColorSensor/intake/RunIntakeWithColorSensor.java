@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems.intakeCommandColorSensor.intake;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intakeCommandColorSensor.colorSensor.ColorSensorSubsystem;
 
 public class RunIntakeWithColorSensor extends CommandBase {
@@ -15,6 +17,8 @@ public class RunIntakeWithColorSensor extends CommandBase {
     this.intakeSubsystem = intakeSubsystem;
     this.colorSensorSubsystem = colorSensorSubsystem;
     this.power = power;
+
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intakeSubsystem);
     addRequirements(colorSensorSubsystem);
