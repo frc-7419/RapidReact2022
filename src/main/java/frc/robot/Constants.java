@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -54,6 +56,24 @@ public final class Constants {
         public static double r1 = 0.37; //arbitrary
         public static double g = -9.8;  
         public static double focalLength = 2.9272781257541;
+    }
+
+    // values for Gains Constants fron System Identification Tool 
+    public static class TrajectoryConstants {
+        
+        // Constants change depending on the Units 
+        // Double check the constant depening on the units. can change on SysId tool
+        public static final double ks = 0.0; // Units: Volts // change me 
+        public static final double kv = 0; // Units: VoltSecondsPerMeter // change me 
+        public static final double ka = 0; // Units: VoltSecondsSquaredPerMeter // change me 
+
+        public static final double kPDriveVel = 0; // change me 
+        
+        public static final double kTrackWidth = 0; // Units: Meters // change me 
+        public static final double kMaxSpeed = 0; // Units: MetersPerSecond //change me 
+        public static final double kMaxAcceleration = 0; // Units: MetersPerSecondSquared // change me
+
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidth);
     }
 
     public static class RobotConstants {

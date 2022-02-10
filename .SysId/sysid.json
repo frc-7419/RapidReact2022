@@ -1,0 +1,11 @@
+{
+  "SysId": {
+    "Analysis Type": "Drivetrain",
+    "AnalyzerJSONLocation": "C:\\Users\\sidan\\Desktop\\Robotics\\FRC 2022\\sysid_data20220209-125927.json",
+    "NetworkTables Settings": {
+      "serverTeam": "7419"
+    },
+    "mode": "Client",
+    "serverTeam": "7419"
+  }
+}
