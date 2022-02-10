@@ -13,8 +13,10 @@ public class RetractIntakeWithElevator extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private LimitSwitchSubsystem limitSwitchSubsystem;
 
-  public RetractIntakeWithElevator() {
+  public RetractIntakeWithElevator(ElevatorSubsystem elevatorSubsystem, LimitSwitchSubsystem limitSwitchSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.elevatorSubsystem = elevatorSubsystem;
+    this.limitSwitchSubsystem = limitSwitchSubsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +25,14 @@ public class RetractIntakeWithElevator extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (limitSwitchSubsystem.get()) {
+
+    }
+    else {
+
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
