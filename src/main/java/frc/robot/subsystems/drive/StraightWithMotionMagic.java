@@ -57,8 +57,8 @@ public class StraightWithMotionMagic extends CommandBase {
         TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
         TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
 
-        double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
-        double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
+        double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
+        double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
 
         SmartDashboard.putNumber("lSetpoint", leftSetpoint);
         SmartDashboard.putNumber("rSetpoint", rightSetpoint);
