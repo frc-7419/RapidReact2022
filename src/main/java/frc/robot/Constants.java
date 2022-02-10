@@ -61,8 +61,8 @@ public final class Constants {
     public static class PIDConstants {
         // straight with motion magic pid gains
         public static double DriveBaseMotionMagickP = 0.5;
-        public static double DriveBaseMotionMagickI = 0.5;
-        public static double DriveBaseMotionMagickD = 0.5;
+        public static double DriveBaseMotionMagickI = 0;
+        public static double DriveBaseMotionMagickD = 0;
 
         // turn with gyro pid gains
         public static double GyrokP = 0.00688;
