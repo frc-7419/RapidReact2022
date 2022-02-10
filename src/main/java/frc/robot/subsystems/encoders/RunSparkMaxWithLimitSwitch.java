@@ -11,11 +11,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunSparkMaxWithLimitSwitch extends CommandBase {
   /** Creates a new RunSparkMaxWithLimitSwitch. */
   private SparkMaxSubsystem sparkMaxSubsystem;
-  private DigitalInput limitSwitch;
   public RunSparkMaxWithLimitSwitch(SparkMaxSubsystem sparkMaxSubsystem) {
     this.sparkMaxSubsystem = sparkMaxSubsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    limitSwitch = new DigitalInput(0);
+    // Use addRequirements() here to declare subsystem dependencies
     addRequirements(sparkMaxSubsystem);
   } 
 
@@ -26,18 +24,20 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Limit Switch", limitSwitch.get());
-    if(!limitSwitch.get()) {
+    SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
+    if(!sparkMaxSubsystem.getLimitSwitch().get()) {
       sparkMaxSubsystem.setSpeed(0);
     }
-    else if(limitSwitch.get()) {
+    else if(sparkMaxSubsystem.getLimitSwitch().get()) {
       sparkMaxSubsystem.setSpeed(0.3);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    sparkMaxSubsystem.setSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override
