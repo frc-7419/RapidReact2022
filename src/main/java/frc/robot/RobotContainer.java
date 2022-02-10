@@ -28,6 +28,8 @@ public class RobotContainer {
   instantiate both driveBaseSubsystem and gyroSubsystem
   */
 
+  private Object driveBaseSubsystem;
+  private Object gyroSubsystem;
   private final Period2Auton period2Auton = new Period2Auton(driveBaseSubsystem, gyroSubsystem);
 
   // instantiate your auto commands here
