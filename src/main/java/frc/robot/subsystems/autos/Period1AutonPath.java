@@ -8,7 +8,7 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 
 public class Period1AutonPath extends SequentialCommandGroup {
 
-    public Period1AutonPath(DriveBaseSubsystem driveBase, StraightWithMotionMagic straightWithMotionMagic, TurnWithGyroClosedLoop turnWithGyroClosedLoop) {
+    public Period1AutonPath(DriveBaseSubsystem driveBase) {
         addCommands(new StraightWithMotionMagic(driveBase, 85.0));
         addCommands(new WaitCommand(1));
         addCommands(new StraightWithMotionMagic(driveBase, -85.0));
