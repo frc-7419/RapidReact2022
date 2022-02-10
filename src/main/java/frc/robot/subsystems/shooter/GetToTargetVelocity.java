@@ -2,21 +2,23 @@ package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.Constants.RobotConstants;
 
 public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
+  private SimpleMotorFeedforward topFeedforward;
+  private SimpleMotorFeedforward bottomFeedforward; 
 
   private double kP;
   private double kI;
-  // private double kF;
   private double bottomKf;
   private double topKf;
 
-  // private double targetRPM;
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
 
@@ -24,6 +26,8 @@ public class GetToTargetVelocity extends CommandBase {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRawVelocity = topTargetRawVelocity;
     this.bottomTargetRawVelocity = bottomTargetRawVelocity;
+    topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
+    bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);
     addRequirements(shooterSubsystem);
   }
 
@@ -39,8 +43,8 @@ public class GetToTargetVelocity extends CommandBase {
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    bottomKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
-    topKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    topKf = topFeedforward.calculate(topTargetRawVelocity, topTargetRawVelocity*2);
+    bottomKf = bottomFeedforward.calculate(bottomTargetRawVelocity, bottomTargetRawVelocity*2);
 
     shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
@@ -61,8 +65,8 @@ public class GetToTargetVelocity extends CommandBase {
     kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
     kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
 
-    bottomKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
-    topKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    topKf = topFeedforward.calculate(topTargetRawVelocity, topTargetRawVelocity*2);
+    bottomKf = bottomFeedforward.calculate(bottomTargetRawVelocity, bottomTargetRawVelocity*2);
 
     shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
