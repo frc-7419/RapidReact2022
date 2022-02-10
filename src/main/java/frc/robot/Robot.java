@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
+
   private RobotContainer robotContainer;
 
   @Override
@@ -21,7 +22,6 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotPeriodic() {
-    // RobotContainer.arcade.start();
     CommandScheduler.getInstance().run();
   }
 
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     // This makes sure that the autonomous stops running when teleop starts running. 
     // Uncomment this once you have an auto command to run to make sure it doesnt keep running in teleop
-    // robotContainer.getAutonomousCommand().cancel();
+    robotContainer.getAutonomousCommand().cancel();
     robotContainer.setDefaultCommands();
 
   }
