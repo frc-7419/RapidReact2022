@@ -26,10 +26,10 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   public void execute() {
     SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
     if(!sparkMaxSubsystem.getLimitSwitch().get()) {
-      sparkMaxSubsystem.setSpeed(0);
+      sparkMaxSubsystem.setSpeed(0.3);
     }
     else if(sparkMaxSubsystem.getLimitSwitch().get()) {
-      sparkMaxSubsystem.setSpeed(0.3);
+      sparkMaxSubsystem.setSpeed(0);
     }
   }
 
