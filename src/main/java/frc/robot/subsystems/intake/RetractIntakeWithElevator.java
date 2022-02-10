@@ -29,11 +29,7 @@ public class RetractIntakeWithElevator extends CommandBase {
   @Override
   public void execute() {
     if (limitSwitchSubsystem.get()) {
-<<<<<<< HEAD
       solenoidSubsystem.retractSolenoid();
-=======
-
->>>>>>> 8bbe336a0545c2d2c36b73326556c81a7a23c74b
     }
   }
 
