@@ -27,14 +27,19 @@ public class RobotContainer {
   /* suggestions from Karan:
   instantiate both driveBaseSubsystem and gyroSubsystem
   */
-
-  private final Period2Auton period2Auton = new Period2Auton(driveBaseSubsystem, gyroSubsystem);
+  public final DriveBaseSubsystem driveBaseSubsystem;
+  public final GyroSubsystem gyroSubsystem;
+  private final Period2Auton period2Auton ;
 
   // instantiate your auto commands here
   
 
   public RobotContainer() {
     // Configure the button bindings
+    this.driveBaseSubsystem = new DriveBaseSubsystem();
+    this.gyroSubsystem = new GyroSubsystem();
+    this.period2Auton = new Period2Auton(driveBaseSubsystem, gyroSubsystem);
+
     configureButtonBindings();
     smartDashboardBindings();
   }

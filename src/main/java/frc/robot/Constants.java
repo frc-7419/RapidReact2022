@@ -65,9 +65,10 @@ public final class Constants {
         public static double DriveBaseMotionMagickD = 0;
 
         // turn with gyro pid gains
-        public static double GyrokP = 0.0028;
+        public static double GyrokP = 0.005;
         public static double GyrokI = 0;
-        public static double GyrokD = 0.00016;
+        // public static double GyrokD = 0.00016;
+        public static double GyrokD = 0.000;
     }
 
     public static double[][] kSpeedToFf = {

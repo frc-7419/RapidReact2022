@@ -8,6 +8,7 @@
 package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
@@ -43,6 +44,7 @@ public class StraightWithMotionMagic extends CommandBase {
         /* factory default + inversions just so nothing acts up */
         driveBase.factoryResetAll();
         driveBase.setAllDefaultInversions();
+        driveBase.setAllMode(NeutralMode.Coast);
 
         driveBase.getLeftMast().setSelectedSensorPosition(0);
         driveBase.getRightMast().setSelectedSensorPosition(0);
@@ -103,6 +105,7 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void end(boolean interrupted){
         driveBase.stop();
+        driveBase.brake();
         SmartDashboard.putBoolean("MM Running", false);
     }
 }
