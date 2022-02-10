@@ -7,18 +7,25 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.CanIds;
+import frc.robot.Constants.RobotConstants;
 
 public class ShooterSubsystem extends SubsystemBase{
     private TalonFX bottomFalcon;
     private TalonFX topFalcon;
+
+    private SimpleMotorFeedforward topFeedforward;
+    private SimpleMotorFeedforward bottomFeedforward;
+
     private double kP;
     private double kI;
     private double tkF;
     private double bkF;
+
     private double powerOutput = 0;
     private double bottomTargetRawVelocity = 500; // in raw velocity units (ticks/0.1s)
     private double topTargetRawVelocity = 500; // RV
@@ -28,6 +35,9 @@ public class ShooterSubsystem extends SubsystemBase{
     public ShooterSubsystem(){
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
         topFalcon = new TalonFX(CanIds.topShooterFalcon.id);
+
+        topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
+        bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);
 
         // bottomFalcon.configFactoryDefault();
         // topFalcon.configFactoryDefault();
@@ -125,10 +135,6 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
 
-    public void setTopkF(double kF){this.tkF = tkF;}
-
-    public void setBottomkF(double kF){this.bkF = bkF;}
-
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
 
@@ -140,30 +146,20 @@ public class ShooterSubsystem extends SubsystemBase{
         }
     }
 
-    public double computeTopkF(double nativeUnits) {
-        return 0; // insert top ff regression model
+    public double computeTopkF(double nativeUnitsVelocity) {
+        return topFeedforward.calculate(nativeUnitsVelocity);
     }
 
-    public double computeBottomkF(double nativeUnits) {
-        return 0; // insert bottom ff regression model
+    public double computeTopkF(double nativeUnitsVelocity, double nativeUnitsAcceleration) {
+        return topFeedforward.calculate(nativeUnitsVelocity, nativeUnitsAcceleration);
     }
 
-    public double lookUpTopkF(double nativeUnits){
-        double output = 0;
-        for(double[] pair : Constants.kRawVelocityToTopFf){
-            if(pair[0] == nativeUnits){output = pair[1];}
-        }
-        if(output == 0){output = computeTopkF(nativeUnits);}
-        return output; 
+    public double computeBottomkF(double nativeUnitsVelocity) {
+        return bottomFeedforward.calculate(nativeUnitsVelocity);
     }
 
-    public double lookUpBottomkF(double nativeUnits){
-        double output = 0;
-        for(double[] pair : Constants.kRawVelocityToBottomFf){
-            if(pair[0] == nativeUnits){output = pair[1];}
-        }
-        if(output == 0){output = computeBottomkF(nativeUnits);}
-        return output; 
+    public double computeBottomkF(double nativeUnitsVelocity, double nativeUnitsAcceleration) {
+        return bottomFeedforward.calculate(nativeUnitsVelocity, nativeUnitsAcceleration);
     }
 
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
