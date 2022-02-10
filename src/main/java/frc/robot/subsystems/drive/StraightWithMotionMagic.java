@@ -44,11 +44,7 @@ public class StraightWithMotionMagic extends CommandBase {
         /* factory default + inversions just so nothing acts up */
         driveBase.factoryResetAll();
         driveBase.setAllDefaultInversions();
-<<<<<<< HEAD
-        driveBase.setAllMode(NeutralMode.Coast);
-=======
         driveBase.coast();
->>>>>>> 921ad44bd4209b31952ef99e65382cd72a516191
 
         driveBase.getLeftMast().setSelectedSensorPosition(0);
         driveBase.getRightMast().setSelectedSensorPosition(0);
