@@ -6,10 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.limitswitch.ElevatorSubsystem;
-import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
-import frc.robot.subsystems.limitswitch.RunElevatorWithLimitSwitch;
+import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.elevator.RunElevatorWithLimitSwitch;
 import frc.robot.subsystems.intake.DeployIntakeWithPneumatics;
 import frc.robot.subsystems.pneumatics.CompressorSubsystem;
 import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
