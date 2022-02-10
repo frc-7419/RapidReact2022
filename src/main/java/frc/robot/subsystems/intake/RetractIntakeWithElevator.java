@@ -29,13 +29,19 @@ public class RetractIntakeWithElevator extends CommandBase {
   @Override
   public void execute() {
     if (limitSwitchSubsystem.get()) {
+<<<<<<< HEAD
       solenoidSubsystem.retractSolenoid();
+=======
+
+>>>>>>> 8bbe336a0545c2d2c36b73326556c81a7a23c74b
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+  }
 
   // Returns true when the command should end.
   @Override
