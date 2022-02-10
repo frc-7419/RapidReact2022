@@ -21,11 +21,13 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         //Robot is initially facing the hub. We then shoot the ball. Next we will turn the robot so that it can go back
         //and collect the second ball and then shoot it
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180)); //180 degree turn
+        addCommands(new WaitCommand(0.5));
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 58.08)); //The robot will ideally be positioned toward
         //the middle of the tarmac so it will have to move sttraight about half of the distance between the hub and the ball
         //to reach the ball
         //Here, we will collect the ball and then turn around and then shoot it 
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180)); //180 degree turn
+        addCommands(new WaitCommand(0.5));
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 58.08)); //The robot will ideally be positioned toward
         //here after moving 58.08 inches, it will return back to its orignal position and then shoot
 
