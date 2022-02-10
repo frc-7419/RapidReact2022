@@ -43,6 +43,7 @@ public class StraightWithMotionMagic extends CommandBase {
         /* factory default + inversions just so nothing acts up */
         driveBase.factoryResetAll();
         driveBase.setAllDefaultInversions();
+        driveBase.coast();
 
         driveBase.getLeftMast().setSelectedSensorPosition(0);
         driveBase.getRightMast().setSelectedSensorPosition(0);
@@ -103,6 +104,7 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void end(boolean interrupted){
         driveBase.stop();
+        driveBase.brake();
         SmartDashboard.putBoolean("MM Running", false);
     }
 }
