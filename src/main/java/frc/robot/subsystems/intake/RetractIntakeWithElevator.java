@@ -7,16 +7,18 @@ package frc.robot.subsystems.intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
+import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
 public class RetractIntakeWithElevator extends CommandBase {
   /** Creates a new RetractIntakeWithElevator. */
-  private ElevatorSubsystem elevatorSubsystem;
   private LimitSwitchSubsystem limitSwitchSubsystem;
+  private SolenoidSubsystem solenoidSubsystem;
 
-  public RetractIntakeWithElevator(ElevatorSubsystem elevatorSubsystem, LimitSwitchSubsystem limitSwitchSubsystem) {
+  public RetractIntakeWithElevator(LimitSwitchSubsystem limitSwitchSubsystem, SolenoidSubsystem solenoidSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.elevatorSubsystem = elevatorSubsystem;
     this.limitSwitchSubsystem = limitSwitchSubsystem;
+    this.solenoidSubsystem = solenoidSubsystem;
+    addRequirements(limitSwitchSubsystem, solenoidSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -27,10 +29,7 @@ public class RetractIntakeWithElevator extends CommandBase {
   @Override
   public void execute() {
     if (limitSwitchSubsystem.get()) {
-
-    }
-    else {
-
+      solenoidSubsystem.retractSolenoid();
     }
   }
 
