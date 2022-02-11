@@ -11,8 +11,6 @@ import frc.robot.Constants.RobotConstants;
 public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
-  private SimpleMotorFeedforward topFeedforward;
-  private SimpleMotorFeedforward bottomFeedforward; 
 
   private double kP;
   private double kI;
@@ -26,8 +24,6 @@ public class GetToTargetVelocity extends CommandBase {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRawVelocity = topTargetRawVelocity;
     this.bottomTargetRawVelocity = bottomTargetRawVelocity;
-    topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
-    bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);
     addRequirements(shooterSubsystem);
   }
 
