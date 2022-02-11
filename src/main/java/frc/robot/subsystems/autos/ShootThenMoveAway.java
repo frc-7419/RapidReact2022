@@ -18,6 +18,6 @@ public class ShootThenMoveAway extends SequentialCommandGroup {
   public ShootThenMoveAway(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -30), new StraightWithMotionMagic(driveBaseSubsystem, -4096.0));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -30), new StraightWithMotionMagic(driveBaseSubsystem, -80.88));
   }
 }
