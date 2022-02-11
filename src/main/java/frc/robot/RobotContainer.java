@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.drive.Brake;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -31,7 +32,7 @@ public class RobotContainer {
 
   // instantiate your auto commands here
   private final StraightWithMotionMagic straightWithMotionMagic = new StraightWithMotionMagic(driveBaseSubsystem, 12);
-  
+  private final Brake brake = new Brake(driveBaseSubsystem);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -42,6 +43,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new StraightWithMotionMagic(driveBaseSubsystem, 12));
+    new JoystickButton(joystick, XboxController.Button.kB.value).whenPressed(new Brake(driveBaseSubsystem));
   }
 
   private void smartDashboardBindings() {

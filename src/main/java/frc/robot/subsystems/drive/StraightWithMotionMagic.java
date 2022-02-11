@@ -1,76 +1,74 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
 public class StraightWithMotionMagic extends CommandBase {
   
-    private DriveBaseSubsystem driveBaseSubsystem;
-
+    private DriveBaseSubsystem driveBase;
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
-    private double leftMastError;
-    private double rightMastError;
-
-    private double threshold = 0.5; // in inches
-
-    private double kP;
-    private double kI;
-    private double kD;
-
+    private boolean started;
     private long startTime;
-   
+
+    /**
+     * 
+     * @param driveBase
+     * @param setpoint in inches
+     */
     public StraightWithMotionMagic(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
-        this.driveBaseSubsystem = driveBaseSubsystem;
+        // this.setpoint = setpoint;
+        this.driveBase = driveBaseSubsystem;
         this.setpoint = setpoint;
-        addRequirements(driveBaseSubsystem);
     }
 
     @Override
-    public void initialize() {
-        SmartDashboard.putString("command status", "motion magic test");
-        /* factory default just so nothing acts up */
-        // driveBaseSubsystem.factoryResetAll();
+    public void initialize(){
+        SmartDashboard.putBoolean("MM Running", false);
 
-        // reset default inversions
-        driveBaseSubsystem.setAllDefaultInversions();
+        /* factory default + inversions just so nothing acts up */
+        driveBase.factoryResetAll();
+        driveBase.setAllDefaultInversions();
+        driveBase.coast();
 
-        // reset sensor position
-        driveBaseSubsystem.getLeftMast().setSelectedSensorPosition(0);
-        driveBaseSubsystem.getRightMast().setSelectedSensorPosition(0);
+        driveBase.getLeftMast().setSelectedSensorPosition(0);
+        driveBase.getRightMast().setSelectedSensorPosition(0);
 
-        // sample code
-        driveBaseSubsystem.getLeftMast().configMotionCruiseVelocity(15000, 0);
-        driveBaseSubsystem.getLeftMast().configMotionAcceleration(6000, 0);
+        // because sample code 
+        driveBase.getLeftMast().configMotionCruiseVelocity(15000, 0);
+        driveBase.getLeftMast().configMotionAcceleration(6000, 0);
 
-        driveBaseSubsystem.getRightMast().configMotionCruiseVelocity(15000, 0);
-        driveBaseSubsystem.getRightMast().configMotionAcceleration(6000, 0);  
+        driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
+        driveBase.getRightMast().configMotionAcceleration(6000, 0); 
+         
 
-        // PIDF gains from SmartDashboard
-        kP = SmartDashboard.getNumber("mmKp", PIDConstants.DriveBaseMotionMagickP);
-        kD = SmartDashboard.getNumber("mmKi", PIDConstants.DriveBaseMotionMagickI);
-        kI = SmartDashboard.getNumber("mmKd", PIDConstants.DriveBaseMotionMagickD);
+        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PIDConstants.DriveBaseMotionMagickP, PIDConstants.DriveBaseMotionMagickI, PIDConstants.DriveBaseMotionMagickD, 0);
 
-        // set PIDF constants
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getLeftMast(), kP, kD, kI, 0);
-        TalonFuncs.setPIDFConstants(0, driveBaseSubsystem.getRightMast(), kP, kD, kI, 0);
-        
-        // get setpoint from SmartDashboard
-        setpoint = SmartDashboard.getNumber("mmSetpoint", 12);
-        double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
-        double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 1, 2048);
+        double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
+        double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
 
-        SmartDashboard.putNumber("left setpoint", leftSetpoint);
-        SmartDashboard.putNumber("right setpoint", rightSetpoint);
+        SmartDashboard.putNumber("lSetpoint", leftSetpoint);
+        SmartDashboard.putNumber("rSetpoint", rightSetpoint);
 
-        driveBaseSubsystem.getLeftMast().set(ControlMode.MotionMagic, leftSetpoint);
-        driveBaseSubsystem.getRightMast().set(ControlMode.MotionMagic, rightSetpoint);
+        started = false;
+
+        driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSetpoint);
+        driveBase.getRightMast().set(ControlMode.MotionMagic, rightSetpoint);
 
         startTime = System.currentTimeMillis();
     }
@@ -78,32 +76,36 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void execute(){
 
-        SmartDashboard.putString("command status", "executing motion magic");
+        SmartDashboard.putBoolean("MM Running", true);
 
-        SmartDashboard.putNumber("leftMast position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("rightMast position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("LM Position", driveBase.getLeftMast().getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("RM Position", driveBase.getRightMast().getSelectedSensorPosition(0));
     
-        leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
-        rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
+        double leftMastOutput = driveBase.getLeftMast().getMotorOutputPercent();
+        double rightMastOutput = driveBase.getRightMast().getMotorOutputPercent();
+        SmartDashboard.putNumber("LM Out", leftMastOutput);
+        SmartDashboard.putNumber("RM Out", rightMastOutput);
+        SmartDashboard.putNumber("LM Error", driveBase.getLeftMast().getClosedLoopError());
+        SmartDashboard.putNumber("RM Error", driveBase.getRightMast().getClosedLoopError());
+        if(System.currentTimeMillis() - startTime > 1000){
+            started = true;
+        }
 
-        leftMastError = driveBaseSubsystem.getLeftMast().getClosedLoopError();
-        rightMastError = driveBaseSubsystem.getRightMast().getClosedLoopError();
-
-        SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
-        SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
-        SmartDashboard.putNumber("left closed loop error", leftMastError);
-        SmartDashboard.putNumber("right closed loop error", rightMastError);
+        SmartDashboard.putBoolean("started", started);
     }
 
     @Override
     public boolean isFinished(){
-        double thresholdInTicks = UnitConversions.inchesToTicks(threshold, 3, 1, 2048);
-        return (Math.abs(leftMastError) < thresholdInTicks && Math.abs(rightMastError) < thresholdInTicks);
+        if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
+            Timer.delay(1);
+            return true;
+        } else{return false;}
     }
 
     @Override
-    public void end(boolean interrupted) {
-        driveBaseSubsystem.setAll(0);
-        driveBaseSubsystem.brake();
+    public void end(boolean interrupted){
+        driveBase.stop();
+        driveBase.brake();
+        SmartDashboard.putBoolean("MM Running", false);
     }
 }
