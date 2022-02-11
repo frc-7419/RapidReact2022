@@ -146,20 +146,20 @@ public class ShooterSubsystem extends SubsystemBase{
         }
     }
 
-    public double computeTopkF(double nativeUnitsVelocity) {
-        return topFeedforward.calculate(nativeUnitsVelocity);
+    public double computeTopkF(double nativeUnitsVelocitySetpoint) {
+        return topFeedforward.calculate(nativeUnitsVelocitySetpoint);
     }
 
-    public double computeTopkF(double nativeUnitsVelocity, double nativeUnitsAcceleration) {
-        return topFeedforward.calculate(nativeUnitsVelocity, nativeUnitsAcceleration);
+    public double computeTopkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
+        return topFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
     }
 
-    public double computeBottomkF(double nativeUnitsVelocity) {
-        return bottomFeedforward.calculate(nativeUnitsVelocity);
+    public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
+        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint);
     }
 
-    public double computeBottomkF(double nativeUnitsVelocity, double nativeUnitsAcceleration) {
-        return bottomFeedforward.calculate(nativeUnitsVelocity, nativeUnitsAcceleration);
+    public double computeBottomkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
+        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
     }
 
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}

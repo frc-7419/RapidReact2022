@@ -2,11 +2,9 @@ package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
-import frc.robot.Constants.RobotConstants;
 
 public class GetToTargetVelocity extends CommandBase {
 
@@ -19,6 +17,9 @@ public class GetToTargetVelocity extends CommandBase {
 
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
+
+  private double topTargetRawAcceleration;
+  private double bottomTargetRawAcceleration;
 
   public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity) {
     this.shooterSubsystem = shooterSubsystem;
@@ -39,8 +40,8 @@ public class GetToTargetVelocity extends CommandBase {
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    topKf = topFeedforward.calculate(topTargetRawVelocity, topTargetRawVelocity*2);
-    bottomKf = bottomFeedforward.calculate(bottomTargetRawVelocity, bottomTargetRawVelocity*2);
+    topKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
+    bottomKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
     shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
@@ -61,8 +62,8 @@ public class GetToTargetVelocity extends CommandBase {
     kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
     kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
 
-    topKf = topFeedforward.calculate(topTargetRawVelocity, topTargetRawVelocity*2);
-    bottomKf = bottomFeedforward.calculate(bottomTargetRawVelocity, bottomTargetRawVelocity*2);
+    topKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
+    bottomKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
     shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
