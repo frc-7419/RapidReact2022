@@ -45,7 +45,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     pidController = new PIDController(kp, ki, kd);
     // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     pidController.setSetpoint(initAngle + target);
-    pidController.setTolerance(0.1); 
+    pidController.setTolerance(0.5); 
   } 
 
   @Override
