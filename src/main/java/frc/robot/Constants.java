@@ -68,7 +68,7 @@ public final class Constants {
         gains work and are accurate, but are slow for small setpoints */
 
         public static double GyrokP = 0.001;
-        public static double GyrokI = 0;
+        public static double GyrokI = 0.001;
         public static double GyrokD = 0.0001;
     }
 
