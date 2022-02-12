@@ -40,7 +40,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     // SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
     // SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
     double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
-    double ki = SmartDashboard.getNumber("kp", PIDConstants.GyrokI);
+    double ki = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
     double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
     pidController = new PIDController(kp, ki, kd);
     // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);

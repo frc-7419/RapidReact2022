@@ -61,7 +61,7 @@ public final class Constants {
     public static class PIDConstants {
         // gains that work but are a bit slow
         public static double GyrokP = 0.001;
-        public static double GyrokI = 0;
+        public static double GyrokI = 0.001;
         public static double GyrokD = 0.0001;
     }
 
