@@ -1,7 +1,8 @@
 package frc.robot.subsystems.gyro;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
@@ -15,7 +16,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   private double kP;
   private double kI;
   private double kD;
-  private PIDController pidController;
+  private ProfiledPIDController pidController;
   private double pidOutput;
   private double negative;
   private double initAngle;
@@ -37,9 +38,9 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if (target > 0){negative = 1;}
     else {negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
-    pidController.setSetpoint(initAngle + target);
-    pidController.setTolerance(0.5); 
+    pidController = new ProfiledPIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD, new TrapezoidProfile.Constraints(10, 5));
+    pidController.setGoal(initAngle + target);
+    pidController.setTolerance(0.5);
   } 
 
   @Override
