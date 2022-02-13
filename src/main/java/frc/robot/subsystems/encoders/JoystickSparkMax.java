@@ -29,8 +29,13 @@ public class JoystickSparkMax extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    spark.getSoftLimitForward();
+    spark.getSoftLimitReverse();
     if (joystick.getAButtonPressed()){
         spark.setSpeed(1);
+    }
+    else {
+      spark.setSpeed(0);
     }
   }
 
