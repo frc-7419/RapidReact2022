@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.encoders.RunSparkMax;
 import frc.robot.subsystems.encoders.JoystickSparkMax;
 import frc.robot.subsystems.encoders.SparkMaxSubsystem;
 import edu.wpi.first.wpilibj.XboxController;

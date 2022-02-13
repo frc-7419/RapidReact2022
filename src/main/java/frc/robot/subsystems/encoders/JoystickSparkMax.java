@@ -32,6 +32,9 @@ public class JoystickSparkMax extends CommandBase {
     if (joystick.getAButtonPressed()){
         spark.setSpeed(1);
     }
+    else {
+      spark.setSpeed(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
