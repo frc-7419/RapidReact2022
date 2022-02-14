@@ -15,6 +15,7 @@ public class IntakeSubsystem extends SubsystemBase{
     
     private VictorSPX left;
     private VictorSPX right;
+    private double power;
 
     public IntakeSubsystem(){
         left = new VictorSPX(CanIds.intakeVictor.id); //need to create two different can ids for each motor
@@ -34,7 +35,12 @@ public class IntakeSubsystem extends SubsystemBase{
     }
 
     public void setPower(double power) {
+        this.power = power;
         left.set(ControlMode.PercentOutput, power);
         right.set(ControlMode.PercentOutput, power);
+    }
+
+    public double getPower() {
+        return this.power;
     }
 }

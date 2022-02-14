@@ -11,14 +11,18 @@ import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
 public class RetractIntakeWithElevator extends CommandBase {
   /** Creates a new RetractIntakeWithElevator. */
+  private IntakeSubsystem intakeSubsystem;
   private LimitSwitchSubsystem limitSwitchSubsystem;
   private SolenoidSubsystem solenoidSubsystem;
+  private int status;
 
-  public RetractIntakeWithElevator(LimitSwitchSubsystem limitSwitchSubsystem, SolenoidSubsystem solenoidSubsystem) {
+  public RetractIntakeWithElevator(LimitSwitchSubsystem limitSwitchSubsystem, SolenoidSubsystem solenoidSubsystem, IntakeSubsystem intakeSubsystem, int status) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.intakeSubsystem = intakeSubsystem;
     this.limitSwitchSubsystem = limitSwitchSubsystem;
     this.solenoidSubsystem = solenoidSubsystem;
-    addRequirements(limitSwitchSubsystem, solenoidSubsystem);
+    this.status = status;
+    addRequirements(intakeSubsystem, limitSwitchSubsystem, solenoidSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -28,9 +32,17 @@ public class RetractIntakeWithElevator extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (limitSwitchSubsystem.get()) {
-      solenoidSubsystem.retractSolenoid();
+    if (status == 1) {
+      if (limitSwitchSubsystem.get()) {
+        solenoidSubsystem.retractSolenoid();
+      }
     }
+
+    // else if (status == 2) {   // still need to implement
+    //   if (intakeSubsystem.getPower() > 0) {
+    //     intakeSubsystem.setPower(0);;
+    //   }
+    // }
   }
 
   // Called once the command ends or is interrupted.
