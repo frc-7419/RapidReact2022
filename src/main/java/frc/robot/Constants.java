@@ -35,6 +35,7 @@ public final class Constants {
         climberFalcon(13),
         shooterFalcon(14), 
         hoodVictor(40), 
+        upperLimitSwitch(1)
         ;
 
         public final int id;
