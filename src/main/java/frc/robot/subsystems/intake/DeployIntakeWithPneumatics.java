@@ -6,17 +6,18 @@ package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
 public class DeployIntakeWithPneumatics extends CommandBase {
   private SolenoidSubsystem solenoidSubsystem;
-  private XboxController joystick;
+  private LimitSwitchSubsystem limitSwitchSubsystem;
   /** Creates a new DeployIntakeWithPneumatics. */
-  public DeployIntakeWithPneumatics(SolenoidSubsystem solenoidSubsystem, XboxController joystick) {
+  public DeployIntakeWithPneumatics(SolenoidSubsystem solenoidSubsystem, LimitSwitchSubsystem limitSwitchSubsystem) {
     this.solenoidSubsystem = solenoidSubsystem;
-    this.joystick = joystick;
+    this.limitSwitchSubsystem = limitSwitchSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(solenoidSubsystem);
+    addRequirements(solenoidSubsystem, limitSwitchSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,8 +27,8 @@ public class DeployIntakeWithPneumatics extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (joystick.getXButtonPressed()) {
-      solenoidSubsystem.toggleSolenoid();
+    if (limitSwitchSubsystem.get()) {
+      solenoidSubsystem.retractSolenoid();
     }
   }
 

@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.RunElevatorWithLimitSwitch;
 import frc.robot.subsystems.intake.DeployIntakeWithPneumatics;
@@ -30,10 +31,11 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
 
   private final SolenoidSubsystem solenoid = new SolenoidSubsystem();
+  private final LimitSwitchSubsystem limitSwitchSubsystem = new LimitSwitchSubsystem();
   private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
   private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
   private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
-  private final DeployIntakeWithPneumatics deployIntakeWithPneumatics = new DeployIntakeWithPneumatics(solenoid, joystick);
+  private final DeployIntakeWithPneumatics deployIntakeWithPneumatics = new DeployIntakeWithPneumatics(solenoid, limitSwitchSubsystem);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
