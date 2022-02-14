@@ -10,42 +10,45 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
+
 public class MotorRetractIntake extends CommandBase {
 
   private ElevatorSubsystem elevatorSubsystem;
-  private LimitSwitchSubsystem limitSwitchSubsystem;
+  private LimitSwitchSubsystem elevatorLimitSwitchSubsystem;
+  private LimitSwitchSubsystem intakeLimitSwitchSubsystem;
   private VictorSPX left;
   private VictorSPX right;
+  private IntakeSubsystem intakeSubsystem;
 
-  public MotorRetractIntake(ElevatorSubsystem elevatorSubsystem, LimitSwitchSubsystem limitSwitchSubsystem) {
+  public MotorRetractIntake(ElevatorSubsystem elevatorSubsystem, LimitSwitchSubsystem elevatorLimitSwitchSubsystem, LimitSwitchSubsystem intakeLimitSwitchSubsystem, IntakeSubsystem intakeSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
-    this.limitSwitchSubsystem = limitSwitchSubsystem;
+    this.elevatorLimitSwitchSubsystem = elevatorLimitSwitchSubsystem;
+    this.elevatorLimitSwitchSubsystem = intakeLimitSwitchSubsystem;
+    this.intakeSubsystem = intakeSubsystem;
     left = new VictorSPX(CanIds.intakeVictor.id);
     right = new VictorSPX(CanIds.intakeVictor.id);
     Initers.initVictors(left, right);
-    addRequirements(elevatorSubsystem, limitSwitchSubsystem);
+    addRequirements(elevatorSubsystem, elevatorLimitSwitchSubsystem, intakeLimitSwitchSubsystem, intakeSubsystem);
   }
 
-    public VictorSPX getLeft() {
-        return left;
-    }
+  public VictorSPX getLeft() {
+    return left;
+  }
 
-    public VictorSPX getRight() {
-      return right;
-    }
-
-    public void setPower(double power) {
-        left.set(ControlMode.PercentOutput, power);
-        right.set(ControlMode.PercentOutput, power);
-    }
+  public VictorSPX getRight() {
+    return right;
+  }
 
   @Override
   public void initialize() {}
 
   @Override
   public void execute() {
-    if (limitSwitchSubsystem.get()) {
-
+    if (elevatorLimitSwitchSubsystem.get() && !intakeLimitSwitchSubsystem.get()) {
+      intakeSubsystem.setPower(-intakeSubsystem.getPower());
+    }
+    else {
+      intakeSubsystem.setPower(0);
     }
   }
 
