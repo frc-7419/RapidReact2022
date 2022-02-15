@@ -4,14 +4,17 @@
 
 package frc.robot.subsystems.encoders;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunSparkMaxWithLimitSwitch extends CommandBase {
   /** Creates a new RunSparkMaxWithLimitSwitch. */
   private SparkMaxSubsystem sparkMaxSubsystem;
-  public RunSparkMaxWithLimitSwitch(SparkMaxSubsystem sparkMaxSubsystem) {
+  private XboxController joystick;
+  public RunSparkMaxWithLimitSwitch(SparkMaxSubsystem sparkMaxSubsystem, XboxController joystick) {
     this.sparkMaxSubsystem = sparkMaxSubsystem;
+    this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies
     addRequirements(sparkMaxSubsystem);
   } 
@@ -25,7 +28,7 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   public void execute() {
     SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
     if(!sparkMaxSubsystem.getLimitSwitch().get()) {
-      sparkMaxSubsystem.setSpeed(0.3);
+      sparkMaxSubsystem.setSpeed(joystick.getLeftX());
     }
     else if(sparkMaxSubsystem.getLimitSwitch().get()) {
       sparkMaxSubsystem.setSpeed(0);
