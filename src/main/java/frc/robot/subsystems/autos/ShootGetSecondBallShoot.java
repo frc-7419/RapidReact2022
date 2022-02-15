@@ -34,7 +34,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 67)); //The robot will ideally be positioned toward
         //here after moving 58.08 inches, it will return back to its orignal position and then shoot
 
-        
+        //changed the kD to 0.0001685
 
         
     }
