@@ -10,7 +10,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
   
-  private DriveBaseSubsystem driveBase;
+  private DriveBaseSubsystem driveBaseSubsystem;
   private GyroSubsystem gyroSubsystem;
   private double target;
   private double kP;
@@ -27,10 +27,9 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target) {
-    this.driveBase = driveBase;
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
-    this.target = target;
   }
 
   @Override
@@ -38,11 +37,17 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if (target > 0){negative = 1;}
     else {negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    driveBase.coast();
+
+    driveBaseSubsystem.coast();
+
     double kP = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
     double kI = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
     double kD = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
-    pidController = new ProfiledPIDController(kP, kI, kD, new TrapezoidProfile.Constraints(10, 5));
+    double kMaxVelocity = SmartDashboard.getNumber("kMaxVelocity", 5);
+    double kMaxAcceleration = SmartDashboard.getNumber("kMaxAcc", 5);
+    target = SmartDashboard.getNumber("setpoint", 180);
+
+    pidController = new ProfiledPIDController(kP, kI, kD, new TrapezoidProfile.Constraints(kMaxVelocity, kMaxAcceleration));
     pidController.setGoal(initAngle + target);
     pidController.setTolerance(0.5);
   } 
@@ -50,15 +55,16 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
+    SmartDashboard.putBoolean("at setpoint", pidController.atSetpoint());
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
-    driveBase.setLeftPower(negative * -pidOutput);
-    driveBase.setRightPower(negative * pidOutput);
+    driveBaseSubsystem.setLeftPower(negative * -pidOutput);
+    driveBaseSubsystem.setRightPower(negative * pidOutput);
   }
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.stop();
-    driveBase.brake();
+    driveBaseSubsystem.stop();
+    driveBaseSubsystem.brake();
     // Timer.delay(1);
     SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }

@@ -7,10 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.autos.ShootThenMoveAway;
-import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -27,9 +28,7 @@ public class RobotContainer {
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
 
-  // instantiate your auto commands here
-  private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
-  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem);
+  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem);
   
 
   public RobotContainer() {
@@ -38,13 +37,22 @@ public class RobotContainer {
     smartDashboardBindings();
   }
 
+
   private void configureButtonBindings() {}
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
+    SmartDashboard.putNumber("ki", PIDConstants.GyrokI);
+    SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
+    SmartDashboard.putNumber("kMaxVelocity", 10);
+    SmartDashboard.putNumber("kMaxAcc", 5);
+    SmartDashboard.putNumber("target", 180);
+    SmartDashboard.putBoolean("at setpoint", false);
+  }
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return shootThenMoveAway;
+    return turnWithGyroClosedLoop;
   }
 
   // set default commands here
