@@ -17,7 +17,6 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   private double kD;
   private PIDController pidController;
   private double pidOutput;
-  private double negative;
   private double initAngle;
 
   /**
@@ -35,11 +34,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   @Override
   public void initialize() {
     driveBase.coast();
-    if(target > 0){negative = 1;}
-    else{negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    // SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
-    // SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
     double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
     double ki = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
     double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
@@ -57,6 +52,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBase.setLeftPower(negative * -pidOutput);
     driveBase.setRightPower(negative * pidOutput);
+    SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override
@@ -64,7 +60,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     driveBase.stop();
     driveBase.brake();
     // Timer.delay(1);
-    SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
+    
   }
 
   @Override
