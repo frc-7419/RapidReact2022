@@ -23,7 +23,7 @@ public class Period7Auton extends SequentialCommandGroup {
     // addCommands(new ShootAtAngle());
 
     // Turn to next cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -136.5));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5));
 
     // Drive forward to next cargo
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem,  37.943));
