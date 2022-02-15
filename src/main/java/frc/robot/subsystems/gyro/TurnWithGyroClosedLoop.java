@@ -38,14 +38,17 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     if (target > 0){negative = 1;}
     else {negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
-    pidController = new ProfiledPIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD, new TrapezoidProfile.Constraints(10, 5));
+    driveBase.coast();
+    double kP = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
+    double kI = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
+    double kD = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
+    pidController = new ProfiledPIDController(kP, kI, kD, new TrapezoidProfile.Constraints(10, 5));
     pidController.setGoal(initAngle + target);
     pidController.setTolerance(0.5);
   } 
 
   @Override
   public void execute() {
-    SmartDashboard.putString("command status", "turn w gyro");
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBase.setLeftPower(negative * -pidOutput);
