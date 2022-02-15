@@ -15,7 +15,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private CANSparkMax canSparkMax;
   private DigitalInput limitSwitch;
   public SparkMaxSubsystem() {
-    canSparkMax = new CANSparkMax(0, MotorType.kBrushless);
+    canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     limitSwitch = new DigitalInput(0);
     canSparkMax.restoreFactoryDefaults();
   }
