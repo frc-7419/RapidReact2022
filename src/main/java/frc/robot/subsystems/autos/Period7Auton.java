@@ -17,25 +17,25 @@ public class Period7Auton extends SequentialCommandGroup {
     // TODO: change values
 
     // Adjust the robot to turn to hub
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 10));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 10).withTimeout(5));
 
     // Shoot preloaded balls
     // addCommands(new ShootAtAngle());
 
     // Turn to next cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5).withTimeout(5));
 
     // Drive forward to next cargo
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem,  37.943));
 
     // Turn to the second cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -32.25)); //positive equivalent is 147.75 (from -32.25)
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 147.75).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     // Drive forward to the second cargo
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem,  107.664));
 
     // Turn roughly to the target
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80.25));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80.25).withTimeout(5));
 
     // Use limight to adjust to the target
     // addCommands(new TurnToTx(driveBaseSubsystem, limelightSubsystem));
