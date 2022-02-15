@@ -34,6 +34,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
 
   @Override
   public void initialize() {
+    driveBase.coast();
     if(target > 0){negative = 1;}
     else{negative = -1;}
     initAngle = gyroSubsystem.getGyroAngle();
@@ -51,8 +52,8 @@ public class TurnWithGyroClosedLoop extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putString("command status", "turn w gyro");
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
+    SmartDashboard.putBoolean("at setpoint", pidController.atSetpoint());
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBase.setLeftPower(negative * -pidOutput);
     driveBase.setRightPower(negative * pidOutput);

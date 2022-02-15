@@ -42,6 +42,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("ki", PIDConstants.GyrokI);
     SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
     SmartDashboard.putNumber("target", 180);
+    SmartDashboard.putBoolean("at setpoint", false);
   }
 
   /**
