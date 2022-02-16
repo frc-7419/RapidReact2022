@@ -25,27 +25,30 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target) {
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target, double kP, double kI, double kD) {
     this.driveBase = driveBase;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;
+    this.kP = kP;
+    this.kI = kI;
+    this.kD = kD;
   }
 
   @Override
   public void initialize() {
     driveBase.coast();
     initAngle = gyroSubsystem.getGyroAngle();
-    pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
+    pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(.5); //0.5 -> 1.5
   } 
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBase.setLeftPower(-pidOutput);
     driveBase.setRightPower(pidOutput);
+    SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
