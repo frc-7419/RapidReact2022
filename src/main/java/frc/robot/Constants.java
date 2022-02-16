@@ -64,8 +64,7 @@ public final class Constants {
         public static double DriveBaseMotionMagickI = 0;
         public static double DriveBaseMotionMagickD = 0;
 
-        /* turn with gyro gains
-        gains work and are accurate, but are slow for small setpoints */
+        /* turn with gyro gain. add your own here */
 
         public static double GyrokP = 0.006;
         public static double GyrokI = 0.00;
