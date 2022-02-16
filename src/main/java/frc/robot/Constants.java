@@ -68,8 +68,8 @@ public final class Constants {
         gains work and are accurate, but are slow for small setpoints */
 
         public static double GyrokP = 0.0025;
-        public static double GyrokI = 0.0005404;
-        public static double GyrokD = 0.0006; //changed from 0.0001 to 0.0001685
+        public static double GyrokI = 0.00054175;
+        public static double GyrokD = 0.00055; //changed from 0.0001 to 0.0001685
     }
 
     public static double[][] kSpeedToFf = {
