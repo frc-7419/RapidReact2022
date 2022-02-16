@@ -24,7 +24,7 @@ public class ShootGetSecondBallShootOneTurn extends SequentialCommandGroup {
         // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)); //180 degree turn. 
         // //Decorator where if the command doesn't finish in that time interval it will move on
         // addCommands(new WaitCommand(0.25));
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -67)); //The robot will ideally be positioned toward
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 67)); //The robot will ideally be positioned toward
         //the middle of the tarmac so it will have to move sttraight about half of the distance between the hub and the ball
         //to reach the ball
         addCommands(new WaitCommand(0.25));
