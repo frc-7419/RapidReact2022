@@ -34,7 +34,7 @@ public class Period7Auton extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.075));
 
     // Turn to the second cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 147.75).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -32.25).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     addCommands(new WaitCommand(0.075));
 
