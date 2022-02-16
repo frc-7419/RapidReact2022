@@ -14,19 +14,18 @@ public class Period2Auton extends SequentialCommandGroup {
     // SmartDashboard.putString("command running", "thirty degrees");
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 30).withTimeout(2));
     // //addCommands(shootBall());
-    SmartDashboard.putString("command running", "-70 deg");
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -70).withTimeout(5));
+    SmartDashboard.putString("command running", "-49 deg");
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -49).withTimeout(5));
     SmartDashboard.putString("command running", "going back");
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -40.375));
     // //addCommands(new collectBall());
     // //addCommands();
-    SmartDashboard.putString("command running", "45 degrees");
+    SmartDashboard.putString("command running", "-49.1 degrees");
 
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -45).withTimeout(5));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -49.1).withTimeout(5));
     SmartDashboard.putString("command running", "going forward");
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 107));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 60));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -60));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80).withTimeout(5));
 
 
   }
