@@ -64,12 +64,11 @@ public final class Constants {
         public static double DriveBaseMotionMagickI = 0;
         public static double DriveBaseMotionMagickD = 0;
 
-        /* turn with gyro gains
-        gains work and are accurate, but are slow for small setpoints */
+        /* turn with gyro gain. add your own here */
 
-        public static double GyrokP = 0.001;
-        public static double GyrokI = 0.001;
-        public static double GyrokD = 0.0001;
+        // public static double GyrokP180 = 0.001;
+        // public static double GyrokI180 = 0.001;
+        // public static double GyrokD180 = 0.0001;
     }
 
     public static double[][] kSpeedToFf = {
