@@ -6,7 +6,6 @@ import com.team7419.Initers;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
-import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
 /**
  * actual ball intake, as in like the rollers

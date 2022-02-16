@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems.intake;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;

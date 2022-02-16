@@ -9,20 +9,18 @@ import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
-public class RetractIntakeWithElevator extends CommandBase {
+public class PneumaticsRetractElevator extends CommandBase {
   /** Creates a new RetractIntakeWithElevator. */
-  private IntakeSubsystem intakeSubsystem;
-  private LimitSwitchSubsystem limitSwitchSubsystem;
+  private LimitSwitchSubsystem elevatorLimitSwitchSubsystem;
   private SolenoidSubsystem solenoidSubsystem;
   private int status;
 
-  public RetractIntakeWithElevator(LimitSwitchSubsystem limitSwitchSubsystem, SolenoidSubsystem solenoidSubsystem, IntakeSubsystem intakeSubsystem, int status) {
+  public PneumaticsRetractElevator(LimitSwitchSubsystem elevatorLimitSwitchSubsystem, SolenoidSubsystem solenoidSubsystem, int status) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intakeSubsystem = intakeSubsystem;
-    this.limitSwitchSubsystem = limitSwitchSubsystem;
+    this.elevatorLimitSwitchSubsystem = elevatorLimitSwitchSubsystem;
     this.solenoidSubsystem = solenoidSubsystem;
     this.status = status;
-    addRequirements(intakeSubsystem, limitSwitchSubsystem, solenoidSubsystem);
+    addRequirements(elevatorLimitSwitchSubsystem, solenoidSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,7 +31,7 @@ public class RetractIntakeWithElevator extends CommandBase {
   @Override
   public void execute() {
     if (status == 1) {
-      if (limitSwitchSubsystem.get()) {
+      if (elevatorLimitSwitchSubsystem.get()) {
         solenoidSubsystem.retractSolenoid();
       }
     }
