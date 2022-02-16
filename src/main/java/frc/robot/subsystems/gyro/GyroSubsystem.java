@@ -8,12 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class GyroSubsystem extends SubsystemBase {
 
-  public AHRS ahrs;
+  private AHRS ahrs;
 
   public GyroSubsystem() {
-
-        SmartDashboard.putString("subsystem", "init gyro sub");
-        
         try {
 			/* Communicate w/navX-MXP via the MXP SPI Bus (use mini USB to USB A cable)   
 			   Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or S     
@@ -22,16 +19,15 @@ public class GyroSubsystem extends SubsystemBase {
 		} catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true); 
         }
-
         SmartDashboard.putNumber("init angle", ahrs.getAngle());
     }
 
-    public double getGyroAngle(){
+    public double getGyroAngle() {
         return ahrs.getAngle();
     }
 
     @Override
-    public void periodic(){
-        SmartDashboard.putNumber("gyro", this.getGyroAngle());
+    public void periodic() {
+        SmartDashboard.putNumber("gyro angle", this.getGyroAngle());
     }
 }
