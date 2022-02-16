@@ -12,21 +12,20 @@ public class Period2Auton extends SequentialCommandGroup {
 
   public Period2Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     // SmartDashboard.putString("command running", "thirty degrees");
-    // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 30).withTimeout(2));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 30).withTimeout(2));
     // //addCommands(shootBall());
-    // SmartDashboard.putString("command running", "-70 deg");
-    // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -70).withTimeout(0.5));
-    // SmartDashboard.putString("command running", "going back");
-    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -40.375));
+    SmartDashboard.putString("command running", "-70 deg");
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -70).withTimeout(5));
+    SmartDashboard.putString("command running", "going back");
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -40.375));
     // //addCommands(new collectBall());
     // //addCommands();
-    // SmartDashboard.putString("command running", "45 degrees");
+    SmartDashboard.putString("command running", "45 degrees");
 
-    // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -45).withTimeout(0.5));
-    // SmartDashboard.putString("command running", "going forward");
-    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 107));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -45).withTimeout(5));
+    SmartDashboard.putString("command running", "going forward");
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 107));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 60));
-
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -60));
 
 
