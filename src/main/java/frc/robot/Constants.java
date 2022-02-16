@@ -66,9 +66,9 @@ public final class Constants {
 
         /* turn with gyro gain. add your own here */
 
-        public static double GyrokP = 0.0025;
-        public static double GyrokI = 0.00054175;
-        public static double GyrokD = 0.00055; //changed from 0.0001 to 0.0001685
+        public static double GyrokP180 = 0.0025;
+        public static double GyrokI180 = 0.00054175;
+        public static double GyrokD180 = 0.00055; //changed from 0.0001 to 0.0001685
     }
 
     public static double[][] kSpeedToFf = {
