@@ -9,7 +9,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
   
-  private DriveBaseSubsystem driveBase;
+  private DriveBaseSubsystem driveBaseSubsystem;
   private GyroSubsystem gyroSubsystem;
   private double target;
   private double kP;
@@ -21,12 +21,12 @@ public class TurnWithGyroClosedLoop extends CommandBase {
 
   /**
    * LEFT IS POSITIVE
-   * @param driveBase
+   * @param driveBaseSubsystem
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target, double kP, double kI, double kD) {
-    this.driveBase = driveBase;
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target, double kP, double kI, double kD) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;
     this.kP = kP;
@@ -36,27 +36,27 @@ public class TurnWithGyroClosedLoop extends CommandBase {
 
   @Override
   public void initialize() {
-    driveBase.coast();
+    driveBaseSubsystem.coast();
     initAngle = gyroSubsystem.getGyroAngle();
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(0.5); 
+    SmartDashboard.putNumber("turn setpoint", target);
   } 
 
   @Override
   public void execute() {
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
-    driveBase.setLeftPower(-pidOutput);
-    driveBase.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(-pidOutput);
+    driveBaseSubsystem.setRightPower(pidOutput);
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.stop();
-    driveBase.brake();
-    
+    driveBaseSubsystem.stop();
+    driveBaseSubsystem.brake();
   }
 
   @Override
