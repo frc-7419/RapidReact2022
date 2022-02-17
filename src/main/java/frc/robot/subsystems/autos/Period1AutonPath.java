@@ -13,7 +13,6 @@ public class Period1AutonPath extends SequentialCommandGroup {
     public Period1AutonPath(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 85.0));
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180));
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 85.0));
         
         //addCommands(commands);
         //Drive forward
