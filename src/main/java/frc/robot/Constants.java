@@ -70,9 +70,23 @@ public final class Constants {
         // public static double GyrokI180 = 0.001;
         // public static double GyrokD180 = 0.0001;
         // Following PIDs need to be changed after the actual angles are tuned;
-        public static double GyrokP = 0.007;
-        public static double GyrokI = 0.007;
-        public static double GyrokD = 0.007;
+        public static double GyrokP = 0.00;
+        public static double GyrokI = 0.00;
+        public static double GyrokD = 0.00;
+
+        public static double GyrokPNegative49 = 0.00;
+        public static double GyrokINegative49 = 0.00;
+        public static double GyrokDNegative49 = 0.00;
+
+        //Following PIDs are already tuned
+        public static double GyrokP30 = 0.0085;
+        public static double GyrokI30 = 0.00;
+        public static double GyrokD30 = 0.0001;
+
+        public static double GyrokP80 = 0.0035;
+        public static double GyrokI80 = 0.000655;
+        public static double GyrokD80 = 0.0004;
+
     }
 
     public static double[][] kSpeedToFf = {
