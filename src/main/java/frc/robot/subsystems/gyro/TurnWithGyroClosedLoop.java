@@ -9,7 +9,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
   
-  private DriveBaseSubsystem driveBase;
+  private DriveBaseSubsystem driveBaseSubsystem;
   private GyroSubsystem gyroSubsystem;
   private double target;
   private double kP;
@@ -25,21 +25,20 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBase, GyroSubsystem gyroSubsystem, double target) {
-    this.driveBase = driveBase;
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;
   }
 
   @Override
   public void initialize() {
-    driveBase.coast();
+    driveBaseSubsystem.coast();
     initAngle = gyroSubsystem.getGyroAngle();
     double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
     double ki = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
     double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
     pidController = new PIDController(kp, ki, kd);
-    // pidController = new PIDController(PIDConstants.GyrokP, PIDConstants.GyrokI, PIDConstants.GyrokD);
     target = SmartDashboard.getNumber("target", 180);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(0.5); 
@@ -50,17 +49,15 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     SmartDashboard.putBoolean("at setpoint", pidController.atSetpoint());
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
-    driveBase.setLeftPower(-pidOutput);
-    driveBase.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(-pidOutput);
+    driveBaseSubsystem.setRightPower(pidOutput);
     SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.stop();
-    driveBase.brake();
-    // Timer.delay(1);
-    
+    driveBaseSubsystem.stop();
+    driveBaseSubsystem.brake();
   }
 
   @Override
