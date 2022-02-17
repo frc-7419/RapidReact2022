@@ -27,7 +27,7 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final Period1AutonPath period1AutonPath = new Period1AutonPath(driveBaseSubsystem);
+  private final Period1AutonPath period1AutonPath = new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
@@ -44,7 +44,7 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return new Period1AutonPath(driveBaseSubsystem);
+    return new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
   }
 
   // set default commands here
