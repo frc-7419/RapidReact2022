@@ -25,7 +25,7 @@ public class Period7Auton extends SequentialCommandGroup {
     // addCommands(new ShootAtAngle());
 
     // Turn to next cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180));
 
     addCommands(new WaitCommand(0.1));
 
@@ -35,7 +35,7 @@ public class Period7Auton extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.075));
 
     // // Turn to the second cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -32.25, PIDConstants.GyrokP32, PIDConstants.GyrokI32, PIDConstants.GyrokD32)); //positive equivalent is 147.75 (from -32.25)
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     addCommands(new WaitCommand(0.075));
 
@@ -45,7 +45,7 @@ public class Period7Auton extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.25));
 
     // // Turn roughly to the target
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80.25, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     // Use limight to adjust to the target
     // addCommands(new TurnToTx(driveBaseSubsystem, limelightSubsystem));
