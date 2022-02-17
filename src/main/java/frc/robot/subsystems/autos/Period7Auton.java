@@ -3,6 +3,7 @@ package frc.robot.subsystems.autos;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -24,27 +25,27 @@ public class Period7Auton extends SequentialCommandGroup {
     // addCommands(new ShootAtAngle());
 
     // Turn to next cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5).withTimeout(5));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63.5, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63));
 
-    addCommands(new WaitCommand(0.075));
+    addCommands(new WaitCommand(0.1));
 
-    // Drive forward to next cargo
+    // // Drive forward to next cargo
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem,  37.943));
 
     addCommands(new WaitCommand(0.075));
 
-    // Turn to the second cargo
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -32.25).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
+    // // Turn to the second cargo
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -32.25, PIDConstants.GyrokP32, PIDConstants.GyrokI32, PIDConstants.GyrokD32)); //positive equivalent is 147.75 (from -32.25)
 
     addCommands(new WaitCommand(0.075));
 
-    // Drive forward to the second cargo
+    // // Drive forward to the second cargo
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem,  107.664));
 
-    addCommands(new WaitCommand(0.1));
+    addCommands(new WaitCommand(0.25));
 
-    // Turn roughly to the target
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80.25).withTimeout(5));
+    // // Turn roughly to the target
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80.25, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80));
 
     // Use limight to adjust to the target
     // addCommands(new TurnToTx(driveBaseSubsystem, limelightSubsystem));

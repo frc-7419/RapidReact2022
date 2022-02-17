@@ -68,7 +68,21 @@ public final class Constants {
 
         public static double GyrokP = 0.006;
         public static double GyrokI = 0.00;
-        public static double GyrokD = 0.0001;
+        public static double GyrokD = 0.0002;        
+        
+        public static double GyrokP63 = 0.007;
+        public static double GyrokI63 = 0.0002;
+        public static double GyrokD63 = 0.0003;
+        
+        public static double GyrokP32 = 0.0085;
+        public static double GyrokI32 = 0.00;
+        public static double GyrokD32 = 0.0001;
+
+        public static double GyrokP80 = 0.0064;
+        public static double GyrokI80 = 0.000155;
+        public static double GyrokD80 = 0.00025;
+
+
     }
 
     public static double[][] kSpeedToFf = {
