@@ -7,16 +7,19 @@ package frc.robot.subsystems.encoders;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SparkMaxSubsystem extends SubsystemBase {
   /** Creates a new SparkMaxSoftLimit. */
-  private CANSparkMax spark;
+  // private CANSparkMax spark;
+  private Spark spark;
 
   public SparkMaxSubsystem() {
-    spark = new CANSparkMax(21, MotorType.kBrushless);
-    spark.restoreFactoryDefaults();
+    // spark = new CANSparkMax(21, MotorType.kBrushless);
+    spark = new Spark(0);
+    // spark.restoreFactoryDefaults();
   }
 
   public void setSpeed(double power) {
@@ -32,10 +35,10 @@ public class SparkMaxSubsystem extends SubsystemBase {
     // spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
   }
 
-  public void getSoftLimitForward() {
-    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
-  }
-  public void getSoftLimitReverse() {
-    SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
-  }
+  // public void getSoftLimitForward() {
+  //   SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+  // }
+  // public void getSoftLimitReverse() {
+  //   SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+  // }
 }
