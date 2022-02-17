@@ -5,40 +5,30 @@
 package frc.robot.subsystems.loader;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderSubsystem extends SubsystemBase {
   /** Creates a new LoaderSubsystem. */
-  private TalonFX leftMotor;
-  private TalonFX rightMotor;
+  private VictorSPX Motor1;
   public LoaderSubsystem() {
-    leftMotor = new TalonFX(0);
-    rightMotor = new TalonFX(0);
-    leftMotor.configFactoryDefault();
-    rightMotor.configFactoryDefault();
-    leftMotor.setInverted(true);
-    rightMotor.setInverted(false);
-    leftMotor.setSensorPhase(false);
-    rightMotor.setSensorPhase(false);
+    Motor1 = new VictorSPX(0);
+    Motor1.configFactoryDefault();
+    Motor1.setInverted(true);
+    Motor1.setSensorPhase(false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public TalonFX getRightMotor() {
-    return rightMotor;
-  }
-
-  public TalonFX getLeftMotor() {
-    return leftMotor;
+  public VictorSPX getMotor1() {
+    return Motor1;
   }
   
   public void setPower(double power) {
-    leftMotor.set(ControlMode.PercentOutput, power);
-    rightMotor.set(ControlMode.PercentOutput, power);
+    Motor1.set(ControlMode.PercentOutput, power);
   }
   
 }
