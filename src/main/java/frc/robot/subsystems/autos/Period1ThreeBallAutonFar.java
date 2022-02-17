@@ -14,5 +14,11 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 85.0));
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180));
         
+
+        //straight to second ball
+        //turn left to face third ball
+        //turn turret and shoot preload and second ball
+        //forward to third ball
+        //turn around 45-90 degrees left to make room for turret to turn and shoot
     }
 }
