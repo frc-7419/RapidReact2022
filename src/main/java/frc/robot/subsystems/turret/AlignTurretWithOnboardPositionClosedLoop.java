@@ -14,7 +14,7 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurretWithPositionClosedLoop extends CommandBase {
+public class AlignTurretWithOnboardPositionClosedLoop extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
@@ -29,17 +29,17 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   private double turretPosition;
   private double turretVelocity;
 
-  public AlignTurretWithPositionClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithOnboardPositionClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    // initializing turret talon
+    turretSubsystem.coast();
+    
+    // reset factory defaults for neo
     turretSubsystem.getTurretMotor().restoreFactoryDefaults();
 
     // velocities in rpm
@@ -61,7 +61,6 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
     turretSubsystem.getTurretPIDController().setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     turretPercentOutput = turretSubsystem.getTurretMotor().get();
@@ -78,6 +77,7 @@ public class AlignTurretWithPositionClosedLoop extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     turretSubsystem.setPower(0);
+    turretSubsystem.brake();
   }
 
   // Returns true when the command should end.

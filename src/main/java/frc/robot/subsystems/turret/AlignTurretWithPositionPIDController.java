@@ -37,7 +37,8 @@ public class AlignTurretWithPositionPIDController extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    turretSubsystem.coast();
+    
     // instantiate PIDController class
     pidController = new PIDController(kP, kI, kD);
 
@@ -61,6 +62,7 @@ public class AlignTurretWithPositionPIDController extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     turretSubsystem.setPower(0);
+    turretSubsystem.brake();
   }
 
   // Returns true when the command should end.

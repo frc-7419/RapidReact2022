@@ -9,6 +9,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -63,6 +64,14 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void setPower(double power) {
     turret.set(power);
+  }
+
+  public void brake() {
+    turret.setIdleMode(IdleMode.kBrake);
+  }
+
+  public void coast() {
+    turret.setIdleMode(IdleMode.kCoast);
   }
 
   public CANSparkMax getTurretMotor() {
