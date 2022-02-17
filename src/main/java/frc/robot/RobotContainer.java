@@ -45,6 +45,7 @@ public class RobotContainer {
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
     return new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
+    // suggestion: ^ do not return a new instance of the command. return the same one that you instantiated before
   }
 
   // set default commands here
