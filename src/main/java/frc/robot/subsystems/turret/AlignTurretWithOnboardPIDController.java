@@ -14,7 +14,7 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurretWithOnboardPositionClosedLoop extends CommandBase {
+public class AlignTurretWithOnboardPIDController extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
@@ -29,7 +29,7 @@ public class AlignTurretWithOnboardPositionClosedLoop extends CommandBase {
   private double turretPosition;
   private double turretVelocity;
 
-  public AlignTurretWithOnboardPositionClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithOnboardPIDController(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);

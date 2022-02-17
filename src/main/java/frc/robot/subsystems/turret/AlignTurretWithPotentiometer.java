@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
+public class AlignTurretWithPotentiometer extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private AnalogPotentiometer turretPotentiometer;
@@ -25,7 +25,7 @@ public class AlignTurretWithPotentiometerClosedLoop extends CommandBase {
 
   private double pidOutput;
   
-  public AlignTurretWithPotentiometerClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithPotentiometer(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     turretPotentiometer = new AnalogPotentiometer(1, 180, 0);

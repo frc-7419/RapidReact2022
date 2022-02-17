@@ -13,7 +13,7 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurretWithPositionPIDController extends CommandBase {
+public class AlignTurretWithPIDController extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
@@ -28,7 +28,7 @@ public class AlignTurretWithPositionPIDController extends CommandBase {
 
   private double pidOutput;
   
-  public AlignTurretWithPositionPIDController(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretWithPIDController(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
