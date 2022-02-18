@@ -17,10 +17,18 @@ public class Period1ThreeBallClose extends SequentialCommandGroup {
   /** Creates a new Period1SecondAutonPath. */
   public Period1ThreeBallClose(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));
+    /*
+    // go forward to the second ball and intake
+    // shoot the ball
+    // travel to the third ball
+    // go back into the tarmac and shoot
+    // go back out of the tarmac
+    */
+
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52)); 
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));// turn 58 degrees
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 113));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));// turn 58 degrees
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
   }
 
