@@ -10,7 +10,6 @@ public class TalonSubsystem extends SubsystemBase {
   
   public TalonSubsystem() {
     talonSRX = new TalonSRX(51);
-
   }
 
   @Override
