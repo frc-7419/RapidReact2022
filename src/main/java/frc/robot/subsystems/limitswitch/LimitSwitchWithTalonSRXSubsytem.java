@@ -12,15 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class ElevatorSubsystem extends SubsystemBase {
-  private TalonSRX elevatorLeft;
-  private TalonSRX elevatorRight;
+public class LimitSwitchWithTalonSRXSubsytem extends SubsystemBase {
+  private TalonSRX talonSRX;
+
   /** Creates a new ElevatorSubsystem. */
-  public ElevatorSubsystem() {
-    elevatorLeft = new TalonSRX(50);
-    elevatorRight = new TalonSRX(51);
-    elevatorRight.setInverted(true);
-    }
+  public LimitSwitchWithTalonSRXSubsytem() {
+    talonSRX = new TalonSRX(deviceNumber); //add ID
+  }
   
 
   @Override
@@ -32,15 +30,4 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
-
-  public void setPower(double power) {
-    elevatorLeft.set(ControlMode.PercentOutput, power);
-    elevatorRight.set(ControlMode.PercentOutput, power);
-  }
-
-
-  public void brake() {
-    elevatorLeft.setNeutralMode(NeutralMode.Brake);
-    elevatorRight.setNeutralMode(NeutralMode.Brake);
-}
 }

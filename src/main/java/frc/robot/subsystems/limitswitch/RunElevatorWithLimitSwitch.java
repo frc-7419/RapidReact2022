@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunElevatorWithLimitSwitch extends CommandBase {
   /** Creates a new RunElevatorWithLimitSwitch. */
-  private ElevatorSubsystem elevatorSubsystem;
+  private LimitSwitchWithTalonSRXSubsytem elevatorSubsystem;
   private XboxController joystick;
 
   private DigitalInput topLimitSwitch;
   private DigitalInput bottomLimitSwitch;
 
-  public RunElevatorWithLimitSwitch(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  public RunElevatorWithLimitSwitch(LimitSwitchWithTalonSRXSubsytem elevatorSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
