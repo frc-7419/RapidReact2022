@@ -14,12 +14,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimitSwitchWithTalonSRXSubsytem extends SubsystemBase {
   private TalonSRX talonSRX;
-
+  
   /** Creates a new ElevatorSubsystem. */
   public LimitSwitchWithTalonSRXSubsytem() {
-    talonSRX = new TalonSRX(deviceNumber); //add ID
+    talonSRX = new TalonSRX(50); //add the actual ID value
+  }
+
+  public TalonSRX getTalonSRX() {
+    return talonSRX;
   }
   
+  public void setPower(double power) {
+    talonSRX.set(ControlMode.PercentOutput, power);
+  }
 
   @Override
   public void periodic() {
