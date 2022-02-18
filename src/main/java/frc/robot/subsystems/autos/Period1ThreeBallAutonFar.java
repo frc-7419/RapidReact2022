@@ -11,9 +11,9 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
 
     public Period1ThreeBallAutonFar(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 85.0));
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115));
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 85.0));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 75.0));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 135, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115));
+        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 116.4));
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63, PIDConstants.GyrokP63, PIDConstants.GyrokP63, PIDConstants.GyrokP63));
         
 
