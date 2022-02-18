@@ -13,32 +13,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SparkMaxSubsystem extends SubsystemBase {
   /** Creates a new SparkMaxSoftLimit. */
-  // private CANSparkMax spark;
-  private Spark spark;
+  private CANSparkMax spark;
+  // private Spark spark;
 
   public SparkMaxSubsystem() {
-    // spark = new CANSparkMax(21, MotorType.kBrushless);
-    spark = new Spark(0);
+    spark = new CANSparkMax(21, MotorType.kBrushless);
+    // spark = new Spark(0);
     // spark.restoreFactoryDefaults();
   }
 
-  public void setSpeed(double power) {
+  public void setPower(double power) {
     spark.set(power);
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    // spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    // spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    // spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
-    // spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
-  }
+  public void periodic() {}
 
-  // public void getSoftLimitForward() {
-  //   SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
-  // }
-  // public void getSoftLimitReverse() {
-  //   SmartDashboard.putNumber("forward: ", spark.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
-  // }
 }
