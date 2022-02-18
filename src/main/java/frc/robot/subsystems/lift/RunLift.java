@@ -51,8 +51,9 @@ public class RunLift extends CommandBase {
       liftWithPneumaticsSubsystem.retractRight();
     }
     else {
-      liftWithSliderSubsystem.setLeftPower(0);
-      liftWithSliderSubsystem.setRightPower(0);
+      liftWithSliderSubsystem.brake();
+      // liftWithSliderSubsystem.setLeftPower(0);
+      // liftWithSliderSubsystem.setRightPower(0);
     }    
   }
 
