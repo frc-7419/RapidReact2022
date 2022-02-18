@@ -4,18 +4,20 @@
 
 package frc.robot.subsystems.encoders;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SparkMaxSubsystem extends SubsystemBase {
   /** Creates a new SparkMaxSubsystem. */
-  private Spark spark;
+  private CANSparkMax canSparkMax;
   private DigitalInput limitSwitch;
   public SparkMaxSubsystem() {
-    spark = new Spark(0);
+    canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     limitSwitch = new DigitalInput(0);
+    canSparkMax.restoreFactoryDefaults();
   }
   public DigitalInput getLimitSwitch() {
     return limitSwitch;
@@ -24,7 +26,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
     return limitSwitch.get();
   }
   public void setSpeed(double speed) {
-    spark.set(speed);
+    canSparkMax.set(speed);
   }
   @Override
   public void periodic() {
