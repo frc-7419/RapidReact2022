@@ -17,6 +17,10 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public SparkMaxSubsystem() {
     spark = new CANSparkMax(21, MotorType.kBrushless);
     spark.restoreFactoryDefaults();
+    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
   }
 
   public void setSpeed(double power) {
@@ -26,10 +30,6 @@ public class SparkMaxSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
-    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
   }
 
   public void getSoftLimitForward() {
