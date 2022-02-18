@@ -42,5 +42,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void brake() {
     elevatorLeft.setNeutralMode(NeutralMode.Brake);
     elevatorRight.setNeutralMode(NeutralMode.Brake);
-}
+  }
+
+  public void coast() {
+    elevatorLeft.setNeutralMode(NeutralMode.Coast);
+    elevatorRight.setNeutralMode(NeutralMode.Coast);
+  }
 }
