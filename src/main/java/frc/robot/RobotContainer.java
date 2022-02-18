@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.limitswitch.LimitSwitchWithTalonSRXSubsytem;
+import frc.robot.subsystems.limitswitch.LimitSwitchSubsystem;
 import frc.robot.subsystems.limitswitch.RunLimitSwitchWithTalonSRX;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
-  private final LimitSwitchWithTalonSRXSubsytem limitSwitchWithTalonSRXSubsytem = new LimitSwitchWithTalonSRXSubsytem();
+  private final LimitSwitchSubsystem limitSwitchWithTalonSRXSubsytem = new LimitSwitchSubsystem();
   private final RunLimitSwitchWithTalonSRX runLimitSwitchWithTalonSRX = new RunLimitSwitchWithTalonSRX(limitSwitchWithTalonSRXSubsytem, 0.5);
   /*
    * Use this method to define your button->command mappings. Buttons can be created by

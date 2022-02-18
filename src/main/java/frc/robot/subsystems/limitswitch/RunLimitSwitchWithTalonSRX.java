@@ -6,18 +6,21 @@ package frc.robot.subsystems.limitswitch;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.talon.TalonSubsystem;
 
 public class RunLimitSwitchWithTalonSRX extends CommandBase {
-  private LimitSwitchWithTalonSRXSubsytem limitSwitchWithTalonSRXSubsytem;
+  private LimitSwitchSubsystem limitSwitchSubsystem;
+  private TalonSubsystem talonSubsystem;
   private DigitalInput limitSwitch;
   private double power;
 
-  public RunLimitSwitchWithTalonSRX(LimitSwitchWithTalonSRXSubsytem limitSwitchWithTalonSRXSubsytem, double power) {
-    this.limitSwitchWithTalonSRXSubsytem = limitSwitchWithTalonSRXSubsytem;
+  public RunLimitSwitchWithTalonSRX(LimitSwitchSubsystem limitSwitchSubsystem, double power, TalonSubsystem talonSubsystem) {
+    this.limitSwitchSubsystem = limitSwitchSubsystem;
+    this.talonSubsystem = talonSubsystem;
     this.power = power;
     limitSwitch = new DigitalInput(1);
     
-    addRequirements(limitSwitchWithTalonSRXSubsytem);
+    addRequirements(limitSwitchSubsystem);
 
   }
 
@@ -29,17 +32,17 @@ public class RunLimitSwitchWithTalonSRX extends CommandBase {
   @Override
   public void execute() {
     if (limitSwitch.get()) {
-      limitSwitchWithTalonSRXSubsytem.setPower(0);
+      talonSubsystem.setPower(0);
     }
     else {
-      limitSwitchWithTalonSRXSubsytem.setPower(power);
+      talonSubsystem.setPower(power);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    limitSwitchWithTalonSRXSubsytem.setPower(0);
+    talonSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.
