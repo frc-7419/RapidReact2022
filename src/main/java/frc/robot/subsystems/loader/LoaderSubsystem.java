@@ -11,24 +11,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderSubsystem extends SubsystemBase {
   /** Creates a new LoaderSubsystem. */
-  private VictorSPX Motor1;
+  private VictorSPX loader;
   public LoaderSubsystem() {
-    Motor1 = new VictorSPX(0);
-    Motor1.configFactoryDefault();
-    Motor1.setInverted(true);
-    Motor1.setSensorPhase(false);
+    loader = new VictorSPX(0);
+    loader.configFactoryDefault();
+    loader.setInverted(true);
+    loader.setSensorPhase(false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public VictorSPX getMotor1() {
-    return Motor1;
+  public VictorSPX getloader() {
+    return loader;
   }
   
   public void setPower(double power) {
-    Motor1.set(ControlMode.PercentOutput, power);
+    loader.set(ControlMode.PercentOutput, power);
   }
   
 }
