@@ -46,6 +46,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    talonSubsystem.setDefaultCommand(runLimitSwitchWithTalonSRX);
+    elevatorSubsystem.setDefaultCommand(runLimitSwitchWithTalonSRX);
   }
 }
