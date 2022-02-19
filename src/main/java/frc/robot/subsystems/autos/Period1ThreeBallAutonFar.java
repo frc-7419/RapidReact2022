@@ -19,7 +19,7 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
 
 // if its not reaching setpoint, increase P
 // if its overshooting, increase D
-// increase I if it overshoots and doesn't get back fast enoguh
+// increase I if it overshoots and doesn't get back fast enough
 
         //straight to second ball
         //turn left to face third ball
