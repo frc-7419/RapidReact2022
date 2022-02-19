@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.autos.Period1AutonPath;
+import frc.robot.subsystems.autos.Period1ThreeBallClose;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +28,7 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final Period1AutonPath period1AutonPath = new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
+  private final Period1ThreeBallClose period1AutonPath = new Period1ThreeBallClose(driveBaseSubsystem, gyroSubsystem);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   

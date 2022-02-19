@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems.autos;
 
+import java.util.concurrent.TimeoutException;
+
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
@@ -25,11 +28,15 @@ public class Period1ThreeBallClose extends SequentialCommandGroup {
     // go back out of the tarmac
     */
 
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52)); 
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52)); 
+    // addCommands(new WaitCommand(0.2));
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));// turn 58 degrees
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 113));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));// turn 58 degrees
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 113));
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 58, PIDConstants.GyrokP58, PIDConstants.GyrokI58, PIDConstants.GyrokD58));// turn 58 degrees
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
   }
 
 }
