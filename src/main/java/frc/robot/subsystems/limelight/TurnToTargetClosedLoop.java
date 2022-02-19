@@ -44,7 +44,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 
-    kP = SmartDashboard.getNumber("kP", 0.08);
+    kP = SmartDashboard.getNumber("kP", 0.005);
     kI = SmartDashboard.getNumber("kI", 0);
     kD = SmartDashboard.getNumber("kD", 0); 
 

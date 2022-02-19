@@ -34,7 +34,7 @@ public class RobotContainer {
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("kP", 0.08);
+    SmartDashboard.putNumber("kP", 0.005);
     SmartDashboard.putNumber("kI", 0);
     SmartDashboard.putNumber("kD", 0);
   }
