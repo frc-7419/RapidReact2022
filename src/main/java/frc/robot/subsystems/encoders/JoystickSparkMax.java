@@ -11,7 +11,7 @@ public class JoystickSparkMax extends CommandBase {
   /** Creates a new RunSparkMax. */
   private SparkMaxSubsystem sparkMaxSubsystem;
   private XboxController joystick;
-
+  private double kSpeed = 0.1;
   public JoystickSparkMax(SparkMaxSubsystem sparkMaxSubsystem, XboxController joystick) {
     this.sparkMaxSubsystem = sparkMaxSubsystem;
     this.joystick = joystick;
@@ -25,7 +25,7 @@ public class JoystickSparkMax extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sparkMaxSubsystem.setPower(joystick.getRightY());
+    sparkMaxSubsystem.setPower(kSpeed*joystick.getRightY());
   }
 
   // Called once the command ends or is interrupted.
