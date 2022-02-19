@@ -8,34 +8,30 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.talon.TalonSubsystem;
 
 public class RunLimitSwitchWithTalonSRX extends CommandBase {
   private TalonSubsystem talonSubsystem;
-  private DigitalInput limitSwitch;
-  private double power;
+  private XboxController joystick;
 
-  public RunLimitSwitchWithTalonSRX(double power, TalonSubsystem talonSubsystem) {
+  public RunLimitSwitchWithTalonSRX(XboxController joystick, TalonSubsystem talonSubsystem) {
     this.talonSubsystem = talonSubsystem;
-    this.power = power;
-    limitSwitch = new DigitalInput(1);
+    this.joystick = joystick;
+    addRequirements(talonSubsystem);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (limitSwitch.get()) {
-      talonSubsystem.getTalonSRX().configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    }
-    else {
-      talonSubsystem.setPower(power);
-    }
+    talonSubsystem.setPower(-joystick.getLeftY());
   }
 
   // Called once the command ends or is interrupted.

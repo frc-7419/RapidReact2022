@@ -22,7 +22,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
   private final TalonSubsystem talonSubsystem = new TalonSubsystem();
-  private final RunLimitSwitchWithTalonSRX runLimitSwitchWithTalonSRX = new RunLimitSwitchWithTalonSRX(0.5, talonSubsystem);
+  private final RunLimitSwitchWithTalonSRX runLimitSwitchWithTalonSRX = new RunLimitSwitchWithTalonSRX(joystick, talonSubsystem);
   /*
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
