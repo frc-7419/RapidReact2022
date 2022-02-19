@@ -41,14 +41,14 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-   
+    new JoystickButton(joystick, XboxController.Button.kA.value).whenPressed(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem));
   }
 
   public Command getAutonomousCommand() {
     return runTurret;
   }
   public void setDefaultCommands(){
-    turretSubsystem.setDefaultCommand(runTurret);
+    // turretSubsystem.setDefaultCommand(runTurret);
   }
 
   

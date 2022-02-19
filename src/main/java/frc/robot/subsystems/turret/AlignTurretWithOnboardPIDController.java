@@ -18,7 +18,7 @@ public class AlignTurretWithOnboardPIDController extends CommandBase {
   private TurretSubsystem turretSubsystem = new TurretSubsystem();
   private LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
-  private double kP = 0;
+  private double kP = 0.01;
   private double kI = 0;
   private double kD = 0;
   private double kF = 0;
@@ -48,7 +48,7 @@ public class AlignTurretWithOnboardPIDController extends CommandBase {
     turretSubsystem.getTurretPIDController().setSmartMotionMaxAccel(6000, 0);
 
     // set tolerance
-    turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(UnitConversions.inchesToTicks(tolerance, RobotConstants.turretRadius , 100/12, 4096), 0);
+    turretSubsystem.getTurretPIDController().setSmartMotionAllowedClosedLoopError(UnitConversions.inchesToTicks(tolerance, RobotConstants.turretRadius , 96/12, 4096), 0);
 
      // reset sensor position
      turretSubsystem.getTurretEncoder().setPosition(0);
@@ -57,7 +57,7 @@ public class AlignTurretWithOnboardPIDController extends CommandBase {
     turretSubsystem.setPIDFConstants(kP, kI, kD, kF);
 
     // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, 100/12, 4096);
+    setpoint = UnitConversions.inchesToTicks(UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, 96/12, 4096);
     turretSubsystem.getTurretPIDController().setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
 
