@@ -1,6 +1,8 @@
 package frc.robot.subsystems.drive;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -15,8 +17,12 @@ public class ArcadeDrive extends CommandBase {
   private double kSlowStraight;
   private double kSlowTurn;
   private XboxController joystick;
+  private DifferentialDrive drive;
 
-  
+  // Limits *acceleration* not max speed; basically kD
+  private final SlewRateLimiter speedLimiter = new SlewRateLimiter(0.5);
+  private final SlewRateLimiter rotLimiter = new SlewRateLimiter(0.5);
+
   public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
@@ -24,6 +30,7 @@ public class ArcadeDrive extends CommandBase {
     this.kTurn = kTurn;
     this.kSlowStraight = kSlowStraight;
     this.kSlowTurn = kSlowTurn;
+    this.drive = new DifferentialDrive(driveBase.getLeftGroup(), driveBase.getRightGroup());
     addRequirements(driveBase);
 }
 
@@ -36,11 +43,13 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+    boolean squareInputs = false; // square joystick inputs
+    double xSpeed = speedLimiter.calculate(joystick.getLeftY() * kStraight) * kSlowStraight;
+    double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn) * kSlowTurn;
+    // double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+    // double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
 
-    driveBase.setLeftPower(leftPower);
-    driveBase.setRightPower(rightPower);
+    drive.arcadeDrive(xSpeed, zRotation, squareInputs);
   }
 
   @Override
