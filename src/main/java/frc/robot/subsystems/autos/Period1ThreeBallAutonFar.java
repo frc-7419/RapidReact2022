@@ -17,6 +17,10 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
         addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63, PIDConstants.GyrokP63, PIDConstants.GyrokP63, PIDConstants.GyrokP63));
         
 
+// if its not reaching setpoint, increase P
+// if its overshooting, increase D
+// increase I if it overshoots and doesn't get back fast enoguh
+
         //straight to second ball
         //turn left to face third ball
         //turn turret and shoot preload and second ball
