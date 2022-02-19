@@ -50,7 +50,7 @@ public class RunElevatorWithSoftLimits extends CommandBase {
     SmartDashboard.putNumber("Joystick value", joystick.getRightY());
 
     if (joystick.getRightY() != 0){
-      elevatorSubsystem.setPower(0.3 * joystick.getRightY());
+      elevatorSubsystem.setPower(joystick.getRightY());
     }
     else{
       elevatorSubsystem.setPower(0);
