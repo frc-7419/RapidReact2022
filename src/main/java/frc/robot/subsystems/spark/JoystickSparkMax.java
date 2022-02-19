@@ -16,6 +16,7 @@ public class JoystickSparkMax extends CommandBase {
   public JoystickSparkMax(SparkMaxSubsystem sparkMaxSubsystem, XboxController joystick, double kSpeed) {
     this.sparkMaxSubsystem = sparkMaxSubsystem;
     this.joystick = joystick;
+    this.kSpeed = kSpeed;
     addRequirements(sparkMaxSubsystem);
   }
 
