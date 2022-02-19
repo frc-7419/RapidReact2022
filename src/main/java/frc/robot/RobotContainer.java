@@ -8,37 +8,42 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.AlignTurretWithOnboardPIDController;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.encoders.JoystickSparkMax;
-import frc.robot.subsystems.encoders.SparkMaxSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
+import frc.robot.subsystems.spark.JoystickSparkMax;
+import frc.robot.subsystems.spark.SparkMaxSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
-  private final SparkMaxSubsystem sparkSubsystem = new SparkMaxSubsystem();
+  private final SparkMaxSubsystem sparkMaxSubsystem = new SparkMaxSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final JoystickSparkMax joystickSparkMax = new JoystickSparkMax(sparkSubsystem, joystick);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(sparkSubsystem,limelightSubsystem);
+  private final JoystickSparkMax joystickSparkMax = new JoystickSparkMax(sparkMaxSubsystem, joystick, 0.1);
+  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(sparkMaxSubsystem,limelightSubsystem);
 
-  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
-
-  private final AlignTurretWithOnboardPIDController alignTurretWithOnboardPIDController = new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
+    smartDashboardBindings();
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kA.value).whenPressed(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem));
+    // new JoystickButton(joystick, XboxController.Button.kA.value).whenPressed(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem));
+  }
+
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("kP", 0.08);
+    SmartDashboard.putNumber("kI", 0);
+    SmartDashboard.putNumber("kD", 0);
   }
 
   public Command getAutonomousCommand() {
     return turnToTargetClosedLoop;
   }
   public void setDefaultCommands() {
-    // turretSubsystem.setDefaultCommand(runTurret);
+    sparkMaxSubsystem.setDefaultCommand(joystickSparkMax);
   }
 
   
