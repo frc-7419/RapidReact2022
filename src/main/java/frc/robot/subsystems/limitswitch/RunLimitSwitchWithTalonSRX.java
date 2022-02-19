@@ -4,23 +4,22 @@
 
 package frc.robot.subsystems.limitswitch;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.talon.TalonSubsystem;
 
 public class RunLimitSwitchWithTalonSRX extends CommandBase {
-  private LimitSwitchSubsystem limitSwitchSubsystem;
   private TalonSubsystem talonSubsystem;
   private DigitalInput limitSwitch;
   private double power;
 
-  public RunLimitSwitchWithTalonSRX(LimitSwitchSubsystem limitSwitchSubsystem, double power, TalonSubsystem talonSubsystem) {
-    this.limitSwitchSubsystem = limitSwitchSubsystem;
+  public RunLimitSwitchWithTalonSRX(double power, TalonSubsystem talonSubsystem) {
     this.talonSubsystem = talonSubsystem;
     this.power = power;
     limitSwitch = new DigitalInput(1);
-    
-    addRequirements(limitSwitchSubsystem);
 
   }
 
@@ -32,7 +31,7 @@ public class RunLimitSwitchWithTalonSRX extends CommandBase {
   @Override
   public void execute() {
     if (limitSwitch.get()) {
-      talonSubsystem.setPower(0);
+      talonSubsystem.getTalonSRX().configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     }
     else {
       talonSubsystem.setPower(power);
