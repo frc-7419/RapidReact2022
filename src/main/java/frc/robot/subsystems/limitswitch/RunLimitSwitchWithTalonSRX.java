@@ -7,19 +7,18 @@ package frc.robot.subsystems.limitswitch;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 
 public class RunLimitSwitchWithTalonSRX extends CommandBase {
-  private ElevatorSubsystem talonSubsystem;
+  private ElevatorSubsystem elevatorSubsystem;
   private XboxController joystick;
 
-  public RunLimitSwitchWithTalonSRX(XboxController joystick, ElevatorSubsystem talonSubsystem) {
-    this.talonSubsystem = talonSubsystem;
+  public RunLimitSwitchWithTalonSRX(XboxController joystick, ElevatorSubsystem elevatorSubsystem) {
+    this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
-    addRequirements(talonSubsystem);
+    addRequirements(elevatorSubsystem);
 
   }
 
@@ -31,13 +30,13 @@ public class RunLimitSwitchWithTalonSRX extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSubsystem.setPower(-joystick.getLeftY());
+    elevatorSubsystem.setPower(-joystick.getLeftY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    talonSubsystem.setPower(0);
+    elevatorSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.
