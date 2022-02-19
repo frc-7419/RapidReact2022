@@ -21,8 +21,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
-  private final ElevatorSubsystem talonSubsystem = new ElevatorSubsystem();
-  private final RunLimitSwitchWithTalonSRX runLimitSwitchWithTalonSRX = new RunLimitSwitchWithTalonSRX(joystick, talonSubsystem);
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  private final RunLimitSwitchWithTalonSRX runLimitSwitchWithTalonSRX = new RunLimitSwitchWithTalonSRX(joystick, elevatorSubsystem);
   /*
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
