@@ -10,13 +10,13 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.talon.TalonSubsystem;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
 
 public class RunLimitSwitchWithTalonSRX extends CommandBase {
-  private TalonSubsystem talonSubsystem;
+  private ElevatorSubsystem talonSubsystem;
   private XboxController joystick;
 
-  public RunLimitSwitchWithTalonSRX(XboxController joystick, TalonSubsystem talonSubsystem) {
+  public RunLimitSwitchWithTalonSRX(XboxController joystick, ElevatorSubsystem talonSubsystem) {
     this.talonSubsystem = talonSubsystem;
     this.joystick = joystick;
     addRequirements(talonSubsystem);
