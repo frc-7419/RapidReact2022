@@ -24,14 +24,13 @@ public class RobotContainer {
 
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
+  private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
 
   public RobotContainer() {
     configureButtonBindings();
   }
 
-  private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kRightBumper.value).toggleWhenPressed(new RunLoader(loaderSubsystem, joystick, 0.3));
-  }
+  private void configureButtonBindings() {}
 
   public Command getAutonomousCommand() {
     return new WaitCommand(0);
@@ -40,6 +39,7 @@ public class RobotContainer {
   public void setDefaultCommands(){
     intakeSubsystem.setDefaultCommand(runIntake);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
+    loaderSubsystem.setDefaultCommand(runLoader);
   }
 
   

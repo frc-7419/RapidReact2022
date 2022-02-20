@@ -25,7 +25,12 @@ public class RunLoader extends CommandBase {
 
   @Override
   public void execute() {
-    loaderSubsystem.setPower(power);
+    if (joystick.getLeftBumper()) {
+      loaderSubsystem.setPower(power);
+    }
+    else {
+      loaderSubsystem.setPower(0);
+    }
   }
 
   @Override
