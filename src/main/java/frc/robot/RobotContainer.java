@@ -5,57 +5,29 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.ultrasonicSensor.MaxBotixUltrasonicSensorSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.colorSensor.RevColorDistanceSub;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.loader.LoaderSubsystem;
+import frc.robot.subsystems.loader.RunLoader;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
+  private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   private final RevColorDistanceSub revColorDistanceSub = new RevColorDistanceSub();
-  private final MaxBotixUltrasonicSensorSubsystem maxBotixUltrasonicSensorSubsystem = new MaxBotixUltrasonicSensorSubsystem();
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
-
+    new JoystickButton(joystick, XboxController.Button.kRightBumper.value).toggleWhenPressed(new RunLoader(loaderSubsystem, joystick, 0.3));
   }
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-//    *
-//    * @return the command to run in autonomous
-//    */
 
-  // uncomment when u need to use this
-  // public Command getAutonomousCommand() {
-  //   return autonomousCommand;
-  // }
-
-  // set default commands here
-  public void setDefaultCommands(){
+  public void setDefaultCommands() {
     
   }
 }

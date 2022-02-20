@@ -9,39 +9,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 public class RunLoader extends CommandBase {
-  /** Creates a new RunLoader. */
   private LoaderSubsystem loaderSubsystem;
   private XboxController joystick;
-  public RunLoader(LoaderSubsystem loaderSubsystem, XboxController joystick) {
+  private double power;
+
+  public RunLoader(LoaderSubsystem loaderSubsystem, XboxController joystick, double power) {
     this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
     addRequirements(loaderSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(joystick.getAButton()) {
-      loaderSubsystem.setPower(0.3);
-    }
-    if (joystick.getYButton()) {
-      loaderSubsystem.setPower(-0.3);
-    }
-    else {
-      loaderSubsystem.setPower((0));
-    }
+    loaderSubsystem.setPower(power);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

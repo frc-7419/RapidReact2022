@@ -8,12 +8,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CanIds;
 
 public class LoaderSubsystem extends SubsystemBase {
-  /** Creates a new LoaderSubsystem. */
   private VictorSPX loader;
+
   public LoaderSubsystem() {
-    loader = new VictorSPX(0);
+    loader = new VictorSPX(CanIds.loaderVictor.id);
     loader.configFactoryDefault();
     loader.setInverted(true);
     loader.setSensorPhase(false);
@@ -23,7 +24,7 @@ public class LoaderSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public VictorSPX getloader() {
+  public VictorSPX getLoader() {
     return loader;
   }
   
