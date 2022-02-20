@@ -8,21 +8,15 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
-public class IntakeSubsystem extends SubsystemBase{
-    private CANSparkMax intakeMotor;
+public class IntakeSolenoidSubsystem extends SubsystemBase{
     private Solenoid intakeSolenoid; 
 
-    public IntakeSubsystem() {
-        intakeMotor = new CANSparkMax(CanIds.intake.id, MotorType.kBrushless);
+    public IntakeSolenoidSubsystem() {
         intakeSolenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, 0);
     }
 
     @Override
     public void periodic() {}
-
-    public void setPower(double power) {
-        intakeMotor.set(power);
-    }
 
     public void actuateSolenoid() {
         intakeSolenoid.set(true);
@@ -39,8 +33,4 @@ public class IntakeSubsystem extends SubsystemBase{
     public Solenoid getIntakeSolenoid() {
         return intakeSolenoid;
     }
-
-    public CANSparkMax getIntakeMotor() {
-        return intakeMotor;
-    } 
 }

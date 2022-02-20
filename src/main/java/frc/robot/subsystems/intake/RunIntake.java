@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PowerConstants;
 
-public class IntakeDefault extends CommandBase{
+public class RunIntake extends CommandBase{
   private IntakeSubsystem intakeSubsystem;
   private XboxController joystick;
   
-  public IntakeDefault(IntakeSubsystem intakeSubsystem, XboxController joystick) {
+  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
     this.intakeSubsystem = intakeSubsystem;
     this.joystick = joystick;
     addRequirements(intakeSubsystem);
