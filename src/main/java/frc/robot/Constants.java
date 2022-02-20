@@ -56,7 +56,7 @@ public final class Constants {
     }
 
     public static class PowerConstants {
-        public static double intakeMultiplier = -0.9;
+        public static double intakeMultiplier = 0.9;
     }
 
     public static class PIDConstants {

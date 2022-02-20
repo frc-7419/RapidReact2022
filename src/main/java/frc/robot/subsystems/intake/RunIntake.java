@@ -20,9 +20,8 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void execute() {
-    // assumption being that left trigger vals are negative
     if (Math.abs(joystick.getLeftTriggerAxis()) > 0) {
-      intakeSubsystem.setPower(intakeMultiplier * joystick.getLeftTriggerAxis());
+      intakeSubsystem.setPower(-intakeMultiplier * joystick.getLeftTriggerAxis());
     } else if (Math.abs(joystick.getRightTriggerAxis()) > 0) {
       intakeSubsystem.setPower(intakeMultiplier * joystick.getRightTriggerAxis());
     } else {
