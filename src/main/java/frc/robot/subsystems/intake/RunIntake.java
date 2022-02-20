@@ -1,31 +1,30 @@
 package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.PowerConstants;
 
 public class RunIntake extends CommandBase{
   private IntakeSubsystem intakeSubsystem;
   private XboxController joystick;
+  private double intakeMultiplier;
   
-  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
+  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick, double intakeMultiplier) {
     this.intakeSubsystem = intakeSubsystem;
     this.joystick = joystick;
+    this.intakeMultiplier = intakeMultiplier;
     addRequirements(intakeSubsystem);
   }
 
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
     // assumption being that left trigger vals are negative
     if (Math.abs(joystick.getLeftTriggerAxis()) > 0) {
-      intakeSubsystem.setPower(PowerConstants.intakeMultiplier * joystick.getLeftTriggerAxis());
+      intakeSubsystem.setPower(intakeMultiplier * joystick.getLeftTriggerAxis());
     } else if (Math.abs(joystick.getRightTriggerAxis()) > 0) {
-      intakeSubsystem.setPower(PowerConstants.intakeMultiplier * joystick.getRightTriggerAxis());
+      intakeSubsystem.setPower(intakeMultiplier * joystick.getRightTriggerAxis());
     } else {
       intakeSubsystem.setPower(0);
     }
