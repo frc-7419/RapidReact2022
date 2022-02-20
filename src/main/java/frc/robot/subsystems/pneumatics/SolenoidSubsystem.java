@@ -3,19 +3,18 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.pneumatics;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SolenoidSub extends SubsystemBase {
+public class SolenoidSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  DoubleSolenoid solenoid;
+  private Solenoid solenoid;
   //boolean reversed;
   
 
-  public SolenoidSub() {
-    solenoid = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM,0,1);
+  public SolenoidSubsystem() {
+    solenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, 0);
     //this.reversed = reversed;
   }
 
@@ -30,14 +29,17 @@ public class SolenoidSub extends SubsystemBase {
   }
 
   public void actuateSolenoid() {
-    solenoid.set(Value.kForward);
+    solenoid.set(true);
   }
 
   public void retractSolenoid() {
-    solenoid.set(Value.kReverse);
+    solenoid.set(false);
+  }
+  public void toggleSolenoid() {
+    solenoid.toggle();
   }
 
-  public void stopSolenoid() {
-    solenoid.set(Value.kOff);
-  }
+//  public void stopSolenoid() {
+//    solenoid.set(Value.kOff);
+//  }
 }

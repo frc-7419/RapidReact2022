@@ -8,26 +8,26 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class PneumaticsSub extends SubsystemBase {
+public class CompressorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  Compressor c;
-  boolean enabled = true;
-  boolean pressureSwitch;
-  double current;
+  private Compressor compressor;
+  private boolean enabled = true;
+  private boolean pressureSwitch;
+  private double current;
 
-  public PneumaticsSub() {
-    c = new Compressor(0, PneumaticsModuleType.CTREPCM);
-    c.enableDigital();
-    pressureSwitch = c.getPressureSwitchValue();
-    current = c.getCurrent();
+  public CompressorSubsystem() {
+    compressor = new Compressor(1, PneumaticsModuleType.CTREPCM);
+    compressor.enableDigital();
+    pressureSwitch = compressor.getPressureSwitchValue();
+    current = compressor.getCurrent();
   }
 
   public void start() { 
-    c.enableDigital();
+    compressor.enableDigital();
   }
 
   public void stop() {
-    c.disable();
+    compressor.disable();
   }
 
   @Override

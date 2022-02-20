@@ -4,32 +4,29 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
-import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.intake.IntakeDefault;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
-import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
-import frc.robot.subsystems.potentiometer.PotentiometerSubsystem;
+import frc.robot.subsystems.intake.DeployIntakeWithPneumatics;
+import frc.robot.subsystems.pneumatics.CompressorSubsystem;
+import frc.robot.subsystems.pneumatics.RunSolenoid;
+import frc.robot.subsystems.pneumatics.SolenoidForwardAndReverse;
+import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
 
-  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
-  private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
-  private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
-  private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
+  private final SolenoidSubsystem solenoid = new SolenoidSubsystem();
+  private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
+  private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
+  private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
+  private final DeployIntakeWithPneumatics deployIntakeWithPneumatics = new DeployIntakeWithPneumatics(solenoid, joystick);
 
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
@@ -40,7 +37,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-   
+    // new JoystickButton(joystick, XboxController.Button.kX.value).whenPressed(new RunPneumaticsSystem(solenoid, false));
+    // new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new RunPneumaticsSystem(solenoid, true));
   }
 
   public Command getAutonomousCommand() {
@@ -48,6 +46,7 @@ public class RobotContainer {
   }
   public void setDefaultCommands(){
     intakeSubsystem.setDefaultCommand(intakeDefault);
+    this.solenoid.setDefaultCommand(deployIntakeWithPneumatics);
   }
 
   
