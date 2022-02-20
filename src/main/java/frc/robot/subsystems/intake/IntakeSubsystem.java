@@ -10,7 +10,7 @@ public class IntakeSubsystem extends SubsystemBase{
     private CANSparkMax intake;
 
     public IntakeSubsystem() {
-        intake = new CANSparkMax(CanIds.intake.id, MotorType.kBrushless);
+        intake = new CANSparkMax(CanIds.intakeSpark.id, MotorType.kBrushless);
     }
 
     @Override

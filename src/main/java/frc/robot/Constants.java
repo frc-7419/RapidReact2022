@@ -30,11 +30,10 @@ public final class Constants {
         leftFalcon2(4),
         rightFalcon2(3),
         loaderFalcon(10),
-        intake(11),
         revolverVictor(12),
         climberFalcon(13),
-        shooterFalcon(14), 
-        hoodVictor(40), 
+        shooterFalcon(14),
+        intakeSpark(15),  
         ;
 
         public final int id;
