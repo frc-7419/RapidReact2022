@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
-import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 
 public class LiftWithSliderSubsystem extends SubsystemBase{
     private TalonFX leftMotor;
@@ -14,8 +13,8 @@ public class LiftWithSliderSubsystem extends SubsystemBase{
     
     public LiftWithSliderSubsystem() {
         // need to change id and channel of the solenoids later
-        this.leftMotor = new TalonFX(CanIds.leftLift.id);
-        this.rightMotor = new TalonFX(CanIds.rightLift.id);
+        leftMotor = new TalonFX(CanIds.leftElevatorFalcon.id);
+        rightMotor = new TalonFX(CanIds.rightElevatorFalcon.id);
     }
 
     @Override
