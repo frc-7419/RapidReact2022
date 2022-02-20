@@ -34,7 +34,7 @@ public final class Constants {
         intakeSpark(15),  
         loaderVictor(16),
         ;
-        public static int maxboticsUltrasonicId = 1;
+        
         public final int id;
         private CanIds(int id) {
             this.id = id;
