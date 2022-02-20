@@ -29,8 +29,8 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        climberFalcon(13),
-        shooterFalcon(14), 
+        bottomShooterFalcon(10),
+        topShooterFalcon(14),
         loaderVictor(16),
         ;
         public static int maxboticsUltrasonicId = 1;
