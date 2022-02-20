@@ -42,7 +42,7 @@ public class RobotContainer {
     return turnToTargetClosedLoop;
   }
   public void setDefaultCommands() {
-    sparkMaxSubsystem.setDefaultCommand(joystickSparkMax);
+    turretSubsystem.setDefaultCommand(turnToTargetClosedLoop);
   }
 
   

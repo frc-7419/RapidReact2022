@@ -32,12 +32,9 @@ public final class Constants {
         loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
-        climberFalcon(13),
-        shooterFalcon(14), 
-        hoodVictor(40), 
-
-        //2022 robot constants
-        turret(21);
+        bottomShooterFalcon(10),
+        topShooterFalcon(14),
+        turretSpark(21),
         ;
 
         public final int id;
