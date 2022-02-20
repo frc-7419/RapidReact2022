@@ -16,6 +16,7 @@ public class RunLoader extends CommandBase {
   public RunLoader(LoaderSubsystem loaderSubsystem, XboxController joystick, double power) {
     this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
+    this.power = power;
     addRequirements(loaderSubsystem);
   }
 
