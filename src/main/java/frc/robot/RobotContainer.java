@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.ArrowRunShooterWithJoystick;
 import frc.robot.subsystems.shooter.BasicShooterSubsystem;
-import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
 import frc.robot.subsystems.spark.JoystickSparkMax;
 import frc.robot.subsystems.spark.SparkMaxSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 
 public class RobotContainer {
@@ -26,14 +26,6 @@ public class RobotContainer {
   private final JoystickSparkMax joystickSparkMax = new JoystickSparkMax(sparkMaxSubsystem, joystick, 0.1);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(sparkMaxSubsystem,limelightSubsystem);
 
-
-  public RobotContainer() {
-    configureButtonBindings();
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.shooter.GetToTargetVelocity;
-
-public class RobotContainer {
-  private final XboxController joystick = new XboxController(0);
   private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
   
   private final ArrowRunShooterWithJoystick arrowRunShooterWithJoystick = new ArrowRunShooterWithJoystick(basicShooterSubsystem, joystick);
