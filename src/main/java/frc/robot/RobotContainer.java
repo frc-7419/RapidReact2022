@@ -15,10 +15,10 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
 
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
-  // private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
+  private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
+  private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
 
-  // private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
+  private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
 
   public RobotContainer() {
@@ -33,7 +33,7 @@ public class RobotContainer {
 
   public void setDefaultCommands(){
     intakeSubsystem.setDefaultCommand(runIntake);
-    // intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
+    intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
   }
 
   
