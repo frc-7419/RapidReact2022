@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.ultrasonicSensor.MaxBotixUltrasonicSensorSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.colorSensor.RevColorDistanceSub;
@@ -23,6 +24,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
   private final RevColorDistanceSub revColorDistanceSub = new RevColorDistanceSub();
+  private final MaxBotixUltrasonicSensorSubsystem maxBotixUltrasonicSensorSubsystem = new MaxBotixUltrasonicSensorSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 

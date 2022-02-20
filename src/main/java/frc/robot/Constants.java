@@ -36,7 +36,7 @@ public final class Constants {
         shooterFalcon(14), 
         hoodVictor(40), 
         ;
-
+        public static int maxboticsUltrasonicId = 1;
         public final int id;
         private CanIds(int id) {
             this.id = id;
