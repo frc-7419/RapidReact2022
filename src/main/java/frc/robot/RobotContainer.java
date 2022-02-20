@@ -9,6 +9,9 @@ import frc.robot.subsystems.turret.AlignTurretWithOnboardPIDController;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.shooter.ArrowRunShooterWithJoystick;
+import frc.robot.subsystems.shooter.BasicShooterSubsystem;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.limelight.TurnToTargetClosedLoop;
 import frc.robot.subsystems.spark.JoystickSparkMax;
@@ -26,25 +29,38 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureButtonBindings();
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
+
+public class RobotContainer {
+  private final XboxController joystick = new XboxController(0);
+  private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
+  
+  private final ArrowRunShooterWithJoystick arrowRunShooterWithJoystick = new ArrowRunShooterWithJoystick(basicShooterSubsystem, joystick);
+
+  public RobotContainer() {
+    configureButtonBindings();
+
     smartDashboardBindings();
   }
 
   private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kA.value).whenPressed(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem));
+    // new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000));
+   
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("kP", 0.005);
-    SmartDashboard.putNumber("kI", 0);
-    SmartDashboard.putNumber("kD", 0);
+    // SmartDashboard.putNumber("targetRPM", 1000);
+    // SmartDashboard.putNumber("shooterKp", PIDConstants.ShooterkP);
+    // SmartDashboard.putNumber("shooterKi", PIDConstants.ShooterkI);
   }
 
   public Command getAutonomousCommand() {
-    return turnToTargetClosedLoop;
+    return new WaitCommand(0);
   }
-  public void setDefaultCommands() {
+    
+  public void setDefaultCommands(){
+    basicShooterSubsystem.setDefaultCommand(arrowRunShooterWithJoystick);
     sparkMaxSubsystem.setDefaultCommand(joystickSparkMax);
   }
-
-  
 }
