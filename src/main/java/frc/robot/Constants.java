@@ -32,8 +32,9 @@ public final class Constants {
         bottomShooterFalcon(10),
         topShooterFalcon(14),
         intakeSpark(15),  
+        loaderVictor(16),
         ;
-
+        public static int maxboticsUltrasonicId = 1;
         public final int id;
         private CanIds(int id) {
             this.id = id;
