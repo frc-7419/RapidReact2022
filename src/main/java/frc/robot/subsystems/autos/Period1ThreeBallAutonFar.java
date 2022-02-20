@@ -12,9 +12,9 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
 
     public Period1ThreeBallAutonFar(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 75.0));
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 135, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 135, PIDConstants.GyrokP135, PIDConstants.GyrokI135, PIDConstants.GyrokD135));
         addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 116.4));
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63, PIDConstants.GyrokP63, PIDConstants.GyrokP63, PIDConstants.GyrokP63));
+        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 45, PIDConstants.GyrokP45, PIDConstants.GyrokP45, PIDConstants.GyrokP45));
         
 
 // if its not reaching setpoint, increase P

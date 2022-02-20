@@ -94,6 +94,16 @@ public final class Constants {
         public static double GyrokI122 = 0.00051636;
         public static double GyrokD122 = 0.00050584;
 
+        public static double GyrokP135 = 0.0087;
+        public static double GyrokI135 = 0;
+        public static double GyrokD135 = 0.0000083;
+
+        public static double GyrokP45 = 0.007;
+        public static double GyrokI45 = 0;
+        public static double GyrokD45 = 0.0001;
+
+        
+
 
 
     }
