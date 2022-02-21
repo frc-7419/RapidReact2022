@@ -90,9 +90,4 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getAlpha() {return alpha;}
   public double getBeta() {return beta;}
 
-  public void setLED(int state) {
-    networkTable.getEntry("ledMode").setNumber(state);
-  }
-
-
 }

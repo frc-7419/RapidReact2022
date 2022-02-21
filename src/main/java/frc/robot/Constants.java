@@ -48,14 +48,11 @@ public final class Constants {
     }
 
     public static class RobotConstants {
-        public static double shooterRadius = 0.5; // placeholder value, will change
-        public static double turretRadius = 1.5625; // placeholder value, will change
-        public static double turretGearRatio = 100/12;
-    }
-
-    public static class PowerConstants {
-        public static final double intakeMultiplier = 1.0;
         public static final double TalonFXTicksPerRotation = 2048;
+
+        public static final double turretRadius = 1.5625; // placeholder value, will change
+        public static final double turretGearRatio = 100/12;
+
         public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
         public static final double topShooterWheelRadius = 1.5;
 
@@ -68,6 +65,10 @@ public final class Constants {
         public static final double BottomShooterKs = 0.1;
         public static final double BottomShooterKv = 0.1;
         public static final double BottomShooterKa = 0.1;
+    }
+
+    public static class PowerConstants {
+        public static final double intakeMultiplier = 1.0;
     }
 
     public static class PIDConstants {
@@ -93,33 +94,6 @@ public final class Constants {
         public static final double ShooterkF = 0.05;
     }
 
-    // old 
-
-    // public static final double[][] kSpeedToFf = {
-    //     {1000, .09},
-    //     {2000, .065},
-    //     {3000, .0575},
-    //     {4000, .0545},
-    //     {5000, .0525},
-    //     {6000, .051},
-    //     {7000, .0505},
-    //     {8000, .0495},
-    //     {9000, .049},
-    //     {10000, .0485},
-    //     {11000, .0482},
-    //     {12000, .0478},
-    //     {13000, .0475},
-    //     {14000, .0474},
-    //     {15000, .0474},
-    //     {16000, .0474},
-    //     {17000, .0472},
-    //     {18000, .047},
-    //     {19000, .047},
-    //     {20000, .047},
-    //     {21000, .0472},
-    //     {22000, .0472},
-    // };   
-    
     public static final double[][] kRawVelocityToTopFf = {
         {1000, 0.06365},
         {1500, 0.058615},
