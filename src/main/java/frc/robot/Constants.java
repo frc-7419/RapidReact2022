@@ -23,10 +23,8 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        intakeVictor(11),
-        topShooterFalcon(13), 
+        topShooterFalcon(14), 
         bottomShooterFalcon(10),
-        hoodVictor(40), 
         ;
 
         public final int id;
@@ -52,14 +50,14 @@ public final class Constants {
         public static final double topShooterWheelRadius = 1.5;
 
         // top shooter kS, kV, kA
-        public static final double TopShooterKs = 0.73569;
-        public static final double TopShooterKv = 0.10952;
-        public static final double TopShooterKa = 0.0056306;
+        public static final double TopShooterKs = 0.73569 * 2048;
+        public static final double TopShooterKv = 0.10952 * 2048;
+        public static final double TopShooterKa = 0.0056306 * 2048;
 
         // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.57654;
-        public static final double BottomShooterKv = 0.10892;
-        public static final double BottomShooterKa = 0.0044231;
+        public static final double BottomShooterKs = 0.57654 * 2048;
+        public static final double BottomShooterKv = 0.10892 * 2048;
+        public static final double BottomShooterKa = 0.0044231 * 2048;
     }
 
     public static class PIDConstants {

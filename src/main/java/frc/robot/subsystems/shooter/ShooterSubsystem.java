@@ -70,6 +70,9 @@ public class ShooterSubsystem extends SubsystemBase{
 
         SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetRawVelocity);
         SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetRawVelocity);
+
+        SmartDashboard.putNumber("tKf", getTopkF());
+        SmartDashboard.putNumber("bKf", getBottomkF());
     }
 
     public void run() {
