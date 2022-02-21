@@ -5,16 +5,15 @@
 package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunShooterWithJoystick extends CommandBase {
   /** Creates a new RunShooterWithJoystick. */
   private BasicShooterSubsystem basicShooterSubsystem;
   private XboxController joystick;
-  private double powerLeft;
-  private double powerRight;
-  private double powerBoth;
+  private double powerTop = 0;
+  private double powerBottom = 0;
+  private double stepInterval = 0.005;
 
   public RunShooterWithJoystick(BasicShooterSubsystem basicShooterSubsystem, XboxController joystick) {
     this.basicShooterSubsystem = basicShooterSubsystem;
@@ -25,20 +24,38 @@ public class RunShooterWithJoystick extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
+  public static enum Direction {
+    UP(0), RIGHT(90), DOWN(180), LEFT(270);
 
+    int direction;
+
+    private Direction(int direction) {
+        this.direction = direction;
+    }
+}
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      SmartDashboard.putNumber("power left", joystick.getLeftTriggerAxis());
-      SmartDashboard.putNumber("power right", joystick.getRightTriggerAxis());
-
-      powerLeft = joystick.getLeftTriggerAxis();
-      powerRight = joystick.getRightTriggerAxis();
-      basicShooterSubsystem.setTopPower(powerLeft);
-      basicShooterSubsystem.setBottomPower(powerRight);
-
-      if (joystick.getRightY() != 0) {
-        basicShooterSubsystem.setBothPower(joystick.getRightY());
+      int dPadValue = joystick.getPOV();
+      if (dPadValue == Direction.UP.direction) {
+        powerTop += stepInterval;
+      } else if (dPadValue == Direction.DOWN.direction) {
+        powerTop -= stepInterval;
+      } else if (dPadValue == Direction.RIGHT.direction) {
+        powerBottom += stepInterval;
+      } else if (dPadValue == Direction.LEFT.direction) {
+        powerBottom -= stepInterval;
+      }
+      basicShooterSubsystem.setTopPower(powerTop);
+      basicShooterSubsystem.setBottomPower(powerBottom);
+      if (-joystick.getRightY() > 0) {
+        basicShooterSubsystem.setBothPower(-joystick.getRightY());
+        
+      }
+      if (joystick.getBButtonPressed()) {
+        basicShooterSubsystem.setBothPower(0);
+        powerTop = 0;
+        powerBottom = 0;
       }
   }
 
