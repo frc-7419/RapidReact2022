@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurnToTargetClosedLoop;
 import frc.robot.subsystems.turret.TurretSubsystem;
+import frc.robot.snippets.DiscardWrongColor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
@@ -13,6 +14,7 @@ import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.colorSensor.RevColorDistanceSub;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
@@ -28,14 +30,14 @@ public class RobotContainer {
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
-  
+  private final RevColorDistanceSub revColorDistanceSub = new RevColorDistanceSub();
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
   private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
-
+  private final DiscardWrongColor discardWrongColor = new DiscardWrongColor(turretSubsystem, revColorDistanceSub);
   public RobotContainer() {
     configureButtonBindings();
     smartDashboardBindings();
@@ -55,5 +57,6 @@ public class RobotContainer {
     loaderSubsystem.setDefaultCommand(runLoader);
     basicShooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
+    revColorDistanceSub.setDefaultCommand(discardWrongColor);
   }
 }
