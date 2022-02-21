@@ -30,7 +30,7 @@ public class RobotContainer {
   private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
   
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
   private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
