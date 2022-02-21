@@ -13,37 +13,25 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
-  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
-  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
-
-
+  
   public RobotContainer() {
     configureButtonBindings();
     smartDashboardBindings();
   }
 
-  private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kA.value).whenPressed(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem));
-  }
+  private void configureButtonBindings() {}
 
-  private void smartDashboardBindings() {
-    SmartDashboard.putNumber("kP", 0.005);
-    SmartDashboard.putNumber("kI", 0);
-    SmartDashboard.putNumber("kD", 0);
-  }
+  private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return turnToTargetClosedLoop;
-  }
-  public void setDefaultCommands() {
-    turretSubsystem.setDefaultCommand(turnToTargetClosedLoop);
+    return new WaitCommand(0);
   }
 
-  
+  public void setDefaultCommands() {}
+
 }
