@@ -37,7 +37,7 @@ public class RobotContainer {
   private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
-  private final DiscardWrongColor discardWrongColor = new DiscardWrongColor(turretSubsystem, revColorDistanceSub);
+  private final DiscardWrongColor discardWrongColor = new DiscardWrongColor(turretSubsystem, basicShooterSubsystem, revColorDistanceSub);
   public RobotContainer() {
     configureButtonBindings();
     smartDashboardBindings();
