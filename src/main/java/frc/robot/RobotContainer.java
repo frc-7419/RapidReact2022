@@ -20,7 +20,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
-  private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
+  // private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
 
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);

@@ -28,6 +28,9 @@ public class RunLoader extends CommandBase {
     if (joystick.getLeftBumper()) {
       loaderSubsystem.setPower(power);
     }
+    // else if (joystick.getRightBumper()) {
+    //   loaderSubsystem.setPower(-power);
+    // }
     else {
       loaderSubsystem.setPower(0);
     }
