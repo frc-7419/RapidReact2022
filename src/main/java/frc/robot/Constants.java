@@ -29,12 +29,13 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        loaderFalcon(10),
         bottomShooterFalcon(10),
         topShooterFalcon(14),
+        intakeSpark(15),  
+        loaderVictor(16),
         turretSpark(21),
         ;
-
+        
         public final int id;
         private CanIds(int id) {
             this.id = id;
@@ -42,14 +43,14 @@ public final class Constants {
     }
 
     public static class LimelightConstants {
-        public static double kTargetHeight = 2.6416; //meters
-        public static double kCameraHeight = 0.8128;
-        public static double mountingAngle = 55; 
-        public static double m = 1.0; 
-        public static double n = 0.48; //arbitrary
-        public static double r1 = 0.37; //arbitrary
-        public static double g = -9.8;  
-        public static double focalLength = 2.9272781257541;
+        public static final double kTargetHeight = 2.6416; //meters
+        public static final double kCameraHeight = 0.8128;
+        public static final double mountingAngle = 55; 
+        public static final double m = 1.0; 
+        public static final double n = 0.48; //arbitrary
+        public static final double r1 = 0.37; //arbitrary
+        public static final double g = -9.8;  
+        public static final double focalLength = 2.9272781257541;
     }
 
     public static class RobotConstants {
@@ -58,7 +59,11 @@ public final class Constants {
         public static double turretGearRatio = 100/12;
     }
 
-    public static class PIDFConstants {
+    public static class PowerConstants {
+        public static double intakeMultiplier = 1.0;
+    }
+
+    public static class PIDConstants {
         //gyro
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
@@ -73,9 +78,15 @@ public final class Constants {
         public static double TurretPotentiometerkP = 0;
         public static double TurretPotentiometerkI = 0;
         public static double TurretPotentiometerkD = 0;
+
+        //shooter
+        public static final double ShooterkP = 0;
+        public static final double ShooterkI = 0;
+        public static final double ShooterkD = 0;
+        public static final double ShooterkF = 0;
     }
 
-    public static double[][] kSpeedToFf = {
+    public static final double[][] kSpeedToFf = {
         {1000, .09},
         {2000, .065},
         {3000, .0575},
