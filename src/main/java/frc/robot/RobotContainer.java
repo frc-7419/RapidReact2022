@@ -47,7 +47,7 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return new WaitCommand(0);
+    return turnToTargetClosedLoop;
   }
     
   public void setDefaultCommands(){
