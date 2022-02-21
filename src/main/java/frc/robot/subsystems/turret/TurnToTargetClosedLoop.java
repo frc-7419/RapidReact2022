@@ -1,14 +1,14 @@
-package frc.robot.subsystems.limelight;
+package frc.robot.subsystems.turret;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.spark.SparkMaxSubsystem;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class TurnToTargetClosedLoop extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
-  private SparkMaxSubsystem sparkMaxSubsystem;
+  private TurretSubsystem turretSubsystem;
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
@@ -20,10 +20,10 @@ public class TurnToTargetClosedLoop extends CommandBase {
   private double tx;
   private double tv;
 
-  public TurnToTargetClosedLoop(SparkMaxSubsystem sparkMaxSubsystem, LimelightSubsystem limelightSubsystem) {
-    this.sparkMaxSubsystem = sparkMaxSubsystem;
+  public TurnToTargetClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+    this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    addRequirements(sparkMaxSubsystem, limelightSubsystem);
+    addRequirements(turretSubsystem);
   }
 
   @Override
@@ -52,13 +52,13 @@ public class TurnToTargetClosedLoop extends CommandBase {
       pidController = new PIDController(kP, kI, kD);
       pidOutput = pidController.calculate(tx);
       SmartDashboard.putNumber("pid output", pidOutput);
-      sparkMaxSubsystem.setPower(-pidOutput);
+      turretSubsystem.setPower(-pidOutput);
     }
   }
 
   @Override
   public void end(boolean interrupted) {
-    sparkMaxSubsystem.setPower(0);
+    turretSubsystem.setPower(0);
   }
 
   @Override

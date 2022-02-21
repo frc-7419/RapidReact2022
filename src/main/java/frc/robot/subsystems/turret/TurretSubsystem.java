@@ -40,8 +40,8 @@ public class TurretSubsystem extends SubsystemBase {
     pidController = turret.getPIDController();
 
     // set limit switches
-    forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
-    reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+    forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+    reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
     forwardLimit.enableLimitSwitch(false);
     reverseLimit.enableLimitSwitch(false);

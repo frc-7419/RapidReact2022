@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.AlignTurretWithOnboardPIDController;
+import frc.robot.subsystems.turret.RunTurretWithJoystick;
+import frc.robot.subsystems.turret.TurnToTargetClosedLoop;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,10 +26,10 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
-  private final SparkMaxSubsystem sparkMaxSubsystem = new SparkMaxSubsystem();
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final JoystickSparkMax joystickSparkMax = new JoystickSparkMax(sparkMaxSubsystem, joystick, 0.1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(sparkMaxSubsystem,limelightSubsystem);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
+  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
 
   private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
   
@@ -67,6 +69,6 @@ public class RobotContainer {
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
     loaderSubsystem.setDefaultCommand(runLoader);
     basicShooterSubsystem.setDefaultCommand(arrowRunShooterWithJoystick);
-    sparkMaxSubsystem.setDefaultCommand(joystickSparkMax);
+    turretSubsystem.setDefaultCommand(turnToTargetClosedLoop);
   }
 }
