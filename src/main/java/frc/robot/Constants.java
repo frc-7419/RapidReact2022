@@ -53,6 +53,11 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
+
+        // intake 
+        public static double IntakeKs;
+        public static double IntakeKv;
+        public static double IntakeKa;
     }
 
     public static class PowerConstants {
@@ -60,10 +65,10 @@ public final class Constants {
     }
 
     public static class PIDConstants {
-        //gyro
-        public static double GyrokP = 0.085;
-        public static double GyrokI = 0;
-        public static double GyrokD = 0;
+        // intake
+        public static double IntakeKp = 0.01;
+        public static double IntakeKd = 0;
+        public static double IntakeKi = 0;
     }
 
     public static double[][] kSpeedToFf = {
