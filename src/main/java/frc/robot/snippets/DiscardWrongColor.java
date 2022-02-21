@@ -28,21 +28,23 @@ public class DiscardWrongColor extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    startTime = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (revColorDistanceSub.getColor() == wrongColor && !ran){
+
         SmartDashboard.putString("discard: ", "true");
-        turretSubsystem.setPower(power);
-        if (System.currentTimeMillis() - startTime > time){
-            return true;
-        } else {
-            return false;
+        startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < time){
+            turretSubsystem.setPower(power);
         }
-        ran=true;
+        startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < time){
+            turretSubsystem.setPower(-power);
+        }
+        // ran=true;
     }
   }
 
@@ -53,6 +55,6 @@ public class DiscardWrongColor extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
+      return false;
   }
 }
