@@ -30,10 +30,11 @@ public final class Constants {
         leftFalcon2(4),
         rightFalcon2(3),
         bottomShooterFalcon(10),
-        topShooterFalcon(14), 
-        turretSpark(21),
+        topShooterFalcon(14),
+        intakeSpark(15),  
+        loaderVictor(16),
         ;
-
+        
         public final int id;
         private CanIds(int id) {
             this.id = id;
@@ -57,7 +58,11 @@ public final class Constants {
         public static double turretGearRatio = 100/12;
     }
 
-    public static class PIDFConstants {
+    public static class PowerConstants {
+        public static double intakeMultiplier = 1.0;
+    }
+
+    public static class PIDConstants {
         //gyro
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
