@@ -55,12 +55,12 @@ public class LimelightSubsystem extends SubsystemBase {
     alpha = Math.atan((b-Math.tan(Math.toRadians(theta)))/(1+(b*Math.tan(Math.toRadians(theta)))));
     beta = theta + alpha;
 
-    SmartDashboard.putNumber("tv", tv.getDouble(0));
-    SmartDashboard.putNumber("tx", tx.getDouble(0));
-    SmartDashboard.putNumber("ty", ty.getDouble(0));
-    SmartDashboard.putNumber("ta", ta.getDouble(0));
-    SmartDashboard.putNumber("theta", getTheta());
-    SmartDashboard.putNumber("distance", getDistance());
+    // SmartDashboard.putNumber("tv", tv.getDouble(0));
+    // SmartDashboard.putNumber("tx", tx.getDouble(0));
+    // SmartDashboard.putNumber("ty", ty.getDouble(0));
+    // SmartDashboard.putNumber("ta", ta.getDouble(0));
+    // SmartDashboard.putNumber("theta", getTheta());
+    // SmartDashboard.putNumber("distance", getDistance());
   }
 
   @Override
@@ -84,11 +84,15 @@ public class LimelightSubsystem extends SubsystemBase {
   }
   
   public double getTheta() {return theta;}
-
+  
   public double getDistance() {return distance;}
   public double getA() {return a;}
   public double getAlpha() {return alpha;}
   public double getBeta() {return beta;}
 
-  
+  public void setLED(int state) {
+    networkTable.getEntry("ledMode").setNumber(state);
+  }
+
+
 }
