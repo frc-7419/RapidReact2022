@@ -38,9 +38,14 @@ public class RobotContainer {
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("tTargetRV", 2000);
     SmartDashboard.putNumber("bTargetRV", 2000);
-    SmartDashboard.putNumber("bkP", PIDConstants.BottomShooterkP);
-    SmartDashboard.putNumber("bkI", PIDConstants.BottomShooterkI);
+
+    SmartDashboard.putNumber("bKp", PIDConstants.BottomShooterkP);
+    SmartDashboard.putNumber("bKi", PIDConstants.BottomShooterkI);
     SmartDashboard.putNumber("bKd", PIDConstants.BottomShooterkD);
+
+    SmartDashboard.putNumber("tKp", PIDConstants.TopShooterkP);
+    SmartDashboard.putNumber("tKi", PIDConstants.TopShooterkI);
+    SmartDashboard.putNumber("tKd", PIDConstants.TopShooterkD);
   }
 
   public Command getAutonomousCommand() {
