@@ -79,6 +79,10 @@ public class LimelightSubsystem extends SubsystemBase {
     return ty.getDouble(0);
   }
   
+  public void setLED(int state) {
+    networkTable.getEntry("ledMode").setNumber(state);
+  }
+  
   public double getTheta() {return theta;}
 
   public double getDistance() {return distance;}
@@ -87,19 +91,4 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getBeta() {return beta;}
 
   
-  /**
-   * set limelight led state
-   * @param state Integer with value of 0, 1, 2, or 3
-   * <ul>
-   * <li>0: use the LED Mode set in the current pipeline</li>
-   * <li>1: force off</li>
-   * <li>2: force blink</li>
-   * <li>3: force on</li>
-   * </ul>
-   */
-  public void setLED(int state) {
-    networkTable.getEntry("ledMode").setNumber(state);
-  }
-
-
 }

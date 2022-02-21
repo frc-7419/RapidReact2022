@@ -30,11 +30,9 @@ public final class Constants {
         leftFalcon2(4),
         rightFalcon2(3),
         loaderFalcon(10),
-        intakeVictor(11),
-        revolverVictor(12),
-        climberFalcon(13),
-        shooterFalcon(14), 
-        hoodVictor(40), 
+        bottomShooterFalcon(10),
+        topShooterFalcon(14),
+        turretSpark(21),
         ;
 
         public final int id;
@@ -56,13 +54,25 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
+        public static double turretRadius = 1.5625; // placeholder value, will change
+        public static double turretGearRatio = 100/12;
     }
 
-    public static class PIDConstants {
+    public static class PIDFConstants {
         //gyro
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
         public static double GyrokD = 0;
+
+        //turret position closed loop
+        public static double TurretMotionMagickP = 0;
+        public static double TurretMotionMagickI = 0;
+        public static double TurretMotionMagickD = 0;
+
+        //turret potentiometer
+        public static double TurretPotentiometerkP = 0;
+        public static double TurretPotentiometerkI = 0;
+        public static double TurretPotentiometerkD = 0;
     }
 
     public static double[][] kSpeedToFf = {
