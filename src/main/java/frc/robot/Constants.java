@@ -53,6 +53,7 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
+        public static double intakeWheelRadius = 1.0;
 
         // intake 
         public static double IntakeKs;
