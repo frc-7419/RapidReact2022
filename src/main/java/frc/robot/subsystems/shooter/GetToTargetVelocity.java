@@ -35,8 +35,8 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
-    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
-    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.BottomShooterkP);
+    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.BottomShooterkI);
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
@@ -59,8 +59,8 @@ public class GetToTargetVelocity extends CommandBase {
     SmartDashboard.putBoolean("Shooter Running", true);
 
     // update PIF values from SD while running
-    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.ShooterkP);
-    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.ShooterkI);
+    kP = SmartDashboard.getNumber("shooterKp", PIDConstants.BottomShooterkP);
+    kI = SmartDashboard.getNumber("shooterKi", PIDConstants.BottomShooterkI);
 
     topKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
     bottomKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
