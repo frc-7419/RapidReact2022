@@ -32,6 +32,7 @@ public class RunIntakeWithDriveBase extends CommandBase{
 
     if (driveBaseRawVelocity > 0) {
       intakeSubsystem.setPIDFConstants(PIDConstants.IntakeKp, PIDConstants.IntakeKd, PIDConstants.IntakeKi, intakeFeedforward.calculate(driveBaseRawVelocity * 2));
+      intakeSubsystem.getIntakePIDController().setVeloc
     }
     else {
       intakeSubsystem.setPower(0.9);
