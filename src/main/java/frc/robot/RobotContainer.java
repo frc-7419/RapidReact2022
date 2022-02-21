@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.shooter.ArrowRunShooterWithJoystick;
+import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.BasicShooterSubsystem;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -19,7 +19,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
   
-  private final ArrowRunShooterWithJoystick arrowRunShooterWithJoystick = new ArrowRunShooterWithJoystick(basicShooterSubsystem, joystick);
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -43,7 +43,6 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands(){
-    // shooterBasicSubsystem.setDefaultCommand(runShooterWithJoystick);
-    basicShooterSubsystem.setDefaultCommand(arrowRunShooterWithJoystick);
+    basicShooterSubsystem.setDefaultCommand(runShooterWithJoystick);
   }
 }
