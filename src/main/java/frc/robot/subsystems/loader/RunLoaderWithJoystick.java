@@ -8,12 +8,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
-public class RunLoader extends CommandBase {
+public class RunLoaderWithJoystick extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
+  private XboxController joystick;
   private double power;
 
-  public RunLoader(LoaderSubsystem loaderSubsystem, double power) {
+  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem, XboxController joystick, double power) {
     this.loaderSubsystem = loaderSubsystem;
+    this.joystick = joystick;
     this.power = power;
     addRequirements(loaderSubsystem);
   }
@@ -23,13 +25,19 @@ public class RunLoader extends CommandBase {
 
   @Override
   public void execute() {
-    loaderSubsystem.setPower(power);
+    if (joystick.getLeftBumper()) {
+      loaderSubsystem.setPower(power);
+    }
+    // else if (joystick.getRightBumper()) {
+    //   loaderSubsystem.setPower(-power);
+    // }
+    else {
+      loaderSubsystem.setPower(0);
+    }
   }
 
   @Override
-  public void end(boolean interrupted) {
-    loaderSubsystem.setPower(0);
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {

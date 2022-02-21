@@ -1,11 +1,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 import frc.robot.subsystems.loader.LoaderSubsystem;
-import frc.robot.subsystems.loader.RunLoader;
+import frc.robot.subsystems.loader.RunLoaderWithJoystick;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.Constants.PowerConstants;
+import frc.robot.snippets.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.pneumatics.CompressorSubsystem;
@@ -20,11 +21,12 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
-  // private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
 
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
-  private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
-  private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
+  private final RunIntakeWithJoystick runIntake = new RunIntakeWithJoystick(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
+  private final RunLoaderWithJoystick runLoader = new RunLoaderWithJoystick(loaderSubsystem, joystick, 1);
+
+  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -37,9 +39,12 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands(){
-    intakeSubsystem.setDefaultCommand(runIntake);
+    // intakeSubsystem.setDefaultCommand(runIntake);
+    // loaderSubsystem.setDefaultCommand(runLoader);
+
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
-    loaderSubsystem.setDefaultCommand(runLoader);
+    intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
+    loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
   }
 
   
