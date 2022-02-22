@@ -26,19 +26,14 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
-    if(!sparkMaxSubsystem.getLimitSwitch().get()) {
-      sparkMaxSubsystem.setSpeed(joystick.getLeftX());
-    }
-    else if(sparkMaxSubsystem.getLimitSwitch().get()) {
-      sparkMaxSubsystem.setSpeed(0);
-    }
+    //SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    sparkMaxSubsystem.setSpeed(0);
+    //sparkMaxSubsystem.setSpeed(0);
   }
 
   // Returns true when the command should end.
