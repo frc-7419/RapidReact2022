@@ -6,6 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.limitswitch.LimitswitchSubsystem;
+import frc.robot.subsystems.talon.RunMotorWithLimitSwitch;
+import frc.robot.subsystems.talon.TalonSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -17,9 +20,10 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
+  private final TalonSubsystem talonSubsystem = new TalonSubsystem();
+  private final RunMotorWithLimitSwitch runMotorWithLimitSwitch = new RunMotorWithLimitSwitch(limitSwitchSubsystem, talonSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -35,6 +39,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+   
 
   }
   /**
@@ -50,6 +55,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    talonSubsystem.setDefaultCommand(runMotorWithLimitSwitch);
   }
 }
