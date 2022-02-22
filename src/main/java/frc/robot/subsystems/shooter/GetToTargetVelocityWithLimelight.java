@@ -16,8 +16,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   private double kP;
   private double kI;
-  private double kD;
-  private double kF;
+  private double tkF;
+  private double bkF;
 
   private double initialVelocity;
 
@@ -34,18 +34,16 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putString("shooter", "ramping up");
+    // SmartDashboard.putBoolean("Shooter Running", false);
 
     // redo math?
     initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
     
     topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
     bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
-    
-    
-    shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    shooterSubsystem.setPIDF(kP, kI, kD, shooterSubsystem.getkF());
+    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.computeTopkF(topTargetRPM));
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.computeBottomkF(bottomTargetRPM));
     
     shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
@@ -54,17 +52,20 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void execute() {
+    // SmartDashboard.putBoolean("Shooter Running", true);
+
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
 
-    SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
-    SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
-    SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
+    // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
+    // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
+    // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
   }
 
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.off();
+    // SmartDashboard.putBoolean("Shooter Running", false);
   }
 
   @Override

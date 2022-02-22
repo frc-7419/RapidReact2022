@@ -55,12 +55,12 @@ public class LimelightSubsystem extends SubsystemBase {
     alpha = Math.atan((b-Math.tan(Math.toRadians(theta)))/(1+(b*Math.tan(Math.toRadians(theta)))));
     beta = theta + alpha;
 
-    SmartDashboard.putNumber("tv", tv.getDouble(0));
-    SmartDashboard.putNumber("tx", tx.getDouble(0));
-    SmartDashboard.putNumber("ty", ty.getDouble(0));
-    SmartDashboard.putNumber("ta", ta.getDouble(0));
-    SmartDashboard.putNumber("theta", getTheta());
-    SmartDashboard.putNumber("distance", getDistance());
+    // SmartDashboard.putNumber("tv", tv.getDouble(0));
+    // SmartDashboard.putNumber("tx", tx.getDouble(0));
+    // SmartDashboard.putNumber("ty", ty.getDouble(0));
+    // SmartDashboard.putNumber("ta", ta.getDouble(0));
+    // SmartDashboard.putNumber("theta", getTheta());
+    // SmartDashboard.putNumber("distance", getDistance());
   }
 
   @Override
@@ -80,23 +80,12 @@ public class LimelightSubsystem extends SubsystemBase {
   }
   
   public double getTheta() {return theta;}
-
+  
   public double getDistance() {return distance;}
   public double getA() {return a;}
   public double getAlpha() {return alpha;}
   public double getBeta() {return beta;}
 
-  
-  /**
-   * set limelight led state
-   * @param state Integer with value of 0, 1, 2, or 3
-   * <ul>
-   * <li>0: use the LED Mode set in the current pipeline</li>
-   * <li>1: force off</li>
-   * <li>2: force blink</li>
-   * <li>3: force on</li>
-   * </ul>
-   */
   public void setLED(int state) {
     networkTable.getEntry("ledMode").setNumber(state);
   }
