@@ -7,7 +7,7 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
-import frc.robot.subsystems.shooter.BasicShooterSubsystem;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
@@ -27,14 +27,14 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
-  private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
   private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -53,7 +53,7 @@ public class RobotContainer {
     intakeSubsystem.setDefaultCommand(runIntake);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
     loaderSubsystem.setDefaultCommand(runLoader);
-    basicShooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
   }
 }
