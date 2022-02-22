@@ -6,6 +6,7 @@ package frc.robot.subsystems.revMagneticLimitSwitch;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RevMagneticLimitSwitchSubsystem extends SubsystemBase {
   /** Creates a new RevMagneticLimitSwitchSubsystem. */
@@ -17,5 +18,14 @@ public class RevMagneticLimitSwitchSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("limit switch",revMagneticLimitSwitch.get());
   }
+
+  public DigitalInput getRevMagneticLimitSwitch() {
+    return revMagneticLimitSwitch;
+}
+
+public boolean get() {
+  return revMagneticLimitSwitch.get();
+}
 }
