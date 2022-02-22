@@ -54,6 +54,6 @@ public class RobotContainer {
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
     loaderSubsystem.setDefaultCommand(runLoader);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
-    turretSubsystem.setDefaultCommand(runTurretWithJoystick);
+    turretSubsystem.setDefaultCommand(turnToTargetClosedLoop);
   }
 }
