@@ -5,7 +5,6 @@
 package frc.robot.subsystems.encoders;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunSparkMaxWithLimitSwitch extends CommandBase {
@@ -26,14 +25,18 @@ public class RunSparkMaxWithLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //SmartDashboard.putBoolean("Limit Switch", sparkMaxSubsystem.getLimitSwitch().get());
-
+    if(sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
+      sparkMaxSubsystem.setPower(0);
+    }
+    else {
+      sparkMaxSubsystem.setPower(joystick.getLeftY());
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //sparkMaxSubsystem.setSpeed(0);
+    sparkMaxSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.

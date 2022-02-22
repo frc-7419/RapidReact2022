@@ -24,14 +24,38 @@ public class SparkMaxSubsystem extends SubsystemBase {
     forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
     canSparkMax.restoreFactoryDefaults();
+
     forwardLimitSwitch.enableLimitSwitch(false);
     reverseLimitSwitch.enableLimitSwitch(false);
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
+  public void setPower(double power) {
+    canSparkMax.set(power);
+  }
+  public SparkMaxLimitSwitch getForwardLimitSwitch() {
+    return forwardLimitSwitch;
+  }
+  public SparkMaxLimitSwitch getReverseLimitSwitch() {
+    return reverseLimitSwitch;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    canSparkMax.set(joystick.getLeftY());
 
+    // enable/disable limit switches based on value read from SmartDashboard
+    forwardLimitSwitch.enableLimitSwitch(SmartDashboard.getBoolean("Forward Limit Enabled", false));
+    reverseLimitSwitch.enableLimitSwitch(SmartDashboard.getBoolean("Reverse Limit Enabled", false));
+
+    /**
+     * The isPressed() method can be used on a SparkMaxLimitSwitch object to read the state of the switch.
+     * 
+     * In this example, the polarity of the switches are set to normally closed. In this case,
+     * isPressed() will return true if the switch is pressed. It will also return true if you do not 
+     * have a switch connected. isPressed() will return false when the switch is released.
+     */
+    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
+    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
   }
 }
