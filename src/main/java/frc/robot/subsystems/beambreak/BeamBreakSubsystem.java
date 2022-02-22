@@ -5,6 +5,7 @@
 package frc.robot.subsystems.beambreak;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BeamBreakSubsystem extends SubsystemBase {
@@ -17,6 +18,7 @@ public class BeamBreakSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("beamBreak: ", getBeamBreak());
     // This method will be called once per scheduler run
   }
 
