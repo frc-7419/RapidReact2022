@@ -5,21 +5,20 @@
 package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunShooterWithJoystick extends CommandBase {
   /** Creates a new RunShooterWithJoystick. */
-  private BasicShooterSubsystem basicShooterSubsystem;
+  private ShooterSubsystem shooterSubsystem;
   private XboxController joystick;
   private double powerTop = 0;
   private double powerBottom = 0;
   private double stepInterval = 0.005;
 
-  public RunShooterWithJoystick(BasicShooterSubsystem basicShooterSubsystem, XboxController joystick) {
-    this.basicShooterSubsystem = basicShooterSubsystem;
+  public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController joystick) {
+    this.shooterSubsystem = shooterSubsystem;
     this.joystick = joystick;
-    addRequirements(basicShooterSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -47,14 +46,14 @@ public class RunShooterWithJoystick extends CommandBase {
       } else if (dPadValue == Direction.LEFT.direction) {
         powerBottom -= stepInterval;
       }
-      basicShooterSubsystem.setTopPower(powerTop);
-      basicShooterSubsystem.setBottomPower(powerBottom);
+      shooterSubsystem.setTopPower(powerTop);
+      shooterSubsystem.setBottomPower(powerBottom);
       if (-joystick.getRightY() > 0) {
-        basicShooterSubsystem.setBothPower(-joystick.getRightY());
+        shooterSubsystem.setBothPower(-joystick.getRightY());
         
       }
       if (joystick.getBButtonPressed()) {
-        basicShooterSubsystem.setBothPower(0);
+        shooterSubsystem.setBothPower(0);
         powerTop = 0;
         powerBottom = 0;
       }
