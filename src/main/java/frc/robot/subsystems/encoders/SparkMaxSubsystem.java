@@ -18,11 +18,10 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private CANSparkMax canSparkMax;
   private SparkMaxLimitSwitch forwardLimitSwitch;
   private SparkMaxLimitSwitch reverseLimitSwitch;
-  private XboxController joystick;
   public SparkMaxSubsystem() {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
-    forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
-    reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+    forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+    reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     canSparkMax.restoreFactoryDefaults();
 
     forwardLimitSwitch.enableLimitSwitch(false);
@@ -35,18 +34,15 @@ public class SparkMaxSubsystem extends SubsystemBase {
   }
   public SparkMaxLimitSwitch getForwardLimitSwitch() {
     return forwardLimitSwitch;
-  }
+  } 
   public SparkMaxLimitSwitch getReverseLimitSwitch() {
     return reverseLimitSwitch;
   }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    canSparkMax.set(joystick.getLeftY());
 
     // enable/disable limit switches based on value read from SmartDashboard
-    forwardLimitSwitch.enableLimitSwitch(SmartDashboard.getBoolean("Forward Limit Enabled", false));
-    reverseLimitSwitch.enableLimitSwitch(SmartDashboard.getBoolean("Reverse Limit Enabled", false));
 
     /**
      * The isPressed() method can be used on a SparkMaxLimitSwitch object to read the state of the switch.
