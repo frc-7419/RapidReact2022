@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.encoders.RunSparkMaxWithLimitSwitch;
+import frc.robot.subsystems.encoders.RunSparkMaxWithJoystick;
 import frc.robot.subsystems.encoders.SparkMaxSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +23,7 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
   private final SparkMaxSubsystem sparkMaxSubsystem = new SparkMaxSubsystem();
-  private final RunSparkMaxWithLimitSwitch runSparkMaxWithLimitSwitch = new RunSparkMaxWithLimitSwitch(sparkMaxSubsystem, joystick);
+  private final RunSparkMaxWithJoystick runSparkMaxWithJoystick = new RunSparkMaxWithJoystick(sparkMaxSubsystem, joystick);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -55,6 +55,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    sparkMaxSubsystem.setDefaultCommand(runSparkMaxWithLimitSwitch);
+    sparkMaxSubsystem.setDefaultCommand(runSparkMaxWithJoystick);
   }
 }
