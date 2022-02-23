@@ -22,14 +22,7 @@ public final class Constants {
         //to add a motor's can id: motorName(canId),
         // motor1(5),
         // motor2(3),
-        // motorX(x)...
-
-        // 2020 robot constants
-        leftFalcon1(5),
-        rightFalcon1(2),
-        leftFalcon2(4),
-        rightFalcon2(3),
-        shooterFalcon(14), 
+        // motorX(x)... 
         transferWheelVictor(25),
         ;
 
