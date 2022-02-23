@@ -12,7 +12,7 @@ public class RevMagneticLimitSwitchSubsystem extends SubsystemBase {
   /** Creates a new RevMagneticLimitSwitchSubsystem. */
   DigitalInput revMagneticLimitSwitch;
   public RevMagneticLimitSwitchSubsystem() {
-    this.revMagneticLimitSwitch = new DigitalInput(0);
+    this.revMagneticLimitSwitch = new DigitalInput(1);
   }
 
   @Override
