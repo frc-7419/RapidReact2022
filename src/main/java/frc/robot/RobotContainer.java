@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.pneumatics.CompressorSubsystem;
 import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
 import frc.robot.subsystems.pneumatics.RunSolenoid;
@@ -29,6 +31,8 @@ public class RobotContainer {
   private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
   private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
   private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
+  private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
@@ -63,5 +67,6 @@ public class RobotContainer {
   // set default commands here
   public void setDefaultCommands(){
     this.solenoid.setDefaultCommand(runSolenoid);
+    this.armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }
