@@ -9,12 +9,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.transferWheel.RunTransferWheel;
 import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class AutoShoot extends SequentialCommandGroup {
   /** Creates a new AutoShoot. */
   public AutoShoot(LoaderSubsystem loaderSubsystem, TransferWheelSubsystem transferWheelSubsystem, TurretSubsystem turretSubsystem, ShooterSubsystem shooterSubsystem) {
-    addCommands(new ParallelCommandGroup(new RunLoader())
+    addCommands(new ParallelCommandGroup(new RunLoader(loaderSubsystem, 1), new RunTransferWheel(transferWheelSubsystem, 1)));
   }
 }
