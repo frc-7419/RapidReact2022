@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RevMagneticLimitSwitchSubsystem extends SubsystemBase {
   /** Creates a new RevMagneticLimitSwitchSubsystem. */
-  DigitalInput revMagneticLimitSwitch;
+  private DigitalInput revMagneticLimitSwitch;
+  
   public RevMagneticLimitSwitchSubsystem() {
     this.revMagneticLimitSwitch = new DigitalInput(0);
   }
