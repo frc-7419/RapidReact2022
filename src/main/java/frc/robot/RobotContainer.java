@@ -46,8 +46,8 @@ public class RobotContainer {
 
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("kP", PIDConstants.TurretKp);
-    SmartDashboard.putNumber("kI", 0);
-    SmartDashboard.putNumber("kD", 0); 
+    SmartDashboard.putNumber("kI", PIDConstants.TurretKi);
+    SmartDashboard.putNumber("kD", PIDConstants.TurretKd);
   }
 
   public Command getAutonomousCommand() {
