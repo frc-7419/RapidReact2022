@@ -12,14 +12,14 @@ public class RevMagneticLimitSwitchSubsystem extends SubsystemBase {
   /** Creates a new RevMagneticLimitSwitchSubsystem. */
   DigitalInput revMagneticLimitSwitch;
   public RevMagneticLimitSwitchSubsystem() {
-    this.revMagneticLimitSwitch = new DigitalInput(1);
+    this.revMagneticLimitSwitch = new DigitalInput(0);
   }
 
   @Override
   public void periodic() {
     
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("limit switch",revMagneticLimitSwitch.get());
+    SmartDashboard.putBoolean("limit switch", revMagneticLimitSwitch.get());
   }
 
   public DigitalInput getRevMagneticLimitSwitch() {
