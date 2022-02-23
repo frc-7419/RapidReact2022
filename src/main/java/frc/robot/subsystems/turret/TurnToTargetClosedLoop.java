@@ -3,6 +3,7 @@ package frc.robot.subsystems.turret;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class TurnToTargetClosedLoop extends CommandBase {
@@ -44,7 +45,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 
-    kP = SmartDashboard.getNumber("kP", 0.005);
+    kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
     kI = SmartDashboard.getNumber("kI", 0);
     kD = SmartDashboard.getNumber("kD", 0); 
 

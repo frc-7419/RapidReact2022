@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
@@ -43,7 +44,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {}
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("kP", PIDConstants.TurretKp);
+    SmartDashboard.putNumber("kI", 0);
+    SmartDashboard.putNumber("kD", 0); 
+  }
 
   public Command getAutonomousCommand() {
     return turnToTargetClosedLoop;
