@@ -74,9 +74,9 @@ public final class Constants {
         public static double GyrokI = 0.00;
         public static double GyrokD = 0.00;
 
-        public static double GyrokPNegative49 = 0.0039;
-        public static double GyrokINegative49 = 0.0031;
-        public static double GyrokDNegative49 = 0.004;
+        public static double GyrokPNegative49 = 0.002;
+        public static double GyrokINegative49 = 0.003;
+        public static double GyrokDNegative49 = 0.0001;
 
         //Following PIDs are already tuned
         public static double GyrokP30 = 0.0085;
@@ -86,6 +86,13 @@ public final class Constants {
         public static double GyrokP80 = 0.0035;
         public static double GyrokI80 = 0.000655;
         public static double GyrokD80 = 0.0004;
+
+        public static double GyrokP115 = 0.005;
+        public static double GyrokI115 = 0.00;
+        public static double GyrokD115 = 0.0000083;
+        
+        
+        
 
     }
 
