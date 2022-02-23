@@ -58,11 +58,16 @@ public final class Constants {
         public static double turretGearRatio = 100/12;
     }
 
-    public static class PIDFConstants {
+    public static class PIDConstants {
         //gyro
         public static double GyrokP = 0.085;
         public static double GyrokI = 0;
         public static double GyrokD = 0;
+
+        // turret PID gains
+        public static double TurretKp = 0.006;
+        public static double TurretKi = 0;
+        public static double TurretKd = 0;
 
         //turret position closed loop
         public static double TurretMotionMagickP = 0;
