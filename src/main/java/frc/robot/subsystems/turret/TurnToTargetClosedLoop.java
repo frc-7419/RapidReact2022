@@ -3,6 +3,7 @@ package frc.robot.subsystems.turret;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class TurnToTargetClosedLoop extends CommandBase {
@@ -30,9 +31,9 @@ public class TurnToTargetClosedLoop extends CommandBase {
   public void initialize() {
     SmartDashboard.putString("command status", "pid");
 
-    kP = SmartDashboard.getNumber("kP", 0.08);
-    kI = SmartDashboard.getNumber("kI", 0);
-    kD = SmartDashboard.getNumber("kD", 0); 
+    kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
+    kI = SmartDashboard.getNumber("kI", PIDConstants.TurretKi);
+    kD = SmartDashboard.getNumber("kD", PIDConstants.TurretKd); 
 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(0);
@@ -44,9 +45,9 @@ public class TurnToTargetClosedLoop extends CommandBase {
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 
-    kP = SmartDashboard.getNumber("kP", 0.005);
-    kI = SmartDashboard.getNumber("kI", 0);
-    kD = SmartDashboard.getNumber("kD", 0); 
+    kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
+    kI = SmartDashboard.getNumber("kI", PIDConstants.TurretKi);
+    kD = SmartDashboard.getNumber("kD", PIDConstants.TurretKd); 
 
     if (tv == 1.0) {
       pidController = new PIDController(kP, kI, kD);

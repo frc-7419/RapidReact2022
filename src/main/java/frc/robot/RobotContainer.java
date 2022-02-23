@@ -45,7 +45,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {}
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("kP", PIDConstants.TurretKp);
+    SmartDashboard.putNumber("kI", PIDConstants.TurretKi);
+    SmartDashboard.putNumber("kD", PIDConstants.TurretKd);
+  }
 
   public Command getAutonomousCommand() {
     return turnToTargetClosedLoop;
