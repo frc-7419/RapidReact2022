@@ -18,16 +18,12 @@ public class BeamBreakSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("beamBreak: ", getBeamBreak());
+    SmartDashboard.putBoolean("beamBreak: ", beamBreak.get());
     // This method will be called once per scheduler run
   }
 
   public DigitalInput getBeamBreak() {
     return beamBreak;
-  }
-  
-  public boolean getBeamBreak(){
-    return beamBreak.get();
   }
 
 }
