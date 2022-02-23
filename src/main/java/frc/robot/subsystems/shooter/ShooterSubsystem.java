@@ -127,7 +127,7 @@ public class ShooterSubsystem extends SubsystemBase{
     public void setTopPower(double power){
         topFalcon.set(ControlMode.PercentOutput, power);
     }
-    public void setBottonPower(double power){
+    public void setBottomPower(double power){
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
     public void setBothPower(double power){
