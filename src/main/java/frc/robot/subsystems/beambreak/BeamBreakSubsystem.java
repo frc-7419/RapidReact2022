@@ -22,6 +22,10 @@ public class BeamBreakSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public DigitalInput getBeamBreak() {
+    return beamBreak;
+  }
+  
   public boolean getBeamBreak(){
     return beamBreak.get();
   }
