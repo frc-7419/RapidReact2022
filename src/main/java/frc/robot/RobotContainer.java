@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.colorSensor.RevColorDistanceSub;
 import frc.robot.subsystems.loader.LoaderSubsystem;
-import frc.robot.subsystems.loader.RunLoader;
+import frc.robot.subsystems.loader.RunLoaderWithJoystick;
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
@@ -24,7 +24,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(joystick, XboxController.Button.kRightBumper.value).toggleWhenPressed(new RunLoader(loaderSubsystem, joystick, 0.3));
+    new JoystickButton(joystick, XboxController.Button.kRightBumper.value).toggleWhenPressed(new RunLoaderWithJoystick(loaderSubsystem, joystick, 0.3));
   }
 
   public void setDefaultCommands() {
