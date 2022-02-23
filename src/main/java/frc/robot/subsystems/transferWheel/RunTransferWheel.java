@@ -8,12 +8,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunTransferWheel extends CommandBase {
-  private XboxController joystick;
   private TransferWheelSubsystem transferWheelSubsystem;
   private double power;
 
-  public RunTransferWheel(XboxController joystick, TransferWheelSubsystem transferWheelSubsystem, double power) {
-    this.joystick = joystick;
+  public RunTransferWheel(TransferWheelSubsystem transferWheelSubsystem, double power) {
     this.transferWheelSubsystem = transferWheelSubsystem;
     this.power = power;
     addRequirements(transferWheelSubsystem);
