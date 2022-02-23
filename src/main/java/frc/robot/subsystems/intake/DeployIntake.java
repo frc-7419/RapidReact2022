@@ -18,7 +18,9 @@ public class DeployIntake extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    intakeSolenoidSubsystem.retractSolenoid();
+  }
 
   @Override
   public void execute() {
@@ -28,7 +30,9 @@ public class DeployIntake extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    intakeSolenoidSubsystem.retractSolenoid();
+  }
 
   @Override
   public boolean isFinished() {
