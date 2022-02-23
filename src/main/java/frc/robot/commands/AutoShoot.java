@@ -4,19 +4,17 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.loader.LoaderSubsystem;
+import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoShoot extends SequentialCommandGroup {
   /** Creates a new AutoShoot. */
   public AutoShoot(LoaderSubsystem loaderSubsystem, TransferWheelSubsystem transferWheelSubsystem, TurretSubsystem turretSubsystem, ShooterSubsystem shooterSubsystem) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new ParallelCommandGroup(new RunLoader())
   }
 }
