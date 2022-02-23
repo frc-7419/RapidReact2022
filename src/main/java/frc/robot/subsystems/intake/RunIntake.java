@@ -5,13 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunIntake extends CommandBase{
   private IntakeSubsystem intakeSubsystem;
-  private XboxController joystick;
-  private double intakeMultiplier;
+  private double power;
   
-  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick, double intakeMultiplier) {
+  public RunIntake(IntakeSubsystem intakeSubsystem, double power) {
     this.intakeSubsystem = intakeSubsystem;
-    this.joystick = joystick;
-    this.intakeMultiplier = intakeMultiplier;
+    this.power = power;
     addRequirements(intakeSubsystem);
   }
 
@@ -20,13 +18,7 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void execute() {
-    if (Math.abs(joystick.getLeftTriggerAxis()) > 0) {
-      intakeSubsystem.setPower(-intakeMultiplier * joystick.getLeftTriggerAxis());
-    } else if (Math.abs(joystick.getRightTriggerAxis()) > 0) {
-      intakeSubsystem.setPower(intakeMultiplier * joystick.getRightTriggerAxis());
-    } else {
-      intakeSubsystem.setPower(0);
-    }
+    intakeSubsystem.setPower(power);
   }
 
   @Override
