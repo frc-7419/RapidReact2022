@@ -1,4 +1,4 @@
-package frc.robot.subsystems.limitswitch;
+package frc.robot.subsystems.revMagneticLimitSwitch;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -8,14 +8,14 @@ import frc.robot.subsystems.talon.TalonSubsystem;
 
 public class RunMotorWithLimitSwitch extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private LimitSwitchSubsystem limitSwitchSubsystem;
+  private RevMagneticLimitSwitchSubsystem revMagneticLimitSwitchSubsystem;
   private TalonSubsystem talonSubsystem;
 
-  public RunMotorWithLimitSwitch(LimitSwitchSubsystem limitSwitchSubsystem, TalonSubsystem talonSubsystem) {
-    this.limitSwitchSubsystem = limitSwitchSubsystem;
+  public RunMotorWithLimitSwitch(RevMagneticLimitSwitchSubsystem revMagneticLimitSwitchSubsystem, TalonSubsystem talonSubsystem) {
+    this.revMagneticLimitSwitchSubsystem = revMagneticLimitSwitchSubsystem;
     this.talonSubsystem = talonSubsystem;
     // uses addRequirements() instead of requires()
-    addRequirements(limitSwitchSubsystem, talonSubsystem);
+    addRequirements(revMagneticLimitSwitchSubsystem, talonSubsystem);
   }
 
   @Override
@@ -24,13 +24,13 @@ public class RunMotorWithLimitSwitch extends CommandBase {
 
   @Override
   public void execute() {
-    if (limitSwitchSubsystem.getLimitSwitch().get()){
-      talonSubsystem.setPower(0.2);
-    }
-    // add an else statement that brakes the motor
-    else {
-      talonSubsystem.setNeutralMode(NeutralMode.Brake);
-    }
+      if (revMagneticLimitSwitchSubsystem.getRevMagneticLimitSwitch().get()){
+        talonSubsystem.setPower(0.2);
+      }
+      // add an else statement that brakes the motor
+      else {
+        talonSubsystem.brake();
+      }
     }
     // ^ this sets the power to 0 but doesn't BRAKE it. check assignments for help
 

@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LimitswitchSubsystem extends SubsystemBase {
+public class LimitSwitchSubsystem extends SubsystemBase {
   private DigitalInput limitSwitch;
 
-  public LimitswitchSubsystem(){
+  public LimitSwitchSubsystem(){
     limitSwitch = new DigitalInput(0);
   }
 
