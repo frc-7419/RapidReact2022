@@ -59,10 +59,10 @@ public final class Constants {
     }
 
     public static class PowerConstants {
-        public static final double DriveBaseLeftStraight = .85;
-        public static final double DriveBaseRightTurn = .85; //.6
-        public static final double DriveBaseLeftTurn = .85; //.6
-        public static final double DriveBaseRightStraight = .85;
+        public static final double DriveBaseLeftStraight = -.45;
+        public static final double DriveBaseRightTurn = .35; //.6
+        public static final double DriveBaseLeftTurn = .35; //.6
+        public static final double DriveBaseRightStraight = -.45;
     }
 
     public static class PIDConstants {
