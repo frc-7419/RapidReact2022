@@ -74,6 +74,9 @@ public final class Constants {
         public static final double kMaxAcceleration = 0; // Units: MetersPerSecondSquared // change me
 
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidth);
+
+        public static final double kRamseteB = 0; // change me
+        public static final double kRamseteZeta = 0; // change me
     }
 
     public static class RobotConstants {
