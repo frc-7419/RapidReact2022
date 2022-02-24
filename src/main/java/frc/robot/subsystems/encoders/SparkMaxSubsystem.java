@@ -15,12 +15,12 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private CANSparkMax spark;
 
   public SparkMaxSubsystem() {
-    spark = new CANSparkMax(21, MotorType.kBrushless);
+    spark = new CANSparkMax(20, MotorType.kBrushless);
     spark.restoreFactoryDefaults();
     spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
     spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
-    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 45);
+    spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -45);
   }
 
   public void setSpeed(double power) {
