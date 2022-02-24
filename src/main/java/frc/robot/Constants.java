@@ -29,9 +29,6 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        bottomShooterFalcon(10),
-        topShooterFalcon(14),
-        intakeSpark(15),  
         ;
 
         public final int id;
@@ -62,7 +59,10 @@ public final class Constants {
     }
 
     public static class PowerConstants {
-        public static double intakeMultiplier = 1.0;
+        public static final double DriveBaseLeftStraight = .85;
+        public static final double DriveBaseRightTurn = .85; //.6
+        public static final double DriveBaseLeftTurn = .85; //.6
+        public static final double DriveBaseRightStraight = .85;
     }
 
     public static class PIDConstants {
