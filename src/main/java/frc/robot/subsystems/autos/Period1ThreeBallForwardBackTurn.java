@@ -22,19 +22,21 @@ public class Period1ThreeBallForwardBackTurn extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
     addCommands(new WaitCommand(0.2));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -52));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -80));
     addCommands(new WaitCommand(0.2));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -90, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90));
     addCommands(new WaitCommand(0.2));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 240));
+    addCommands(new WaitCommand(0.2));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -140));
 
     /*
     Algorithm:
     - Drive dorward and intake first ball
     - Drive back to start and shoot
-    - Turn 90 degrees to the next ball
-    - Drive to the next ball
-    - Intake and shoot
+    - Turn 85 right degrees to the next ball
+    - Drive to and intake the next ball and the ball near the hub
+    - Drive back to where the previous ball was and shoot
     */
 
   }
