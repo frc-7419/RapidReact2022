@@ -5,15 +5,28 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Period1ThreeBallForwardBackTurn extends SequentialCommandGroup {
   /** Creates a new Period1ThreeBallForwardBackTurn. */
-  public Period1ThreeBallForwardBackTurn() {
+  public Period1ThreeBallForwardBackTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
+    addCommands(new WaitCommand(0.2));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -52));
+    addCommands(new WaitCommand(0.2));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -90, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90));
+    addCommands(new WaitCommand(0.2));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
 
     /*
     Algorithm:
