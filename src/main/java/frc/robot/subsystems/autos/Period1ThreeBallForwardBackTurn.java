@@ -24,7 +24,7 @@ public class Period1ThreeBallForwardBackTurn extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.2));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -80));
     addCommands(new WaitCommand(0.2));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80));
     addCommands(new WaitCommand(0.2));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 240));
     addCommands(new WaitCommand(0.2));
