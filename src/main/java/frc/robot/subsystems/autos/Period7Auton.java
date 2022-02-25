@@ -48,7 +48,7 @@ public class Period7Auton extends SequentialCommandGroup {
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     // Use limight to adjust to the target
-    // addCommands(new TurnToTx(driveBaseSubsystem, limelightSubsystem));
+    // addCommands(new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem));
 
     // Shoot two cargos
     // addCommands(new ShootAtAngle());
