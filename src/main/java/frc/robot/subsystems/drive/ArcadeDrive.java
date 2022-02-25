@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class ArcadeDrive extends CommandBase {
 
-  private DriveBaseSubsystem driveBase;
+  private DriveBaseSubsystem driveBaseSubsystem;
   private double kStraight;
   private double kTurn;
   private double kSlowStraight;
@@ -22,21 +22,21 @@ public class ArcadeDrive extends CommandBase {
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(0.98);
   private final SlewRateLimiter rotLimiter = new SlewRateLimiter(0.98);
 
-  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
+  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
     this.joystick = joystick;
-    this.driveBase = driveBase;
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
     this.kSlowStraight = kSlowStraight;
     this.kSlowTurn = kSlowTurn;
-    addRequirements(driveBase);
+    addRequirements(driveBaseSubsystem);
 }
 
   @Override
   public void initialize() {
-    driveBase.factoryResetAll();    
-    driveBase.setAllDefaultInversions();
-    driveBase.coast(); 
+    driveBaseSubsystem.factoryResetAll();    
+    driveBaseSubsystem.setAllDefaultInversions();
+    driveBaseSubsystem.coast(); 
   }
 
   @Override
@@ -49,7 +49,7 @@ public class ArcadeDrive extends CommandBase {
     // double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
     // double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
 
-    driveBase.getDrive().arcadeDrive(xSpeed, zRotation, squareInputs);
+    driveBaseSubsystem.getDrive().arcadeDrive(xSpeed, zRotation, squareInputs);
   }
 
   @Override
@@ -59,7 +59,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.setAll(0);
+    driveBaseSubsystem.setAll(0);
   }
 
 }
