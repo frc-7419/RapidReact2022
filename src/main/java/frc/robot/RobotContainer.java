@@ -23,12 +23,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
 
-  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
-  private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
-  private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
-  private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
+  // private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
+  // private final ColorSensorSubsystem colorSensorSubsystem = new ColorSensorSubsystem();
+  // private final LimitswitchSubsystem limitSwitchSubsystem = new LimitswitchSubsystem();
+  // private final PotentiometerSubsystem potentiometerSubsystem = new PotentiometerSubsystem();
+
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, 1, 1, 1, 1);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -42,7 +44,7 @@ public class RobotContainer {
     return new WaitCommand(0);
   }
   public void setDefaultCommands(){
-
+    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
   }
 
   
