@@ -17,11 +17,10 @@ public class Period2Auton extends SequentialCommandGroup {
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 30, PIDConstants.GyrokP30, PIDConstants.GyrokI30, PIDConstants.GyrokD30));
     //addCommands(shootBall());
     SmartDashboard.putString("command running", "-49 deg");
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -49, PIDConstants.GyrokPNegative49, PIDConstants.GyrokINegative49, PIDConstants.GyrokDNegative49));
-    SmartDashboard.putString("command running", "going back");
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -40.375));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 131, PIDConstants.GyrokPNegative49, PIDConstants.GyrokINegative49, PIDConstants.GyrokDNegative49));
+    SmartDashboard.putString("command running", "going forward");
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 40.375));
     // //addCommands(new collectBall());
-    // //addCommands(new shootBall());
     SmartDashboard.putString("command running", "115 degrees");
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115));
     SmartDashboard.putString("command running", "going forward");
