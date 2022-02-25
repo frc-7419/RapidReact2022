@@ -52,6 +52,10 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.6; // placeholder value, will change
+        public static double turretRadius = 0.5; // placeholder
+        public static double turretGearRatio = 0.5; // also placeholder
+        public static double topShooterWheelRadius = 0.5; // also placeholder
+        public static double bottomShooterWheelRadius = 0.5; // do i have to write placeholder
     }
 
     public static class PIDConstants {

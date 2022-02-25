@@ -9,6 +9,10 @@ import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.UnBrake;
 import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
+import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -21,9 +25,15 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
  */
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
+
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final Period7Auton period7Auton = new Period7Auton(driveBaseSubsystem, gyroSubsystem);
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
+  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final TransferWheelSubsystem transferWheelSubsystem = new TransferWheelSubsystem();
+
+  private final Period7Auton period7Auton = new Period7Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, transferWheelSubsystem);
 
   private UnBrake unBrake = new UnBrake(driveBaseSubsystem);
 

@@ -7,11 +7,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.CanIds;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.Constants.RobotConstants;
 
 public class ShooterSubsystem extends SubsystemBase{
@@ -36,8 +38,8 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
         topFalcon = new TalonFX(CanIds.topShooterFalcon.id);
 
-        topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
-        bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv);
+        topFeedforward = new SimpleMotorFeedforward(PIDConstants.TopShooterKs, PIDConstants.TopShooterKv);
+        bottomFeedforward = new SimpleMotorFeedforward(PIDConstants.BottomShooterKs, PIDConstants.BottomShooterKv);
 
         // topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
         // bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);
