@@ -5,16 +5,25 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
+import frc.robot.Constants.RobotConstants;
 
 public class DriveBaseSubsystem extends SubsystemBase {
   
-  public WPI_TalonFX left1;
-	public WPI_TalonFX right1;
-	public WPI_TalonFX left2;
-  public WPI_TalonFX right2;
+  private WPI_TalonFX left1;
+	private WPI_TalonFX right1;
+	private WPI_TalonFX left2;
+  private WPI_TalonFX right2;
+
+  private DifferentialDrive drive;
+  private DifferentialDriveKinematics kinematics;
+  private DifferentialDriveOdometry odometry;
 
   MotorControllerGroup left;
   MotorControllerGroup right;
@@ -30,6 +39,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     factoryResetAll();
     right.setInverted(true);
+
+    drive = new DifferentialDrive(left, right);
+    kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(RobotConstants.trackWidth));
+    // odometry = new DifferentialDriveOdometry(gyroAngle)
   }
 
   @Override
@@ -48,6 +61,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
   // motor groups
   public MotorControllerGroup getLeftGroup(){return left;}
   public MotorControllerGroup getRightGroup(){return right;}
+  // differential drive
+  public DifferentialDrive getDrive(){return drive;}
 
   public void setLeftPower(double power){
     left.set(power);

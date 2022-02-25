@@ -17,7 +17,6 @@ public class ArcadeDrive extends CommandBase {
   private double kSlowStraight;
   private double kSlowTurn;
   private XboxController joystick;
-  private DifferentialDrive drive;
 
   // Limits *acceleration* not max speed; basically kD
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(0.98);
@@ -30,7 +29,6 @@ public class ArcadeDrive extends CommandBase {
     this.kTurn = kTurn;
     this.kSlowStraight = kSlowStraight;
     this.kSlowTurn = kSlowTurn;
-    this.drive = new DifferentialDrive(driveBase.getLeftGroup(), driveBase.getRightGroup());
     addRequirements(driveBase);
 }
 
@@ -51,7 +49,7 @@ public class ArcadeDrive extends CommandBase {
     // double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
     // double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
 
-    drive.arcadeDrive(xSpeed, zRotation, squareInputs);
+    driveBase.getDrive().arcadeDrive(xSpeed, zRotation, squareInputs);
   }
 
   @Override
