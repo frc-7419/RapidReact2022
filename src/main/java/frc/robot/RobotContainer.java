@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -23,10 +19,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
-  /* suggestions from Karan:
-  instantiate both driveBaseSubsystem and gyroSubsystem
-  */
   public final DriveBaseSubsystem driveBaseSubsystem;
   public final GyroSubsystem gyroSubsystem;
   private final Period2Auton period2Auton ;
@@ -48,7 +40,6 @@ public class RobotContainer {
 
   private void smartDashboardBindings() {}
 
-  // uncomment when u need to use this
   public Command getAutonomousCommand() {
     return period2Auton;
   }
