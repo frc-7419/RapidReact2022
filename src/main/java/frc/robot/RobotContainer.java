@@ -25,6 +25,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
@@ -56,6 +57,5 @@ public class RobotContainer {
     turretSubsystem.setDefaultCommand(alignTurret);
   }
 
-  public void setDefaultCommands() {}
 
 }
