@@ -2,7 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
-import frc.robot.subsystems.turret.TurnToTargetClosedLoop;
+import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,7 +34,7 @@ public class RobotContainer {
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
+  private final AlignTurret alignTurret = new AlignTurretturretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
 
   public RobotContainer() {
@@ -51,7 +51,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return turnToTargetClosedLoop;
+    return alignTurret;
   }
     
   public void setDefaultCommands(){
@@ -62,6 +62,6 @@ public class RobotContainer {
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
-    turretSubsystem.setDefaultCommand(turnToTargetClosedLoop);
+    turretSubsystem.setDefaultCommand(alignTurret);
   }
 }
