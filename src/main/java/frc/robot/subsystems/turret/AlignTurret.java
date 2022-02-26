@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class TurnToTargetClosedLoop extends CommandBase {
+public class AlignTurret extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private TurretSubsystem turretSubsystem;
@@ -21,7 +21,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
   private double tx;
   private double tv;
 
-  public TurnToTargetClosedLoop(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurret(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
