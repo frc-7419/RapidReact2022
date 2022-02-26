@@ -51,46 +51,6 @@ public final class Constants {
     }
 
     public static class RobotConstants {
-        public static double shooterRadius = 0.6; // placeholder value, will change
-        public static double turretRadius = 0.5; // placeholder
-        public static double turretGearRatio = 0.5; // also placeholder
-        public static double topShooterWheelRadius = 0.5; // also placeholder
-        public static double bottomShooterWheelRadius = 0.5; // do i have to write placeholder
-    }
-
-    public static class PIDConstants {
-        // straight with motion magic pid gains
-        public static double DriveBaseMotionMagickP = 0.5;
-        public static double DriveBaseMotionMagickI = 0;
-        public static double DriveBaseMotionMagickD = 0;
-
-        /* turn with gyro gain. add your own here */
-
-        public static double GyrokP = 0.006;
-        public static double GyrokI = 0.00;
-        public static double GyrokD = 0.0002;        
-        
-        public static double GyrokP63 = 0.007;
-        public static double GyrokI63 = 0.0002;
-        public static double GyrokD63 = 0.0003;
-        
-        public static double GyrokP32 = 0.0085;
-        public static double GyrokI32 = 0.00;
-        public static double GyrokD32 = 0.0001;
-
-        public static double GyrokP80 = 0.0064;
-        public static double GyrokI80 = 0.000155;
-        public static double GyrokD80 = 0.00025;
-
-        public static double GyrokP115 = 0.005;
-        public static double GyrokI115 = 0;
-        public static double GyrokD115 = 0.0000083;
-
-        public static double GyrokP180 = 0.0035;
-        public static double GyrokI180 = 0.000655;
-        public static double GyrokD180 = 0.0004;
-
-
         public static final double TalonFXTicksPerRotation = 2048;
 
         public static final double turretRadius = 1.5625; // placeholder value, will change
@@ -98,6 +58,52 @@ public final class Constants {
 
         public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
         public static final double topShooterWheelRadius = 1.5;
+    }
+
+    public static class PIDConstants {
+        // straight with motion magic pid gains
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
+
+        /* turn with gyro gain. add your own here */
+        public static final double GyrokP = 0.006;
+        public static final double GyrokI = 0.00;
+        public static final double GyrokD = 0.0002;        
+        
+        public static final double GyrokP63 = 0.007;
+        public static final double GyrokI63 = 0.0002;
+        public static final double GyrokD63 = 0.0003;
+        
+        public static final double GyrokP32 = 0.0085;
+        public static final double GyrokI32 = 0.00;
+        public static final double GyrokD32 = 0.0001;
+
+        public static final double GyrokP80 = 0.0064;
+        public static final double GyrokI80 = 0.000155;
+        public static final double GyrokD80 = 0.00025;
+
+        public static final double GyrokP115 = 0.005;
+        public static final double GyrokI115 = 0;
+        public static final double GyrokD115 = 0.0000083;
+
+        public static final double GyrokP180 = 0.0035;
+        public static final double GyrokI180 = 0.000655;
+        public static final double GyrokD180 = 0.0004;
+
+        // turret PID gains
+        public static final double TurretKp = 0.006;
+        public static final double TurretKi = 0;
+        public static final double TurretKd = 0;
+
+        //shooter
+        public static final double BottomShooterkP = 0.17054/(2048*6);
+        public static final double BottomShooterkI = 0;
+        public static final double BottomShooterkD = 0;
+
+        public static final double TopShooterkP = 0.10603/(2048*6);
+        public static final double TopShooterkI = 0;
+        public static final double TopShooterkD = 0;
 
         // top shooter kS, kV, kA
         public static final double TopShooterKs = 0.73569/(2048*6);
@@ -108,34 +114,6 @@ public final class Constants {
         public static final double BottomShooterKs = 0.57654/(2048*6);
         public static final double BottomShooterKv = 0.10892/(2048*6);
         public static final double BottomShooterKa = 0.0044231/(2048*6);
-
-        // turret PID gains
-        public static double TurretKp = 0.006;
-        public static double TurretKi = 0;
-        public static double TurretKd = 0;
-
-        //turret position closed loop
-        public static double TurretMotionMagickP = 0;
-        public static double TurretMotionMagickI = 0;
-        public static double TurretMotionMagickD = 0;
-
-        //turret potentiometer
-        public static double TurretPotentiometerkP = 0;
-        public static double TurretPotentiometerkI = 0;
-        public static double TurretPotentiometerkD = 0;
-
-        //shooter
-        public static final double BottomShooterkP = 0.17054/(2048*6);
-        public static final double BottomShooterkI = 0;
-        public static final double BottomShooterkD = 0;
-
-        public static final double TopShooterkP = 0.10603/(2048*6);
-        public static final double TopShooterkI = 0;
-        public static final double TopShooterkD = 0;
-    }
-
-    public static class PowerConstants {
-        public static final double intakeMultiplier = 1.0;
     }
 
     public static final double[][] kRawVelocityToTopFf = {
