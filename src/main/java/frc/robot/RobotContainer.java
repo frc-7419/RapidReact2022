@@ -10,7 +10,7 @@ import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.Constants.PowerConstants;
-import frc.robot.snippets.RunIntakeAndLoaderWithJoystick;
+import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
@@ -34,7 +34,7 @@ public class RobotContainer {
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
-  private final AlignTurret alignTurret = new AlignTurretturretSubsystem, limelightSubsystem);
+  private final AlignTurret alignTurret = new AlignTurret(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
 
   public RobotContainer() {
@@ -55,9 +55,6 @@ public class RobotContainer {
   }
     
   public void setDefaultCommands(){
-    // intakeSubsystem.setDefaultCommand(runIntake);
-    // loaderSubsystem.setDefaultCommand(runLoader);
-
     intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
