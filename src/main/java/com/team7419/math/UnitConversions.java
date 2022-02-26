@@ -19,10 +19,6 @@ public class UnitConversions {
         return (2 * Math.PI * radius) / 60;
     }
 
-    public static int mpsToTicksP100Ms(double input) { // m is meters
-		double output = (((input*39.3701)/6)*2048)/10;
-		return (int) Math.round(output);
-	}
     public static double mpsToRawSensorVelocity(double mps, double ticksPerRotation, double radius) {
         return rpmToRawSensorVelocity(mpsToRPM(mps, radius), ticksPerRotation);
     }

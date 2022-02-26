@@ -76,60 +76,60 @@ public final class Constants {
 
     public static class PIDConstants {
         // straight with motion magic pid gains
-        public static double DriveBaseMotionMagickP = 0.5;
-        public static double DriveBaseMotionMagickI = 0;
-        public static double DriveBaseMotionMagickD = 0;
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
 
         /* turn with gyro gain. add your own here */
 
-        public static double GyrokP = 0.006;
-        public static double GyrokI = 0.00;
-        public static double GyrokD = 0.0002;        
+        public static final double GyrokP = 0.006;
+        public static final double GyrokI = 0.00;
+        public static final double GyrokD = 0.0002;        
         
-        public static double GyrokP63 = 0.007;
-        public static double GyrokI63 = 0.0002;
-        public static double GyrokD63 = 0.0003;
+        public static final double GyrokP63 = 0.007;
+        public static final double GyrokI63 = 0.0002;
+        public static final double GyrokD63 = 0.0003;
         
-        public static double GyrokP32 = 0.0085;
-        public static double GyrokI32 = 0.00;
-        public static double GyrokD32 = 0.0001;
+        public static final double GyrokP32 = 0.0085;
+        public static final double GyrokI32 = 0.00;
+        public static final double GyrokD32 = 0.0001;
 
-        public static double GyrokP80 = 0.0064;
-        public static double GyrokI80 = 0.000155;
-        public static double GyrokD80 = 0.00025;
+        public static final double GyrokP80 = 0.0064;
+        public static final double GyrokI80 = 0.000155;
+        public static final double GyrokD80 = 0.00025;
 
-        public static double GyrokP90 = 0.0064;
-        public static double GyrokI90 = 0.000155;
-        public static double GyrokD90 = 0.00025;
+        public static final double GyrokP90 = 0.0064;
+        public static final double GyrokI90 = 0.000155;
+        public static final double GyrokD90 = 0.00025;
 
-        public static double GyrokP115 = 0.005;
-        public static double GyrokI115 = 0;
-        public static double GyrokD115 = 0.0000083;
+        public static final double GyrokP115 = 0.005;
+        public static final double GyrokI115 = 0;
+        public static final double GyrokD115 = 0.0000083;
 
-        public static double GyrokP180 = 0.0035;
-        public static double GyrokI180 = 0.000655;
-        public static double GyrokD180 = 0.0004;
+        public static final double GyrokP180 = 0.0035;
+        public static final double GyrokI180 = 0.000655;
+        public static final double GyrokD180 = 0.0004;
 
-        public static double GyrokP185 = 0.0035;
-        public static double GyrokI185 = 0.000655;
-        public static double GyrokD185 = 0.0004;
+        public static final double GyrokP185 = 0.0035;
+        public static final double GyrokI185 = 0.000655;
+        public static final double GyrokD185 = 0.0004;
 
-        public static double GyrokP122 = 0.0072;
-        public static double GyrokI122 = 0.00048;
-        public static double GyrokD122 = 0.00050;
+        public static final double GyrokP122 = 0.0072;
+        public static final double GyrokI122 = 0.00048;
+        public static final double GyrokD122 = 0.00050;
 
-        public static double GyrokP135 = 0.0047;
-        public static double GyrokI135 = 0;
-        public static double GyrokD135 = 0.0000083;
+        public static final double GyrokP135 = 0.0047;
+        public static final double GyrokI135 = 0;
+        public static final double GyrokD135 = 0.0000083;
 
-        public static double GyrokP45 = 0.007;
-        public static double GyrokI45 = 0;
-        public static double GyrokD45 = 0.0001;
+        public static final double GyrokP45 = 0.007;
+        public static final double GyrokI45 = 0;
+        public static final double GyrokD45 = 0.0001;
 
         // turret PID gains
-        public static double TurretKp = 0.006;
-        public static double TurretKi = 0;
-        public static double TurretKd = 0;
+        public static final double TurretKp = 0.006;
+        public static final double TurretKi = 0;
+        public static final double TurretKd = 0;
 
         //shooter
         public static final double BottomShooterkP = 0.17054/(2048*6);
