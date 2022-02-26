@@ -38,8 +38,8 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
         topFalcon = new TalonFX(CanIds.topShooterFalcon.id);
 
-        topFeedforward = new SimpleMotorFeedforward(PIDConstants.TopShooterKs, PIDConstants.TopShooterKv);
-        bottomFeedforward = new SimpleMotorFeedforward(PIDConstants.BottomShooterKs, PIDConstants.BottomShooterKv);
+        topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
+        bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv);
 
         // topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
         // bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);

@@ -58,6 +58,16 @@ public final class Constants {
 
         public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
         public static final double topShooterWheelRadius = 1.5;
+
+        // top shooter kS, kV, kA
+        public static final double TopShooterKs = 0.73569/(2048*6);
+        public static final double TopShooterKv = 0.10952/(2048*6);
+        public static final double TopShooterKa = 0.0056306/(2048*6);
+
+        // bottom shooter kS, kV, kA
+        public static final double BottomShooterKs = 0.57654/(2048*6);
+        public static final double BottomShooterKv = 0.10892/(2048*6);
+        public static final double BottomShooterKa = 0.0044231/(2048*6);
     }
 
     public static class PIDConstants {
@@ -104,16 +114,6 @@ public final class Constants {
         public static final double TopShooterkP = 0.10603/(2048*6);
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
-
-        // top shooter kS, kV, kA
-        public static final double TopShooterKs = 0.73569/(2048*6);
-        public static final double TopShooterKv = 0.10952/(2048*6);
-        public static final double TopShooterKa = 0.0056306/(2048*6);
-
-        // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.57654/(2048*6);
-        public static final double BottomShooterKv = 0.10892/(2048*6);
-        public static final double BottomShooterKa = 0.0044231/(2048*6);
     }
 
     public static final double[][] kRawVelocityToTopFf = {
