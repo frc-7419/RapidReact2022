@@ -2,7 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
-import frc.robot.subsystems.turret.TurnToTargetClosedLoop;
+import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import frc.robot.snippets.DiscardWrongColor;
 import edu.wpi.first.wpilibj.XboxController;
@@ -36,7 +36,7 @@ public class RobotContainer {
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
   private final RunLoader runLoader = new RunLoader(loaderSubsystem, joystick, 1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
+  private final AlignTurret alignTurret = new AlignTurret(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
   private final DiscardWrongColor discardWrongColor = new DiscardWrongColor(turretSubsystem, basicShooterSubsystem, revColorDistanceSub);
   public RobotContainer() {
@@ -53,7 +53,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return turnToTargetClosedLoop;
+    return alignTurret;
   }
     
   public void setDefaultCommands(){
