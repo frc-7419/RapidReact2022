@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.turret.AlignTurretWithOnboardPIDController;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
-import frc.robot.subsystems.turret.TurnToTargetClosedLoop;
+import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,7 +21,7 @@ public class RobotContainer {
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(turretSubsystem, limelightSubsystem);
+  private final AlignTurret turnToTargetClosedLoop = new AlignTurret(turretSubsystem, limelightSubsystem);
 
 
   public RobotContainer() {
