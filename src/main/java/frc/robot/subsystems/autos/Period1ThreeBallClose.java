@@ -28,15 +28,15 @@ public class Period1ThreeBallClose extends SequentialCommandGroup {
     // go back out of the tarmac
     */
 
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52)); 
-    addCommands(new WaitCommand(0.2));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -(180-58), PIDConstants.GyrokP122, PIDConstants.GyrokI122, PIDConstants.GyrokD122));// turn 58 degrees
-    addCommands(new WaitCommand(0.2));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 113));
-    addCommands(new WaitCommand(0.2));
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -(180-58), PIDConstants.GyrokP122, PIDConstants.GyrokI122, PIDConstants.GyrokD122));// turn 58 degrees
-    addCommands(new WaitCommand(0.2));
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52)); 
+    // addCommands(new WaitCommand(0.2));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -122, PIDConstants.GyrokP122, PIDConstants.GyrokI122, PIDConstants.GyrokD122));// turn 58 degrees
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 113));
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -(180-58), PIDConstants.GyrokP122, PIDConstants.GyrokI122, PIDConstants.GyrokD122));// turn 58 degrees
+    // addCommands(new WaitCommand(0.2));
+    // addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
   }
 
 }

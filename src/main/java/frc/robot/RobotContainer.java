@@ -28,8 +28,8 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final Period1AutonPath period1AutonPath = new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
-  //private final Period1ThreeBallClose period1AutonPath = new Period1ThreeBallClose(driveBaseSubsystem, gyroSubsystem);
+  //private final Period1AutonPath period1AutonPath = new Period1AutonPath(driveBaseSubsystem, gyroSubsystem);
+  private final Period1ThreeBallClose period1AutonPath = new Period1ThreeBallClose(driveBaseSubsystem, gyroSubsystem);
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
