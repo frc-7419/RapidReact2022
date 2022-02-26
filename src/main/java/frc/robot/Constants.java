@@ -76,24 +76,14 @@ public final class Constants {
 
     public static class PIDConstants {
         //gyro
-        public static double GyrokP = 0.085;
-        public static double GyrokI = 0;
-        public static double GyrokD = 0;
+        public static final double GyrokP = 0.085;
+        public static final double GyrokI = 0;
+        public static final double GyrokD = 0;
 
         // turret PID gains
-        public static double TurretKp = 0.006;
-        public static double TurretKi = 0;
-        public static double TurretKd = 0;
-
-        //turret position closed loop
-        public static double TurretMotionMagickP = 0;
-        public static double TurretMotionMagickI = 0;
-        public static double TurretMotionMagickD = 0;
-
-        //turret potentiometer
-        public static double TurretPotentiometerkP = 0;
-        public static double TurretPotentiometerkI = 0;
-        public static double TurretPotentiometerkD = 0;
+        public static final double TurretKp = 0.006;
+        public static final double TurretKi = 0;
+        public static final double TurretKd = 0;
 
         //shooter
         public static final double BottomShooterkP = 0.17054/(2048*6);
