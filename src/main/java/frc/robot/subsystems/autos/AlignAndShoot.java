@@ -10,7 +10,7 @@ import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.transferWheel.RunTransferWheel;
 import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
-import frc.robot.subsystems.turret.AlignTurretWithOnboardPIDController;
+import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -21,7 +21,7 @@ public class AlignAndShoot extends SequentialCommandGroup {
   public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, TransferWheelSubsystem transferWheelSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(parallel(new AlignTurretWithOnboardPIDController(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)));
+    addCommands(parallel(new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)));
     addCommands(parallel(new RunTransferWheel(transferWheelSubsystem, 0.5), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)));
   }
 }
