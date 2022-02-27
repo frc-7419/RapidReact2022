@@ -1,5 +1,7 @@
 package com.team7419.math;
 
+import edu.wpi.first.math.util.Units;
+
 public class UnitConversions {
 
     public static double roundToDecimal(double number, int n) {
@@ -21,6 +23,10 @@ public class UnitConversions {
 
     public static double mpsToRawSensorVelocity(double mps, double ticksPerRotation, double radius) {
         return rpmToRawSensorVelocity(mpsToRPM(mps, radius), ticksPerRotation);
+    }
+
+    public static double rawSensorVelocityToMPS(double rawVelocity, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return ticksToMeters(rawVelocity, radius, gearRatioMultiplier, ticksPerRotation) * 10;
     }
 
     public static double inchesToMeters(double inches) {
@@ -47,6 +53,10 @@ public class UnitConversions {
     public static double ticksToInches(double ticks, double radius, double gearRatioMultiplier,
             double ticksPerRotation) {
         return (2 * Math.PI * radius * ticks) / (ticksPerRotation * gearRatioMultiplier);
+    }
+
+    public static double ticksToMeters(double ticks, double radius, double gearRatioMultiplier, double ticksPerRotation) {
+        return Units.inchesToMeters(ticksToInches(ticks, radius, gearRatioMultiplier, ticksPerRotation));
     }
 
     public static double thetaToInches(double theta, double radius) {

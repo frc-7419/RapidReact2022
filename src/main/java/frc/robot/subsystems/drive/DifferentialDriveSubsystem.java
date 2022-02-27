@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.kauailabs.navx.frc.AHRS;
+import com.team7419.math.UnitConversions;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class DifferentialDriveSubsystem extends SubsystemBase {
@@ -64,22 +65,11 @@ public class DifferentialDriveSubsystem extends SubsystemBase {
     this.m_rightMotors = new MotorControllerGroup(right1, right2);
     this.m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
-    try {
-      /*
-       * Communicate w/navX-MXP via the MXP SPI Bus (use mini USB to USB A cable)
-       * Alternatively: I2C.Port.kMXP, SerialPort.Port.kMXP or S
-       * See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for
-       * details.
-       */
-      ahrs = new AHRS(SerialPort.Port.kMXP);
-    } catch (RuntimeException ex) {
-      
-      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
-    }
+    ahrs = new AHRS(SerialPort.Port.kMXP);
 
     m_rightMotors.setInverted(true);
     
-    // Sets the distance per pulse for the encoders
+    //Sets the distance per pulse for the encoders
     // m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     // m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
@@ -104,11 +94,11 @@ public class DifferentialDriveSubsystem extends SubsystemBase {
   }
 
   public double getAverageLeftVelocity() {
-    return (this.left1.getSelectedSensorVelocity() + this.left2.getSelectedSensorVelocity())/2.0;
+    return UnitConversions.rawSensorVelocityToMPS((this.left1.getSelectedSensorVelocity() + this.left2.getSelectedSensorVelocity())/2.0, 3, 10.71, 2048);
   }
 
   public double getAverageRightVelocity() {
-    return (this.right1.getSelectedSensorVelocity() + this.right2.getSelectedSensorVelocity())/2.0;
+    return UnitConversions.rawSensorVelocityToMPS((this.right1.getSelectedSensorVelocity() + this.right2.getSelectedSensorVelocity())/2.0, 3, 10.71, 2048);
   }
   /**
    * Returns the current wheel speeds of the robot.
@@ -154,13 +144,10 @@ public class DifferentialDriveSubsystem extends SubsystemBase {
 
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
-
-    // m_leftEncoder.reset();
-    // m_rightEncoder.reset();
-    this.right1.configFactoryDefault();
-    this.right2.configFactoryDefault();
-    this.left1.configFactoryDefault();
-    this.left2.configFactoryDefault();
+    this.right1.setSelectedSensorPosition(0);
+    this.right2.setSelectedSensorPosition(0);
+    this.left1.setSelectedSensorPosition(0);
+    this.left2.setSelectedSensorPosition(0);
   }
 
   /**
@@ -170,15 +157,15 @@ public class DifferentialDriveSubsystem extends SubsystemBase {
    */
   public double getAverageEncoderDistance() {
     // return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
-    return (this.right1.getSelectedSensorPosition() + this.right2.getSelectedSensorPosition() + this.right1.getSelectedSensorPosition() + this.left2.getSelectedSensorPosition())/4.0;
+    return UnitConversions.ticksToMeters((this.right1.getSelectedSensorPosition() + this.right2.getSelectedSensorPosition() + this.right1.getSelectedSensorPosition() + this.left2.getSelectedSensorPosition())/4.0, 3, 10.71, 2048);
   }
 
   public double getAverageRightDistance() {
-    return (this.right1.getSelectedSensorPosition() + this.right2.getSelectedSensorPosition())/2.0;
+    return UnitConversions.ticksToMeters((this.right1.getSelectedSensorPosition() + this.right2.getSelectedSensorPosition())/2.0, 3, 10.71, 2048);
   }
 
   public double getAverageLeftDistance() {
-    return (this.left1.getSelectedSensorPosition() + this.left2.getSelectedSensorPosition())/2.0;
+    return UnitConversions.ticksToMeters((this.left1.getSelectedSensorPosition() + this.left2.getSelectedSensorPosition())/2.0, 3, 10.71, 2048);
   }
   // /**
   //  * Gets the left drive encoder.

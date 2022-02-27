@@ -70,13 +70,14 @@ public final class Constants {
         public static final double kPDriveVel = 0; // change me 
         
         public static final double kTrackWidth = 0; // Units: Meters // change me 
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidth);
+
         public static final double kMaxSpeed = 0; // Units: MetersPerSecond //change me 
         public static final double kMaxAcceleration = 0; // Units: MetersPerSecondSquared // change me
 
-        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidth);
-
-        public static final double kRamseteB = 0; // change me
-        public static final double kRamseteZeta = 0; // change me
+        // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+        public static final double kRamseteB = 2; // change me
+        public static final double kRamseteZeta = 0.7; // change me
     }
 
     public static class RobotConstants {
