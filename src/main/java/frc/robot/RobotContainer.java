@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurret;
+import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import frc.robot.Constants.PIDConstants;
@@ -33,7 +34,7 @@ public class RobotContainer {
   private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
-  private final AlignTurret alignTurret = new AlignTurret(turretSubsystem, limelightSubsystem);
+  private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
 
   public RobotContainer() {
@@ -46,7 +47,7 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return alignTurret;
+    return alignTurretDefault;
   }
     
   public void setDefaultCommands(){
@@ -54,7 +55,7 @@ public class RobotContainer {
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
-    turretSubsystem.setDefaultCommand(alignTurret);
+    turretSubsystem.setDefaultCommand(alignTurretDefault);
   }
 
 
