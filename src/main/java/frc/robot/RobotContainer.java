@@ -64,4 +64,7 @@ public class RobotContainer {
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
     revColorDistanceSub.setDefaultCommand(discardWrongColor);
   }
+
+  public void setDefaultCommands() {}
+
 }
