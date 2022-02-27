@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-public class AlignTurret extends CommandBase {
+public class AlignTurretDefault extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private TurretSubsystem turretSubsystem;
@@ -21,7 +21,7 @@ public class AlignTurret extends CommandBase {
   private double tx;
   private double tv;
 
-  public AlignTurret(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretDefault(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
@@ -64,7 +64,8 @@ public class AlignTurret extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return pidController.atSetpoint();
+    // return pidController.atSetpoint();
+    return false;
   }
 }
  
