@@ -11,24 +11,39 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
+import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.turret.AlignTurret;
+import frc.robot.subsystems.turret.TurretSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Period1ThreeBallForwardBackTurn extends SequentialCommandGroup {
   /** Creates a new Period1ThreeBallForwardBackTurn. */
-  public Period1ThreeBallForwardBackTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
+  public Period1ThreeBallForwardBackTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
     addCommands(new WaitCommand(0.2));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -80));
+
+    // turret turn left 157 degrees
+    addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
+    //shoot 
+    addCommands(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+
     addCommands(new WaitCommand(0.2));
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80));
     addCommands(new WaitCommand(0.2));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 240));
     addCommands(new WaitCommand(0.2));
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -140));
+    
+    addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
+    addCommands(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+
 
     /*
     Algorithm:
