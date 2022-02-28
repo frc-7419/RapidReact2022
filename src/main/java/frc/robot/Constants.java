@@ -104,7 +104,7 @@ public final class Constants {
         public static final double GyrokD80 = 0.0004;
 
         public static final double GyrokP115 = 0.005;
-        public static final double GyrokI115 = 0.00;
+        public static final double GyrokI115 = 0.000155;
         public static final double GyrokD115 = 0.0000083;
         
         public static final double GyrokP161 = 0.0047;
