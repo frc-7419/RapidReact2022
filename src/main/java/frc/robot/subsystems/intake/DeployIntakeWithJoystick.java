@@ -4,23 +4,27 @@
 
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DeployIntake extends CommandBase {
+public class DeployIntakeWithJoystick extends CommandBase {
   private IntakeSolenoidSubsystem intakeSolenoidSubsystem;
+  private XboxController joystick;
 
-  public DeployIntake(IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
+  public DeployIntakeWithJoystick(IntakeSolenoidSubsystem intakeSolenoidSubsystem, XboxController joystick) {
     this.intakeSolenoidSubsystem = intakeSolenoidSubsystem;
+    this.joystick = joystick;
     addRequirements(intakeSolenoidSubsystem);
   }
 
   @Override
-  public void initialize() {
-    intakeSolenoidSubsystem.actuateSolenoid();
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
+    if (joystick.getXButtonPressed()) {
+      intakeSolenoidSubsystem.toggleSolenoid();
+    }
   }
 
   @Override
