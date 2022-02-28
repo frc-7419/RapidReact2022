@@ -12,15 +12,15 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
 import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class Period2Auton extends SequentialCommandGroup {
 
-  public Period2Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem) {
+  public Period2Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, TransferWheelSubsystem transferWheelSubsystem) {
     //Shooting the first ball in our robot
-    addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
-    addCommands(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, transferWheelSubsystem));
 
     //Turn robot towards the first ball to collect
     SmartDashboard.putString("command running", "161 degrees");
