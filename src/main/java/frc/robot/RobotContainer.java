@@ -12,6 +12,7 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.subsystems.intake.DeployIntake;
+import frc.robot.subsystems.intake.DeployIntakeWithJoystick;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
@@ -34,7 +35,7 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final RevColorDistanceSub revColorDistanceSub = new RevColorDistanceSub();
 
-  private final DeployIntake deployIntake = new DeployIntake(intakeSolenoidSubsystem, joystick);
+  private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick, PowerConstants.intakeMultiplier);
   private final RunLoaderWithJoystick runLoader = new RunLoaderWithJoystick(loaderSubsystem, joystick, 1);
@@ -60,7 +61,7 @@ public class RobotContainer {
     
   public void setDefaultCommands(){
     intakeSubsystem.setDefaultCommand(runIntake);
-    intakeSolenoidSubsystem.setDefaultCommand(deployIntake);
+    intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoader);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
