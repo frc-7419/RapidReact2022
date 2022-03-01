@@ -69,7 +69,14 @@ public final class Constants {
     }
 
     public static class PowerConstants {
-        public static final double intakeMultiplier = 1.0;
+        //drive
+        public static final double DriveBaseLeftStraight = -.45;
+        public static final double DriveBaseRightTurn = .35; //.6
+        public static final double DriveBaseLeftTurn = .35; //.6
+        public static final double DriveBaseRightStraight = -.45;
+
+        //intake
+        public static final double intakeMultiplier = 1.0; 
     }
 
     public static class PIDConstants {
