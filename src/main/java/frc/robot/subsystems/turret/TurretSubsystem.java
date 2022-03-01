@@ -46,6 +46,8 @@ public class TurretSubsystem extends SubsystemBase {
 
     // forwardLimit.enableLimitSwitch(false);
     // reverseLimit.enableLimitSwitch(false);
+
+    turret.burnFlash();
   }
 
   @Override
