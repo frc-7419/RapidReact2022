@@ -21,10 +21,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     factoryResetAll();
     
-    right1.setInverted(true);
-    right1.setSensorPhase(false);
-    right2.setInverted(true);
-    right2.setSensorPhase(false);
+    right1.setInverted(false);
+    right1.setSensorPhase(true);
+    right2.setInverted(false);
+    right2.setSensorPhase(true);
 
     left2.follow(left1);
     right2.follow(right1);

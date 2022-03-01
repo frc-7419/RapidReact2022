@@ -26,8 +26,8 @@ public final class Constants {
 
         // 2020 robot constants
         leftFalcon1(2),
-        rightFalcon1(3),
-        leftFalcon2(4),
+        leftFalcon2(3),
+        rightFalcon1(4),
         rightFalcon2(5),
         loaderFalcon(10),
         intakeVictor(11),
