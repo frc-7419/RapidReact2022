@@ -11,6 +11,7 @@ public class IntakeSubsystem extends SubsystemBase{
 
     public IntakeSubsystem() {
         intake = new CANSparkMax(CanIds.intakeSpark.id, MotorType.kBrushless);
+        intake.burnFlash();
     }
 
     @Override
