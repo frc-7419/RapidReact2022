@@ -45,7 +45,7 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.2));
 
     //turn 85 degrees clockwise
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85));
     addCommands(new WaitCommand(0.2));
 
     //drive 240 inches and intake both balls in its path as well as run loader
