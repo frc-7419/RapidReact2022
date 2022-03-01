@@ -24,7 +24,7 @@ public class BetterPeriod2Auton extends SequentialCommandGroup {
 
   public BetterPeriod2Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem) {
     //DeployIntake command will be replaced with the RunIntake command once it is fixed
-    addCommands(parallel(new Period2Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem), new RunIntake(intakeSubsystem, 0.3)));
+    addCommands(parallel(new Period2Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem), new RunIntake(intakeSubsystem, 1)));
   }
 
 }
