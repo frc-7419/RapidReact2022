@@ -17,18 +17,23 @@ package frc.robot;
 public final class Constants {
 
     public static enum CanIds {
+        // 2020 drive train ids
+        // leftFalcon1(5),
+        // rightFalcon1(2),
+        // leftFalcon2(4),
+        // rightFalcon2(3)
 
-        // 2020 robot constants
-        leftFalcon1(5),
+        // 2022 drive train ids
+        leftFalcon1(4),
+        leftFalcon2(5),
         rightFalcon1(2),
-        leftFalcon2(4),
         rightFalcon2(3),
         bottomShooterFalcon(10),
         topShooterFalcon(14),
         intakeSpark(15),  
         loaderVictor(16),
         turretSpark(21),
-        transferWheelVictor(25),
+        feederVictor(25),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
         ;
@@ -71,7 +76,14 @@ public final class Constants {
     }
 
     public static class PowerConstants {
-        public static final double intakeMultiplier = 1.0;
+        //drive
+        public static final double DriveBaseLeftStraight = -.45;
+        public static final double DriveBaseRightTurn = .35; //.6
+        public static final double DriveBaseLeftTurn = .35; //.6
+        public static final double DriveBaseRightStraight = -.45;
+
+        //intake
+        public static final double intakeMultiplier = 1.0; 
     }
 
     public static class PIDConstants {
