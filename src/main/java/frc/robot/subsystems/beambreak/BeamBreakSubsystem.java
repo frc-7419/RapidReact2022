@@ -14,8 +14,8 @@ public class BeamBreakSubsystem extends SubsystemBase {
 
   /** Creates a new BeamBreakSubsystem. */
   public BeamBreakSubsystem() {
-    beamBreakReceiver = new DigitalInput(0);
-    beamBreakTransmitter = new DigitalInput(1);
+    beamBreakReceiver = new DigitalInput(5);
+    beamBreakTransmitter = new DigitalInput(6);
 
   }
 
