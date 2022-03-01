@@ -70,10 +70,17 @@ public final class Constants {
 
     public static class PowerConstants {
         //drive
-        public static final double DriveBaseLeftStraight = -.45;
-        public static final double DriveBaseRightTurn = .35; //.6
-        public static final double DriveBaseLeftTurn = .35; //.6
-        public static final double DriveBaseRightStraight = -.45;
+        // public static final double DriveBaseLeftStraight = .45;
+        // public static final double DriveBaseRightTurn = .35; //.6
+        // public static final double DriveBaseLeftTurn = .35; //.6
+        // public static final double DriveBaseRightStraight = .45;
+
+        // for testing: 
+        public static final double DriveBaseLeftStraight = .15;
+        public static final double DriveBaseRightTurn = .1; 
+        public static final double DriveBaseLeftTurn = .1; 
+        public static final double DriveBaseRightStraight = .15;
+
 
         //intake
         public static final double intakeMultiplier = 1.0; 
