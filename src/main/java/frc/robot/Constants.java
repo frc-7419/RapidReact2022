@@ -17,10 +17,10 @@ package frc.robot;
 public final class Constants {
 
     public static enum CanIds {
-        leftFalcon1(2),
-        leftFalcon2(3),
-        rightFalcon1(4),
-        rightFalcon2(5),
+        leftFalcon1(4),
+        leftFalcon2(5),
+        rightFalcon1(2),
+        rightFalcon2(3),
         bottomShooterFalcon(10),
         topShooterFalcon(14),
         intakeSpark(15),  
