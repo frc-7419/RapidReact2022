@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // uncomment the following line once you return an autonomous command in getAutonomousCommand()
-    // robotContainer.getAutonomousCommand().schedule();
+    robotContainer.getAutonomousCommand().schedule();
   }
 
   @Override
