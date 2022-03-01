@@ -26,7 +26,7 @@ public final class Constants {
         intakeSpark(15),  
         loaderVictor(16),
         turretSpark(21),
-        transferWheelVictor(25),
+        feederVictor(25),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
         ;
