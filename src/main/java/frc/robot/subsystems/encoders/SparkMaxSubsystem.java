@@ -20,10 +20,10 @@ public class SparkMaxSubsystem extends SubsystemBase {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    canSparkMax.restoreFactoryDefaults();
-
+    
     forwardLimitSwitch.enableLimitSwitch(true);
     reverseLimitSwitch.enableLimitSwitch(true);
+    
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
