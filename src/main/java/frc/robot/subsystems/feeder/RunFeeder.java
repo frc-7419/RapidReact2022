@@ -2,16 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.transferWheel;
+package frc.robot.subsystems.feeder;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunTransferWheel extends CommandBase {
-  private TransferWheelSubsystem transferWheelSubsystem;
+public class RunFeeder extends CommandBase {
+  private FeederSubsystem transferWheelSubsystem;
   private double power;
 
-  public RunTransferWheel(TransferWheelSubsystem transferWheelSubsystem, double power) {
+  public RunFeeder(FeederSubsystem transferWheelSubsystem, double power) {
     this.transferWheelSubsystem = transferWheelSubsystem;
     this.power = power;
     addRequirements(transferWheelSubsystem);
