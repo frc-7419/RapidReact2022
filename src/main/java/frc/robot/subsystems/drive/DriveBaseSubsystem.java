@@ -85,7 +85,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     left2.setInverted(false);
   }
 
-  public void factoryResetAll(){
+  public void factoryResetAll() {
     right1.configFactoryDefault();
     right2.configFactoryDefault();
     left1.configFactoryDefault();
