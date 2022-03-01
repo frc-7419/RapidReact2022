@@ -57,7 +57,8 @@ public class RobotContainer {
     return alignTurretDefault;
   }
     
-  public void setDefaultCommands(){
+  public void setDefaultCommands() {
+    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
