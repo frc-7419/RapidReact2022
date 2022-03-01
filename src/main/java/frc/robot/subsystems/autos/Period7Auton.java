@@ -7,16 +7,16 @@ import frc.robot.Constants.LimelightConstants;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.subsystems.transferWheel.TransferWheelSubsystem;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class Period7Auton extends SequentialCommandGroup {
 
-  public Period7Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, TransferWheelSubsystem transferWheelSubsystem) {
+  public Period7Auton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem) {
     /* use:
     addCommands(new FoodCommand());
     addCommands(new BarCommand());
@@ -24,7 +24,7 @@ public class Period7Auton extends SequentialCommandGroup {
     // TODO: change values
 
     // align and shoot
-    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, transferWheelSubsystem));
+    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
 
     // Turn to next cargo
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180));
@@ -50,7 +50,7 @@ public class Period7Auton extends SequentialCommandGroup {
     addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115).withTimeout(5)); //positive equivalent is 147.75 (from -32.25)
 
     // Use limight to adjust to the target and shoot
-    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, transferWheelSubsystem));
+    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
 
   }
 
