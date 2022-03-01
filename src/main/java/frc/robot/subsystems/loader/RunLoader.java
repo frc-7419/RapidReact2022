@@ -4,13 +4,11 @@
 
 package frc.robot.subsystems.loader;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 public class RunLoader extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
-  private XboxController joystick;
   private double power;
 
   public RunLoader(LoaderSubsystem loaderSubsystem, double power) {
