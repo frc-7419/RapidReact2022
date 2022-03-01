@@ -22,8 +22,8 @@ public class SparkMaxSubsystem extends SubsystemBase {
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     canSparkMax.restoreFactoryDefaults();
 
-    forwardLimitSwitch.enableLimitSwitch(false);
-    reverseLimitSwitch.enableLimitSwitch(false);
+    forwardLimitSwitch.enableLimitSwitch(true);
+    reverseLimitSwitch.enableLimitSwitch(true);
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
