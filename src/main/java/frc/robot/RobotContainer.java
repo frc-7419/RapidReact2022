@@ -28,10 +28,14 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
     
-    new DoubleButton(
-      new JoystickButton(joystick, XboxController.Button.kX.value), 
-      new JoystickButton(joystick, XboxController.Button.kY.value))
-      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
+    new JoystickButton(joystick, XboxController.Button.kX.value)
+      .and(new JoystickButton(joystick, XboxController.Button.kY.value))
+      .toggleWhenActive(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
+    
+    // new DoubleButton(
+    //   new JoystickButton(joystick, XboxController.Button.kX.value), 
+    //   new JoystickButton(joystick, XboxController.Button.kY.value))
+    //   .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
 
   }
 
