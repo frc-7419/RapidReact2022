@@ -31,15 +31,15 @@ public class RobotContainer {
     new DoubleButton(
       new JoystickButton(joystick, XboxController.Button.kX.value), 
       new JoystickButton(joystick, XboxController.Button.kY.value))
-      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 2000, 2000));
 
   }
 
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("tTargetRV", 2000);
     SmartDashboard.putNumber("bTargetRV", 2000);
-    SmartDashboard.putNumber("kP", PIDConstants.ShooterkP);
-    SmartDashboard.putNumber("kI", PIDConstants.ShooterkI);
+    SmartDashboard.putNumber("ShooterKp", PIDConstants.ShooterkP);
+    SmartDashboard.putNumber("ShooterKi", PIDConstants.ShooterkI);
     SmartDashboard.putNumber("bKf", PIDConstants.ShooterkF);
     SmartDashboard.putNumber("tKf", PIDConstants.ShooterkF);
   }
