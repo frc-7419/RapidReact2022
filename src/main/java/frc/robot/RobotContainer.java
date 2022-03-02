@@ -1,7 +1,10 @@
 package frc.robot;
 
+import com.team7419.joystick.DoubleButton;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
@@ -46,10 +49,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
-    
-    new DoubleButton(
-      new JoystickButton(joystick, XboxController.Button.kX.value), 
-      new JoystickButton(joystick, XboxController.Button.kY.value))
+    new JoystickButton(joystick, XboxController.Button.kY.value)
       .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 2000, 2000));
 
   }
@@ -57,10 +57,10 @@ public class RobotContainer {
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("tTargetRV", 2000);
     SmartDashboard.putNumber("bTargetRV", 2000);
-    SmartDashboard.putNumber("ShooterKp", PIDConstants.ShooterkP);
-    SmartDashboard.putNumber("ShooterKi", PIDConstants.ShooterkI);
-    SmartDashboard.putNumber("bKf", PIDConstants.ShooterkF);
-    SmartDashboard.putNumber("tKf", PIDConstants.ShooterkF);
+    SmartDashboard.putNumber("ShooterKp", 0);
+    SmartDashboard.putNumber("ShooterKi", 0);
+    SmartDashboard.putNumber("bKf", 0.05);
+    SmartDashboard.putNumber("tKf", 0.05);
   }
 
   public Command getAutonomousCommand() {
@@ -72,7 +72,7 @@ public class RobotContainer {
     intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
-    shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    // shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(alignTurretDefault);
   }
 
