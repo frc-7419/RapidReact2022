@@ -38,11 +38,8 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
-    bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
-    bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
-
-    tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
-    tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
+    kP = SmartDashboard.getNumber("ShooterKp", PIDConstants.ShooterkP);
+    kI = SmartDashboard.getNumber("ShooterKi", PIDConstants.ShooterkI);
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
@@ -65,11 +62,8 @@ public class GetToTargetVelocity extends CommandBase {
     SmartDashboard.putBoolean("Shooter Running", true);
 
     // update PIF values from SD while running
-    bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
-    bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
-
-    tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
-    tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
+    kP = SmartDashboard.getNumber("ShooterKp", PIDConstants.ShooterkP);
+    kI = SmartDashboard.getNumber("ShooterKi", PIDConstants.ShooterkI);
 
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
@@ -77,11 +71,8 @@ public class GetToTargetVelocity extends CommandBase {
     tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
     bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
-    SmartDashboard.putNumber("tKf", tKf);
-    SmartDashboard.putNumber("bKf", bKf);
-
-    shooterSubsystem.setTopPIDF(bKp, bKi, 0, tKf);
-    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, bKf);
+    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
+    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
 
     // double topTargetVelocity = topTargetRPM * ticksPerRotation * (1/600);
     // double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
