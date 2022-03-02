@@ -26,7 +26,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
     
     new JoystickButton(joystick, XboxController.Button.kX.value)
       .and(new JoystickButton(joystick, XboxController.Button.kY.value))
@@ -45,11 +44,12 @@ public class RobotContainer {
 
     SmartDashboard.putNumber("bKp", PIDConstants.BottomShooterkP);
     SmartDashboard.putNumber("bKi", PIDConstants.BottomShooterkI);
-    SmartDashboard.putNumber("bKd", PIDConstants.BottomShooterkD);
+    SmartDashboard.putNumber("bKf", 0);
+
 
     SmartDashboard.putNumber("tKp", PIDConstants.TopShooterkP);
     SmartDashboard.putNumber("tKi", PIDConstants.TopShooterkI);
-    SmartDashboard.putNumber("tKd", PIDConstants.TopShooterkD);
+    SmartDashboard.putNumber("tKf", 0);
   }
 
   public Command getAutonomousCommand() {
