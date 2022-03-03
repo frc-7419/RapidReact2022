@@ -10,29 +10,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BeamBreakSubsystem extends SubsystemBase {
   private DigitalInput beamBreakReceiver;
-  private DigitalInput beamBreakTransmitter;
 
   /** Creates a new BeamBreakSubsystem. */
-  public BeamBreakSubsystem() {
+  public BeamBreakSubsystem() { 
     beamBreakReceiver = new DigitalInput(5);
-    beamBreakTransmitter = new DigitalInput(6);
 
   }
 
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("beamBreak: ", beamBreakReceiver.get());
-    SmartDashboard.putBoolean("beamBreak: ", beamBreakTransmitter.get());
-
     // This method will be called once per scheduler run
   }
 
   public DigitalInput getBeamBreakReceiver() {
     return beamBreakReceiver;
   }
-
-  public DigitalInput getBeamBreakTransmitter() {
-    return beamBreakTransmitter;
-  }
-
-}
+} 
