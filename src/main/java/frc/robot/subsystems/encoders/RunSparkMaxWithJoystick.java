@@ -25,7 +25,7 @@ public class RunSparkMaxWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sparkMaxSubsystem.setPower(joystick.getLeftY());
+    sparkMaxSubsystem.setPower(joystick.getLeftY()*0.3);
   }
 
   // Called once the command ends or is interrupted.
