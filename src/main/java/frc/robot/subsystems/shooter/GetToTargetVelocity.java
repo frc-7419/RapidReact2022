@@ -74,11 +74,11 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
 
-    tKf = SmartDashboard.getNumber("tKf", 0);
-    bKf = SmartDashboard.getNumber("bKf", 0);
+    // tKf = SmartDashboard.getNumber("tKf", 0);
+    // bKf = SmartDashboard.getNumber("bKf", 0);
 
-    // tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    // bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
+    tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
+    bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
     // SmartDashboard.putNumber("tKf", tKf);
     // SmartDashboard.putNumber("bKf", bKf);
