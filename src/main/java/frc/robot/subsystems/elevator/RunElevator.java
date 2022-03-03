@@ -36,7 +36,7 @@ public class RunElevator extends CommandBase {
 
     if (joystick.getRightY() != 0) {
       elevatorSubsystem.coast();
-      elevatorSubsystem.setPower(-joystick.getRightY());
+      elevatorSubsystem.setPower(-joystick.getRightY() * 0.7);
     } else {
       elevatorSubsystem.setPower(0);
       elevatorSubsystem.brake();
