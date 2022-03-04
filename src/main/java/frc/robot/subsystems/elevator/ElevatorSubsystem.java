@@ -6,19 +6,19 @@ package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 
 public class ElevatorSubsystem extends SubsystemBase {
-  private TalonSRX elevatorLeft;
-  private TalonSRX elevatorRight;
+  private TalonFX elevatorLeft;
+  private TalonFX elevatorRight;
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
-    elevatorLeft = new TalonSRX(CanIds.leftElevatorFalcon.id);
-    elevatorRight = new TalonSRX(CanIds.rightElevatorFalcon.id);
+    elevatorLeft = new TalonFX(CanIds.leftElevatorFalcon.id);
+    elevatorRight = new TalonFX(CanIds.rightElevatorFalcon.id);
     elevatorRight.setInverted(true);
     }
   
