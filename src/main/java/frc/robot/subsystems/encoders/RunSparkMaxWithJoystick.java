@@ -29,15 +29,18 @@ public class RunSparkMaxWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || !sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
-      sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);
+    if (sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
+      sparkMaxSubsystem.setPower(0);
+      sparkMaxSubsystem.brake();
     }
 
-    else if (sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
-      sparkMaxSubsystem.brake();
-      SmartDashboard.putBoolean("is braking", true);
-      new WaitCommand(0.5);
-      sparkMaxSubsystem.coast();
+    else {//sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
+      // sparkMaxSubsystem.brake();
+      // SmartDashboard.putBoolean("is braking", true);
+      // new WaitCommand(0.5);
+      // sparkMaxSubsystem.coast();
+      sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);
+
     }
     // else {
     //   sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);

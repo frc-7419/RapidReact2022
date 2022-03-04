@@ -63,5 +63,6 @@ public class SparkMaxSubsystem extends SubsystemBase {
      */
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
+    
   }
 }
