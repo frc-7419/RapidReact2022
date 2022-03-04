@@ -4,8 +4,10 @@
 
 package frc.robot.subsystems.encoders;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,6 +34,14 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public void setPower(double power) {
     canSparkMax.set(power);
   }
+
+  public void brake() {
+    canSparkMax.setIdleMode(IdleMode.kBrake);
+  }
+  public void coast() {
+    canSparkMax.setIdleMode(IdleMode.kCoast);
+  }
+
   public SparkMaxLimitSwitch getForwardLimitSwitch() {
     return forwardLimitSwitch;
   } 
