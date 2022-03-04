@@ -24,7 +24,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
     forwardLimitSwitch.enableLimitSwitch(true);
     reverseLimitSwitch.enableLimitSwitch(true);
 
-    canSparkMax.burnFlash();
+    // canSparkMax.burnFlash();
     
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
