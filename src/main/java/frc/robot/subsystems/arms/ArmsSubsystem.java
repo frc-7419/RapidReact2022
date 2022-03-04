@@ -16,7 +16,7 @@ public class ArmsSubsystem extends SubsystemBase {
   /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
     this.armTalon = new TalonSRX(11); //temporary ID
-    brake();
+    // brake();
   }
 
   @Override
