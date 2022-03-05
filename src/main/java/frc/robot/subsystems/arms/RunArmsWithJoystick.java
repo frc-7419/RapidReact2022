@@ -11,7 +11,7 @@ public class RunArmsWithJoystick extends CommandBase {
   private ArmsSubsystem armsSubsystem;
   private XboxController joystick;
   /** Creates a new RunArmsWithJoystick. */
-  public RunArmsWithJoystick(ArmsSubsystem armsSubsystem, XboxController xboxController) {
+  public RunArmsWithJoystick(ArmsSubsystem armsSubsystem, XboxController joystick) {
     this.armsSubsystem = armsSubsystem;
     this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.

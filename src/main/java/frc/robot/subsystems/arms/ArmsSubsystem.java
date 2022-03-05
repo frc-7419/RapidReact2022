@@ -9,13 +9,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CanIds;
 
 public class ArmsSubsystem extends SubsystemBase {
   //one motor controls both arms
   private TalonSRX armTalon;
   /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
-    this.armTalon = new TalonSRX(11); //temporary ID
+    this.armTalon = new TalonSRX(CanIds.armsTalon.id); //temporary ID
     // brake();
   }
 
