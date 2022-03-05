@@ -35,11 +35,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("p output", elevatorLeft.getMotorOutputPercent());
   }
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
-
   public void setPower(double power) {
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
