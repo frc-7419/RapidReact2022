@@ -21,6 +21,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
     spark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
     spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
     spark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -15);
+    spark.burnFlash();
   }
 
   public void setSpeed(double power) {
