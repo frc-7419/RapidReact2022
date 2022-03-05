@@ -32,7 +32,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("elevator pos", elevatorLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("p output", elevatorLeft.getPercentOutput());
+    SmartDashboard.putNumber("p output", elevatorLeft.getMotorOutputPercent());
   }
 
   @Override
