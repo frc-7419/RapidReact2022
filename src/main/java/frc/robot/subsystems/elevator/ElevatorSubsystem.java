@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,15 +25,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     elevatorRight.follow(elevatorLeft);
     
-    elevatorLeft.setInverted(false);
+    elevatorLeft.setInverted(true);
     elevatorRight.setInverted(InvertType.OpposeMaster);
   }
-  
 
   @Override
   public void periodic() {
     SmartDashboard.putNumber("elevator pos", elevatorLeft.getSelectedSensorPosition());
-    SmartDashboard.putNumber("p output", elevatorLeft.getMotorOutputPercent());
+    SmartDashboard.putNumber("position", getElevatorPosition());
   }
 
   public void setPower(double power) {
@@ -48,5 +48,21 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void coast() {
     elevatorLeft.setNeutralMode(NeutralMode.Coast);
     elevatorRight.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public void setPIDFConstants(double kP, double kI, double kD, double kF) {
+    TalonFuncs.setPIDFConstants(0, elevatorLeft, kP, kI, kD, kF);
+  }
+
+  public double getElevatorPosition() {
+    return elevatorLeft.getSelectedSensorPosition();
+  }
+
+  public TalonFX getElevatorLeft() {
+    return elevatorLeft;
+  }
+  
+  public TalonFX getElevatorRight() {
+    return elevatorRight;
   }
 }

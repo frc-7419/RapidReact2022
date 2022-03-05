@@ -58,7 +58,8 @@ public final class Constants {
     }
 
     public static class PIDConstants {
-        
+        public static final double ElevatorKp = 0.01;
+        public static final double ElevatorKf = 0;
     }
 
     public static double[][] kSpeedToFf = {

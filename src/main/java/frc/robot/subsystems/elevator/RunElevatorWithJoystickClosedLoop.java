@@ -4,17 +4,24 @@
 
 package frc.robot.subsystems.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 
 
-public class RunElevatorWithJoystick extends CommandBase {
+public class RunElevatorWithJoystickClosedLoop extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private XboxController joystick;
 
-  public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  private double initialPosition;
+  private double currentPosition;
+
+  public RunElevatorWithJoystickClosedLoop(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
     addRequirements(elevatorSubsystem);
@@ -23,21 +30,19 @@ public class RunElevatorWithJoystick extends CommandBase {
   @Override
   public void initialize() {
     elevatorSubsystem.coast();
+    currentPosition = elevatorSubsystem.getElevatorPosition();
   }
 
   @Override
   public void execute() {
-
-    SmartDashboard.putNumber("joystick out", joystick.getRightY());
-
     if (joystick.getRightY() != 0) {
       elevatorSubsystem.coast();
       elevatorSubsystem.setPower(joystick.getRightY() * 0.35);
+      currentPosition = elevatorSubsystem.getElevatorPosition();
     } else {
-      elevatorSubsystem.setPower(0);
-      elevatorSubsystem.brake();
-    }
-      
+      elevatorSubsystem.setPIDFConstants(PIDConstants.ElevatorKp, 0, 0, 0);
+      elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, currentPosition, DemandType.ArbitraryFeedForward, PIDConstants.ElevatorKf);
+    } 
   }
 
   @Override
