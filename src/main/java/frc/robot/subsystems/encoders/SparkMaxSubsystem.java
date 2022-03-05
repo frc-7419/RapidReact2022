@@ -15,11 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SparkMaxSubsystem extends SubsystemBase {
-  /** Creates a new SparkMaxSubsystem. */
+  /** Creates a new  */
   private CANSparkMax canSparkMax;
   private SparkMaxLimitSwitch forwardLimitSwitch;
   private SparkMaxLimitSwitch reverseLimitSwitch;
+
   private RelativeEncoder encoder;
+  private double forwardLimitPosition = Double.MAX_VALUE; // rotations
+  private double reverseLimitPosition = Double.MAX_VALUE;
 
   public SparkMaxSubsystem() {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
@@ -36,7 +39,17 @@ public class SparkMaxSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
   public void setPower(double power) {
-    canSparkMax.set(power);
+    if (
+      (getEncoderPosition() <= reverseLimitPosition && (power < 0 ) && (reverseLimitPosition != Double.MAX_VALUE)) ||
+      (getEncoderPosition() >= forwardLimitPosition) && (power > 0 ) && (forwardLimitPosition != Double.MAX_VALUE)
+    ) {
+      canSparkMax.set(0);
+      brake();
+    }
+    else {
+      canSparkMax.set(power);
+      coast();
+    }
   }
 
   public void brake() {
@@ -55,19 +68,19 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public double getEncoderPosition() {
     return encoder.getPosition();
   }
+
+
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    if (getReverseLimitSwitch().isPressed() && reverseLimitPosition == Double.MAX_VALUE) {
+      reverseLimitPosition = getEncoderPosition();
+      SmartDashboard.putNumber("Reverse Limit Position", reverseLimitPosition);
+    }
+    if (getForwardLimitSwitch().isPressed() && forwardLimitPosition == Double.MAX_VALUE) {
+      forwardLimitPosition = getEncoderPosition();
+      SmartDashboard.putNumber("Forward Limit Position", forwardLimitPosition);
+    }
 
-    // enable/disable limit switches based on value read from SmartDashboard
-
-    /**
-     * The isPressed() method can be used on a SparkMaxLimitSwitch object to read the state of the switch.
-     * 
-     * In this example, the polarity of the switches are set to normally closed. In this case,
-     * isPressed() will return true if the switch is pressed. It will also return true if you do not 
-     * have a switch connected. isPressed() will return false when the switch is released.
-     */
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
     SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
