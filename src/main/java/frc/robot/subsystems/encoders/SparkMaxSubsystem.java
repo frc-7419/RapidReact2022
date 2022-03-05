@@ -41,7 +41,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public void setPower(double power) {
     if (
       (getEncoderPosition() <= reverseLimitPosition && (power < 0 ) && (reverseLimitPosition != Double.MAX_VALUE)) ||
-      (getEncoderPosition() >= forwardLimitPosition) && (power > 0 ) && (forwardLimitPosition != Double.MAX_VALUE)
+      (getEncoderPosition() >= forwardLimitPosition && (power > 0 ) && (forwardLimitPosition != Double.MAX_VALUE))
     ) {
       canSparkMax.set(0);
       brake();
