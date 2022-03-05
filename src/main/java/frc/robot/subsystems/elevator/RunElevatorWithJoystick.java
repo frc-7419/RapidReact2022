@@ -32,7 +32,7 @@ public class RunElevatorWithJoystick extends CommandBase {
 
     if (joystick.getRightY() != 0) {
       elevatorSubsystem.coast();
-      elevatorSubsystem.setPower(joystick.getRightY() * 0.35);
+      elevatorSubsystem.setPower(-joystick.getRightY() * 0.35);
     } else {
       elevatorSubsystem.setPower(0);
       elevatorSubsystem.brake();
