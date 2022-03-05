@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunArmsWithJoystick extends CommandBase {
   private ArmsSubsystem armsSubsystem;
-  private XboxController xboxController;
+  private XboxController joystick;
   /** Creates a new RunArmsWithJoystick. */
   public RunArmsWithJoystick(ArmsSubsystem armsSubsystem, XboxController xboxController) {
     this.armsSubsystem = armsSubsystem;
-    this.xboxController = xboxController;
+    this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.armsSubsystem);
   }
@@ -26,19 +26,19 @@ public class RunArmsWithJoystick extends CommandBase {
   @Override
   public void execute() {
     //run with bumpers
-    if (this.xboxController.getLeftBumperPressed()) {
-      this.armsSubsystem.setPower(0.5);
-    } else if (this.xboxController.getRightBumperPressed()) {
-      this.armsSubsystem.setPower(-0.5);
+    if (joystick.getLeftY() != 0) {
+      armsSubsystem.coast();
+      armsSubsystem.setPower(-joystick.getLeftY() * 0.35);
     } else {
-      this.armsSubsystem.setPower(0);
+      armsSubsystem.setPower(0);
+      armsSubsystem.brake();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    this.armsSubsystem.setPower(0);
+    armsSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.

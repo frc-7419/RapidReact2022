@@ -6,6 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.RunArmsWithJoystick;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
@@ -15,6 +19,7 @@ import frc.robot.subsystems.pneumatics.RunSolenoid;
 import frc.robot.subsystems.pneumatics.SolenoidForwardAndReverse;
 import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,34 +29,24 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
-
-  private final SolenoidSubsystem solenoid = new SolenoidSubsystem(1,0);
-  private final SolenoidForwardAndReverse solenoidForwardAndReverse = new SolenoidForwardAndReverse(solenoid);
-  private final CompressorSubsystem compressorSubsystem = new CompressorSubsystem();
-  private final RunSolenoid runSolenoid = new RunSolenoid(solenoid, joystick);
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
+  private final RunElevatorWithJoystick runElevatorWithLimitSwitch = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
-
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+    setDefaultCommands();
   }
-
-  /**
+  /*
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kX.value).whenPressed(new RunPneumaticsSystem(solenoid, false));
-    // new JoystickButton(joystick, XboxController.Button.kY.value).whenPressed(new RunPneumaticsSystem(solenoid, true));
+   
+
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -61,12 +56,12 @@ public class RobotContainer {
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
-    return this.solenoidForwardAndReverse;
+    return new WaitCommand(0);
   }
 
   // set default commands here
   public void setDefaultCommands(){
-    this.solenoid.setDefaultCommand(runSolenoid);
-    this.armsSubsystem.setDefaultCommand(runArmsWithJoystick);
+    elevatorSubsystem.setDefaultCommand(runElevatorWithLimitSwitch);
+    armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }

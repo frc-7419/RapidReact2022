@@ -6,7 +6,6 @@ package frc.robot.subsystems.arms;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,7 +16,7 @@ public class ArmsSubsystem extends SubsystemBase {
   /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
     this.armTalon = new TalonSRX(11); //temporary ID
-    brake();
+    // brake();
   }
 
   @Override
