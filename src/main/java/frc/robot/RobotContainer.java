@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.servo.ServoSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.colorSensor.ColorSensorSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -34,6 +35,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureButtonBindings();
+    SmartDashboard.putNumber("speedSlewLimit", 0.98);
+    SmartDashboard.putNumber("rotSlewLimit", 0.98);
   }
 
   private void configureButtonBindings() {

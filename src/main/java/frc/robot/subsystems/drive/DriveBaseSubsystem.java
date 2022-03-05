@@ -93,6 +93,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
   public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
   public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
 
+  public void arcadeDrive(double xSpeed, double zRotation, boolean squareInputs) {
+    drive.arcadeDrive(xSpeed, zRotation, squareInputs);
+  }
+
   public void setAllDefaultInversions() {
     right.setInverted(true);
     left.setInverted(false);
