@@ -20,13 +20,13 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AlignAndShoot extends SequentialCommandGroup {
   /** Creates a new AlignAndShoot. */
-  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, BeamBreakSubsystem beamBreakSubsystem) {
+  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, BeamBreakSubsystem beamBreakSubsystem, int cargoToShoot) {
     // align turret and get to velocity
     addCommands(parallel(new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)));
     // once velocity reached, aim, run transfer wheel, and maintain velocity
     race( // race ends when first ends, should probably use withInterrupt but idk how
       parallel(new RunFeeder(feederSubsystem, 0.5), new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)).withTimeout(5),
-      new WaitUntilShot(beamBreakSubsystem, 2)
+      new WaitUntilShot(beamBreakSubsystem, cargoToShoot)
     );
   }
 }
