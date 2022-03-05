@@ -6,6 +6,7 @@ package frc.robot.subsystems.encoders;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -18,16 +19,19 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private CANSparkMax canSparkMax;
   private SparkMaxLimitSwitch forwardLimitSwitch;
   private SparkMaxLimitSwitch reverseLimitSwitch;
+  private RelativeEncoder encoder;
+
   public SparkMaxSubsystem() {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+    encoder = canSparkMax.getEncoder();
     
-    forwardLimitSwitch.enableLimitSwitch(true);
-    reverseLimitSwitch.enableLimitSwitch(true);
+    forwardLimitSwitch.enableLimitSwitch(false);
+    reverseLimitSwitch.enableLimitSwitch(false);
 
     // canSparkMax.burnFlash();
-    
+
     SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
@@ -48,6 +52,9 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public SparkMaxLimitSwitch getReverseLimitSwitch() {
     return reverseLimitSwitch;
   }
+  public double getEncoderPosition() {
+    return encoder.getPosition();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -63,6 +70,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
      */
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
+    SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
     
   }
 }

@@ -15,6 +15,10 @@ public class RunSparkMaxWithJoystick extends CommandBase {
   /** Creates a new RunSparkMaxWithJoystick. */
   private SparkMaxSubsystem sparkMaxSubsystem;
   private XboxController joystick;
+
+  private double forwardLimitPosition = Double.MAX_VALUE; // rotations
+  private double reverseLimitPosition = Double.MAX_VALUE;
+
   public RunSparkMaxWithJoystick(SparkMaxSubsystem sparkMaxSubsystem, XboxController joystick) {
     this.sparkMaxSubsystem = sparkMaxSubsystem;
     this.joystick = joystick;
@@ -29,19 +33,35 @@ public class RunSparkMaxWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
+    if (sparkMaxSubsystem.getReverseLimitSwitch().isPressed() && reverseLimitPosition == Double.MAX_VALUE) {
+      reverseLimitPosition = sparkMaxSubsystem.getEncoderPosition();
+      SmartDashboard.putNumber("Reverse Limit Position", reverseLimitPosition);
+    }
+    if (sparkMaxSubsystem.getForwardLimitSwitch().isPressed() && forwardLimitPosition == Double.MAX_VALUE) {
+      forwardLimitPosition = sparkMaxSubsystem.getEncoderPosition();
+      SmartDashboard.putNumber("Forward Limit Position", forwardLimitPosition);
+    }
+
+    if ((sparkMaxSubsystem.getEncoderPosition() <= reverseLimitPosition) && (joystick.getLeftY() < 0 ) && (reverseLimitPosition != Double.MAX_VALUE)) {
       sparkMaxSubsystem.setPower(0);
       sparkMaxSubsystem.brake();
     }
+    else if ((sparkMaxSubsystem.getEncoderPosition() >= forwardLimitPosition) && (joystick.getLeftY() > 0 ) && (forwardLimitPosition != Double.MAX_VALUE)) {
+      sparkMaxSubsystem.setPower(0);
+      sparkMaxSubsystem.brake();
+    }
+    else {
+      sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);
+      sparkMaxSubsystem.coast();
+    }
 
-    else {//sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
+    // else {//sparkMaxSubsystem.getForwardLimitSwitch().isPressed() || sparkMaxSubsystem.getReverseLimitSwitch().isPressed()) {
       // sparkMaxSubsystem.brake();
       // SmartDashboard.putBoolean("is braking", true);
       // new WaitCommand(0.5);
       // sparkMaxSubsystem.coast();
-      sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);
 
-    }
+    // }
     // else {
     //   sparkMaxSubsystem.setPower(joystick.getLeftY()*0.15);
     // }
