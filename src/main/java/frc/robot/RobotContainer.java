@@ -29,13 +29,12 @@ public class RobotContainer {
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.3);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.15);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
   private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, 
-  PowerConstants.DriveBaseLeftStraight, PowerConstants.DriveBaseRightTurn, 
-  PowerConstants.DriveBaseRightStraight, PowerConstants.DriveBaseLeftTurn);
+  PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -56,7 +55,8 @@ public class RobotContainer {
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
-    turretSubsystem.setDefaultCommand(alignTurretDefault);
+    // turretSubsystem.setDefaultCommand(alignTurretDefault);
+    turretSubsystem.setDefaultCommand(runTurretWithJoystick);
   }
 
 

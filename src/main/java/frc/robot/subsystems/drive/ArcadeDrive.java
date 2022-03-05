@@ -13,27 +13,24 @@ public class ArcadeDrive extends CommandBase {
   private XboxController joystick;
 
   
-  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
+  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn){
     this.joystick = joystick;
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
-    this.kSlowStraight = kSlowStraight;
-    this.kSlowTurn = kSlowTurn;
     addRequirements(driveBaseSubsystem);
 }
 
   @Override
   public void initialize() {
-    driveBaseSubsystem.factoryResetAll();    
-    driveBaseSubsystem.setAllDefaultInversions();
+    // driveBaseSubsystem.factoryResetAll();    
     driveBaseSubsystem.coast(); 
   }
 
   @Override
   public void execute() {
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getRightY();
+    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getRightY();
 
     driveBaseSubsystem.setLeftPower(leftPower);
     driveBaseSubsystem.setRightPower(rightPower);
