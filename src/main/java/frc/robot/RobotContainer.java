@@ -27,7 +27,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
-  private final RunElevatorWithJoystick runElevatorWithLimitSwitch = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
   
   public RobotContainer() {
@@ -39,10 +39,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-   
+  private void configureButtonBindings() {}
 
-  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
 //    *
@@ -56,7 +54,7 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    elevatorSubsystem.setDefaultCommand(runElevatorWithLimitSwitch);
+    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }

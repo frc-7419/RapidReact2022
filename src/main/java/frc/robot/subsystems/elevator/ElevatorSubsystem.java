@@ -20,7 +20,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeft = new TalonFX(CanIds.leftElevatorFalcon.id);
     elevatorRight = new TalonFX(CanIds.rightElevatorFalcon.id);
     elevatorRight.setInverted(true);
-    }
+  }
   
 
   @Override
@@ -37,7 +37,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);
   }
-
 
   public void brake() {
     elevatorLeft.setNeutralMode(NeutralMode.Brake);
