@@ -10,7 +10,9 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
+import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
+import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -34,9 +36,11 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem  = new LimelightSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem  = new IntakeSolenoidSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final Period1FourBallAuton period1FourBallAuton = new Period1FourBallAuton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, shooterSubsystem, limelightSubsystem, intakeSolenoidSubsystem, feederSubsystem);
+  private final Period1FourBallAuton period1FourBallAuton = new Period1FourBallAuton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, shooterSubsystem, limelightSubsystem, intakeSolenoidSubsystem, feederSubsystem, intakeSubsystem, loaderSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
