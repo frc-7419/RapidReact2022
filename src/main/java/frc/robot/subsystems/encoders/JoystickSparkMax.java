@@ -31,7 +31,7 @@ public class JoystickSparkMax extends CommandBase {
   public void execute() {
     spark.getSoftLimitForward();
     spark.getSoftLimitReverse();
-    spark.setSpeed(joystick.getLeftY());
+    spark.setSpeed(joystick.getLeftY()*0.15);
   }
 
   // Called once the command ends or is interrupted.
