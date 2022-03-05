@@ -15,7 +15,11 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
+import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
+import frc.robot.subsystems.loader.LoaderSubsystem;
+import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurret;
@@ -26,44 +30,38 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Period1FourBallAuton extends SequentialCommandGroup {
   /** Creates a new Period1ThreeBallForwardBackTurn. */
-  public Period1FourBallAuton(DriveBaseSubsystem driveBaseSubsystem, 
-                              GyroSubsystem gyroSubsystem, 
-                              TurretSubsystem turretSubsystem, 
-                              ShooterSubsystem shooterSubsystem, 
-                              LimelightSubsystem limelightSubsystem, 
-                              IntakeSolenoidSubsystem intakeSolenoidSubsystem, 
-                              FeederSubsystem feederSubsystem) {
+  public Period1FourBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, 
+                              ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, 
+                              FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
+    addCommands(
+      parallel(
+        new RunIntake(intakeSubsystem, 90),
+        new RunLoader(loaderSubsystem, 90),
+        sequence(
+          //robot drives forward
+          new StraightWithMotionMagic(driveBaseSubsystem, 52),
 
-    //robot drives forward
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 52));
+          //robot drives back
+          new StraightWithMotionMagic(driveBaseSubsystem, -80),
 
-    //robot drives back
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -80));
+          //align turret and shoot
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem),
+          new WaitCommand(0.2),
 
-    //align turret and shoot
-    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
-    addCommands(new WaitCommand(0.2));
+          //turn 85 degrees clockwise
+          new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
+          new WaitCommand(0.2),
 
-    //turn 85 degrees clockwise
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85));
-    addCommands(new WaitCommand(0.2));
+          //drive 240 inches and intake both balls in its path as well as run loader
+          new StraightWithMotionMagic(driveBaseSubsystem, 240),
 
-    //drive 240 inches and intake both balls in its path as well as run loader
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 240));
+          //drive back 140 inches to where the ball right outisde of the tarmac was
+          new StraightWithMotionMagic(driveBaseSubsystem, -140),
 
-    //drive back 140 inches to where the ball right outisde of the tarmac was
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -140));
-
-    //align turret and shoot
-    addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
-
-    /*
-    Algorithm:
-    - Drive dorward and intake first ball
-    - Drive back to start and shoot
-    - Turn 85 right degrees to the next ball
-    - Drive to and intake the next ball and the ball near the hub
-    - Drive back to where the previous ball was and shoot
-    */
+          //align turret and shoot
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem)
+        )
+      )
+    );
   }
 }
