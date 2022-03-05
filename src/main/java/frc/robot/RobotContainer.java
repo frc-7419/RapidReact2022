@@ -13,11 +13,6 @@ import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.pneumatics.CompressorSubsystem;
-import frc.robot.subsystems.pneumatics.RunPneumaticsSystem;
-import frc.robot.subsystems.pneumatics.RunSolenoid;
-import frc.robot.subsystems.pneumatics.SolenoidForwardAndReverse;
-import frc.robot.subsystems.pneumatics.SolenoidSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
