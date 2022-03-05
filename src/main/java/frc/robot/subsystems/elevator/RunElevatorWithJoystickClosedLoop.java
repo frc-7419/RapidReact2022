@@ -35,13 +35,14 @@ public class RunElevatorWithJoystickClosedLoop extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick.getRightY() != 0) {
+    if (joystick.getAButton()) {
+      elevatorSubsystem.coast();
+      elevatorSubsystem.setPIDFConstants(PIDConstants.ElevatorKp, 0, 0, 0);
+      elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, currentPosition, DemandType.ArbitraryFeedForward, PIDConstants.ElevatorKf);
+    } else {
       elevatorSubsystem.coast();
       elevatorSubsystem.setPower(joystick.getRightY() * 0.35);
       currentPosition = elevatorSubsystem.getElevatorPosition();
-    } else {
-      elevatorSubsystem.setPIDFConstants(PIDConstants.ElevatorKp, 0, 0, 0);
-      elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, currentPosition, DemandType.ArbitraryFeedForward, PIDConstants.ElevatorKf);
     } 
   }
 
