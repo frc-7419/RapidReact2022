@@ -19,11 +19,11 @@ import frc.robot.Constants.CanIds;
 public class TurretSubsystem extends SubsystemBase {
   private CANSparkMax turret;
 
-  private RelativeEncoder alternateEncoder;
-  private SparkMaxPIDController pidController;
+  // private RelativeEncoder alternateEncoder;
+  // private SparkMaxPIDController pidController;
   
-  // private SparkMaxLimitSwitch forwardLimit;
-  // private SparkMaxLimitSwitch reverseLimit;
+  private SparkMaxLimitSwitch forwardLimit;
+  private SparkMaxLimitSwitch reverseLimit;
 
   public TurretSubsystem() {
     // initialize turret talon
@@ -32,38 +32,38 @@ public class TurretSubsystem extends SubsystemBase {
     turret.restoreFactoryDefaults();
 
     // Encoder object created to display position values, 8192 counts per rev
-    alternateEncoder = turret.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, 8192);
+    // alternateEncoder = turret.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, 8192);
 
     // set PID controller
-    pidController = turret.getPIDController();
+    // pidController = turret.getPIDController();
 
     // set encoder as feedback device for pid controller
-    pidController.setFeedbackDevice(alternateEncoder);
+    // pidController.setFeedbackDevice(alternateEncoder);
 
     // set limit switches
-    // forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    // reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+    forwardLimit = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+    reverseLimit = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
-    // forwardLimit.enableLimitSwitch(false);
-    // reverseLimit.enableLimitSwitch(false);
+    forwardLimit.enableLimitSwitch(true);
+    reverseLimit.enableLimitSwitch(true);
 
     turret.burnFlash();
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Encoder Position", alternateEncoder.getPosition());
+    // SmartDashboard.putNumber("Encoder Position", alternateEncoder.getPosition());
 
     // SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimit.isLimitSwitchEnabled());
     // SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimit.isLimitSwitchEnabled());
   }
 
-  public void setPIDFConstants(double kP, double kD, double kI, double kF) {
-    pidController.setP(kP);
-    pidController.setI(kI);
-    pidController.setD(kD);
-    pidController.setFF(kF);
-  }
+  // public void setPIDFConstants(double kP, double kD, double kI, double kF) {
+  //   pidController.setP(kP);
+  //   pidController.setI(kI);
+  //   pidController.setD(kD);
+  //   pidController.setFF(kF);
+  // }
 
   public void setPower(double power) {
     turret.set(power);
@@ -81,11 +81,11 @@ public class TurretSubsystem extends SubsystemBase {
     return turret;
   }
 
-  public RelativeEncoder getTurretEncoder() {
-    return alternateEncoder;
-  }
+  // public RelativeEncoder getTurretEncoder() {
+  //   return alternateEncoder;
+  // }
 
-  public SparkMaxPIDController getTurretPIDController() {
-    return pidController;
-  }
+  // public SparkMaxPIDController getTurretPIDController() {
+  //   return pidController;
+  // }
 }

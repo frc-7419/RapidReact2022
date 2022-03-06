@@ -82,8 +82,8 @@ public final class Constants {
         // public static final double DriveBaseLeftTurn = .35; //.6
         // public static final double DriveBaseRightStraight = .45;
 
-        public static final double DriveBaseStraight = .15;
-        public static final double DriveBaseTurn = .15; 
+        public static final double DriveBaseStraight = .275;
+        public static final double DriveBaseTurn = .275; 
         // public static final double DriveBaseLeftStraight = -.15;
         // public static final double DriveBaseRightTurn = .1; 
         // public static final double DriveBaseLeftTurn = .1; 
