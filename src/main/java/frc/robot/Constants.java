@@ -49,29 +49,24 @@ public final class Constants {
         public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
         public static final double topShooterWheelRadius = 1.5;
 
-        // top shooter kS, kV, kA
-        public static final double TopShooterKs = 0.73569;
-        public static final double TopShooterKv = 0.10952;
-        public static final double TopShooterKa = 0.0056306;
+        // top shooter kS, kV, kA, meters
+        public static final double TopShooterKs = 0.682;
+        public static final double TopShooterKv = 0.11505;
+        public static final double TopShooterKa = 0.0091068;
 
         // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.57654;
-        public static final double BottomShooterKv = 0.10892;
-        public static final double BottomShooterKa = 0.0044231;
+        public static final double BottomShooterKs = 0.55786;
+        public static final double BottomShooterKv = 0.10932;
+        public static final double BottomShooterKa = 0.0047002;
     }
 
     public static class PIDConstants {
-        //gyro
-        public static final double GyrokP = 0.085;
-        public static final double GyrokI = 0;
-        public static final double GyrokD = 0;
-
-        //shooter
+        //shooter, meters
         public static final double BottomShooterkP = 0.17054;
         public static final double BottomShooterkI = 0;
         public static final double BottomShooterkD = 0;
 
-        public static final double TopShooterkP = 0.10603;
+        public static final double TopShooterkP = 0.00039888;
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
     }
