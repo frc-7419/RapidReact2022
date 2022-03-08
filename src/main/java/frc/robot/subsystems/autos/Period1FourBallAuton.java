@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
@@ -32,7 +33,8 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
   /** Creates a new Period1ThreeBallForwardBackTurn. */
   public Period1FourBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, 
                               ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, 
-                              FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
+                              FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem,
+                              BeamBreakSubsystem beamBreakSubsystem, int cargoToShoot) {
     addCommands(
       parallel(
         new RunIntake(intakeSubsystem, 90),
@@ -45,7 +47,7 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
           new StraightWithMotionMagic(driveBaseSubsystem, -80),
 
           //align turret and shoot
-          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem),
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
           new WaitCommand(0.2),
 
           //turn 85 degrees clockwise
@@ -59,7 +61,7 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
           new StraightWithMotionMagic(driveBaseSubsystem, -140),
 
           //align turret and shoot
-          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem)
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot)
         )
       )
     );

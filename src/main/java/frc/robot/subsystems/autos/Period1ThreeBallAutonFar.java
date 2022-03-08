@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
@@ -30,26 +31,11 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
                               LimelightSubsystem limelightSubsystem, 
                               IntakeSubsystem intakeSubsystem, 
                               FeederSubsystem feederSubsystem,
-                              LoaderSubsystem loaderSubsystem) {
+                              LoaderSubsystem loaderSubsystem,
+                              BeamBreakSubsystem beamBreakSubsystem,
+                              int cargoToShoot) {
 
         //robot drives forward
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 75.0));
-        addCommands(new WaitCommand(0.2));
-
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 135, PIDConstants.GyrokP135, PIDConstants.GyrokI135, PIDConstants.GyrokD135));
-        addCommands(new WaitCommand(0.2));
-
-        addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
-        addCommands(new WaitCommand(0.2));
-
-        addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 116.4));
-        addCommands(new WaitCommand(0.2));
-
-        addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 45, PIDConstants.GyrokP45, PIDConstants.GyrokP45, PIDConstants.GyrokP45));
-        addCommands(new WaitCommand(0.2));
-
-        addCommands(new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem));
-
         addCommands(
             parallel(
                 new RunIntake(intakeSubsystem, 90),
@@ -61,7 +47,7 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
                     new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 135, PIDConstants.GyrokP135, PIDConstants.GyrokI135, PIDConstants.GyrokD135),
                     new WaitCommand(0.2),
             
-                    new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem),
+                    new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
                     new WaitCommand(0.2),
             
                     new StraightWithMotionMagic(driveBaseSubsystem, 116.4),
@@ -70,7 +56,7 @@ public class Period1ThreeBallAutonFar extends SequentialCommandGroup {
                     new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 45, PIDConstants.GyrokP45, PIDConstants.GyrokP45, PIDConstants.GyrokP45),
                     new WaitCommand(0.2),
             
-                    new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem)
+                    new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot)
                 )
             )
         );

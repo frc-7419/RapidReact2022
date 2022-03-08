@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.autos.Period1FourBallAuton;
 import frc.robot.subsystems.autos.Period1ThreeBallClose;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -38,9 +39,11 @@ public class RobotContainer {
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
+  private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
+  private final int cargoToShoot = 0;
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final Period1FourBallAuton period1FourBallAuton = new Period1FourBallAuton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, shooterSubsystem, limelightSubsystem, intakeSolenoidSubsystem, feederSubsystem, intakeSubsystem, loaderSubsystem);
+  private final Period1FourBallAuton period1FourBallAuton = new Period1FourBallAuton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, shooterSubsystem, limelightSubsystem, intakeSolenoidSubsystem, feederSubsystem, intakeSubsystem, loaderSubsystem, beamBreakSubsystem, cargoToShoot);
 
   public RobotContainer() {
     configureButtonBindings();
