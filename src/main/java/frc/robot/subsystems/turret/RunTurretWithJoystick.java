@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunTurretWithJoystick extends CommandBase {
-  private TurretSubsystem turretSubsystem;
+  private OldTurretSubsystem turretSubsystem;
   private XboxController joystick;
   private double kSpeed;
 
-  public RunTurretWithJoystick(TurretSubsystem turretSubsystem, XboxController joystick, double kSpeed) {
+  public RunTurretWithJoystick(OldTurretSubsystem turretSubsystem, XboxController joystick, double kSpeed) {
     this.turretSubsystem = turretSubsystem;
     this.joystick = joystick;
     this.kSpeed = kSpeed;

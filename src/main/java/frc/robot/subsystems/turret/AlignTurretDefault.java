@@ -9,7 +9,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 public class AlignTurretDefault extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
-  private TurretSubsystem turretSubsystem;
+  private OldTurretSubsystem turretSubsystem;
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
@@ -21,7 +21,7 @@ public class AlignTurretDefault extends CommandBase {
   private double tx;
   private double tv;
 
-  public AlignTurretDefault(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+  public AlignTurretDefault(OldTurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem);
