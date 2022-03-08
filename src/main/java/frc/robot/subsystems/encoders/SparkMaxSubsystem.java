@@ -20,18 +20,20 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private SparkMaxLimitSwitch forwardLimitSwitch;
   private SparkMaxLimitSwitch reverseLimitSwitch;
 
-  private RelativeEncoder encoder;
-  private double forwardLimitPosition = Double.MAX_VALUE; // rotations
-  private double reverseLimitPosition = Double.MAX_VALUE;
+  // private RelativeEncoder encoder;
+  private boolean forwardLimitDetected = false;
+  private boolean reverseLimitDetected = false;
 
   public SparkMaxSubsystem() {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    encoder = canSparkMax.getEncoder();
+    // encoder = canSparkMax.getEncoder();
     
     forwardLimitSwitch.enableLimitSwitch(false);
     reverseLimitSwitch.enableLimitSwitch(false);
+
+
 
     // canSparkMax.burnFlash();
 
@@ -39,17 +41,8 @@ public class SparkMaxSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
   public void setPower(double power) {
-    if (
-      (getEncoderPosition() <= reverseLimitPosition && (power < 0 ) && (reverseLimitPosition != Double.MAX_VALUE)) ||
-      (getEncoderPosition() >= forwardLimitPosition && (power > 0 ) && (forwardLimitPosition != Double.MAX_VALUE))
-    ) {
-      canSparkMax.set(0);
-      brake();
-    }
-    else {
-      canSparkMax.set(power);
-      coast();
-    }
+    coast();
+    canSparkMax.set(power);
   }
 
   public void brake() {
@@ -65,25 +58,27 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public SparkMaxLimitSwitch getReverseLimitSwitch() {
     return reverseLimitSwitch;
   }
-  public double getEncoderPosition() {
-    return encoder.getPosition();
-  }
 
 
   @Override
   public void periodic() {
-    if (getReverseLimitSwitch().isPressed() && reverseLimitPosition == Double.MAX_VALUE) {
-      reverseLimitPosition = getEncoderPosition();
-      SmartDashboard.putNumber("Reverse Limit Position", reverseLimitPosition);
+    if (getReverseLimitSwitch().isPressed() && !reverseLimitDetected) {
+      reverseLimitDetected = true;
+      SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
+      canSparkMax.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
     }
-    if (getForwardLimitSwitch().isPressed() && forwardLimitPosition == Double.MAX_VALUE) {
-      forwardLimitPosition = getEncoderPosition();
-      SmartDashboard.putNumber("Forward Limit Position", forwardLimitPosition);
+    if (getForwardLimitSwitch().isPressed() && !forwardLimitDetected) {
+      forwardLimitDetected = true;
+      SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
+      canSparkMax.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 0);
+
     }
 
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
-    SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
+    // SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
     
   }
 }
