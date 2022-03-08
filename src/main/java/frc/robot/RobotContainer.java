@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.autos.Period7Auton;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.UnBrake;
@@ -33,8 +34,9 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+  private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
-  private final Period7Auton period7Auton = new Period7Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem);
+  private final Period7Auton period7Auton = new Period7Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem);
 
   private UnBrake unBrake = new UnBrake(driveBaseSubsystem);
 

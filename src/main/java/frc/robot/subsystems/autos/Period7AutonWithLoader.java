@@ -5,6 +5,7 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -29,9 +30,9 @@ public class Period7AutonWithLoader extends SequentialCommandGroup {
  * @param feederSubsystem 
  * @param intakeSubsystem 
  * @param loaderSubsystem */
-  public Period7AutonWithLoader(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
+  public Period7AutonWithLoader(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, BeamBreakSubsystem beamBreakSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(parallel(new Period7Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem), new RunIntake(intakeSubsystem, 1), new RunLoader(loaderSubsystem, 1)));
+    addCommands(parallel(new Period7Auton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem), new RunIntake(intakeSubsystem, 1), new RunLoader(loaderSubsystem, 1)));
   }
 }
