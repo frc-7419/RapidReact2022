@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -64,7 +65,6 @@ public class GetToTargetVelocity extends CommandBase {
   public void execute() {
     SmartDashboard.putBoolean("Shooter Running", true);
 
-    // update PIF values from SD while running
     bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
 
@@ -74,25 +74,16 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
 
-    // tKf = SmartDashboard.getNumber("tKf", 0);
-    // bKf = SmartDashboard.getNumber("bKf", 0);
-
     tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
     bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
-    // SmartDashboard.putNumber("tKf", tKf);
-    // SmartDashboard.putNumber("bKf", bKf);
+    shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
+    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
 
-    shooterSubsystem.setTopPIDF(bKp, bKi, 0, tKf);
-    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, bKf);
-
-    // double topTargetVelocity = topTargetRPM * ticksPerRotation * (1/600);
-    // double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
-    
     // SmartDashboard.putNumber("tTargetRV", topTargetRawVelocity);
     // SmartDashboard.putNumber("bTargetRV", bottomTargetRawVelocity);
 
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity);
+    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity, DemandType.ArbitraryFeedForward, shooterSubsystem.computeTopkF(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint));
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
 
     // shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRawVelocity, 2048));

@@ -21,16 +21,10 @@ public class ShooterSubsystem extends SubsystemBase{
     private SimpleMotorFeedforward topFeedforward;
     private SimpleMotorFeedforward bottomFeedforward;
 
-    private double kP;
-    private double kI;
-    private double tkF;
-    private double bkF;
-
     private double powerOutput = 0;
-    private double bottomTargetRawVelocity = 500; // in raw velocity units (ticks/0.1s)
-    private double topTargetRawVelocity = 500; // RV
-    private double velocityThreshold = 30;  // RV
-    private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
+    private double bottomTargetRawVelocity = 0; // in native velocity
+    private double topTargetRawVelocity = 0; 
+    private double velocityThreshold = 30; 
 
     public ShooterSubsystem(){
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
@@ -54,12 +48,6 @@ public class ShooterSubsystem extends SubsystemBase{
         configShooterOutputs();
     }
 
-    public enum ControlMethod {
-        PERCENT_OUTPUT,
-        SPIN_UP,
-        HOLDING,
-    }
-
     @Override
     public void periodic() {
         SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
@@ -76,22 +64,6 @@ public class ShooterSubsystem extends SubsystemBase{
 
         SmartDashboard.putNumber("tKf", getTopkF());
         SmartDashboard.putNumber("bKf", getBottomkF());
-    }
-
-    public void run() {
-        ControlMethod method = this.controlMethod;
-        if (method == ControlMethod.PERCENT_OUTPUT){
-            topFalcon.set(ControlMode.PercentOutput, powerOutput);
-            bottomFalcon.set(ControlMode.PercentOutput, powerOutput);
-        }
-        else if (method == ControlMethod.HOLDING){
-            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
-            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
-        }
-        else if (method == ControlMethod.SPIN_UP){
-            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
-            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
-        }
     }
 
     public void configShooterOutputs() {
@@ -128,15 +100,13 @@ public class ShooterSubsystem extends SubsystemBase{
         return topOnTarget() && bottomOnTarget();
     }
 
-    public void setOutputPower(double power){this.powerOutput = power;}
-
-    public void setTopPower(double power){
+    public void setTopPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
     }
-    public void setBottonPower(double power){
+    public void setBottomPower(double power) {
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
-    public void setBothPower(double power){
+    public void setBothPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
@@ -144,35 +114,28 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
 
-    public void setControlMethod(ControlMethod method) {
-        this.controlMethod = method;
-        if(method == ControlMethod.HOLDING){
-            setTopPIDF(0,0,0,tkF);
-            setBottomPIDF(0,0,0,bkF);
-        }
+    public double computeTopkF(double velocityMetersPerSecond) {
+        return topFeedforward.calculate(velocityMetersPerSecond) / 12;
     }
-
-    public double computeTopkF(double nativeUnitsVelocitySetpoint) {
-        return topFeedforward.calculate(nativeUnitsVelocitySetpoint);
+    public double computeTopkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
+        return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared);
     }
-
-    public double computeTopkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
-        return topFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
+    public double computeBottomkF(double velocityMetersPerSecond) {
+        return topFeedforward.calculate(velocityMetersPerSecond) / 12;
     }
-
-    public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
-        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint);
-    }
-
-    public double computeBottomkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
-        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
+    public double computeBottomkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
+        return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared);
     }
 
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
     public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
 
-    public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
-    public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
+    public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
+        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * );
+    }
+    public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
+        this.bottomTargetRawVelocity = velocity;
+    }
 
     public void percentOutput() {
         topFalcon.set(ControlMode.PercentOutput, powerOutput);
@@ -183,17 +146,8 @@ public class ShooterSubsystem extends SubsystemBase{
         setBothPower(0);
     }
 
-    public double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
-        return rpm * ticksPerRotation * (1/600);
-    }
-
     public double getTopPercentOutput() {return topFalcon.getMotorOutputPercent();}
     public double getBottomPercentOutput() {return bottomFalcon.getMotorOutputPercent();}
-
-    public double getkP(){return kP;}
-    public double getkI(){return kI;}
-    public double getTopkF(){return tkF;}
-    public double getBottomkF(){return bkF;}
 
     public TalonFX getTopTalon(){return topFalcon;}
     public TalonFX getBottomTalon(){return bottomFalcon;}
