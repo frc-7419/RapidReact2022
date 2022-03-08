@@ -24,11 +24,9 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    
     new JoystickButton(joystick, XboxController.Button.kX.value)
       .and(new JoystickButton(joystick, XboxController.Button.kY.value))
       .toggleWhenActive(new GetToTargetVelocity(shooterSubsystem, 0, 0));
-
   }
 
   private void smartDashboardBindings() {
