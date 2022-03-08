@@ -16,28 +16,23 @@ public class GetToTargetVelocity extends CommandBase {
   private double bKi;
   private double tKp;
   private double tKi;
-  private double bKf;
-  private double tKf;
 
-  private double topTargetRawVelocity;
-  private double bottomTargetRawVelocity;
+  private double topTargetVelocity;
+  private double bottomTargetVelocity;
 
   private double topTargetRawAcceleration;
   private double bottomTargetRawAcceleration;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity, double bottomTargetVelocity) {
     this.shooterSubsystem = shooterSubsystem;
-    this.topTargetRawVelocity = topTargetRawVelocity;
-    this.bottomTargetRawVelocity = bottomTargetRawVelocity;
+    this.topTargetVelocity = topTargetVelocity;
+    this.bottomTargetVelocity = bottomTargetVelocity;
     addRequirements(shooterSubsystem);
   }
 
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("Shooter Running", false);
-
-    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
     bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
@@ -45,20 +40,8 @@ public class GetToTargetVelocity extends CommandBase {
     tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
-
-    tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
-
-    shooterSubsystem.setTopPIDF(bKp, bKi, 0, tKf);
-    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, bKf);
-    
-    // instance var setter method for ShooterSubsystem
-    // shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRawVelocity, 2048));
-    // shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRawVelocity, 2048));
-
-    shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
-    shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
+    shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
+    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
   }
 
   @Override
@@ -71,23 +54,14 @@ public class GetToTargetVelocity extends CommandBase {
     tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
-
-    tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
+    topTargetVelocity = SmartDashboard.getNumber("tTargetVelocity", topTargetVelocity);
+    bottomTargetVelocity = SmartDashboard.getNumber("bTargetVelocity", bottomTargetVelocity);
 
     shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
     shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
 
-    // SmartDashboard.putNumber("tTargetRV", topTargetRawVelocity);
-    // SmartDashboard.putNumber("bTargetRV", bottomTargetRawVelocity);
-
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity, DemandType.ArbitraryFeedForward, shooterSubsystem.computeTopkF(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint));
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
-
-    // shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRawVelocity, 2048));
-    // shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRawVelocity, 2048));
+    shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
+    shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());

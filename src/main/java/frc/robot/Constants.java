@@ -46,8 +46,10 @@ public final class Constants {
 
     public static class RobotConstants {
         public static final double TalonFXTicksPerRotation = 2048;
-        public static final double bottomShooterWheelRadius = 2; // inches
-        public static final double topShooterWheelRadius = 2;
+        public static final double BottomShooterWheelRadius = 0.0508; // meters
+        public static final double TopShooterWheelRadius = 0.0508;
+
+        public static final double RotationsPerMeter = 1/(2*Math.PI*0.0508);
 
         // top shooter kS, kV, kA, meters
         public static final double TopShooterKs = 0.682;
