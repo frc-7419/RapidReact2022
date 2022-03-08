@@ -64,13 +64,15 @@ public final class Constants {
 
     public static class PIDConstants {
         //shooter, meters
-        public static final double BottomShooterkP = 0.17054;
+        public static final double TopShooterkP = 0; //insert here
+        public static final double TopShooterkI = 0;
+        public static final double TopShooterkD = 0;
+
+        public static final double BottomShooterkP = 0.00039888;
         public static final double BottomShooterkI = 0;
         public static final double BottomShooterkD = 0;
 
-        public static final double TopShooterkP = 0.00039888;
-        public static final double TopShooterkI = 0;
-        public static final double TopShooterkD = 0;
+        
     }
 
     // old 
