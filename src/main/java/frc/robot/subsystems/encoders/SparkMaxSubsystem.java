@@ -20,7 +20,7 @@ public class SparkMaxSubsystem extends SubsystemBase {
   private SparkMaxLimitSwitch forwardLimitSwitch;
   private SparkMaxLimitSwitch reverseLimitSwitch;
 
-  // private RelativeEncoder encoder;
+  private RelativeEncoder encoder;
   private boolean forwardLimitDetected = false;
   private boolean reverseLimitDetected = false;
 
@@ -28,7 +28,9 @@ public class SparkMaxSubsystem extends SubsystemBase {
     canSparkMax = new CANSparkMax(21, MotorType.kBrushless);
     forwardLimitSwitch = canSparkMax.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     reverseLimitSwitch = canSparkMax.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    // encoder = canSparkMax.getEncoder();
+    encoder = canSparkMax.getEncoder();
+
+    canSparkMax.restoreFactoryDefaults();
     
     forwardLimitSwitch.enableLimitSwitch(false);
     reverseLimitSwitch.enableLimitSwitch(false);
@@ -64,17 +66,18 @@ public class SparkMaxSubsystem extends SubsystemBase {
   public void periodic() {
     if (getReverseLimitSwitch().isPressed() && !reverseLimitDetected) {
       reverseLimitDetected = true;
-      SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
       canSparkMax.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
-    }
+      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, (float)encoder.getPosition());
+    } 
     if (getForwardLimitSwitch().isPressed() && !forwardLimitDetected) {
       forwardLimitDetected = true;
-      SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
       canSparkMax.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 0);
+      canSparkMax.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, (float)encoder.getPosition());
 
-    }
+    } 
+    SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
+
+    SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
 
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
