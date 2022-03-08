@@ -36,7 +36,7 @@ public class BeamBreakSubsystem extends SubsystemBase {
       detections++;
     }
   } else {
-    Thread.sleep(10000)
+    new WaitCommand(10);
     detections -= 2;
   } 
 }
