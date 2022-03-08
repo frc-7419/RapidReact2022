@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BeamBreakSubsystem extends SubsystemBase {
   private DigitalInput beamBreakReceiver;
-
+  private int detections = 0;
   /** Creates a new BeamBreakSubsystem. */
   public BeamBreakSubsystem() { 
     beamBreakReceiver = new DigitalInput(5);
@@ -30,4 +30,13 @@ public class BeamBreakSubsystem extends SubsystemBase {
   public DigitalInput getBeamBreakReceiver() {
     return beamBreakReceiver;
   }
+
+  if (detections < 2) {
+    if (beamBreakReceiver.get() == true) {
+      detections++;
+    }
+  } else {
+    Thread.sleep(10000)
+    detections -= 2;
+  } 
 }
