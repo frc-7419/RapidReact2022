@@ -5,6 +5,8 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
+import frc.robot.subsystems.beambreak.WaitUntilShot;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -18,10 +20,13 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AlignAndShoot extends SequentialCommandGroup {
   /** Creates a new AlignAndShoot. */
-  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem) {
+  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, BeamBreakSubsystem beamBreakSubsystem, int cargoToShoot) {
     // align turret and get to velocity
     addCommands(parallel(new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)));
     // once velocity reached, aim, run transfer wheel, and maintain velocity
-    addCommands(parallel(new RunFeeder(feederSubsystem, 0.5), new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)).withTimeout(5)); // .withInterrupt(beam break 2)
+    addCommands(race( // race ends when first ends, should probably use withInterrupt but idk how
+      parallel(new RunFeeder(feederSubsystem, 0.5), new AlignTurret(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)).withTimeout(5),
+      new WaitUntilShot(beamBreakSubsystem, cargoToShoot)
+    ));
   }
 }
