@@ -22,11 +22,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final XboxController joystick = new XboxController(0);
+  private final XboxController joystick1 = new XboxController(0);
+  private final XboxController joystick2 = new XboxController(1);
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
-  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
-  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1);
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   
   public RobotContainer() {
     configureButtonBindings();
