@@ -40,7 +40,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
-  private final int cargoToShoot = 0;
+  private final int cargoToShoot = 2;
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final Period1FourBallAuton period1FourBallAuton = new Period1FourBallAuton(driveBaseSubsystem, gyroSubsystem, turretSubsystem, shooterSubsystem, limelightSubsystem, intakeSolenoidSubsystem, feederSubsystem, intakeSubsystem, loaderSubsystem, beamBreakSubsystem, cargoToShoot);
