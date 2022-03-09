@@ -57,6 +57,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    runElevatorWithLimitSwitch;
+    elevatorSubsystem.setDefaultCommand(runElevatorWithLimitSwitch);
   }
 }
