@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
@@ -29,13 +30,13 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
 
     public ShootGetSecondBallShootOneTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, 
     IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
-    ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) { 
+    ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, BeamBreakSubsystem beamBreakSubsystem) { 
         addCommands(
             sequence(new StraightWithMotionMagic(driveBaseSubsystem, 67), 
             new WaitCommand(0.25),
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
             new WaitCommand(0.25), 
-            new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem)
+            new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, 2)
             )
         );
         addCommands(new RunIntake(intakeSubsystem, 1));
