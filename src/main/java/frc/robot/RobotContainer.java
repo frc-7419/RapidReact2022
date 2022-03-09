@@ -25,7 +25,7 @@ public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final LimitSwitchSubsystem limitSwitchSubsystem = new LimitSwitchSubsystem();
-  private final RunElevatorWithLimitSwitch runElevatorWithLimitSwitch = new RunElevatorWithLimitSwitch(elevatorSubsystem, joystick);
+  private final RunElevatorWithLimitSwitch runElevatorWithLimitSwitch = new RunElevatorWithLimitSwitch(elevatorSubsystem, joystick, limitSwitchSubsystem);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 

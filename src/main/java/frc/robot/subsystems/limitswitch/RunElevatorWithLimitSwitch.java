@@ -18,7 +18,7 @@ public class RunElevatorWithLimitSwitch extends CommandBase {
   private DigitalInput topLimitSwitch;
   private DigitalInput bottomLimitSwitch;
 
-  public RunElevatorWithLimitSwitch(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  public RunElevatorWithLimitSwitch(ElevatorSubsystem elevatorSubsystem, XboxController joystick, LimitSwitchSubsystem limitSwitchSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
