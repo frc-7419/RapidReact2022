@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.beambreak;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class WaitUntilShot extends CommandBase {
@@ -27,11 +28,12 @@ public class WaitUntilShot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!shooting && beamBreakSubsystem.getShooterBeamBreakActivated()) shooting = true;
-    if (shooting && !beamBreakSubsystem.getShooterBeamBreakActivated()) {
+    if (!shooting && !beamBreakSubsystem.getShooterBeamBreakActivated()) shooting = true;
+    if (shooting && beamBreakSubsystem.getShooterBeamBreakActivated()) {
       shooting = false;
       cargoShot++;
     }
+    SmartDashboard.putNumber("cargo shot", cargoShot);
   }
 
   // Called once the command ends or is interrupted.

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.beambreak;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class WaitUntilIntaked extends CommandBase {
@@ -27,11 +28,12 @@ public class WaitUntilIntaked extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!intaking && beamBreakSubsystem.getIntakeBeamBreakActivated()) intaking = true;
-    if (intaking && !beamBreakSubsystem.getIntakeBeamBreakActivated()) {
+    if (!intaking && !beamBreakSubsystem.getIntakeBeamBreakActivated()) intaking = true;
+    if (intaking && beamBreakSubsystem.getIntakeBeamBreakActivated()) {
       intaking = false;
       cargoIntaked++;
     }
+    SmartDashboard.putNumber("cargo intaked", cargoIntaked);
   }
 
   // Called once the command ends or is interrupted.
