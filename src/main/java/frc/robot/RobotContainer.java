@@ -19,11 +19,9 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-  private final RunElevatorWithJoystick runElevatorWithLimitSwitch = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -54,6 +52,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    elevatorSubsystem.setDefaultCommand(runElevatorWithLimitSwitch);
+    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
   }
 }
