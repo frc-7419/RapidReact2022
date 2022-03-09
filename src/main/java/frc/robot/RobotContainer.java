@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.autos.ShootThenMoveAway;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -31,10 +32,11 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final FeederSubsystem transferWheelSubsystem = new FeederSubsystem();
+  private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
   // instantiate your auto commands here
   private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
-  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, turretSubsystem, transferWheelSubsystem);
+  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, turretSubsystem, transferWheelSubsystem, beamBreakSubsystem);
   
 
   public RobotContainer() {

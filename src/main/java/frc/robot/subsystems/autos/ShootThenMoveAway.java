@@ -6,6 +6,7 @@ package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
@@ -21,9 +22,9 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootThenMoveAway extends SequentialCommandGroup {
   /** Creates a new ShootThenMoveAway. */
-  public ShootThenMoveAway(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem, FeederSubsystem feederSubsystem) {
+  public ShootThenMoveAway(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem, FeederSubsystem feederSubsystem, BeamBreakSubsystem beamBreakSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -30, PIDConstants.GyrokP30, PIDConstants.GyrokI30, PIDConstants.GyrokD30), new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem),new StraightWithMotionMagic(driveBaseSubsystem, -80.88));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -30, PIDConstants.GyrokP30, PIDConstants.GyrokI30, PIDConstants.GyrokD30), new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, 1),new StraightWithMotionMagic(driveBaseSubsystem, -80.88));
   }
 }
