@@ -24,6 +24,7 @@ public class BeamBreakSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  // returns true when nothing is between sensors
   public boolean getIntakeBeamBreakActivated() {
     return intakeBeamBreakReceiver.get();
   }
