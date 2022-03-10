@@ -20,9 +20,6 @@ public class RunElevatorWithJoystick extends CommandBase {
   public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
-    //elevatorSubsystem.getElevatorLeft().configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.equals(LimitSwitchNormal), 0);
-    elevatorSubsystem.getElevatorLeft().overrideLimitSwitchesEnable(false);
-    elevatorSubsystem.getELevatorRight().overrideLimitSwitchesEnable(false);
     addRequirements(elevatorSubsystem);
   }
 

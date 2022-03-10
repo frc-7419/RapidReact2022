@@ -5,6 +5,8 @@
 package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -20,6 +22,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeft = new TalonFX(50);
     elevatorRight = new TalonFX(51);
     elevatorRight.setInverted(true);
+    elevatorLeft.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    elevatorRight.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    elevatorRight.overrideLimitSwitchesEnable(false);
+    elevatorLeft.overrideLimitSwitchesEnable(false);
     }
   
 
