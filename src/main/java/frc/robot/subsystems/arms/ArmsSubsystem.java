@@ -18,9 +18,12 @@ import frc.robot.Constants.CanIds;
 public class ArmsSubsystem extends SubsystemBase {
   //one motor controls both arms
   private CANSparkMax armCAN;
+  private CANSparkMax armCAN2;
+  
   /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
     this.armCAN = new CANSparkMax(CanIds.armCAN.id, MotorType.kBrushless); //temporary ID
+    this.armCAN2 = new CANSparkMax(CanIds.armCAN2.id, MotorType.kBrushless);
     // brake();
   }
 
@@ -30,11 +33,14 @@ public class ArmsSubsystem extends SubsystemBase {
   }
   public void setPower(double power) {
     armCAN.set(power);
+    armCAN2.set(-power);
   }
   public void brake() {
     armCAN.setIdleMode(IdleMode.kBrake);
+    armCAN2.setIdleMode(IdleMode.kBrake);
   }
   public void coast() {
     armCAN.setIdleMode(IdleMode.kCoast);
+    armCAN2.setIdleMode(IdleMode.kCoast);
   }
 }

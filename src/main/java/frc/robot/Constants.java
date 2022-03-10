@@ -32,6 +32,7 @@ public final class Constants {
         bottomShooterFalcon(10),
         topShooterFalon(14),
         armCAN(11), // temp?
+        armCAN2(12),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
         ;
