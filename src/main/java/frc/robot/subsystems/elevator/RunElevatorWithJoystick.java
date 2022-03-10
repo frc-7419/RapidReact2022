@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems.elevator;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,9 +17,12 @@ public class RunElevatorWithJoystick extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private XboxController joystick;
 
-  public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick, Object LimitSwitchNormal) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
+    //elevatorSubsystem.getElevatorLeft().configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.equals(LimitSwitchNormal), 0);
+    elevatorSubsystem.getElevatorLeft().overrideLimitSwitchesEnable(false);
+    elevatorSubsystem.getELevatorRight().overrideLimitSwitchesEnable(false);
     addRequirements(elevatorSubsystem);
   }
 
