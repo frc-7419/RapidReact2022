@@ -17,13 +17,14 @@ import frc.robot.Constants.CanIds;
 
 public class ArmsSubsystem extends SubsystemBase {
   //one motor controls both arms
-  private CANSparkMax armCAN;
-  private CANSparkMax armCAN2;
+  private CANSparkMax armSpark1;
+  private CANSparkMax armSpark2;
   
   /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
-    this.armCAN = new CANSparkMax(CanIds.armCAN.id, MotorType.kBrushless); //temporary ID
-    this.armCAN2 = new CANSparkMax(CanIds.armCAN2.id, MotorType.kBrushless);
+    this.armSpark1 = new CANSparkMax(CanIds.armCAN.id, MotorType.kBrushless); //temporary ID
+    this.armSpark2 = new CANSparkMax(CanIds.armCAN2.id, MotorType.kBrushless);
+    armSpark2.setInverted(true);
     // brake();
   }
 
@@ -32,15 +33,15 @@ public class ArmsSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void setPower(double power) {
-    armCAN.set(power);
-    armCAN2.set(-power);
+    armSpark1.set(power);
+    armSpark2.set(power);
   }
   public void brake() {
-    armCAN.setIdleMode(IdleMode.kBrake);
-    armCAN2.setIdleMode(IdleMode.kBrake);
+    armSpark1.setIdleMode(IdleMode.kBrake);
+    armSpark2.setIdleMode(IdleMode.kBrake);
   }
   public void coast() {
-    armCAN.setIdleMode(IdleMode.kCoast);
-    armCAN2.setIdleMode(IdleMode.kCoast);
+    armSpark1.setIdleMode(IdleMode.kCoast);
+    armSpark2.setIdleMode(IdleMode.kCoast);
   }
 }
