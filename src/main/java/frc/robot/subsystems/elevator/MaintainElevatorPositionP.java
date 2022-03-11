@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
 
-public class MaintainElevatorPosition extends CommandBase {
+public class MaintainElevatorPositionP extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
 
   private double initialPosition;
   private double currentPosition;
 
-  public MaintainElevatorPosition(ElevatorSubsystem elevatorSubsystem) {
+  public MaintainElevatorPositionP(ElevatorSubsystem elevatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
     addRequirements(elevatorSubsystem);
   }
@@ -33,9 +33,8 @@ public class MaintainElevatorPosition extends CommandBase {
   @Override
   public void execute() {
     elevatorSubsystem.coast();
-    elevatorSubsystem.setPIDFConstants(0, 0, 0, 0);
-    // elevatorSubsystem.setPIDFConstants(PIDConstants.ElevatorKp, 0, 0, 0);
-    elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, currentPosition, DemandType.ArbitraryFeedForward, PIDConstants.ElevatorKf);
+    elevatorSubsystem.setPIDFConstants(PIDConstants.ElevatorKp, 0, 0, 0);
+    elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, currentPosition);
   }
 
   @Override

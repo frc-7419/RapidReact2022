@@ -8,6 +8,7 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
+import frc.robot.subsystems.elevator.MaintainElevatorPositionP;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +28,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1);
-  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick1);
   
   public RobotContainer() {
     configureButtonBindings();
@@ -39,7 +40,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kB.value).toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+    new JoystickButton(joystick1, XboxController.Button.kB.value).toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+    new JoystickButton(joystick1, XboxController.Button.kX.value).toggleWhenPressed(new MaintainElevatorPositionP(elevatorSubsystem));
   }
 
   /**
