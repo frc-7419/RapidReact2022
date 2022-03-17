@@ -5,16 +5,19 @@
 package frc.robot.subsystems.loader;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class LoaderSubsystem extends SubsystemBase {
-  private VictorSPX loader;
+  private TalonSRX loader;
 
   public LoaderSubsystem() {
-    loader = new VictorSPX(CanIds.loaderVictor.id);
+    loader = new TalonSRX(CanIds.loaderVictor.id);
     loader.configFactoryDefault();
     loader.setInverted(true);
     loader.setSensorPhase(false);
@@ -24,8 +27,15 @@ public class LoaderSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public VictorSPX getLoader() {
+  public TalonSRX getLoader() {
     return loader;
+  }
+
+  public void brake() {
+    loader.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coast() {
+    loader.setNeutralMode(NeutralMode.Coast);
   }
   
   public void setPower(double power) {

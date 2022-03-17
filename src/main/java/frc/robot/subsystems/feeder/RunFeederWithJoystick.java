@@ -26,9 +26,9 @@ public class RunFeederWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(joystick.getLeftBumperPressed()) {
+    if(joystick.getLeftBumper()) {
       feederSubsystem.setPower(power);
-    } else if (joystick.getRightBumperPressed()) {
+    } else if (joystick.getRightBumper()) {
       feederSubsystem.setPower(-power);
     }
     else {

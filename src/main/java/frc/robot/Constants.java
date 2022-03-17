@@ -32,9 +32,9 @@ public final class Constants {
         topShooterFalcon(14),
         intakeSpark(32),  
         loaderVictor(16),
-        //turretSpark(21),
+        turretSpark(21),
         feederVictor(23),
-        armSpark1(11), // temp?
+        armSpark1(11),
         armSpark2(12),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
