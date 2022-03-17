@@ -24,7 +24,7 @@ public class TurretSubsystem extends SubsystemBase {
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
-    turret = new CANSparkMax(CanIds.turretSpark.id, MotorType.kBrushless);
+    //turret = new CANSparkMax(CanIds.turretSpark.id, MotorType.kBrushless);
     forwardLimitSwitch = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     reverseLimitSwitch = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
     encoder = turret.getEncoder();
