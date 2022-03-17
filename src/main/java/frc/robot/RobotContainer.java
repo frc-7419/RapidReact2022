@@ -8,7 +8,7 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
-import frc.robot.subsystems.elevator.MaintainElevatorPositionP;
+//import frc.robot.subsystems.elevator.MaintainElevatorPositionP;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -41,7 +41,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(joystick1, XboxController.Button.kB.value).toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
-    new JoystickButton(joystick1, XboxController.Button.kX.value).toggleWhenPressed(new MaintainElevatorPositionP(elevatorSubsystem));
+    //new JoystickButton(joystick1, XboxController.Button.kX.value).toggleWhenPressed(new MaintainElevatorPositionP(elevatorSubsystem));
   }
 
   /**
