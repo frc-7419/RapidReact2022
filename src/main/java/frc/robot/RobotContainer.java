@@ -8,8 +8,14 @@ import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
+import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
+import frc.robot.subsystems.feeder.FeederSubsystem;
+import frc.robot.subsystems.feeder.RunFeederWithJoystick;
 import frc.robot.subsystems.intake.DeployIntakeWithJoystick;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
@@ -28,6 +34,15 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
+
+  private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+  private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick, 0.15);
+
+
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
@@ -57,6 +72,10 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
+    feederSubsystem.setDefaultCommand(runFeederWithJoystick);
+
+    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
+    armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 
 

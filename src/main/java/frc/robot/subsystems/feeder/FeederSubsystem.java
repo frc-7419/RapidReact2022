@@ -5,16 +5,17 @@
 package frc.robot.subsystems.feeder;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class FeederSubsystem extends SubsystemBase {
-  private VictorSPX transferWheel;
+  private TalonSRX transferWheel;
 
   public FeederSubsystem() {
-    transferWheel = new VictorSPX(CanIds.feederVictor.id);
+    transferWheel = new TalonSRX(CanIds.feederVictor.id);
   }
 
   public void setPower(double power) {
