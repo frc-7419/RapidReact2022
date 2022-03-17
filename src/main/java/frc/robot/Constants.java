@@ -30,7 +30,7 @@ public final class Constants {
         rightFalcon2(3),
         bottomShooterFalcon(10),
         topShooterFalcon(14),
-        intakeSpark(15),  
+        intakeSpark(23),  
         loaderVictor(16),
         turretSpark(21),
         feederVictor(25),
