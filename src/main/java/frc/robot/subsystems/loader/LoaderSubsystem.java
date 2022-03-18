@@ -18,7 +18,7 @@ public class LoaderSubsystem extends SubsystemBase {
   private TalonSRX loader;
 
   public LoaderSubsystem() {
-    loader = new TalonSRX(CanIds.loaderVictor.id);
+    loader = new TalonSRX(10);
     loader.configFactoryDefault();
     loader.setInverted(true);
     loader.setSensorPhase(false);
