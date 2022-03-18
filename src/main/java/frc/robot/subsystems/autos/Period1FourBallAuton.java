@@ -39,16 +39,15 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
       parallel(
         new RunIntake(intakeSubsystem, 90),
         new RunLoader(loaderSubsystem, 90),
+                  
+        //align turret and shoot
+        new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
         sequence(
           //robot drives forward
           new StraightWithMotionMagic(driveBaseSubsystem, 52),
 
           //robot drives back
           new StraightWithMotionMagic(driveBaseSubsystem, -80),
-
-          //align turret and shoot
-          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
-          new WaitCommand(0.2),
 
           //turn 85 degrees clockwise
           new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
@@ -58,10 +57,7 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
           new StraightWithMotionMagic(driveBaseSubsystem, 240),
 
           //drive back 140 inches to where the ball right outisde of the tarmac was
-          new StraightWithMotionMagic(driveBaseSubsystem, -140),
-
-          //align turret and shoot
-          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot)
+          new StraightWithMotionMagic(driveBaseSubsystem, -140)
         )
       )
     );
