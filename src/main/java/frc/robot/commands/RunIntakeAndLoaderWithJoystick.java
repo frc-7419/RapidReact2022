@@ -39,6 +39,7 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
     else {
       intakeSubsystem.setPower(0);
       loaderSubsystem.setPower(0);
+      loaderSubsystem.brake();
     }
   }
 
