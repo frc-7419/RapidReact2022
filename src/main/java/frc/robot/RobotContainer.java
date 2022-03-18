@@ -55,6 +55,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);
   }
 }
