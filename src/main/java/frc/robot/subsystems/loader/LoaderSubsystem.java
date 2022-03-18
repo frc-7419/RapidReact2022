@@ -18,10 +18,10 @@ public class LoaderSubsystem extends SubsystemBase {
   private TalonSRX loader;
 
   public LoaderSubsystem() {
-    loader = new TalonSRX(10);
-    loader.configFactoryDefault();
-    loader.setInverted(true);
-    loader.setSensorPhase(false);
+    loader = new TalonSRX(16);
+    // loader.configFactoryDefault();
+    // loader.setInverted(true);
+    // loader.setSensorPhase(false);
 
     // enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)
     // loaderSubsystem.getLoaderMotor().configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 30, 15, 0.5));
