@@ -6,6 +6,7 @@ package frc.robot.subsystems.loader;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -21,11 +22,19 @@ public class LoaderSubsystem extends SubsystemBase {
     loader.configFactoryDefault();
     loader.setInverted(true);
     loader.setSensorPhase(false);
+
+    // enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)
+    // loaderSubsystem.getLoaderMotor().configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 30, 15, 0.5));
+    // loaderSubsystem.getLoaderMotor().configContinuousCurrentLimit(3);
+    loader.configContinuousCurrentLimit(10, 0);
+    loader.configPeakCurrentLimit(15, 0);
+    loader.configPeakCurrentDuration(100, 0);
+    loader.enableCurrentLimit(true);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+
   }
   public TalonSRX getLoader() {
     return loader;
@@ -41,5 +50,8 @@ public class LoaderSubsystem extends SubsystemBase {
   public void setPower(double power) {
     loader.set(ControlMode.PercentOutput, power);
   }
-  
+
+  public TalonSRX getLoaderMotor() {
+    return loader;
+  }
 }
