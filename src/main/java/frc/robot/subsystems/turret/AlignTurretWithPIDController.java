@@ -42,11 +42,8 @@ public class AlignTurretWithPIDController extends CommandBase {
     // instantiate PIDController class
     pidController = new PIDController(kP, kI, kD);
 
-    // zero the encoder position
-    turretSubsystem.getTurretEncoder().setPosition(0);
-
      // initialize setpoint
-    setpoint = UnitConversions.inchesToTicks(UnitConversions.thetaToInches(limelightSubsystem.getTx(), RobotConstants.turretRadius), RobotConstants.turretRadius, RobotConstants.turretGearRatio, 4096);
+    setpoint = 0; // we want tx to be 0 to align to center
     pidController.setSetpoint(setpoint);
     pidController.setTolerance(tolerance);
   }
@@ -54,7 +51,7 @@ public class AlignTurretWithPIDController extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pidOutput = pidController.calculate(turretSubsystem.getTurretEncoder().getPosition());
+    pidOutput = pidController.calculate(limelightSubsystem.getTx());
     turretSubsystem.setPower(pidOutput);
   }
 

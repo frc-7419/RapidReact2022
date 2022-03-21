@@ -42,6 +42,7 @@ public class AlignTurret extends CommandBase {
 
   @Override
   public void execute() {
+    turretSubsystem.coast();
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 

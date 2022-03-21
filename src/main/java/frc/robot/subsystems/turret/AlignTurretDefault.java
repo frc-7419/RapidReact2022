@@ -29,6 +29,7 @@ public class AlignTurretDefault extends CommandBase {
 
   @Override
   public void initialize() {
+    turretSubsystem.coast();
     SmartDashboard.putString("command status", "pid");
 
     kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
