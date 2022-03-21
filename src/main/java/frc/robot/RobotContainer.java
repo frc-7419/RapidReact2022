@@ -10,6 +10,7 @@ import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
 //import frc.robot.subsystems.elevator.MaintainElevatorPositionP;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
+import frc.robot.subsystems.elevator.RunElevatorWithJoystickClosedLoop;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -24,10 +25,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick1 = new XboxController(0);
-  private final XboxController joystick2 = new XboxController(1);
+  // private final XboxController joystick2 = new XboxController(1);
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1);
+  private final RunElevatorWithJoystickClosedLoop runElevatorWithJoystickClosedLoop = new RunElevatorWithJoystickClosedLoop(elevatorSubsystem, joystick1);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick1);
   
   public RobotContainer() {
@@ -46,9 +48,9 @@ public class RobotContainer {
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
-//    *
-//    * @return the command to run in autonomous
-//    */
+   *
+   * @return the command to run in autonomous
+   */
 
   // uncomment when u need to use this
   public Command getAutonomousCommand() {
@@ -57,7 +59,7 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
+    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystickClosedLoop);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }
