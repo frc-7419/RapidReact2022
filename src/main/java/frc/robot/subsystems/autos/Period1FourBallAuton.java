@@ -39,9 +39,7 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
       parallel(
         new RunIntake(intakeSubsystem, 90),
         new RunLoader(loaderSubsystem, 90),
-                  
-        //align turret and shoot
-        new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
+                
         sequence(
           //robot drives forward
           new StraightWithMotionMagic(driveBaseSubsystem, 52),
@@ -49,17 +47,42 @@ public class Period1FourBallAuton extends SequentialCommandGroup {
           //robot drives back
           new StraightWithMotionMagic(driveBaseSubsystem, -80),
 
-          //turn 85 degrees clockwise
-          new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
-          new WaitCommand(0.2),
+          //turn 130 degrees clockwise
+          new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -85-45, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
+
+          //align turret and shoot
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot),
+
+          //turn 45 degrees counterclockwise
+          new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 45, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
 
           //drive 240 inches and intake both balls in its path as well as run loader
           new StraightWithMotionMagic(driveBaseSubsystem, 240),
 
           //drive back 140 inches to where the ball right outisde of the tarmac was
-          new StraightWithMotionMagic(driveBaseSubsystem, -140)
+          new StraightWithMotionMagic(driveBaseSubsystem, -140),
+
+          //turn 45 degrees clockwise
+          new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -45, PIDConstants.GyrokP85, PIDConstants.GyrokI85, PIDConstants.GyrokD85),
+
+          //align turret and shoot
+          new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, cargoToShoot)
         )
       )
     );
   }
+
+  /*
+
+  forward 52
+  back 80
+  turn -85 -45
+  allign and shoot
+  turn 45
+  forward 240
+  back 140
+  turn -45
+  allign and shoot
+
+  */
 }
