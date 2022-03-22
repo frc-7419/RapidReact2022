@@ -39,7 +39,7 @@ public class RobotContainer {
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   // private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 1);
+  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 0.5);
   // private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick, 1);
@@ -62,13 +62,13 @@ public class RobotContainer {
   }
     
   public void setDefaultCommands() {
-    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
+    // driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     // intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
-    // turretSubsystem.setDefaultCommand(runTurretWithJoystick);
+    // turretSubsystem.setDefaultCommand(runTurretWithJoystixck);
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
 
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
