@@ -3,9 +3,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-// import frc.robot.subsystems.turret.AlignTurretDefault;
-// import frc.robot.subsystems.turret.RunTurretWithJoystick;
-// import frc.robot.subsystems.turret.TurretSubsystem;
+import frc.robot.subsystems.turret.AlignTurretDefault;
+import frc.robot.subsystems.turret.RunTurretWithJoystick;
+import frc.robot.subsystems.turret.TurretSubsystem;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
@@ -25,7 +25,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 
 public class RobotContainer {
-  private final XboxController joystick = new XboxController(0);
+  private final XboxController joystick1 = new XboxController(0);
+  private final XboxController joystick2 = new XboxController(1);
   // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
@@ -39,13 +40,13 @@ public class RobotContainer {
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   // private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick, intakeSubsystem, loaderSubsystem, 0.5);
+  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 0.5);
   // private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick);
-  private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick, 1);
-  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick);
-  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick, driveBaseSubsystem, 
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
+  private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   public RobotContainer() {
@@ -62,7 +63,7 @@ public class RobotContainer {
   }
     
   public void setDefaultCommands() {
-    // driveBaseSubsystem.setDefaultCommand(arcadeDrive);
+    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     // intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
