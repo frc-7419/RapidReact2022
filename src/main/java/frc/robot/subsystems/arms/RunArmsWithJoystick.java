@@ -26,12 +26,12 @@ public class RunArmsWithJoystick extends CommandBase {
   @Override
   public void execute() {
     //run with bumpers
-    if (joystick.getRightX() != 0) {
-      armsSubsystem.coast();
-      armsSubsystem.setPower(-joystick.getRightY() * 0.45);
+    if (joystick.getRightY() != 0) {
+      // armsSubsystem.coast();
+      armsSubsystem.setPower(-joystick.getRightY() * 0.1);
     } else {
       armsSubsystem.setPower(0);
-      //armsSubsystem.brake();
+      armsSubsystem.brake();
     }
   }
 
@@ -39,6 +39,7 @@ public class RunArmsWithJoystick extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     armsSubsystem.setPower(0);
+    armsSubsystem.brake();
   }
 
   // Returns true when the command should end.

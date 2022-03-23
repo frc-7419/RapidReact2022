@@ -32,12 +32,18 @@ public class ArmsSubsystem extends SubsystemBase {
     leftArm.set(power);
     rightArm.set(power);
   }
+  public void flash() {
+    leftArm.burnFlash();
+    rightArm.burnFlash();
+  }
   public void brake() {
     leftArm.setIdleMode(IdleMode.kBrake);
     rightArm.setIdleMode(IdleMode.kBrake);
+    flash();
   }
   public void coast() {
     leftArm.setIdleMode(IdleMode.kCoast);
     rightArm.setIdleMode(IdleMode.kCoast);
+    flash();
   }
 }
