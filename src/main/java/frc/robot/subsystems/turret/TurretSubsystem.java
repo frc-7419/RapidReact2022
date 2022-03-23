@@ -68,6 +68,6 @@ public class TurretSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
     SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
-    
+    brake();
   }
 }

@@ -35,7 +35,7 @@ public class RunLoaderWithJoystick extends CommandBase {
     }
     else {
       loaderSubsystem.setPower(0);
-      loaderSubsystem.brake();
+      // loaderSubsystem.brake();
     }
   }
 
