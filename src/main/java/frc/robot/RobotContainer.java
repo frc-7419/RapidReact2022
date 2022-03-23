@@ -31,7 +31,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
-  // private final TurretSubsystem turretSubsystem = new TurretSubsystem();
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
@@ -39,7 +39,7 @@ public class RobotContainer {
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
-  // private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick, 0.1);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.1);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
   // private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
@@ -68,7 +68,7 @@ public class RobotContainer {
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
-    // turretSubsystem.setDefaultCommand(runTurretWithJoystixck);
+    turretSubsystem.setDefaultCommand(runTurretWithJoystick);
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
 
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
