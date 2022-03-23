@@ -28,7 +28,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1);
-  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick1);
+  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   
   public RobotContainer() {
     configureButtonBindings();
@@ -58,6 +58,6 @@ public class RobotContainer {
   // set default commands here
   public void setDefaultCommands(){
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
-    armsSubsystem.setDefaultCommand(runArmsWithJoystick);
+    // armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }
