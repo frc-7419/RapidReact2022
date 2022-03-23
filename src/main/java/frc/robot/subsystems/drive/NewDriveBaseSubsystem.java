@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 import frc.robot.Constants.RobotConstants;
 
-public class DriveBaseSubsystem extends SubsystemBase {
+public class NewDriveBaseSubsystem extends SubsystemBase {
   
   private WPI_TalonFX left1;
 	private WPI_TalonFX right1;
@@ -28,7 +28,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
   MotorControllerGroup left;
   MotorControllerGroup right;
   
-  public DriveBaseSubsystem() {
+  public NewDriveBaseSubsystem() {
     left1 = new WPI_TalonFX(CanIds.leftFalcon1.id);
 		right1 = new WPI_TalonFX(CanIds.rightFalcon1.id);
 		left2 = new WPI_TalonFX(CanIds.leftFalcon2.id);

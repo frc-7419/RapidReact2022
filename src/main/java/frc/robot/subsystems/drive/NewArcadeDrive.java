@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ArcadeDrive extends CommandBase {
+public class NewArcadeDrive extends CommandBase {
 
-  private DriveBaseSubsystem driveBaseSubsystem;
+  private NewDriveBaseSubsystem driveBaseSubsystem;
   private double kStraight;
   private double kTurn;
   private double kSlowStraight;
@@ -18,7 +18,7 @@ public class ArcadeDrive extends CommandBase {
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(1.25);
   private final SlewRateLimiter rotLimiter = new SlewRateLimiter(0.75);
 
-  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn) {
+  public NewArcadeDrive(XboxController joystick, NewDriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn) {
     this.joystick = joystick;
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.kStraight = kStraight;
