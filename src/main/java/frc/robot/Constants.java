@@ -75,6 +75,8 @@ public final class Constants {
         public static final double BottomShooterKs = 0.57654/(2048*6);
         public static final double BottomShooterKv = 0.10892/(2048*6);
         public static final double BottomShooterKa = 0.0044231/(2048*6);
+
+        public static final double trackWidth = 0.69; // meters
     }
 
     public static class PowerConstants {
