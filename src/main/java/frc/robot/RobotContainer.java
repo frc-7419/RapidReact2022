@@ -39,11 +39,11 @@ public class RobotContainer {
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.1);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.3);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
   // private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
-  private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
+  // private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 1.0, 1.0);
@@ -58,7 +58,8 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return runFeederWithJoystick;
+    return arcadeDrive;
+    // return runFeederWithJoystick;
   }
     
   public void setDefaultCommands() {
@@ -69,10 +70,10 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
-    feederSubsystem.setDefaultCommand(runFeederWithJoystick);
+    // feederSubsystem.setDefaultCommand(runFeederWithJoystick);
 
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
-    // armsSubsystem.setDefaultCommand(runArmsWithJoystick);
+    armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 
 
