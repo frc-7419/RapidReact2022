@@ -38,7 +38,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right = new MotorControllerGroup(right1, right2);
 
     factoryResetAll();
-    right.setInverted(true);
+    left.setInverted(true);
 
     drive = new DifferentialDrive(left, right);
     kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(RobotConstants.trackWidth));

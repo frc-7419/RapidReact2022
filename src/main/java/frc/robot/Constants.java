@@ -56,7 +56,7 @@ public final class Constants {
 
     public static class RobotConstants {
         public static double shooterRadius = 0.5; // placeholder value, will change
-        public static double trackWidth = 32; // ??
+        public static double trackWidth = 0.69; // ??
     }
 
     public static class PIDConstants {
