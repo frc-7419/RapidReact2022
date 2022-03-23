@@ -10,6 +10,8 @@ import frc.robot.Constants.PowerConstants;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
+import frc.robot.subsystems.drive.ArcadeDrive;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.NewArcadeDrive;
 import frc.robot.subsystems.drive.NewDriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
@@ -34,7 +36,7 @@ public class RobotContainer {
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final NewDriveBaseSubsystem driveBaseSubsystem = new NewDriveBaseSubsystem();
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
@@ -46,7 +48,8 @@ public class RobotContainer {
   // private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick1);
-  private final NewArcadeDrive arcadeDrive = new NewArcadeDrive(joystick1, driveBaseSubsystem, 1.0, 1.0);
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
+  PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   public RobotContainer() {
     configureButtonBindings();
