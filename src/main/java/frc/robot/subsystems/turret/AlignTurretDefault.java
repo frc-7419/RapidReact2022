@@ -53,7 +53,7 @@ public class AlignTurretDefault extends CommandBase {
       pidController = new PIDController(kP, kI, kD);
       pidOutput = pidController.calculate(tx);
       SmartDashboard.putNumber("pid output", pidOutput);
-      turretSubsystem.setPower(-pidOutput);
+      turretSubsystem.setPower(pidOutput);
     }
   }
 

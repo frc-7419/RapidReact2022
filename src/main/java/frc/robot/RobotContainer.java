@@ -21,9 +21,11 @@ import frc.robot.subsystems.feeder.RunFeederWithJoystick;
 import frc.robot.subsystems.intake.DeployIntakeWithJoystick;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
 // import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
@@ -35,7 +37,7 @@ public class RobotContainer {
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
@@ -43,7 +45,7 @@ public class RobotContainer {
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.2);
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
-  // private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
+  private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   // private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
@@ -56,7 +58,9 @@ public class RobotContainer {
     smartDashboardBindings();
   }
 
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(joystick2, XboxController.Button.kY.value).toggleWhenPressed(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+  }
 
   private void smartDashboardBindings() {}
 
