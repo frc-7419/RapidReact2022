@@ -117,6 +117,10 @@ public final class Constants {
         public static final double TopShooterkP = 0.10603/(2048*6);
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
+
+        //elevator
+        public static final double ElevatorKp = 0.0035;
+        public static final double ElevatorKf = -0.10459;
     }
 
     public static final double[][] kRawVelocityToTopFf = {

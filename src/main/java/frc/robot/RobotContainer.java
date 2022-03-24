@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.team7419.joystick.DoubleButton;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.NewArcadeDrive;
 import frc.robot.subsystems.drive.NewDriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.elevator.MaintainElevatorPosition;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeederWithJoystick;
@@ -61,13 +63,21 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    // align turret
     new JoystickButton(joystick2, XboxController.Button.kY.value)
     .toggleWhenPressed(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
 
+    // get to ideal velocity for edge of tarmac
     new DoubleButton(
       new JoystickButton(joystick2, XboxController.Button.kX.value), 
       new JoystickButton(joystick2, XboxController.Button.kY.value))
       .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 9850, 6150, 0.0485, 0.0495));
+    
+    // toggle to maintain elevator position
+    new DoubleButton(
+      new JoystickButton(joystick2, XboxController.Button.kA.value),
+      new JoystickButton(joystick2, XboxController.Button.kB.value))
+      .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
   }
 
   private void smartDashboardBindings() {}
