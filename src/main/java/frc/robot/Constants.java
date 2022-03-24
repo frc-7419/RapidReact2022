@@ -117,6 +117,12 @@ public final class Constants {
         public static final double TopShooterkP = 0.10603/(2048*6);
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
+
+        // old random shooter stuff
+        public static final double ShooterkP = 0;
+        public static final double ShooterkI = 0;
+        public static final double ShooterkD = 0;
+        public static final double ShooterkF = 0.05;
     }
 
     public static final double[][] kRawVelocityToTopFf = {
