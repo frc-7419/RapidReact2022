@@ -4,6 +4,7 @@ import com.team7419.joystick.DoubleButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -87,7 +88,12 @@ public class RobotContainer {
       .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
   }
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("tKf", 0.05);
+    SmartDashboard.putNumber("bKf", 0.05);
+    SmartDashboard.putNumber("tTargetRV", 2000);
+    SmartDashboard.putNumber("bTargetRV", 2000);
+  }
 
   public Command getAutonomousCommand() {
     return shootThenMoveAway;

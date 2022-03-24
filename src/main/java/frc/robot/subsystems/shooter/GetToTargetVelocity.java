@@ -37,8 +37,8 @@ public class GetToTargetVelocity extends CommandBase {
   public void initialize() {
     // SmartDashboard.putBoolean("Shooter Running", false);
 
-    // topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    // bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
+    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
+    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
     // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
@@ -48,8 +48,8 @@ public class GetToTargetVelocity extends CommandBase {
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    // tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    // bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
+    tKf = SmartDashboard.getNumber("tKf", 0.05);
+    bKf = SmartDashboard.getNumber("bKf", 0.05);
 
     shooterSubsystem.setTopPIDF(0, 0, 0, tKf);
     shooterSubsystem.setBottomPIDF(0, 0, 0, bKf);
@@ -73,17 +73,17 @@ public class GetToTargetVelocity extends CommandBase {
     // tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     // tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    // topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    // bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
+    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
+    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
 
-    // tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    // bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
+    tKf = SmartDashboard.getNumber("tKf", 0.05);
+    bKf = SmartDashboard.getNumber("bKf", 0.05);
 
     // SmartDashboard.putNumber("tKf", tKf);
     // SmartDashboard.putNumber("bKf", bKf);
 
-    shooterSubsystem.setTopPIDF(bKp, bKi, 0, tKf);
-    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, bKf);
+    shooterSubsystem.setTopPIDF(0, 0, 0, tKf);
+    shooterSubsystem.setBottomPIDF(0, 0, 0, bKf);
 
     // double topTargetVelocity = topTargetRPM * ticksPerRotation * (1/600);
     // double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
