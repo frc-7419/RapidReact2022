@@ -1,11 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
@@ -62,7 +64,14 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kY.value).whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
   }
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("tTargetRV", 2000);
+    SmartDashboard.putNumber("bTargetRV", 2000);
+    SmartDashboard.putNumber("ShooterKp", PIDConstants.ShooterkP);
+    SmartDashboard.putNumber("ShooterKi", PIDConstants.ShooterkI);
+    SmartDashboard.putNumber("bKf", PIDConstants.ShooterkF);
+    SmartDashboard.putNumber("tKf", PIDConstants.ShooterkF);
+  }
 
   public Command getAutonomousCommand() {
     return arcadeDrive;
