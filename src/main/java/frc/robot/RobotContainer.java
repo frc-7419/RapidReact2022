@@ -59,7 +59,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(joystick2, XboxController.Button.kY.value).toggleWhenPressed(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+    new JoystickButton(joystick2, XboxController.Button.kY.value).whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
   }
 
   private void smartDashboardBindings() {}
