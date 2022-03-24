@@ -1,7 +1,10 @@
 package frc.robot;
 
+import com.team7419.joystick.DoubleButton;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
@@ -62,6 +65,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(joystick2, XboxController.Button.kY.value).whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+
+    new DoubleButton(
+      new JoystickButton(joystick2, XboxController.Button.kX.value), 
+      new JoystickButton(joystick2, XboxController.Button.kY.value))
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 2000, 2000));
   }
 
   private void smartDashboardBindings() {
