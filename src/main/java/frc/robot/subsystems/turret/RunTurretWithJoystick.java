@@ -24,7 +24,7 @@ public class RunTurretWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick.getRightX() > 0) {
+    if (joystick.getRightX() != 0) {
       turretSubsystem.setPower(kSpeed*joystick.getRightX());
     }
     else {
