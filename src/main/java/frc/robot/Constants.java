@@ -99,6 +99,11 @@ public final class Constants {
     }
 
     public static class PIDConstants {
+        //drive
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
+
         //gyro
         public static final double GyrokP = 0.085;
         public static final double GyrokI = 0;
