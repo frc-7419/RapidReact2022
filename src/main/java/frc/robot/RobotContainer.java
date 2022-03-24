@@ -1,6 +1,9 @@
 package frc.robot;
 
+import com.team7419.joystick.DoubleButton;
+
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
@@ -34,7 +37,6 @@ public class RobotContainer {
   // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
-  private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
@@ -59,7 +61,13 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(joystick2, XboxController.Button.kY.value).whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+    new JoystickButton(joystick2, XboxController.Button.kY.value)
+    .toggleWhenPressed(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+
+    new DoubleButton(
+      new JoystickButton(joystick2, XboxController.Button.kX.value), 
+      new JoystickButton(joystick2, XboxController.Button.kY.value))
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 9850, 6150, 0.0485, 0.0495));
   }
 
   private void smartDashboardBindings() {}
@@ -77,8 +85,6 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
-    // feederSubsystem.setDefaultCommand(runFeederWithJoystick);
-
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
