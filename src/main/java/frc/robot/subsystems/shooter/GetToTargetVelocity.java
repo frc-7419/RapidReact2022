@@ -20,10 +20,12 @@ public class GetToTargetVelocity extends CommandBase {
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity, double topKf, double bottomKf) {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRawVelocity = topTargetRawVelocity;
     this.bottomTargetRawVelocity = bottomTargetRawVelocity;
+    this.topKf = topKf;
+    this.bottomKf = bottomKf;
     addRequirements(shooterSubsystem);
   }
 
@@ -39,8 +41,8 @@ public class GetToTargetVelocity extends CommandBase {
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    bottomKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
-    topKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    bottomKf = SmartDashboard.getNumber("bKf", topKf);
+    topKf = SmartDashboard.getNumber("tKf", bottomKf);
 
     shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
     shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
