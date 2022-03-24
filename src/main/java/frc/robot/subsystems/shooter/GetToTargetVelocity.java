@@ -37,8 +37,8 @@ public class GetToTargetVelocity extends CommandBase {
   public void initialize() {
     // SmartDashboard.putBoolean("Shooter Running", false);
 
-    // topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    // bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
+    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
+    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
     // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
@@ -48,8 +48,8 @@ public class GetToTargetVelocity extends CommandBase {
 
     // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
 
-    // tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
-    // bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
+    tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
+    bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
 
     shooterSubsystem.setTopPIDF(0, 0, 0, tKf);
     shooterSubsystem.setBottomPIDF(0, 0, 0, bKf);
@@ -73,8 +73,8 @@ public class GetToTargetVelocity extends CommandBase {
     // tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     // tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    // topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    // bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
+    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
+    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
 
     // tKf = shooterSubsystem.computeTopkF(topTargetRawVelocity);
     // bKf = shooterSubsystem.computeBottomkF(bottomTargetRawVelocity);
