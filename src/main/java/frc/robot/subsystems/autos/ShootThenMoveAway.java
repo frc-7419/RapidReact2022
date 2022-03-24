@@ -31,11 +31,9 @@ public class ShootThenMoveAway extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, -30, PIDConstants.GyrokP30, PIDConstants.GyrokI30, PIDConstants.GyrokD30), new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, 1),new StraightWithMotionMagic(driveBaseSubsystem, -80.88));
     addCommands(
-      parallel(new RunLoader(loaderSubsystem, 1),new GetToTargetVelocity(shooterSubsystem, 9850, 6150),
-      sequence(
-        new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
-      )
-      )
+      new GetToTargetVelocity(shooterSubsystem, 9850, 6150),
+      parallel(new RunLoader(loaderSubsystem, 1),new GetToTargetVelocity(shooterSubsystem, 9850, 6150).withTimeout(5),
+      new StraightWithMotionMagic(driveBaseSubsystem, -80.88))
     );
   }
 }
