@@ -28,7 +28,7 @@ public class RunElevatorWithJoystick extends CommandBase {
   @Override
   public void execute() {
 
-    SmartDashboard.putNumber("joystick out", joystick.getLeftY());
+    // SmartDashboard.putNumber("joystick out", joystick.getLeftY());
 
     if (joystick.getLeftY() != 0) {
       elevatorSubsystem.coast();

@@ -62,8 +62,8 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
+        // SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
+        // SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
 
         // SmartDashboard.putNumber("tRPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
         // SmartDashboard.putNumber("bRPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));

@@ -13,6 +13,7 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 import frc.robot.Constants.PowerConstants;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.ShootThenMoveAway;
 import frc.robot.subsystems.drive.ArcadeDrive;
@@ -85,13 +86,16 @@ public class RobotContainer {
       .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
 
     new JoystickButton(joystick2, XboxController.Button.kA.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 3500, 5450
-    , 0.042, 0.0475));
+    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
       
   
     new JoystickButton(joystick2, XboxController.Button.kY.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 10500, 6500, 0.04775, 0.0477425));
+    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 11500, 6500, 0.04775, 0.0477425));
 
+    new DoubleButton(
+      new JoystickButton(joystick2, XboxController.Button.kX.value), 
+      new JoystickButton(joystick2, XboxController.Button.kA.value))
+      .whileHeld(new CoastArms(armsSubsystem));
     
   }
 
