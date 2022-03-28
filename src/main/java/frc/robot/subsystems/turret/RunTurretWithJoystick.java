@@ -31,6 +31,7 @@ public class RunTurretWithJoystick extends CommandBase {
       turretSubsystem.setPower(kSpeed*joystick.getRightX());
     }
     else {
+      turretSubsystem.setPower(0);
       turretSubsystem.brake();
     }
     

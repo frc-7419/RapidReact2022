@@ -86,7 +86,7 @@ public final class Constants {
         // public static final double DriveBaseLeftTurn = .35; //.6
         // public static final double DriveBaseRightStraight = .45;
 
-        public static final double DriveBaseStraight = .45;
+        public static final double DriveBaseStraight = .55;
         public static final double DriveBaseTurn = .35; 
         // public static final double DriveBaseLeftStraight = -.15;
         // public static final double DriveBaseRightTurn = .1; 
@@ -110,7 +110,7 @@ public final class Constants {
         public static final double GyrokD = 0;
 
         // turret PID gains
-        public static final double TurretKp = 0.015;
+        public static final double TurretKp = 0.0065;
         public static final double TurretKi = 0;
         public static final double TurretKd = 0;
 

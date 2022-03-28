@@ -13,7 +13,7 @@ public class RunShooterWithJoystick extends CommandBase {
   private XboxController joystick;
   private double powerTop = 0;
   private double powerBottom = 0;
-  private double stepInterval = 0.01;
+  private double stepInterval = 0.005;
 
   public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController joystick) {
     this.shooterSubsystem = shooterSubsystem;
