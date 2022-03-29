@@ -7,8 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.encoders.RunSparkMaxWithJoystick;
-import frc.robot.subsystems.encoders.SparkMaxSubsystem;
+
+import frc.robot.subsystems.encoders.RunTurretWithJoystick;
+
+import frc.robot.subsystems.encoders.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -22,8 +24,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
-  private final SparkMaxSubsystem sparkMaxSubsystem = new SparkMaxSubsystem();
-  private final RunSparkMaxWithJoystick runSparkMaxWithJoystick = new RunSparkMaxWithJoystick(sparkMaxSubsystem, joystick);
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
+  private final RunTurretWithJoystick runSparkMaxWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -55,6 +57,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    sparkMaxSubsystem.setDefaultCommand(runSparkMaxWithJoystick);
+    turretSubsystem.setDefaultCommand(runSparkMaxWithJoystick);
   }
 }
