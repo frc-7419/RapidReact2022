@@ -115,6 +115,23 @@ public final class Constants {
         public static final double TopShooterkP = 0.10603/(2048*6);
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
+
+        //Auton PIDs
+
+        // 180
+        public static final double kP180 = 0.10603/(2048*6);
+        public static final double kI180 = 0;
+        public static final double kD180 = 0;
+
+        // 115
+        public static final double kP115 = 0.10603/(2048*6);
+        public static final double kI115 = 0;
+        public static final double kD115 = 0;
+
+        // 65
+        public static final double kP65 = 0.10603/(2048*6);
+        public static final double kI65 = 0;
+        public static final double kD65 = 0;
     }
 
     public static final double[][] kRawVelocityToTopFf = {
