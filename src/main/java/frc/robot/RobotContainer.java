@@ -60,7 +60,7 @@ public class RobotContainer {
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final TankDrive tankDrive = new TankDrive(joystick1, driveBaseSubsystem, 
-  PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
+  PowerConstants.DriveBaseStraight);
 
   // auto
   private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
