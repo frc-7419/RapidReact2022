@@ -16,7 +16,7 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.ShootThenMoveAway;
-import frc.robot.subsystems.drive.ArcadeDrive;
+import frc.robot.subsystems.drive.TankDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.NewArcadeDrive;
 import frc.robot.subsystems.drive.NewDriveBaseSubsystem;
@@ -59,7 +59,7 @@ public class RobotContainer {
   // private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
+  private final TankDrive tankDrive = new TankDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   // auto
@@ -117,7 +117,7 @@ public class RobotContainer {
   }
     
   public void setDefaultCommands() {
-    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
+    driveBaseSubsystem.setDefaultCommand(tankDrive);
     // intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
