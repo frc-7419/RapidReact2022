@@ -75,12 +75,6 @@ public class SvrThreeBall extends SequentialCommandGroup {
           // wait for ball to be intaked
           new WaitCommand(0.2),
 
-          // keep shooter at target velocity and run feeder to shoot
-          parallel(
-            new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // specific velocity to be tuned
-            new RunFeeder(feederSubsystem, 0.5)
-          ).withTimeout(1), // tune the amount of time it takes to shoot both balls
-
           // turn 65 degrees to the second ball, while bringing shooter to velocity
           raceWith(
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 65, Constants.PIDConstants.GyrokP63, Constants.PIDConstants.GyrokI63, Constants.PIDConstants.GyrokD63),
