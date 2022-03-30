@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
-  /** Creates a new  */
   private TalonFX turret;
   private DigitalInput forwardLimitSwitch;
   private DigitalInput reverseLimitSwitch;
@@ -27,25 +26,6 @@ public class TurretSubsystem extends SubsystemBase {
     forwardLimitSwitch = new DigitalInput(0);
     reverseLimitSwitch = new DigitalInput(1);
   }
-  public void setPower(double power) {
-    coast();
-    turret.set(ControlMode.PercentOutput, power);
-  }
-
-  public void brake() {
-    turret.setNeutralMode(NeutralMode.Brake);
-  }
-  public void coast() {
-    turret.setNeutralMode(NeutralMode.Coast);
-  }
-
-  public DigitalInput getForwardLimitSwitch() {
-    return forwardLimitSwitch;
-  } 
-  public DigitalInput getReverseLimitSwitch() {
-    return reverseLimitSwitch;
-  }
-
 
   @Override
   public void periodic() {
@@ -66,5 +46,24 @@ public class TurretSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
     // SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
+  }
+
+  public void setPower(double power) {
+    coast();
+    turret.set(ControlMode.PercentOutput, power);
+  }
+
+  public void brake() {
+    turret.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coast() {
+    turret.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public DigitalInput getForwardLimitSwitch() {
+    return forwardLimitSwitch;
+  } 
+  public DigitalInput getReverseLimitSwitch() {
+    return reverseLimitSwitch;
   }
 }
