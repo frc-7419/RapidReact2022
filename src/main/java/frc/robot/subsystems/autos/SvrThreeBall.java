@@ -49,7 +49,7 @@ public class SvrThreeBall extends SequentialCommandGroup {
           new StraightWithMotionMagic(driveBaseSubsystem, 80),
 
           // wait for ball to be intaked
-          new WaitCommand(0.3),
+          new WaitCommand(0.2),
 
           // turn 115 degrees to next ball, while bringing shooter to velocity
           raceWith(
@@ -71,6 +71,9 @@ public class SvrThreeBall extends SequentialCommandGroup {
             new StraightWithMotionMagic(driveBaseSubsystem, 86),
             new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
           ),
+
+          // wait for ball to be intaked
+          new WaitCommand(0.2),
 
           // keep shooter at target velocity and run feeder to shoot
           parallel(
