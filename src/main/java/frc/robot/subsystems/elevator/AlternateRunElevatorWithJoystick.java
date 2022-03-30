@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
-public class AlternateElevator extends CommandBase {
+public class AlternateRunElevatorWithJoystick extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private XboxController joystick;
 
-  public AlternateElevator(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  public AlternateRunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.joystick = joystick;
     addRequirements(elevatorSubsystem);
