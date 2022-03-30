@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final XboxController joystick = new XboxController(1);
+  private final XboxController joystick = new XboxController(0);
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final RunTurretWithJoystick runSparkMaxWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
