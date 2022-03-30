@@ -31,10 +31,12 @@ public final class Constants {
 
         bottomShooterFalcon(10),
         topShooterFalcon(14),
-        intakeSpark(15),  
+        intakeSpark(32),  
         loaderVictor(16),
-        turretSpark(21),
-        feederVictor(25),
+        turretFalcon(62),
+        feederVictor(23),
+        armSpark1(11),
+        armSpark2(12),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
         ;
@@ -47,7 +49,7 @@ public final class Constants {
 
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters
-        public static final double kCameraHeight = 0.8128;
+        public static final double kCameraHeight = 0.84; // inches
         public static final double mountingAngle = 55; 
         public static final double m = 1.0; 
         public static final double n = 0.48; //arbitrary
@@ -74,21 +76,31 @@ public final class Constants {
         public static final double BottomShooterKs = 0.57654/(2048*6);
         public static final double BottomShooterKv = 0.10892/(2048*6);
         public static final double BottomShooterKa = 0.0044231/(2048*6);
+
+        public static final double trackWidth = 0.69; // meters
     }
 
     public static class PowerConstants {
         //drive
-        public static final double DriveBaseLeftStraight = -.45;
-        public static final double DriveBaseRightTurn = .35; //.6
-        public static final double DriveBaseLeftTurn = .35; //.6
-        public static final double DriveBaseRightStraight = -.45;
+        // public static final double DriveBaseLeftStraight = .45;
+        // public static final double DriveBaseRightTurn = .35; //.6
+        // public static final double DriveBaseLeftTurn = .35; //.6
+        // public static final double DriveBaseRightStraight = .45;
+
+        public static final double DriveBaseStraight = .55;
+        public static final double DriveBaseTurn = .35; 
+        // public static final double DriveBaseLeftStraight = -.15;
+        // public static final double DriveBaseRightTurn = .1; 
+        // public static final double DriveBaseLeftTurn = .1; 
+        // public static final double DriveBaseRightStraight = -.15;
+
 
         //intake
         public static final double intakeMultiplier = 1.0; 
     }
 
     public static class PIDConstants {
-        // straight with motion magic pid gains
+        //drive
         public static final double DriveBaseMotionMagickP = 0.5;
         public static final double DriveBaseMotionMagickI = 0;
         public static final double DriveBaseMotionMagickD = 0;
@@ -103,7 +115,7 @@ public final class Constants {
         public static final double GyrokD30 = 0.0001;
 
         // turret PID gains
-        public static final double TurretKp = 0.006;
+        public static final double TurretKp = 0.0065;
         public static final double TurretKi = 0;
         public static final double TurretKd = 0;
 
@@ -132,6 +144,10 @@ public final class Constants {
         public static final double kP65 = 0.10603/(2048*6);
         public static final double kI65 = 0;
         public static final double kD65 = 0;
+        
+        //elevator
+        public static final double ElevatorKp = 0.0035;
+        public static final double ElevatorKf = -0.10459;
     }
 
     public static final double[][] kRawVelocityToTopFf = {
