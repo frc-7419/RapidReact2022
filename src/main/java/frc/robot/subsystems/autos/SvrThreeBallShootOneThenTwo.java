@@ -38,7 +38,10 @@ public class SvrThreeBallShootOneThenTwo extends SequentialCommandGroup {
       new RunLoader(loaderSubsystem, 1),
       new RunIntake(intakeSubsystem, 1),
       sequence(
-        new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
+        parallel(
+        new RunFeeder(feederSubsystem, 0.5),
+        new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
+        ),
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180),
         new StraightWithMotionMagic(driveBaseSubsystem, 80),
         new RunFeeder(feederSubsystem, 0.5),
