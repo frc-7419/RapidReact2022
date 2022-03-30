@@ -7,6 +7,7 @@ package frc.robot.subsystems.autos;
 import javax.sql.rowset.spi.TransactionalWriter;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
@@ -38,22 +39,17 @@ public class SvrThreeBall extends SequentialCommandGroup {
     parallel(
       new AlignTurret(turretSubsystem, limelightSubsystem),
       new RunLoader(loaderSubsystem, 1),
-      new RunIntake(intakeSubsystem, 80),
+      new RunIntake(intakeSubsystem, 1),
 
       sequence(
         // Move 80 in
-        parallel(new StraightWithMotionMagic(driveBaseSubsystem, 80),  new RunFeeder(feederSubsystem, 0.5)),
-
-        // turn 115 clockwise
+        new StraightWithMotionMagic(driveBaseSubsystem, 80),  
+        new RunFeeder(feederSubsystem, 0.5),
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.kP115, Constants.PIDConstants.kI115, Constants.PIDConstants.kD115),
         new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
-        // Move 86 in
+        new WaitCommand(0.3),
         new StraightWithMotionMagic(driveBaseSubsystem, 86),
-
-        // Turn 65 clockwise
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 65, Constants.PIDConstants.kP65, Constants.PIDConstants.kI65, Constants.PIDConstants.kD65),
-
-        // Run Loader
         new RunFeeder(feederSubsystem, 0.5)
         )
     );
