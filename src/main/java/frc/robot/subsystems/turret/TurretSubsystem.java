@@ -29,22 +29,22 @@ public class TurretSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
-      reverseLimitDetected = true;
-      turret.configReverseSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
-      turret.configReverseSoftLimitEnable(true, 0);
-    } 
-    if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
-      forwardLimitDetected = true;
-      turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
-      turret.configForwardSoftLimitEnable(true, 0);
-    } 
-    SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
+    // if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
+    //   reverseLimitDetected = true;
+    //   turret.configReverseSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+    //   turret.configReverseSoftLimitEnable(true, 0);
+    // } 
+    // if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
+    //   forwardLimitDetected = true;
+    //   turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+    //   turret.configForwardSoftLimitEnable(true, 0);
+    // } 
+    // SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
+    // SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
-    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
+    // SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
+    // SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
     // SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
   }
 
