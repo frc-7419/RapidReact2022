@@ -37,23 +37,16 @@ public class SvrThreeBall extends SequentialCommandGroup {
 
     parallel(
       new AlignTurret(turretSubsystem, limelightSubsystem),
-      new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
       new RunLoader(loaderSubsystem, 1),
       new RunIntake(intakeSubsystem, 80),
 
       sequence(
-        // Run loader
-        new RunFeeder(feederSubsystem, 0.5),
-
-        // Turn 180
-        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.kP180, Constants.PIDConstants.kI180, Constants.PIDConstants.kD180),
-
         // Move 80 in
-        new StraightWithMotionMagic(driveBaseSubsystem, 80),
+        parallel(new StraightWithMotionMagic(driveBaseSubsystem, 80),  new RunFeeder(feederSubsystem, 0.5)),
 
         // turn 115 clockwise
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.kP115, Constants.PIDConstants.kI115, Constants.PIDConstants.kD115),
-
+        new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
         // Move 86 in
         new StraightWithMotionMagic(driveBaseSubsystem, 86),
 
