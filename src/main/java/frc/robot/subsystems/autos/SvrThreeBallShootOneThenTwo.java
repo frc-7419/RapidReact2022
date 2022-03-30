@@ -43,11 +43,13 @@ public class SvrThreeBallShootOneThenTwo extends SequentialCommandGroup {
         new StraightWithMotionMagic(driveBaseSubsystem, 80),
         new RunFeeder(feederSubsystem, 0.5),
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
-        new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
-        new WaitCommand(0.3),
+        new WaitCommand(0.1),
         new StraightWithMotionMagic(driveBaseSubsystem, 86),
+        new RunFeeder(feederSubsystem, 0.5),
         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80, Constants.PIDConstants.GyrokP80, Constants.PIDConstants.GyrokI80, Constants.PIDConstants.GyrokD80),
-        new RunFeeder(feederSubsystem, 0.5)
+        // in between this step, hopefully limelight detects the target and the alignturret command works.
+        new WaitCommand(0.3),
+        new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
         )
     );
   }
