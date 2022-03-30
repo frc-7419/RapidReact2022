@@ -45,11 +45,11 @@ public class SvrThreeBall extends SequentialCommandGroup {
         // Move 80 in
         new StraightWithMotionMagic(driveBaseSubsystem, 80),  
         new RunFeeder(feederSubsystem, 0.5),
-        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.kP115, Constants.PIDConstants.kI115, Constants.PIDConstants.kD115),
+        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
         new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
         new WaitCommand(0.3),
         new StraightWithMotionMagic(driveBaseSubsystem, 86),
-        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 65, Constants.PIDConstants.kP65, Constants.PIDConstants.kI65, Constants.PIDConstants.kD65),
+        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80, Constants.PIDConstants.GyrokP80, Constants.PIDConstants.GyrokI80, Constants.PIDConstants.GyrokD80),
         new RunFeeder(feederSubsystem, 0.5)
         )
     );
