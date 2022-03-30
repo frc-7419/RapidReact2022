@@ -23,9 +23,9 @@ public class TurretSubsystem extends SubsystemBase {
 
   public TurretSubsystem() {
     //change later
-    talonFX = new TalonFX(69);
-    forwardLimitSwitch = new DigitalInput(0);
-    reverseLimitSwitch = new DigitalInput(1);
+    talonFX = new TalonFX(62);
+    forwardLimitSwitch = new DigitalInput(1);
+    reverseLimitSwitch = new DigitalInput(2);
     // canSparkMax.burnFlash();
 
   }
