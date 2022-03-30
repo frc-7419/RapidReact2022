@@ -48,10 +48,10 @@ public class RunShooterWithJoystick extends CommandBase {
       }
       shooterSubsystem.setTopPower(powerTop);
       shooterSubsystem.setBottomPower(powerBottom);
-      if (-joystick.getRightY() > 0) {
-        shooterSubsystem.setBothPower(-joystick.getRightY());
+      // if (-joystick.getRightY() > 0) {
+      //   shooterSubsystem.setBothPower(-joystick.getRightY());
         
-      }
+      // }
       if (joystick.getBButtonPressed()) {
         shooterSubsystem.setBothPower(0);
         powerTop = 0;

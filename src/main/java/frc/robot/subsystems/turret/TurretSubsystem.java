@@ -4,80 +4,66 @@
 
 package frc.robot.subsystems.turret;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
-  private CANSparkMax turret;
-  private SparkMaxLimitSwitch forwardLimitSwitch;
-  private SparkMaxLimitSwitch reverseLimitSwitch;
+  private TalonFX turret;
+  private DigitalInput forwardLimitSwitch;
+  private DigitalInput reverseLimitSwitch;
 
-  private RelativeEncoder encoder;
   private boolean forwardLimitDetected = false;
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
-    turret = new CANSparkMax(CanIds.turretSpark.id, MotorType.kBrushless);
-    forwardLimitSwitch = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    reverseLimitSwitch = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    encoder = turret.getEncoder();
-
-    turret.restoreFactoryDefaults();
-    
-    forwardLimitSwitch.enableLimitSwitch(false);
-    reverseLimitSwitch.enableLimitSwitch(false);
-
-    // turret.burnFlash();
-
-    SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
-    SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
+    turret = new TalonFX(CanIds.turretFalcon.id);
+    forwardLimitSwitch = new DigitalInput(0);
+    reverseLimitSwitch = new DigitalInput(1);
   }
 
   @Override
   public void periodic() {
-    if (getReverseLimitSwitch().isPressed() && !reverseLimitDetected) {
+    if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
       reverseLimitDetected = true;
-      turret.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-      turret.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, (float)encoder.getPosition());
+      turret.configReverseSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+      turret.configReverseSoftLimitEnable(true, 0);
     } 
-    if (getForwardLimitSwitch().isPressed() && !forwardLimitDetected) {
+    if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
       forwardLimitDetected = true;
-      turret.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-      turret.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, (float)encoder.getPosition());
-
+      turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+      turret.configForwardSoftLimitEnable(true, 0);
     } 
     SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
 
     SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
-    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
-    // SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
+    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
+    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
+    // SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
   }
 
   public void setPower(double power) {
     coast();
-    turret.set(power);
+    turret.set(ControlMode.PercentOutput, power);
   }
 
   public void brake() {
-    turret.setIdleMode(IdleMode.kBrake);
+    turret.setNeutralMode(NeutralMode.Brake);
   }
   public void coast() {
-    turret.setIdleMode(IdleMode.kCoast);
+    turret.setNeutralMode(NeutralMode.Coast);
   }
 
-  public SparkMaxLimitSwitch getForwardLimitSwitch() {
+  public DigitalInput getForwardLimitSwitch() {
     return forwardLimitSwitch;
   } 
-  public SparkMaxLimitSwitch getReverseLimitSwitch() {
+  public DigitalInput getReverseLimitSwitch() {
     return reverseLimitSwitch;
   }
 }

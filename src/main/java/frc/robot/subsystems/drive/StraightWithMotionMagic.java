@@ -75,22 +75,22 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void execute(){
 
-        SmartDashboard.putBoolean("MM Running", true);
+        // SmartDashboard.putBoolean("MM Running", true);
 
-        SmartDashboard.putNumber("LM Position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("RM Position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
+        // SmartDashboard.putNumber("LM Position", driveBaseSubsystem.getLeftMast().getSelectedSensorPosition(0));
+        // SmartDashboard.putNumber("RM Position", driveBaseSubsystem.getRightMast().getSelectedSensorPosition(0));
     
         double leftMastOutput = driveBaseSubsystem.getLeftMast().getMotorOutputPercent();
         double rightMastOutput = driveBaseSubsystem.getRightMast().getMotorOutputPercent();
-        SmartDashboard.putNumber("LM Out", leftMastOutput);
-        SmartDashboard.putNumber("RM Out", rightMastOutput);
-        SmartDashboard.putNumber("LM Error", driveBaseSubsystem.getLeftMast().getClosedLoopError());
-        SmartDashboard.putNumber("RM Error", driveBaseSubsystem.getRightMast().getClosedLoopError());
+        // SmartDashboard.putNumber("LM Out", leftMastOutput);
+        // SmartDashboard.putNumber("RM Out", rightMastOutput);
+        // SmartDashboard.putNumber("LM Error", driveBaseSubsystem.getLeftMast().getClosedLoopError());
+        // SmartDashboard.putNumber("RM Error", driveBaseSubsystem.getRightMast().getClosedLoopError());
         if(System.currentTimeMillis() - startTime > 1000){
             started = true;
         }
 
-        SmartDashboard.putBoolean("started", started);
+        // SmartDashboard.putBoolean("started", started);
     }
 
     @Override
@@ -105,6 +105,6 @@ public class StraightWithMotionMagic extends CommandBase {
     public void end(boolean interrupted){
         driveBaseSubsystem.stop();
         driveBaseSubsystem.brake();
-        SmartDashboard.putBoolean("MM Running", false);
+        // SmartDashboard.putBoolean("MM Running", false);
     }
 }

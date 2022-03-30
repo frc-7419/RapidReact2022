@@ -18,7 +18,7 @@ public class IntakeSubsystem extends SubsystemBase{
     public void periodic() {}
 
     public void setPower(double power) {
-        intake.set(power);
+        intake.set(-power);
     }
 
     public CANSparkMax getIntakeMotor() {
