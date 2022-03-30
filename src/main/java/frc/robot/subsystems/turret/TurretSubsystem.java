@@ -4,80 +4,70 @@
 
 package frc.robot.subsystems.turret;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
-  private CANSparkMax turret;
-  private SparkMaxLimitSwitch forwardLimitSwitch;
-  private SparkMaxLimitSwitch reverseLimitSwitch;
+  /** Creates a new  */
+  private TalonFX talonFX;
+  private DigitalInput forwardLimitSwitch;
+  private DigitalInput reverseLimitSwitch;
 
-  private RelativeEncoder encoder;
   private boolean forwardLimitDetected = false;
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
-    turret = new CANSparkMax(CanIds.turretSpark.id, MotorType.kBrushless);
-    forwardLimitSwitch = turret.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    reverseLimitSwitch = turret.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-    encoder = turret.getEncoder();
+    //change later
+    talonFX = new TalonFX(69);
+    forwardLimitSwitch = new DigitalInput(0);
+    reverseLimitSwitch = new DigitalInput(1);
+    // canSparkMax.burnFlash();
 
-    turret.restoreFactoryDefaults();
-    
-    forwardLimitSwitch.enableLimitSwitch(false);
-    reverseLimitSwitch.enableLimitSwitch(false);
-
-    // turret.burnFlash();
-
-    SmartDashboard.putBoolean("Forward Limit Enabled", forwardLimitSwitch.isLimitSwitchEnabled());
-    SmartDashboard.putBoolean("Reverse Limit Enabled", reverseLimitSwitch.isLimitSwitchEnabled());
   }
+  public void setPower(double power) {
+    coast();
+    talonFX.set(ControlMode.PercentOutput, power);
+  }
+
+  public void brake() {
+    talonFX.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coast() {
+    talonFX.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public DigitalInput getForwardLimitSwitch() {
+    return forwardLimitSwitch;
+  } 
+  public DigitalInput getReverseLimitSwitch() {
+    return reverseLimitSwitch;
+  }
+
 
   @Override
   public void periodic() {
-    if (getReverseLimitSwitch().isPressed() && !reverseLimitDetected) {
+    if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
       reverseLimitDetected = true;
-      turret.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-      turret.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, (float)encoder.getPosition());
+      talonFX.configReverseSoftLimitThreshold(talonFX.getSelectedSensorPosition(), 0);
+      talonFX.configReverseSoftLimitEnable(true, 0);
     } 
-    if (getForwardLimitSwitch().isPressed() && !forwardLimitDetected) {
+    if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
       forwardLimitDetected = true;
-      turret.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-      turret.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, (float)encoder.getPosition());
-
+      talonFX.configForwardSoftLimitThreshold(talonFX.getSelectedSensorPosition(), 0);
+      talonFX.configForwardSoftLimitEnable(true, 0);
     } 
     SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
 
     SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.isPressed());
-    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.isPressed());
-    // SmartDashboard.putNumber("Turret Encoder Position", encoder.getPosition());
-  }
-
-  public void setPower(double power) {
-    coast();
-    turret.set(power);
-  }
-
-  public void brake() {
-    turret.setIdleMode(IdleMode.kBrake);
-  }
-  public void coast() {
-    turret.setIdleMode(IdleMode.kCoast);
-  }
-
-  public SparkMaxLimitSwitch getForwardLimitSwitch() {
-    return forwardLimitSwitch;
-  } 
-  public SparkMaxLimitSwitch getReverseLimitSwitch() {
-    return reverseLimitSwitch;
+    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
+    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
+    SmartDashboard.putNumber("Turret Encoder Position", talonFX.getSelectedSensorPosition());
+    
   }
 }

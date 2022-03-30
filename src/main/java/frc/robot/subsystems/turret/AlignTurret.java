@@ -24,7 +24,7 @@ public class AlignTurret extends CommandBase {
   public AlignTurret(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    addRequirements(turretSubsystem);
+    addRequirements(turretSubsystem, limelightSubsystem);
   }
 
   @Override
