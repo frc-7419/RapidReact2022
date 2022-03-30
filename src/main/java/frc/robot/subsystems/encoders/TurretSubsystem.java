@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import frc.robot.Constants.CanIds;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,7 +25,7 @@ public class TurretSubsystem extends SubsystemBase {
 
   public TurretSubsystem() {
     //change later
-    talonFX = new TalonFX(62);
+    talonFX = new TalonFX(CanIds.turretFalcon.id);
     forwardLimitSwitch = new DigitalInput(1);
     reverseLimitSwitch = new DigitalInput(2);
     // canSparkMax.burnFlash();

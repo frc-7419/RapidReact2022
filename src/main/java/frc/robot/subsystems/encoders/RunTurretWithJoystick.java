@@ -27,7 +27,14 @@ public class RunTurretWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turretSubsystem.setPower(joystick.getLeftY()*0.4);
+    if (joystick.getLeftY() != 0) {
+      turretSubsystem.coast();
+      turretSubsystem.setPower(joystick.getLeftY()*0.4);
+    }
+    else {
+      turretSubsystem.setPower(0);
+      turretSubsystem.brake();
+    }
   }
 
   // Called once the command ends or is interrupted.
