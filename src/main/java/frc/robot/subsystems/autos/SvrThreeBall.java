@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems.autos;
 
-import javax.sql.rowset.spi.TransactionalWriter;
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
@@ -15,16 +13,14 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
-import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
-import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.subsystems.turret.AlignTurret;
+import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -40,7 +36,7 @@ public class SvrThreeBall extends SequentialCommandGroup {
       // start with robot turned towards first ball and turret turned ~80 degrees clockwise
       parallel(
         // run align turret, loader, and intake continuously 
-        new AlignTurret(turretSubsystem, limelightSubsystem),
+        new AlignTurretDefault(turretSubsystem, limelightSubsystem),
         new RunLoader(loaderSubsystem, 1),
         new RunIntake(intakeSubsystem, 1),
 
