@@ -37,47 +37,42 @@ public class SvrThreeBall extends SequentialCommandGroup {
         new RunIntake(intakeSubsystem, 1),
 
         sequence(
-            // Move 80 inches towards first ball
+            // robot initially faces the scoring hub
+
+            // wait for shooter to reach target velocity
+            new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
+
+            // shoot preload
+            new RunFeeder(feederSubsystem, 0.5),
+
+            // turn 180 degrees to face the second ball
+            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180),
+            
+            // Move __ inches towards second ball --> NOTE: STILL NEED TO CALCULATE PRELOAD TO SECOND BALL DISTANCE, not 80 in
             new StraightWithMotionMagic(driveBaseSubsystem, 80),
 
             // wait for ball to be intaked
             new WaitCommand(0.2),
 
-            // turn 115 degrees to next ball, while bringing shooter to velocity
-            raceWith(
-              new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
-              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
-            ),
+            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
 
             // keep shooter at target velocity and run feeder to shoot
-            parallel(
-              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // specific velocity to be tuned
-              new RunFeeder(feederSubsystem, 0.5)
-            ).withTimeout(1), // tune the amount of time it takes to shoot both balls
-
-            // short wait between shooting and moving
-            new WaitCommand(0.2),
-
-            // move 86 inches while bringing shooter to velocity
-            raceWith(
-              new StraightWithMotionMagic(driveBaseSubsystem, 86),
-              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
-            ),
+            new StraightWithMotionMagic(driveBaseSubsystem, 114),
 
             // wait for ball to be intaked
             new WaitCommand(0.2),
 
-            // turn 65 degrees to the second ball, while bringing shooter to velocity
+            // get to target velocity as the robot turns 65 degrees
             raceWith(
-              new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 65, Constants.PIDConstants.GyrokP63, Constants.PIDConstants.GyrokI63, Constants.PIDConstants.GyrokD63),
-              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
+              new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 63, Constants.PIDConstants.GyrokP63, Constants.PIDConstants.GyrokI63, Constants.PIDConstants.GyrokD63),
+              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
             ),
 
-            // keep shooter at target velocity and run feeder to shoot
-            parallel(
-              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // specific velocity to be tuned
+            // easier to get to target velocity from the wheel's angular momentum from the previous run and run feeder to shoot
+            raceWith(
+              new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
               new RunFeeder(feederSubsystem, 0.5)
-            ).withTimeout(1) // tune the amount of time it takes to shoot both balls
+            )
           )
       )
     );
