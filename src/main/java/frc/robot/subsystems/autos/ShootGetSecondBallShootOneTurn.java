@@ -18,6 +18,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
@@ -35,11 +36,11 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
             sequence(new StraightWithMotionMagic(driveBaseSubsystem, 67), 
             new WaitCommand(0.25),
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
-            new WaitCommand(0.25), 
-            new AlignAndShoot(turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, beamBreakSubsystem, 2)
+            new WaitCommand(0.25)
             )
         );
         addCommands(new RunIntake(intakeSubsystem, 1));
         addCommands(new RunLoader(loaderSubsystem, 1));
+        addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
 }
