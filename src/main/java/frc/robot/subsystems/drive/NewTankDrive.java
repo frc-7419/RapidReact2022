@@ -14,7 +14,7 @@ public class NewTankDrive extends CommandBase {
   private XboxController joystick;
   // Limits *acceleration* not max speed; basically kD
   private final SlewRateLimiter leftSpeedLimiter = new SlewRateLimiter(1.25);
-  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(0.75);
+  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(1.25);
 
   public NewTankDrive(XboxController joystick, NewDriveBaseSubsystem driveBaseSubsystem, double kStraight) {
     this.joystick = joystick;
