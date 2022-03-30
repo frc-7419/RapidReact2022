@@ -58,7 +58,7 @@ public class RobotContainer {
   private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   // private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick2, 1);
-  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
+  private final AlternateElevator alternateElevator = new AlternateElevator(elevatorSubsystem, joystick1);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
@@ -125,7 +125,7 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     // turretSubsystem.setDefaultCommand(alignTurretDefault);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
-    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
+    elevatorSubsystem.setDefaultCommand(alternateElevator);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 
