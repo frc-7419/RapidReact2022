@@ -20,14 +20,8 @@ public class AlternateElevator extends CommandBase {
     addRequirements(elevatorSubsystem);
   }
 
-  @Override
-  public void initialize() {
-    elevatorSubsystem.coast();
-  }
-
   public static enum Direction {
     UP(0), RIGHT(90), DOWN(180), LEFT(270);
-
     int direction;
 
     private Direction(int direction) {
@@ -36,21 +30,25 @@ public class AlternateElevator extends CommandBase {
   } 
 
   @Override
-  public void execute() {
+  public void initialize() {
+    elevatorSubsystem.coast();
+  }
 
-    // SmartDashboard.putNumber("joystick out", joystick.getLeftY());
+  @Override
+  public void execute() {
     int dPadValue = joystick.getPOV();
-        elevatorSubsystem.setPower(0);
-        elevatorSubsystem.brake();
-        while (dPadValue == Direction.UP.direction) {
-            elevatorSubsystem.coast();
-            elevatorSubsystem.setPower(0.32);
-        }
-        while (dPadValue == Direction.DOWN.direction) {
-            elevatorSubsystem.coast();
-            elevatorSubsystem.setPower(-0.32);
-        }
-   
+    if (dPadValue == Direction.UP.direction) {
+      elevatorSubsystem.coast();
+      elevatorSubsystem.setPower(0.32);
+    }
+    else if (dPadValue == Direction.DOWN.direction) {
+      elevatorSubsystem.coast();
+      elevatorSubsystem.setPower(-0.32);
+    }
+    else {
+      elevatorSubsystem.setPower(0);
+      elevatorSubsystem.brake();
+    }
   }
 
   @Override
