@@ -30,10 +30,10 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SvrThreeBallAuton extends SequentialCommandGroup {
+public class SvrThreeBall extends SequentialCommandGroup {
   /** Creates a new SvrThreeBall. */
 
-  public SvrThreeBallAuton(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
+  public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
   ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem,
   FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
 
