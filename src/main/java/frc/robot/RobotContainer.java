@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.autos.ShootThenMoveAway;
 import frc.robot.subsystems.autos.SvrThreeBall;
-import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
 import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -41,7 +40,6 @@ public class RobotContainer {
 
 
   // instantiate your auto commands here
-  private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
   private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, turretSubsystem, feederSubsystem, beamBreakSubsystem, loaderSubsystem);
 
   // SVR Three Ball Auton
