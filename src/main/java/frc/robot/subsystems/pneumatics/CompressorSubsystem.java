@@ -20,6 +20,8 @@ public class CompressorSubsystem extends SubsystemBase {
     compressor.enableDigital();
     pressureSwitch = compressor.getPressureSwitchValue();
     current = compressor.getCurrent();
+    stop();
+    
   }
 
   public void start() { 
