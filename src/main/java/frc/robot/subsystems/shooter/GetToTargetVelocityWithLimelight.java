@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.team7419.InterpolatedTreeMap;
 import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,6 +15,9 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private ShooterSubsystem shooterSubsystem;
   private LimelightSubsystem limelightSubsystem;
 
+  private InterpolatedTreeMap topShooterReferencePoints;
+  private InterpolatedTreeMap bottomShooterReferencePoints;
+
   private double kP;
   private double kI;
   private double tkF;
@@ -22,40 +26,41 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private double initialVelocity;
 
   // private double targetRPM;
-  private double topTargetRPM;
-  private double bottomTargetRPM;
+  private double topTargetRawVelocity;
+  private double bottomTargetRawVelocity;
 
   
   public GetToTargetVelocityWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(shooterSubsystem);
+
+    topShooterReferencePoints = new InterpolatedTreeMap();
+    bottomShooterReferencePoints = new InterpolatedTreeMap();
+
+    // top example:
+    topShooterReferencePoints.put(1.36, 28.0);
+
+    // bottom example:
+    bottomShooterReferencePoints.put(1.36, 28.0);
   }
 
   @Override
   public void initialize() {
-    // SmartDashboard.putBoolean("Shooter Running", false);
+    topTargetRawVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance());
+    bottomTargetRawVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance());
 
-    // redo math?
-    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
-    
-    topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
-    bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
+    shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
+    shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
 
-    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.computeTopkF(topTargetRPM));
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.computeBottomkF(bottomTargetRPM));
-    
-    shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
-    
+    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
+    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
   }
 
   @Override
   public void execute() {
-    // SmartDashboard.putBoolean("Shooter Running", true);
-
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity);
+    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
 
     // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
@@ -65,7 +70,6 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.off();
-    // SmartDashboard.putBoolean("Shooter Running", false);
   }
 
   @Override
