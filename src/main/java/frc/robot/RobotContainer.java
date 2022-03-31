@@ -11,7 +11,6 @@ import com.team7419.joystick.DoubleButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.Constants.PIDConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
@@ -26,22 +25,22 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // new JoystickButton(joystick, XboxController.Button.kY.value).toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 1000, 1000));
-    
     new DoubleButton(
       new JoystickButton(joystick, XboxController.Button.kX.value), 
       new JoystickButton(joystick, XboxController.Button.kY.value))
-      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 2000, 2000));
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 0, 0));
 
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("tTargetRV", 2000);
-    SmartDashboard.putNumber("bTargetRV", 2000);
-    SmartDashboard.putNumber("ShooterKp", PIDConstants.ShooterkP);
-    SmartDashboard.putNumber("ShooterKi", PIDConstants.ShooterkI);
-    SmartDashboard.putNumber("bKf", PIDConstants.ShooterkF);
-    SmartDashboard.putNumber("tKf", PIDConstants.ShooterkF);
+    SmartDashboard.putNumber("tTargetRV", 0);
+    SmartDashboard.putNumber("bTargetRV", 0);
+    SmartDashboard.putNumber("tKp", 0);
+    SmartDashboard.putNumber("bKp", 0);
+    SmartDashboard.putNumber("tKi", 0);
+    SmartDashboard.putNumber("bKi", 0);
+    SmartDashboard.putNumber("bKf", 0);
+    SmartDashboard.putNumber("tKf", 0);
   }
 
   public Command getAutonomousCommand() {

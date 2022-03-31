@@ -10,13 +10,15 @@ public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
 
-  private double kP;
-  private double kI;
-  // private double kF;
-  private double bottomKf;
-  private double topKf;
+  private double tKp;
+  private double bKp;
 
-  // private double targetRPM;
+  private double tKi;
+  private double bKi;
+
+  private double bKf;
+  private double tKf;
+
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
 
@@ -34,20 +36,17 @@ public class GetToTargetVelocity extends CommandBase {
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
-    kP = SmartDashboard.getNumber("ShooterKp", PIDConstants.ShooterkP);
-    kI = SmartDashboard.getNumber("ShooterKi", PIDConstants.ShooterkI);
+    tKp = SmartDashboard.getNumber("tKp", PIDConstants.ShooterTopKp);
+    bKp = SmartDashboard.getNumber("bKp", PIDConstants.ShooterBottomKp);
 
-    // shooterSubsystem.setkF(shooterSubsystem.computekF(topTargetRPM));
+    tKi = SmartDashboard.getNumber("tKi", PIDConstants.ShooterTopKi);
+    bKi = SmartDashboard.getNumber("bKi", PIDConstants.ShooterBottomKi);
 
-    bottomKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
-    topKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
+    bKf = SmartDashboard.getNumber("bKf", 0);
+    tKf = SmartDashboard.getNumber("tKf", 0);
 
-    shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
-    
-    // instance var setter method for ShooterSubsystem
-    // shooterSubsystem.setTopTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
-    // shooterSubsystem.setBottomTargetRawVelocity(shooterSubsystem.rpmToRawSensorVelocity(topTargetRPM, ticksPerRotation));
+    shooterSubsystem.setTopPIDF(tKp, tKi, 0, tKf);
+    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, bKf);
 
     shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
     shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
@@ -57,24 +56,23 @@ public class GetToTargetVelocity extends CommandBase {
   public void execute() {
     SmartDashboard.putBoolean("Shooter Running", true);
 
-    // update PIF values from SD while running
-    kP = SmartDashboard.getNumber("ShooterKp", PIDConstants.ShooterkP);
-    kI = SmartDashboard.getNumber("ShooterKi", PIDConstants.ShooterkI);
-
-    bottomKf = SmartDashboard.getNumber("bKf", PIDConstants.ShooterkF);
-    topKf = SmartDashboard.getNumber("tKf", PIDConstants.ShooterkF);
-
-    shooterSubsystem.setTopPIDF(kP, kI, 0, topKf);
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, bottomKf);
-
     topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
     bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
-
-    // double topTargetVelocity = topTargetRPM * ticksPerRotation * (1/600);
-    // double bottomTargetVelocity = bottomTargetRPM * ticksPerRotation * (1/600);
     
-    // SmartDashboard.putNumber("tTargetRV", topTargetRawVelocity);
-    // SmartDashboard.putNumber("bTargetRV", bottomTargetRawVelocity);
+    tKp = SmartDashboard.getNumber("tKp", PIDConstants.ShooterTopKp);
+    bKp = SmartDashboard.getNumber("bKp", PIDConstants.ShooterBottomKp);
+
+    tKi = SmartDashboard.getNumber("tKi", PIDConstants.ShooterTopKi);
+    bKi = SmartDashboard.getNumber("bKi", PIDConstants.ShooterBottomKi);
+
+    bKf = SmartDashboard.getNumber("bKf", 0);
+    tKf = SmartDashboard.getNumber("tKf", 0);
+
+    shooterSubsystem.setTopPIDF(tKp, tKi, 0, tKf);
+    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, bKf);
+
+    shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
+    shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
     
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity);
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
