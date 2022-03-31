@@ -10,4 +10,9 @@ public class UnitConversions{
 		double output = (((input*39.3701)/6)*2048)/10;
 		return (int) Math.round(output);
 	}
+
+    public static double degreesToTicks(double degrees, double gearRatioMultiplier,
+    double ticksPerRotation) {
+        return (ticksPerRotation * gearRatioMultiplier) * (degrees / 360);
+    }
 }
