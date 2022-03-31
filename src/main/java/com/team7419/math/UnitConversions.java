@@ -52,4 +52,9 @@ public class UnitConversions {
     public static double thetaToInches(double theta, double radius) {
         return theta * (Math.PI / 180) * radius;
     }
+    
+    public static double degreesToTicks(double degrees, double gearRatioMultiplier,
+    double ticksPerRotation) {
+        return (ticksPerRotation * gearRatioMultiplier) * (degrees / 360);
+    }
 }

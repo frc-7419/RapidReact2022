@@ -21,14 +21,23 @@ public class AlignTurret extends CommandBase {
   private double tx;
   private double tv;
 
+  private double initialAngle = Double.NaN;
+
   public AlignTurret(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
     this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(turretSubsystem, limelightSubsystem);
   }
+  public AlignTurret(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, double initialAngle) {
+    this.turretSubsystem = turretSubsystem;
+    this.limelightSubsystem = limelightSubsystem;
+    addRequirements(turretSubsystem, limelightSubsystem);
+    this.initialAngle = initialAngle;
+  }
 
   @Override
   public void initialize() {
+    if (initialAngle != Double.NaN) turretSubsystem.setAngle(this.initialAngle);
     SmartDashboard.putString("command status", "pid");
 
     kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
