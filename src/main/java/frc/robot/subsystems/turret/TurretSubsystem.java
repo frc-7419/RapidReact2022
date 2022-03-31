@@ -41,12 +41,12 @@ public class TurretSubsystem extends SubsystemBase {
       turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
       turret.configForwardSoftLimitEnable(true, 0);
     } 
-    SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
+    // SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
+    // SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
 
-    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
-    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
+    // SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
+    // SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
     // SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
   }
 

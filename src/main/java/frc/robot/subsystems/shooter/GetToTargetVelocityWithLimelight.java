@@ -15,8 +15,10 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private InterpolatedTreeMap topShooterReferencePoints;
   private InterpolatedTreeMap bottomShooterReferencePoints;
 
-  private double kP;
-  private double kI;
+  private double bKp;
+  private double bKi;
+  private double tKp;
+  private double tKi;
 
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
@@ -42,8 +44,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
     shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
 
-    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
+    shooterSubsystem.setTopPIDF(tKp, tKi, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
+    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
   }
 
   @Override

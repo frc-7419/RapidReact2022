@@ -38,7 +38,6 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void initialize(){
-        SmartDashboard.putBoolean("MM Running", false);
 
         /* factory default + inversions just so nothing acts up */
         driveBaseSubsystem.factoryResetAll();
@@ -60,9 +59,6 @@ public class StraightWithMotionMagic extends CommandBase {
 
         double leftSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
         double rightSetpoint = UnitConversions.inchesToTicks(setpoint, 3, 10.71, 2048);
-
-        SmartDashboard.putNumber("lSetpoint", leftSetpoint);
-        SmartDashboard.putNumber("rSetpoint", rightSetpoint);
 
         started = false;
 
