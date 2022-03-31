@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.encoders;
+package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TurretSubsystem extends SubsystemBase {
   /** Creates a new  */
-  private TalonFX talonFX;
+  private TalonFX turret;
   private DigitalInput forwardLimitSwitch;
   private DigitalInput reverseLimitSwitch;
 
@@ -24,25 +24,25 @@ public class TurretSubsystem extends SubsystemBase {
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
-    talonFX = new TalonFX(CanIds.turretFalcon.id);
+    turret = new TalonFX(CanIds.turretFalcon.id);
     forwardLimitSwitch = new DigitalInput(1);
     reverseLimitSwitch = new DigitalInput(2);
     // talonFX.configReverseSoftLimitThreshold(Double.MIN_VALUE, 0);
     // talonFX.configForwardSoftLimitThreshold(Double.MAX_VALUE, 0);
-    talonFX.configReverseSoftLimitEnable(false, 0);
-    talonFX.configForwardSoftLimitEnable(false, 0);
+    turret.configReverseSoftLimitEnable(false, 0);
+    turret.configForwardSoftLimitEnable(false, 0);
   }
 
   public void setPower(double power) {
     coast();
-    talonFX.set(ControlMode.PercentOutput, power);
+    turret.set(ControlMode.PercentOutput, power);
   }
 
   public void brake() {
-    talonFX.setNeutralMode(NeutralMode.Brake);
+    turret.setNeutralMode(NeutralMode.Brake);
   }
   public void coast() {
-    talonFX.setNeutralMode(NeutralMode.Coast);
+    turret.setNeutralMode(NeutralMode.Coast);
   }
 
   public DigitalInput getForwardLimitSwitch() {
@@ -56,13 +56,13 @@ public class TurretSubsystem extends SubsystemBase {
   public void periodic() {
     if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
       reverseLimitDetected = true;
-      talonFX.configReverseSoftLimitThreshold(talonFX.getSelectedSensorPosition(), 0);
-      talonFX.configReverseSoftLimitEnable(true, 0);
+      turret.configReverseSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+      turret.configReverseSoftLimitEnable(true, 0);
     } 
     if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
       forwardLimitDetected = true;
-      talonFX.configForwardSoftLimitThreshold(talonFX.getSelectedSensorPosition(), 0);
-      talonFX.configForwardSoftLimitEnable(true, 0);
+      turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+      turret.configForwardSoftLimitEnable(true, 0);
     } 
     SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
 
@@ -70,7 +70,7 @@ public class TurretSubsystem extends SubsystemBase {
 
     SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
     SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
-    SmartDashboard.putNumber("Turret Encoder Position", talonFX.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
     
   }
 }

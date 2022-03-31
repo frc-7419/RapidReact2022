@@ -5,14 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
-import frc.robot.subsystems.encoders.RunTurretWithJoystick;
-
-import frc.robot.subsystems.encoders.TurretSubsystem;
+import frc.robot.subsystems.turret.RunTurretWithJoystick;
+import frc.robot.subsystems.turret.TurretSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
