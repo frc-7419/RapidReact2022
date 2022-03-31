@@ -33,6 +33,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 // import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -62,9 +63,6 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
-  // auto
-  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
-
   public RobotContainer() {
     configureButtonBindings();
     smartDashboardBindings();
@@ -76,14 +74,16 @@ public class RobotContainer {
     .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
 
     // get to target velocity tuning
-    new JoystickButton(joystick2, XboxController.Button.kY.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 7900, 9900));
+    new DoubleButton(
+      new JoystickButton(joystick2, XboxController.Button.kX.value), 
+      new JoystickButton(joystick2, XboxController.Button.kY.value))
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 0, 0));
   }
 
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return shootThenMoveAway;
+    return new WaitCommand(0);
   }
     
   public void setDefaultCommands() {
