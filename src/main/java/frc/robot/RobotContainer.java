@@ -4,6 +4,8 @@ import com.team7419.joystick.DoubleButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -63,11 +65,13 @@ public class RobotContainer {
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   // auto
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
     smartDashboardBindings();
+    configureAutoSelector();
   }
 
   private void configureButtonBindings() {
@@ -112,8 +116,16 @@ public class RobotContainer {
 
   private void smartDashboardBindings() {}
 
+  private void configureAutoSelector() {
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    // autonChooser.addOption("2 Ball", twoBallAuto);
+    // autonChooser.addOpton("3 Ball", threeBallAuto);
+    // autonChooser.addOption("5 Ball", fiveBallAuto);
+    SmartDashboard.putData(autonChooser);
+  }
+
   public Command getAutonomousCommand() {
-    return oneBallAuto;
+    return autonChooser.getSelected();
   }
     
   public void setDefaultCommands() {
@@ -128,6 +140,5 @@ public class RobotContainer {
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
-
-
 }
+
