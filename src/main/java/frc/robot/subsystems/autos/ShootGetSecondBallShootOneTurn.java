@@ -33,7 +33,7 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
 
     public ShootGetSecondBallShootOneTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, 
     IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
-    ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, BeamBreakSubsystem beamBreakSubsystem) { 
+    ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) { 
         addCommands(
             sequence(
                 new StraightWithMotionMagic(driveBaseSubsystem, 67), 
