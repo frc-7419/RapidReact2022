@@ -15,7 +15,7 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.autos.ShootThenMoveAway;
+import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.NewArcadeDrive;
@@ -63,7 +63,7 @@ public class RobotContainer {
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
 
   // auto
-  private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
+  private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -113,7 +113,7 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return shootThenMoveAway;
+    return oneBallAuto;
   }
     
   public void setDefaultCommands() {

@@ -12,9 +12,9 @@ import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
-public class ShootThenMoveAway extends SequentialCommandGroup {
+public class OneBallAuto extends SequentialCommandGroup {
 
-    public ShootThenMoveAway(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) {
+    public OneBallAuto(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) {
         addCommands(
             new GetToTargetVelocity(shooterSubsystem, 9850, 6150, 0.0485, 0.0495).withTimeout(2),
             parallel(new RunLoader(loaderSubsystem, 1.0), new GetToTargetVelocity(shooterSubsystem, 9850, 6150, 0.0485, 0.0495)).withTimeout(2.5),
