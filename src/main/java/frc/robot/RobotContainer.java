@@ -98,11 +98,6 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kY.value)
     .whileHeld(new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
-    // new DoubleButton(
-    //   new JoystickButton(joystick2, XboxController.Button.kY.value), 
-    //   new JoystickButton(joystick2, XboxController.Button.kB.value))
-    //   .whileHeld(new CoastArms(armsSubsystem));
-
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
     .whileHeld(new CoastArms(armsSubsystem));
     
