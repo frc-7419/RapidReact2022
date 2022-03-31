@@ -77,7 +77,7 @@ public class RobotContainer {
     new DoubleButton(
       new JoystickButton(joystick2, XboxController.Button.kX.value), 
       new JoystickButton(joystick2, XboxController.Button.kY.value))
-      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 0, 0));
+      .toggleWhenPressed(new GetToTargetVelocity(shooterSubsystem, 2000, 2000));
   }
 
   private void smartDashboardBindings() {}
