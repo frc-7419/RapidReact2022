@@ -18,6 +18,7 @@ import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.ShootThenMoveAway;
 import frc.robot.subsystems.autos.SvrThreeBall;
 import frc.robot.subsystems.autos.SvrThreeBallShootOneThenTwo;
+import frc.robot.subsystems.autos.SvrThreeBallWithoutIntake;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.NewArcadeDrive;
@@ -73,6 +74,8 @@ public class RobotContainer {
   // auto
   private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
   private final SvrThreeBall svrThreeBall = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
+  private final SvrThreeBallWithoutIntake svrThreeBallWithoutIntake = new SvrThreeBallWithoutIntake(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
+
   // private final SvrThreeBallShootThreeThenTwo svrThreeBallShootTwoThenOne = new SvrThreeBallShootThreeThenTwo(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
   // private final SvrThreeBallShootTwoThenThree svrThreeBallShootOneThenTwo = new SvrThreeBallShootTwoThenThree(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
 
@@ -124,7 +127,7 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   public Command getAutonomousCommand() {
-    return svrThreeBall;
+    return svrThreeBallWithoutIntake;
     // return svrThreeBallShootOneThenTwo;
   }
     
