@@ -48,7 +48,7 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
                 new RunFeeder(feederSubsystem, 0.5)).withTimeout(1) // tune the amount of time it takes to shoot both balls
             )
         );
-        addCommands(new RunIntake(intakeSubsystem, 1));
+        //addCommands(new RunIntake(intakeSubsystem, 1));
         addCommands(new RunLoader(loaderSubsystem, 1));
         addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
