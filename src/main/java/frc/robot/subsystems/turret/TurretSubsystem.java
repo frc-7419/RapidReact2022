@@ -38,6 +38,9 @@ public class TurretSubsystem extends SubsystemBase {
     reverseLimitSwitch = new DigitalInput(2);
     // talonFX.configReverseSoftLimitThreshold(Double.MIN_VALUE, 0);
     // talonFX.configForwardSoftLimitThreshold(Double.MAX_VALUE, 0);
+
+    turret.configFactoryDefault();
+    
     turret.configReverseSoftLimitEnable(false, 0);
     turret.configForwardSoftLimitEnable(false, 0);
 
