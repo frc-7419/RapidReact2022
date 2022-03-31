@@ -50,8 +50,8 @@ public class ShooterSubsystem extends SubsystemBase{
         topShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
         bottomShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
 
-        this.configFeedfowardReferencePoints(Constants.kRawVelocityToTopFf, topShooterFeedforwardReferencePoints);
-        this.configFeedfowardReferencePoints(Constants.kRawVelocityToBottomFf, bottomShooterFeedforwardReferencePoints);
+        this.configInterpolatedTreeMapReferencePoints(Constants.kRawVelocityToTopFf, topShooterFeedforwardReferencePoints);
+        this.configInterpolatedTreeMapReferencePoints(Constants.kRawVelocityToBottomFf, bottomShooterFeedforwardReferencePoints);
     }
 
     public enum ControlMethod {
@@ -157,8 +157,8 @@ public class ShooterSubsystem extends SubsystemBase{
         return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
     }
 
-    public void configFeedfowardReferencePoints(Double[][] feedforwardReferencePoints, InterpolatedTreeMap interpolatedTreeMap) {
-        for (Double[] i : feedforwardReferencePoints) {
+    public void configInterpolatedTreeMapReferencePoints(Double[][] referencePoints, InterpolatedTreeMap interpolatedTreeMap) {
+        for (Double[] i : referencePoints) {
             interpolatedTreeMap.put(i[0], i[1]);
         }
     }

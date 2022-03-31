@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.InterpolatedTreeMap;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class GetToTargetVelocityWithLimelight extends CommandBase {
@@ -16,8 +17,6 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   private double kP;
   private double kI;
-  private double tkF;
-  private double bkF;
 
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
@@ -30,11 +29,9 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     topShooterReferencePoints = new InterpolatedTreeMap();
     bottomShooterReferencePoints = new InterpolatedTreeMap();
 
-    // top example:
-    topShooterReferencePoints.put(1.36, 28.0);
-
-    // bottom example:
-    bottomShooterReferencePoints.put(1.36, 28.0);
+    // config reference points from constants file
+    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToTopShooterRawVelocity, topShooterReferencePoints);
+    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToBottomShooterRawVelocity, bottomShooterReferencePoints);
   }
 
   @Override
