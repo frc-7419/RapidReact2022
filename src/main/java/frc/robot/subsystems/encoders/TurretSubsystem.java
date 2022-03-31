@@ -24,13 +24,15 @@ public class TurretSubsystem extends SubsystemBase {
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
-    //change later
     talonFX = new TalonFX(CanIds.turretFalcon.id);
     forwardLimitSwitch = new DigitalInput(1);
     reverseLimitSwitch = new DigitalInput(2);
-    // canSparkMax.burnFlash();
-
+    // talonFX.configReverseSoftLimitThreshold(Double.MIN_VALUE, 0);
+    // talonFX.configForwardSoftLimitThreshold(Double.MAX_VALUE, 0);
+    talonFX.configReverseSoftLimitEnable(false, 0);
+    talonFX.configForwardSoftLimitEnable(false, 0);
   }
+
   public void setPower(double power) {
     coast();
     talonFX.set(ControlMode.PercentOutput, power);
@@ -49,7 +51,6 @@ public class TurretSubsystem extends SubsystemBase {
   public DigitalInput getReverseLimitSwitch() {
     return reverseLimitSwitch;
   }
-
 
   @Override
   public void periodic() {
