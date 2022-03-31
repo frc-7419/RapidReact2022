@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.autos.TemplateParallelCommandGroup;
 import frc.robot.subsystems.autos.TemplateSequentialCommandGroup;
-import frc.robot.subsystems.drive.DriveBaseSubsystem;
-import frc.robot.subsystems.gyro.GyroSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -24,8 +22,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController joystick = new XboxController(0);
-  private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
-  private final GyroSubsystem gyro = new GyroSubsystem();
 
   // instantiate your auto commands here
   private final TemplateSequentialCommandGroup templateSequentialCommandGroup = new TemplateSequentialCommandGroup();
