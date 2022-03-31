@@ -38,8 +38,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void initialize() {
-    topTargetRawVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance());
-    bottomTargetRawVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance());
+    topTargetRawVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
+    bottomTargetRawVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
 
     shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
     shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
@@ -50,6 +50,15 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void execute() {
+    topTargetRawVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
+    bottomTargetRawVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
+
+    shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
+    shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
+
+    shooterSubsystem.setTopPIDF(tKp, tKi, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
+    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
+    
     shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity);
     shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
 
