@@ -3,7 +3,7 @@ package frc.robot.subsystems.shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
+import com.team7419.InterpolatedTreeMap;
 import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
@@ -18,8 +18,8 @@ public class ShooterSubsystem extends SubsystemBase{
     private TalonFX bottomFalcon;
     private TalonFX topFalcon;
 
-    private SimpleMotorFeedforward topFeedforward;
-    private SimpleMotorFeedforward bottomFeedforward;
+    private InterpolatedTreeMap topShooterFeedforwardReferencePoints;
+    private InterpolatedTreeMap bottomShooterFeedforwardReferencePoints;
 
     private double kP;
     private double kI;
@@ -36,12 +36,6 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
         topFalcon = new TalonFX(CanIds.topShooterFalcon.id);
 
-        topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
-        bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv);
-
-        // topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv, RobotConstants.TopShooterKa);
-        // bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv, RobotConstants.BottomShooterKa);
-
         // bottomFalcon.configFactoryDefault();
         // topFalcon.configFactoryDefault();
 
@@ -51,7 +45,13 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.setInverted(false);
         topFalcon.setInverted(false);
         
-        configShooterOutputs();
+        this.configShooterOutputs();
+
+        topShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
+        bottomShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
+
+        this.configFeedfowardReferencePoints(Constants.kRawVelocityToTopFf, topShooterFeedforwardReferencePoints);
+        this.configFeedfowardReferencePoints(Constants.kRawVelocityToBottomFf, bottomShooterFeedforwardReferencePoints);
     }
 
     public enum ControlMethod {
@@ -73,9 +73,6 @@ public class ShooterSubsystem extends SubsystemBase{
 
         // SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetRawVelocity);
         // SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetRawVelocity);
-
-        // SmartDashboard.putNumber("tKf", getTopkF());
-        // SmartDashboard.putNumber("bKf", getBottomkF());
     }
 
     public void run() {
@@ -153,26 +150,18 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public double computeTopkF(double nativeUnitsVelocitySetpoint) {
-        return topFeedforward.calculate(nativeUnitsVelocitySetpoint);
-    }
-
-    public double computeTopkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
-        return topFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
+        return (topShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
     }
 
     public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
-        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint);
+        return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
     }
 
-    public double computeBottomkF(double nativeUnitsVelocitySetpoint, double nativeUnitsAccelerationSetpoint) {
-        return bottomFeedforward.calculate(nativeUnitsVelocitySetpoint, nativeUnitsAccelerationSetpoint);
+    public void configFeedfowardReferencePoints(Double[][] feedforwardReferencePoints, InterpolatedTreeMap interpolatedTreeMap) {
+        for (Double[] i : feedforwardReferencePoints) {
+            interpolatedTreeMap.put(i[0], i[1]);
+        }
     }
-
-    public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
-    public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
-
-    public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
-    public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
 
     public void percentOutput() {
         topFalcon.set(ControlMode.PercentOutput, powerOutput);
@@ -182,6 +171,12 @@ public class ShooterSubsystem extends SubsystemBase{
     public void off() {
         setBothPower(0);
     }
+
+    public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
+    public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
+
+    public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
+    public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
 
     public double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
         return rpm * ticksPerRotation * (1/600);

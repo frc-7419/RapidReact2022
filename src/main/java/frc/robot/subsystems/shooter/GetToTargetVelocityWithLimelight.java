@@ -2,12 +2,8 @@ package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.InterpolatedTreeMap;
-import com.team7419.math.UnitConversions;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.LimelightConstants;
-import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class GetToTargetVelocityWithLimelight extends CommandBase {
@@ -23,13 +19,9 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private double tkF;
   private double bkF;
 
-  private double initialVelocity;
-
-  // private double targetRPM;
   private double topTargetRawVelocity;
   private double bottomTargetRawVelocity;
 
-  
   public GetToTargetVelocityWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelightSubsystem = limelightSubsystem;
