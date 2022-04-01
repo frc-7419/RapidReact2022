@@ -58,6 +58,7 @@ public class RobotContainer {
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.2);
@@ -71,7 +72,7 @@ public class RobotContainer {
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ShootGetSecondBallShootOneTurn shootGetSecondBallShootOneTurn = new ShootGetSecondBallShootOneTurn(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
-  private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
+  private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem);
   private final UnBrake unBrake = new UnBrake(driveBaseSubsystem);
   public RobotContainer() {
     configureButtonBindings();

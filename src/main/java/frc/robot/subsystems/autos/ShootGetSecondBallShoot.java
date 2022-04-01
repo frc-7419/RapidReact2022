@@ -11,6 +11,8 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
@@ -25,7 +27,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
     instead of 'null' for the gyro command, substitute it with your instance of GyroSubsystem
     */
 
-    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) { //add parameters
+    public ShootGetSecondBallShoot(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem) { //add parameters
         //Robot is initially facing the hub. We then shoot the ball. Next we will turn the robot so that it can go back
         //and collect the second ball and then shoot it
         //addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
@@ -40,6 +42,7 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         addCommands(new WaitCommand(0.1));
         addCommands(parallel(
             new StraightWithMotionMagic(driveBaseSubsystem, 50),
+            new RunIntake(intakeSubsystem, 1), // added intake 
             new RunLoader(loaderSubsystem, 0.6)
         ).withTimeout(3)); //The robot will ideally be positioned toward
         //the middle of the tarmac so it will have to move straight about half of the distance between the hub and the ball
