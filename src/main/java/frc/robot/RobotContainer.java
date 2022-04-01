@@ -74,7 +74,7 @@ public class RobotContainer {
   // auto
   private final ShootThenMoveAway shootThenMoveAway = new ShootThenMoveAway(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
   private final SvrThreeBall svrThreeBall = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
-  private final SvrThreeBallWithoutIntake svrThreeBallWithoutIntake = new SvrThreeBallWithoutIntake(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
+  private final SvrThreeBallWithoutIntake svrThreeBallWithoutIntake = new SvrThreeBallWithoutIntake(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
 
   // private final SvrThreeBallShootThreeThenTwo svrThreeBallShootTwoThenOne = new SvrThreeBallShootThreeThenTwo(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);
   // private final SvrThreeBallShootTwoThenThree svrThreeBallShootOneThenTwo = new SvrThreeBallShootTwoThenThree(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, intakeSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem);

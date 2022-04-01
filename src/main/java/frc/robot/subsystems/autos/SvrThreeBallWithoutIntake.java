@@ -26,14 +26,14 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
 
   public SvrThreeBallWithoutIntake(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
-  ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem,
+  ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,
   FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     addCommands(
       // start with robot turned towards first ball and turret turned ~80 degrees clockwise
       parallel(
         // run align turret, loader, and intake continuously 
         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-        new RunLoader(loaderSubsystem, 1),
+        new RunLoader(loaderSubsystem, 0.5),
         //new RunIntake(intakeSubsystem, 1),
 
         sequence(
