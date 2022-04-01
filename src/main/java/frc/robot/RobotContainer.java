@@ -11,7 +11,7 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.autos.ShootGetSecondBallShoot;
+import frc.robot.subsystems.autos.TwoBallAuton;
 import frc.robot.subsystems.autos.ShootGetSecondBallShootOneTurn;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -71,7 +71,7 @@ public class RobotContainer {
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ShootGetSecondBallShootOneTurn shootGetSecondBallShootOneTurn = new ShootGetSecondBallShootOneTurn(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
-  private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
+  private final TwoBallAuton shootGetSecondBallShoot = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
   private final UnBrake unBrake = new UnBrake(driveBaseSubsystem);
   public RobotContainer() {
     configureButtonBindings();
