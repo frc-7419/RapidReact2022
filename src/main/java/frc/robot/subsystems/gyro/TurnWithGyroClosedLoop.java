@@ -47,8 +47,8 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   @Override
   public void execute() {
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
-    driveBaseSubsystem.setLeftPower(-pidOutput);
-    driveBaseSubsystem.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(pidOutput);
+    driveBaseSubsystem.setRightPower(-pidOutput);
     SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
     SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }

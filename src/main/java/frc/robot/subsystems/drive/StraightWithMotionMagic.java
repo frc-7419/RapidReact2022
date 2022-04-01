@@ -104,7 +104,7 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void end(boolean interrupted){
         driveBaseSubsystem.stop();
-        driveBaseSubsystem.brake();
+        driveBaseSubsystem.coast();
         // SmartDashboard.putBoolean("MM Running", false);
     }
 }

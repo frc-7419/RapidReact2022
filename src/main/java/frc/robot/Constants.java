@@ -167,4 +167,4 @@ public final class Constants {
         {8000, 0.04772},
         {8500, 0.047827}
     };
-}
+};

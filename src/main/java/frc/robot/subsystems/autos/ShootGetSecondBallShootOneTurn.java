@@ -32,24 +32,28 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
     */
 
     public ShootGetSecondBallShootOneTurn(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, 
-    IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
+     TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
     ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem) { 
         addCommands(
             sequence(
-                new StraightWithMotionMagic(driveBaseSubsystem, 67), 
-                new WaitCommand(0.25), // intaking ball
-                raceWith(
-                    new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
+                new StraightWithMotionMagic(driveBaseSubsystem, 50),
+                parallel(
+                    new StraightWithMotionMagic(driveBaseSubsystem, 15),
+                    new RunLoader(loaderSubsystem, 0.3).withTimeout(3)
+                ),
+                race(
+                    new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180).withTimeout(4),
                     new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // getting the specific velocity
                 ),
                 // shoot both balls
                 parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
-                new RunFeeder(feederSubsystem, 0.5)).withTimeout(1) // tune the amount of time it takes to shoot both balls
-            )
+                    new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                    new RunFeeder(feederSubsystem, 0.5)
+                )//.withTimeout(1) // tune the amount of time it takes to shoot both balls
+            )       
         );
         //addCommands(new RunIntake(intakeSubsystem, 1));
-        addCommands(new RunLoader(loaderSubsystem, 1));
-        addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+        // addCommands(new RunLoader(loaderSubsystem, 0.3));
+        // addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
 }
