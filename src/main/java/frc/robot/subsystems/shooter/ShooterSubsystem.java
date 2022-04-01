@@ -86,13 +86,13 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
-        this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
-        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
+        this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1 * 1.2;
+        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond*1.2) / maxVoltage);
     }
     public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
         this.bottomTargetVelocity = velocityMetersPerSecond;
-        this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
-        bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
+        this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1 * 0.8;
+        bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond*0.8) / maxVoltage);
     }
 
     public void setTopPIDF(double kP, double kI, double kD, double kF){

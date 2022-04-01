@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimelightSubsystem extends SubsystemBase {
   // set up a new instance of NetworkTables (the api/library used to read values from limelight)
-  NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("lіmelight");
   
   // return network table values for tx and ty using getEntry()
   NetworkTableEntry tv = networkTable.getEntry("tv"); // Whether the limelight has any valid targets (0 or 1)
