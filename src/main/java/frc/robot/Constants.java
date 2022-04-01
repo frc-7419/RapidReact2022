@@ -23,8 +23,8 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-        topShooterFalcon(14), 
-        bottomShooterFalcon(10),
+        topShooterFalcon(10), 
+        bottomShooterFalcon(14),
         ;
 
         public final int id;
@@ -51,20 +51,20 @@ public final class Constants {
 
         public static final double RotationsPerMeter = 1/(2*Math.PI*0.0508);
 
-        // top shooter kS, kV, kA, meters
-        public static final double TopShooterKs = 0.682;
-        public static final double TopShooterKv = 0.11505;
-        public static final double TopShooterKa = 0.0091068;
+        // top shooter kS, kV, kA
+        public static final double TopShooterKs = 0.56452;
+        public static final double TopShooterKv = 0.11144;
+        public static final double TopShooterKa = 0.026061;
 
-        // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.55786;
-        public static final double BottomShooterKv = 0.10932;
-        public static final double BottomShooterKa = 0.0047002;
+        // bottom shooter kS, kV, kA, meters
+        public static final double BottomShooterKs = 0.67661;
+        public static final double BottomShooterKv = 0.10994;
+        public static final double BottomShooterKa = 0.0060832;
     }
 
     public static class PIDConstants {
         //shooter, meters
-        public static final double TopShooterkP = 0; //insert here
+        public static final double TopShooterkP = .0014651; //insert here
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
 
