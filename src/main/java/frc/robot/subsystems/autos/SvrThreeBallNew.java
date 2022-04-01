@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.drive.UnBrake;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -24,17 +25,19 @@ import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.TurnTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
-public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
+public class SvrThreeBallNew extends SequentialCommandGroup {
 
-  public SvrThreeBallWithoutIntake(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
+  public SvrThreeBallNew(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
   ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,
-  FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
+  FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem) {
     addCommands(
       // start with robot turned towards first ball and turret turned ~80 degrees clockwise
       parallel(
         // run align turret, loader, and intake continuously 
         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+
         //new TurnTurret(turretSubsystem, 90),  // can use this in the absense of limelight, otherwise use AlignTurretDefault
+
         new RunLoader(loaderSubsystem, 0.5),
         //new RunIntake(intakeSubsystem, 1),
 
@@ -51,7 +54,7 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
             // turn 180 degrees towards second ball
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180),
 
-            // Move 36 inches towards first ball
+            // Move 42 inches towards first ball
             new StraightWithMotionMagic(driveBaseSubsystem, 42), // change to specific value
 
             // wait for ball to be intaked
@@ -60,16 +63,23 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
             // turn 115 degrees to next ball
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
             
-             // move 86 inches while bringing shooter to velocity
+            // move 117 inches while bringing shooter to velocity
+            new StraightWithMotionMagic(driveBaseSubsystem, 117),
+            // raceWith(
+            //   new StraightWithMotionMagic(driveBaseSubsystem, 117),
+            //   new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
+            // ),
+
+            // // wait for ball to be intaked
+            // new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049).withTimeout(0.2),
+
+            // // move back 50 inches for turret to point to the scoring hub
+            // new StraightWithMotionMagic(driveBaseSubsystem, -50),
+
             raceWith(
-              new StraightWithMotionMagic(driveBaseSubsystem, 117),
+              new StraightWithMotionMagic(driveBaseSubsystem, -50),
               new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
             ),
-
-            // wait for ball to be intaked
-            new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049).withTimeout(0.2),
-
-            new StraightWithMotionMagic(driveBaseSubsystem, -50),
 
             // keep shooter at target velocity and run feeder to shoot
             parallel(
@@ -79,6 +89,8 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
         )
       )
     );
+
+    addCommands(new UnBrake(driveBaseSubsystem));
   }
 }
 

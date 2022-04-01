@@ -128,23 +128,33 @@ public final class Constants {
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
 
+
+        
         //Auton PIDs
 
         // 180
-        public static final double kP180 = 0.10603/(2048*6);
-        public static final double kI180 = 0;
-        public static final double kD180 = 0;
+        public static final double kP180 = 0.0035;
+        public static final double kI180 = 0.000655;
+        public static final double kD180 = 0.0004;
 
         // 115
-        public static final double kP115 = 0.10603/(2048*6);
+        public static final double kP115 = 0.005;
         public static final double kI115 = 0;
-        public static final double kD115 = 0;
+        public static final double kD115 = 0.0000083;
 
         // 65
-        public static final double kP65 = 0.10603/(2048*6);
-        public static final double kI65 = 0;
-        public static final double kD65 = 0;
+
+        /* 
+        These constants are actually for 63.5, so just need do modify a bit when tuning auton.
+         */
+        public static final double kP65 = 0.007; 
+        public static final double kI65 = 0.0002;
+        public static final double kD65 = 0.00030;
         
+
+
+
+
         //elevator
         public static final double ElevatorKp = 0.0035;
         public static final double ElevatorKf = -0.10459;
