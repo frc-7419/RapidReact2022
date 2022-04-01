@@ -61,8 +61,11 @@ public class ShooterSubsystem extends SubsystemBase{
         // SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
         // SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
 
-        SmartDashboard.putNumber("tV", getCurrentTopVelocity());
-        SmartDashboard.putNumber("bV", getCurrentBottomVelocity());
+        SmartDashboard.putNumber("tRV", getCurrentTopVelocity());
+        SmartDashboard.putNumber("bRV", getCurrentBottomVelocity());
+
+        SmartDashboard.putNumber("tMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, 0.0508));
+        SmartDashboard.putNumber("bMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentBottomRawVelocity(), 2048, 0.0508));
 
         SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetVelocity);
         SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetVelocity);
