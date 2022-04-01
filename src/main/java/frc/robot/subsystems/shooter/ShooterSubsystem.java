@@ -39,6 +39,12 @@ public class ShooterSubsystem extends SubsystemBase{
         // bottomFalcon.configFactoryDefault();
         // topFalcon.configFactoryDefault();
 
+        bottomFalcon.configVoltageCompSaturation(11); // "full output" will now scale to 11 Volts for all control modes when enabled.
+        bottomFalcon.enableVoltageCompensation(true); // turn on/off feature
+
+        topFalcon.configVoltageCompSaturation(11); // "full output" will now scale to 11 Volts for all control modes when enabled.
+        topFalcon.enableVoltageCompensation(true); // turn on/off feature
+
         bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
 
@@ -76,11 +82,11 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
-        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / RobotController.getBatteryVoltage());
+        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / 12);
     }
     public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
         this.bottomTargetVelocity = velocityMetersPerSecond;
-        bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / RobotController.getBatteryVoltage());
+        bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / 12);
     }
 
     public void setTopPIDF(double kP, double kI, double kD, double kF){
