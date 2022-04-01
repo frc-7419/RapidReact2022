@@ -38,7 +38,7 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
 
         //new TurnTurret(turretSubsystem, 90),  // can use this in the absense of limelight, otherwise use AlignTurretDefault
 
-        new RunLoader(loaderSubsystem, 0.5),
+        //new RunLoader(loaderSubsystem, 0.5),
         new RunIntake(intakeSubsystem, 1),
 
         sequence(
@@ -55,8 +55,11 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180),
 
             // Move 42 inches towards first ball
-            new StraightWithMotionMagic(driveBaseSubsystem, 42), // change to specific value
-
+            
+            raceWith(
+              new StraightWithMotionMagic(driveBaseSubsystem, 42),
+              new RunLoader(loaderSubsystem, 0.5)
+            ),
             // wait for ball to be intaked
             new WaitCommand(0.2),
 
@@ -64,7 +67,10 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, Constants.PIDConstants.GyrokP115, Constants.PIDConstants.GyrokI115, Constants.PIDConstants.GyrokD115),
             
             // move 117 inches while bringing shooter to velocity
-            new StraightWithMotionMagic(driveBaseSubsystem, 117),
+            raceWith(
+              new StraightWithMotionMagic(driveBaseSubsystem, 117),
+              new RunLoader(loaderSubsystem, 0.5)
+            ),
             // raceWith(
             //   new StraightWithMotionMagic(driveBaseSubsystem, 117),
             //   new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
