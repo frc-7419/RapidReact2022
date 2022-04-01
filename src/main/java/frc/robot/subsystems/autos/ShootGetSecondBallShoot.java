@@ -51,8 +51,8 @@ public class ShootGetSecondBallShoot extends SequentialCommandGroup {
         addCommands(new WaitCommand(0.25));
         //addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 50)); //The robot will ideally be positioned toward
         //here after moving 58.08 inches, it will return back to its orignal position and then shoot
-        addCommands(new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget()) // mainting the specific velocity (to be tuned)
-        );
+        addCommands(new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget())); // mainting the specific velocity (to be tuned)
+        
         addCommands(parallel(
             new RunLoader(loaderSubsystem, 1),
             new GetToTargetVelocity(shooterSubsystem, 7900*1.4, 9900*1.4, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
