@@ -12,10 +12,10 @@ public class LEDSubsystem extends SubsystemBase {
   /** Creates a new LEDSubsystem. */
   public AddressableLED led;
   public AddressableLEDBuffer ledBuffer;
-  public int ledLength;
+  public int ledLength = 2;
 
   public LEDSubsystem() {
-    led = new AddressableLED(1);
+    led = new AddressableLED(0);
     ledBuffer = new AddressableLEDBuffer(ledLength);
     led.setLength(ledBuffer.getLength());
   }

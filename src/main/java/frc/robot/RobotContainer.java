@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLEDColor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -19,6 +21,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final XboxController joystick = new XboxController(0);
+  private final LEDSubsystem ledSubsystem = new LEDSubsystem();
+
+  private final SetLEDColor setLEDColor = new SetLEDColor(ledSubsystem);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
 
@@ -50,6 +55,6 @@ public class RobotContainer {
 
   // set default commands here
   public void setDefaultCommands(){
-    
+    ledSubsystem.setDefaultCommand(setLEDColor);
   }
 }
