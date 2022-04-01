@@ -39,7 +39,7 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
         //new TurnTurret(turretSubsystem, 90),  // can use this in the absense of limelight, otherwise use AlignTurretDefault
 
         new RunLoader(loaderSubsystem, 0.5),
-        //new RunIntake(intakeSubsystem, 1),
+        new RunIntake(intakeSubsystem, 1),
 
         sequence(
             // get to target velocity
@@ -76,7 +76,7 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
             // // move back 50 inches for turret to point to the scoring hub
             // new StraightWithMotionMagic(driveBaseSubsystem, -50),
 
-            raceWith(
+            raceWith( 
               new StraightWithMotionMagic(driveBaseSubsystem, -50),
               new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
             ),
