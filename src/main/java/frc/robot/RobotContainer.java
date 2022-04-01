@@ -11,8 +11,8 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.autos.ShootGetSecondBallShoot;
 import frc.robot.subsystems.autos.ShootGetSecondBallShootOneTurn;
+import frc.robot.subsystems.autos.TwoBallAuton;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.UnBrake;
@@ -49,7 +49,6 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  // private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
@@ -72,7 +71,8 @@ public class RobotContainer {
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ShootGetSecondBallShootOneTurn shootGetSecondBallShootOneTurn = new ShootGetSecondBallShootOneTurn(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
-  private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem);
+  // private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem);
+  private final TwoBallAuton twoBallAuton = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem);
   private final UnBrake unBrake = new UnBrake(driveBaseSubsystem);
   public RobotContainer() {
     configureButtonBindings();
@@ -123,7 +123,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     //return shootGetSecondBallShoot;
-    return shootGetSecondBallShoot;
+    return twoBallAuton;
     //return unBrake;
   }
 
