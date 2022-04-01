@@ -21,6 +21,7 @@ import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
+import frc.robot.subsystems.turret.TurnTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
@@ -33,6 +34,7 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
       parallel(
         // run align turret, loader, and intake continuously 
         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+        //new TurnTurret(turretSubsystem, 90),  // can use this in the absense of limelight, otherwise use AlignTurretDefault
         new RunLoader(loaderSubsystem, 0.5),
         //new RunIntake(intakeSubsystem, 1),
 
@@ -40,7 +42,7 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
             // get to target velocity
             new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget()),
             
-            // shoot first ball
+            // shoot first ball 
             parallel(
               new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049), // specific velocity to be tuned
               new RunFeeder(feederSubsystem, 0.5)
@@ -50,7 +52,7 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180),
 
             // Move 36 inches towards first ball
-            new StraightWithMotionMagic(driveBaseSubsystem, 36), // change to specific value
+            new StraightWithMotionMagic(driveBaseSubsystem, 42), // change to specific value
 
             // wait for ball to be intaked
             new WaitCommand(0.2),
@@ -60,14 +62,14 @@ public class SvrThreeBallWithoutIntake extends SequentialCommandGroup {
             
              // move 86 inches while bringing shooter to velocity
             raceWith(
-              new StraightWithMotionMagic(driveBaseSubsystem, 86),
+              new StraightWithMotionMagic(driveBaseSubsystem, 117),
               new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // specific velocity to be tuned
             ),
 
             // wait for ball to be intaked
             new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049).withTimeout(0.2),
 
-            // add command to move turret to target 
+            new StraightWithMotionMagic(driveBaseSubsystem, -50),
 
             // keep shooter at target velocity and run feeder to shoot
             parallel(
