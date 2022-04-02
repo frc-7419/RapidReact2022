@@ -3,6 +3,7 @@ package frc.robot.subsystems.shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.InterpolatedTreeMap;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -69,6 +70,7 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Shooter Running", false);
     shooterSubsystem.off();
   }
 

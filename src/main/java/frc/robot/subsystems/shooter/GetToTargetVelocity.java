@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,58 +17,48 @@ public class GetToTargetVelocity extends CommandBase {
   private double tKp;
   private double tKi;
 
-  private double bKf;
-  private double tKf;
+  private double topTargetVelocity;
+  private double bottomTargetVelocity;
 
-  private double topTargetRawVelocity;
-  private double bottomTargetRawVelocity;
+  private double topTargetRawAcceleration;
+  private double bottomTargetRawAcceleration;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity, double bottomTargetVelocity) {
     this.shooterSubsystem = shooterSubsystem;
-    this.topTargetRawVelocity = topTargetRawVelocity;
-    this.bottomTargetRawVelocity = bottomTargetRawVelocity;
+    this.topTargetVelocity = topTargetVelocity;
+    this.bottomTargetVelocity = bottomTargetVelocity;
     addRequirements(shooterSubsystem);
   }
 
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("Shooter Running", false);
-
-    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
     
     // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
 
-    // tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
-    // tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
-
-    shooterSubsystem.setTopPIDF(0, 0, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
-    shooterSubsystem.setBottomPIDF(0, 0, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
-
-    shooterSubsystem.setTopTargetRawVelocity(topTargetRawVelocity);
-    shooterSubsystem.setBottomTargetRawVelocity(bottomTargetRawVelocity);
+    shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
+    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
   }
 
   @Override
   public void execute() {
     SmartDashboard.putBoolean("Shooter Running", true);
 
-    // update PIF values from SD while running
-    // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
-    // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
+    bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
+    bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
 
     // tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     // tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    topTargetRawVelocity = SmartDashboard.getNumber("tTargetRV", topTargetRawVelocity);
-    bottomTargetRawVelocity = SmartDashboard.getNumber("bTargetRV", bottomTargetRawVelocity);
+    topTargetVelocity = SmartDashboard.getNumber("tTargetVelocity", topTargetVelocity);
+    bottomTargetVelocity = SmartDashboard.getNumber("bTargetVelocity", bottomTargetVelocity);
 
-    shooterSubsystem.setTopPIDF(0, 0, 0, shooterSubsystem.computeTopkF(topTargetRawVelocity));
-    shooterSubsystem.setBottomPIDF(0, 0, 0, shooterSubsystem.computeBottomkF(bottomTargetRawVelocity));
+    shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
+    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
 
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetRawVelocity);
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetRawVelocity);
+    shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
+    shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());

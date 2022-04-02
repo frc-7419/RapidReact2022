@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.InterpolatedTreeMap;
@@ -8,9 +9,9 @@ import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.CanIds;
 import frc.robot.Constants.RobotConstants;
 
@@ -21,16 +22,11 @@ public class ShooterSubsystem extends SubsystemBase{
     private InterpolatedTreeMap topShooterFeedforwardReferencePoints;
     private InterpolatedTreeMap bottomShooterFeedforwardReferencePoints;
 
-    private double kP;
-    private double kI;
-    private double tkF;
-    private double bkF;
+    private double bottomTargetVelocity = 0; // MPS
+    private double topTargetVelocity = 0; 
+    private double velocityThreshold = 30; 
 
-    private double powerOutput = 0;
-    private double bottomTargetRawVelocity = 500; // in raw velocity units (ticks/0.1s)
-    private double topTargetRawVelocity = 500; // RV
-    private double velocityThreshold = 30;  // RV
-    private ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
+    private double maxVoltage = 11;
 
     public ShooterSubsystem(){
         bottomFalcon = new TalonFX(CanIds.bottomShooterFalcon.id);
@@ -38,6 +34,12 @@ public class ShooterSubsystem extends SubsystemBase{
 
         // bottomFalcon.configFactoryDefault();
         // topFalcon.configFactoryDefault();
+
+        bottomFalcon.configVoltageCompSaturation(maxVoltage); // "full output" will now scale to 11 Volts for all control modes when enabled.
+        bottomFalcon.enableVoltageCompensation(true); // turn on/off feature
+
+        topFalcon.configVoltageCompSaturation(maxVoltage); // "full output" will now scale to 11 Volts for all control modes when enabled.
+        topFalcon.enableVoltageCompensation(true); // turn on/off feature
 
         bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
@@ -54,41 +56,24 @@ public class ShooterSubsystem extends SubsystemBase{
         this.configInterpolatedTreeMapReferencePoints(Constants.kRawVelocityToBottomFf, bottomShooterFeedforwardReferencePoints);
     }
 
-    public enum ControlMethod {
-        PERCENT_OUTPUT,
-        SPIN_UP,
-        HOLDING,
-    }
-
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
-        SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
+        // SmartDashboard.putNumber("tRV", topFalcon.getSelectedSensorVelocity(0));
+        // SmartDashboard.putNumber("bRV", bottomFalcon.getSelectedSensorVelocity(0));
 
-        // SmartDashboard.putNumber("tRPM", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        // SmartDashboard.putNumber("bRPM", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        SmartDashboard.putNumber("tRV", getCurrentTopVelocity());
+        SmartDashboard.putNumber("bRV", getCurrentBottomVelocity());
 
-        // SmartDashboard.putNumber("tRPM Graph", UnitConversions.rawSensorVelocityToRPM(topFalcon.getSelectedSensorVelocity(0), 2048));
-        // SmartDashboard.putNumber("bRPM Graph", UnitConversions.rawSensorVelocityToRPM(bottomFalcon.getSelectedSensorVelocity(0), 2048));
+        // double topMPS = UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, 0.0508);
+        // double bottomMPS = UnitConversions.rawSensorVelocityToMPS(getCurrentBottomRawVelocity(), 2048, 0.0508);
+        // SmartDashboard.putNumber("tMPS", topMPS);
+        // SmartDashboard.putNumber("bMPS", bottomMPS);
 
-        // SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetRawVelocity);
-        // SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetRawVelocity);
-    }
+        SmartDashboard.putNumber("tMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, RobotConstants.TopShooterWheelRadius));
+        SmartDashboard.putNumber("bMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, RobotConstants.TopShooterWheelRadius));
 
-    public void run() {
-        ControlMethod method = this.controlMethod;
-        if (method == ControlMethod.PERCENT_OUTPUT){
-            topFalcon.set(ControlMode.PercentOutput, powerOutput);
-            bottomFalcon.set(ControlMode.PercentOutput, powerOutput);
-        }
-        else if (method == ControlMethod.HOLDING){
-            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
-            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
-        }
-        else if (method == ControlMethod.SPIN_UP){
-            topFalcon.set(ControlMode.Velocity, topTargetRawVelocity);
-            bottomFalcon.set(ControlMode.Velocity, bottomTargetRawVelocity);
-        }
+        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
+        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
     }
 
     public void configShooterOutputs() {
@@ -105,6 +90,15 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.configPeakOutputReverse(-1, 0);
     }
 
+    public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
+        this.topTargetVelocity = velocityMetersPerSecond;
+        topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
+    }
+    public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
+        this.bottomTargetVelocity = velocityMetersPerSecond;
+        bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
+    }
+
     public void setTopPIDF(double kP, double kI, double kD, double kF){
         TalonFuncs.setPIDFConstants(0, topFalcon, kP, kI, kD, kF);
     }
@@ -113,82 +107,58 @@ public class ShooterSubsystem extends SubsystemBase{
         TalonFuncs.setPIDFConstants(0, bottomFalcon, kP, kI, kD, kF);
     }
 
+    // public boolean topOnTarget() {
+    //     return Math.abs(getCurrentTopRawVelocity() - topTargetVelocity) < velocityThreshold;
+    // }
+
+    // public boolean bottomOnTarget() {
+    //     return Math.abs(getCurrentBottomRawVelocity() - bottomTargetVelocity) < velocityThreshold;
+    // }
+
     public boolean topOnTarget() {
-        return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < velocityThreshold;
+        return Math.abs(getCurrentTopVelocity() - topTargetVelocity) < velocityThreshold;
     }
 
     public boolean bottomOnTarget() {
-        return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < velocityThreshold;
+        return Math.abs(getCurrentBottomVelocity() - bottomTargetVelocity) < velocityThreshold;
     }
 
     public boolean bothOnTarget() {
         return topOnTarget() && bottomOnTarget();
     }
 
-    public void setOutputPower(double power){this.powerOutput = power;}
-    
-    public void setTopPower(double power){
+    public void setTopPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
     }
-    public void setBottomPower(double power){
+    public void setBottomPower(double power) {
         bottomFalcon.set(ControlMode.PercentOutput, power);
     }
-    public void setBothPower(double power){
+    public void setBothPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
         bottomFalcon.set(ControlMode.PercentOutput, power);
+    }
+    public void off() {
+        setBothPower(0);
     }
 
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
 
-    public void setControlMethod(ControlMethod method) {
-        this.controlMethod = method;
-        if(method == ControlMethod.HOLDING){
-            setTopPIDF(0,0,0,tkF);
-            setBottomPIDF(0,0,0,bkF);
-        }
-    }
-
-    public double computeTopkF(double nativeUnitsVelocitySetpoint) {
-        return (topShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
-    }
-
-    public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
-        return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
-    }
-
-    public void configInterpolatedTreeMapReferencePoints(Double[][] referencePoints, InterpolatedTreeMap interpolatedTreeMap) {
-        for (Double[] i : referencePoints) {
-            interpolatedTreeMap.put(i[0], i[1]);
-        }
-    }
-
-    public void percentOutput() {
-        topFalcon.set(ControlMode.PercentOutput, powerOutput);
-        bottomFalcon.set(ControlMode.PercentOutput, powerOutput);
-    }
-
-    public void off() {
-        setBothPower(0);
-    }
+    // public double computeTopkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
+    //     return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared) / RobotController.getBatteryVoltage();
+    // }
+    // public double computeBottomkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
+    //     return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared) / RobotController.getBatteryVoltage();
+    // }
 
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
     public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
 
-    public void setTopTargetRawVelocity(double velocity){this.topTargetRawVelocity = velocity;}
-    public void setBottomTargetRawVelocity(double velocity){this.bottomTargetRawVelocity = velocity;}
-
-    public double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
-        return rpm * ticksPerRotation * (1/600);
-    }
+    public double getCurrentTopVelocity(){return UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, RobotConstants.TopShooterWheelRadius);}
+    public double getCurrentBottomVelocity(){return UnitConversions.rawSensorVelocityToMPS(getCurrentBottomRawVelocity(), 2048, RobotConstants.BottomShooterWheelRadius);}
 
     public double getTopPercentOutput() {return topFalcon.getMotorOutputPercent();}
     public double getBottomPercentOutput() {return bottomFalcon.getMotorOutputPercent();}
-
-    public double getkP(){return kP;}
-    public double getkI(){return kI;}
-    public double getTopkF(){return tkF;}
-    public double getBottomkF(){return bkF;}
 
     public TalonFX getTopTalon(){return topFalcon;}
     public TalonFX getBottomTalon(){return bottomFalcon;}
