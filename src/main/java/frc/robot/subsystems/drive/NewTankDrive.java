@@ -13,8 +13,8 @@ public class NewTankDrive extends CommandBase {
   private double kSlowStraight;
   private XboxController joystick;
   // Limits *acceleration* not max speed; basically kD
-  private final SlewRateLimiter leftSpeedLimiter = new SlewRateLimiter(2);
-  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(2);
+  private final SlewRateLimiter leftSpeedLimiter = new SlewRateLimiter(50);
+  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(500);
 
   public NewTankDrive(XboxController joystick, NewDriveBaseSubsystem newDriveBaseSubsystem, double kStraight) {
     this.joystick = joystick;
@@ -26,15 +26,15 @@ public class NewTankDrive extends CommandBase {
   @Override
   public void initialize() {
     newDriveBaseSubsystem.factoryResetAll();    
-    newDriveBaseSubsystem.setAllDefaultInversions();
+    // newDriveBaseSubsystem.setAllDefaultInversions();
     newDriveBaseSubsystem.coast(); 
   }
 
   @Override
   public void execute() {
     boolean squareInputs = true; // square joystick inputs
-    double leftSpeed = leftSpeedLimiter.calculate(joystick.getLeftY() * kStraight);
-    double rightSpeed = rightSpeedLimiter.calculate(joystick.getRightY() * kStraight);
+    double leftSpeed = leftSpeedLimiter.calculate(-joystick.getLeftY() * kStraight);
+    double rightSpeed = rightSpeedLimiter.calculate(-joystick.getRightY() * kStraight);
 
     newDriveBaseSubsystem.tankDrive(leftSpeed, rightSpeed, squareInputs);
   }
