@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SetLEDColor extends CommandBase {
   /** Creates a new SetLEDColor. */
   private LEDSubsystem ledSubsystem;
+  private int rainbowFirstPixelHue = 0;
   public SetLEDColor(LEDSubsystem ledSubsystem) {
+    this.ledSubsystem = ledSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(ledSubsystem);
   }
@@ -17,13 +19,18 @@ public class SetLEDColor extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ledSubsystem.setLEDColor(255, 0, 0);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
     ledSubsystem.startLed();
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
+    // ledSubsystem.setLEDColor(0, 0, 255);
+    // ledSubsystem.startLed();
   }
 
   // Called once the command ends or is interrupted.

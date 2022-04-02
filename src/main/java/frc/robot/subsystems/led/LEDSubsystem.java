@@ -12,11 +12,10 @@ public class LEDSubsystem extends SubsystemBase {
   /** Creates a new LEDSubsystem. */
   public AddressableLED led;
   public AddressableLEDBuffer ledBuffer;
-  public int ledLength = 2;
 
   public LEDSubsystem() {
     led = new AddressableLED(0);
-    ledBuffer = new AddressableLEDBuffer(ledLength);
+    ledBuffer = new AddressableLEDBuffer(60);
     led.setLength(ledBuffer.getLength());
   }
 
@@ -57,7 +56,6 @@ public class LEDSubsystem extends SubsystemBase {
       ledBuffer.setHSV(i, hue, 255, 128);
     }
     // Increase by certain number to make the rainbow "move" (change from 3 to greater number if needed)
-    rainbowFirstPixelHue += 3;
-    rainbowFirstPixelHue %= 180;
+    
   }
 }
