@@ -19,7 +19,10 @@ import frc.robot.Constants.RobotConstants;
 public class ShooterSubsystem extends SubsystemBase{
     private TalonFX bottomFalcon;
     private TalonFX topFalcon;
-
+    
+    private SimpleMotorFeedforward topFeedforward;
+    private SimpleMotorFeedforward bottomFeedforward;
+    
     private InterpolatedTreeMap topShooterFeedforwardReferencePoints;
     private InterpolatedTreeMap bottomShooterFeedforwardReferencePoints;
 
@@ -50,11 +53,8 @@ public class ShooterSubsystem extends SubsystemBase{
         
         this.configShooterOutputs();
 
-        topShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
-        bottomShooterFeedforwardReferencePoints = new InterpolatedTreeMap();
-
-        this.configInterpolatedTreeMapReferencePoints(Constants.kRawVelocityToTopFf, topShooterFeedforwardReferencePoints);
-        this.configInterpolatedTreeMapReferencePoints(Constants.kRawVelocityToBottomFf, bottomShooterFeedforwardReferencePoints);
+        topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
+        bottomFeedforward = new SimpleMotorFeedforward(RobotConstants.BottomShooterKs, RobotConstants.BottomShooterKv);
     }
 
     @Override
@@ -145,12 +145,19 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
 
-    // public double computeTopkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
-    //     return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared) / RobotController.getBatteryVoltage();
-    // }
-    // public double computeBottomkF(double velocityMetersPerSecond, double accelerationMetersPerSecondSquared) {
-    //     return topFeedforward.calculate(velocityMetersPerSecond, accelerationMetersPerSecondSquared) / RobotController.getBatteryVoltage();
-    // }
+    public double computeTopkF(double nativeUnitsVelocitySetpoint) {
+        return (topShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
+    }
+
+    public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
+        return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
+    }
+
+    public void configInterpolatedTreeMapReferencePoints(Double[][] referencePoints, InterpolatedTreeMap interpolatedTreeMap) {
+        for (Double[] i : referencePoints) {
+            interpolatedTreeMap.put(i[0], i[1]);
+        }
+    }
 
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
     public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
