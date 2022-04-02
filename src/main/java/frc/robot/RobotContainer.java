@@ -126,7 +126,6 @@ public class RobotContainer {
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
-    // turretSubsystem.setDefaultCommand(alignTurretDefault);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
