@@ -15,6 +15,8 @@ import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.NewDriveBaseSubsystem;
+import frc.robot.subsystems.drive.NewTankDrive;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
@@ -59,6 +61,9 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
+
+  private final NewDriveBaseSubsystem newDriveBaseSubsystem = new NewDriveBaseSubsystem();
+  private final NewTankDrive newTankDrive = new NewTankDrive(joystick1, newDriveBaseSubsystem, 0.4);
 
   // auto
   private SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -120,7 +125,8 @@ public class RobotContainer {
   }
     
   public void setDefaultCommands() {
-    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
+    // driveBaseSubsystem.setDefaultCommand(arcadeDrive);
+    driveBaseSubsystem.setDefaultCommand(newTankDrive);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 

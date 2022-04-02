@@ -8,26 +8,26 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class NewTankDrive extends CommandBase {
 
-  private NewDriveBaseSubsystem driveBaseSubsystem;
+  private NewDriveBaseSubsystem newDriveBaseSubsystem;
   private double kStraight;
   private double kSlowStraight;
   private XboxController joystick;
   // Limits *acceleration* not max speed; basically kD
-  private final SlewRateLimiter leftSpeedLimiter = new SlewRateLimiter(1.25);
-  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(1.25);
+  private final SlewRateLimiter leftSpeedLimiter = new SlewRateLimiter(2);
+  private final SlewRateLimiter rightSpeedLimiter = new SlewRateLimiter(2);
 
-  public NewTankDrive(XboxController joystick, NewDriveBaseSubsystem driveBaseSubsystem, double kStraight) {
+  public NewTankDrive(XboxController joystick, NewDriveBaseSubsystem newDriveBaseSubsystem, double kStraight) {
     this.joystick = joystick;
-    this.driveBaseSubsystem = driveBaseSubsystem;
+    this.newDriveBaseSubsystem = newDriveBaseSubsystem;
     this.kStraight = kStraight;
-    addRequirements(driveBaseSubsystem);
+    addRequirements(newDriveBaseSubsystem);
 }
 
   @Override
   public void initialize() {
-    driveBaseSubsystem.factoryResetAll();    
-    driveBaseSubsystem.setAllDefaultInversions();
-    driveBaseSubsystem.coast(); 
+    newDriveBaseSubsystem.factoryResetAll();    
+    newDriveBaseSubsystem.setAllDefaultInversions();
+    newDriveBaseSubsystem.coast(); 
   }
 
   @Override
@@ -36,7 +36,7 @@ public class NewTankDrive extends CommandBase {
     double leftSpeed = leftSpeedLimiter.calculate(joystick.getLeftY() * kStraight);
     double rightSpeed = rightSpeedLimiter.calculate(joystick.getRightY() * kStraight);
 
-    driveBaseSubsystem.tankDrive(leftSpeed, rightSpeed, squareInputs);
+    newDriveBaseSubsystem.tankDrive(leftSpeed, rightSpeed, squareInputs);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class NewTankDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBaseSubsystem.setAll(0);
+    newDriveBaseSubsystem.setAll(0);
   }
 
 }
