@@ -65,7 +65,7 @@ public class RobotContainer {
 
   private final NewDriveBaseSubsystem newDriveBaseSubsystem = new NewDriveBaseSubsystem();
   // private final NewTankDrive newTankDrive = new NewTankDrive(joystick1, newDriveBaseSubsystem, .75);
-  private final NewArcadeDrive newArcadeDrive = new NewArcadeDrive(joystick1, newDriveBaseSubsystem, 1, 0.75);
+  private final NewArcadeDrive newArcadeDrive = new NewArcadeDrive(joystick1, newDriveBaseSubsystem, 0.95, 0.75);
 
   // auto
   private SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -107,6 +107,7 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kY.value)
     .whileHeld(new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
+
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
     .whileHeld(new CoastArms(armsSubsystem));
     
@@ -135,7 +136,7 @@ public class RobotContainer {
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
     // shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
-    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
+    // elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
   }
 }
