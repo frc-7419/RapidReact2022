@@ -64,11 +64,16 @@ public class ShooterSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("tRV", getCurrentTopVelocity());
         SmartDashboard.putNumber("bRV", getCurrentBottomVelocity());
 
-        SmartDashboard.putNumber("tMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, 0.0508));
-        SmartDashboard.putNumber("bMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentBottomRawVelocity(), 2048, 0.0508));
+        // double topMPS = UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, 0.0508);
+        // double bottomMPS = UnitConversions.rawSensorVelocityToMPS(getCurrentBottomRawVelocity(), 2048, 0.0508);
+        // SmartDashboard.putNumber("tMPS", topMPS);
+        // SmartDashboard.putNumber("bMPS", bottomMPS);
 
-        SmartDashboard.putNumber("tError", getCurrentTopRawVelocity() - topTargetVelocity);
-        SmartDashboard.putNumber("bError", getCurrentBottomRawVelocity() - bottomTargetVelocity);
+        SmartDashboard.putNumber("tMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, RobotConstants.TopShooterWheelRadius));
+        SmartDashboard.putNumber("bMPS", UnitConversions.rawSensorVelocityToMPS(getCurrentTopRawVelocity(), 2048, RobotConstants.TopShooterWheelRadius));
+
+        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
+        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
     }
 
     public void configShooterOutputs() {
@@ -102,12 +107,20 @@ public class ShooterSubsystem extends SubsystemBase{
         TalonFuncs.setPIDFConstants(0, bottomFalcon, kP, kI, kD, kF);
     }
 
+    // public boolean topOnTarget() {
+    //     return Math.abs(getCurrentTopRawVelocity() - topTargetVelocity) < velocityThreshold;
+    // }
+
+    // public boolean bottomOnTarget() {
+    //     return Math.abs(getCurrentBottomRawVelocity() - bottomTargetVelocity) < velocityThreshold;
+    // }
+
     public boolean topOnTarget() {
-        return Math.abs(getCurrentTopRawVelocity() - topTargetVelocity) < velocityThreshold;
+        return Math.abs(getCurrentTopVelocity() - topTargetVelocity) < velocityThreshold;
     }
 
     public boolean bottomOnTarget() {
-        return Math.abs(getCurrentBottomRawVelocity() - bottomTargetVelocity) < velocityThreshold;
+        return Math.abs(getCurrentBottomVelocity() - bottomTargetVelocity) < velocityThreshold;
     }
 
     public boolean bothOnTarget() {
