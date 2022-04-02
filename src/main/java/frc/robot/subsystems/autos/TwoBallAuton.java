@@ -14,11 +14,14 @@ import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurret;
+import frc.robot.subsystems.turret.AlignTurretDefault;
+import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class TwoBallAuton extends ParallelCommandGroup {
 
@@ -28,7 +31,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
     instead of 'null' for the gyro command, substitute it with your instance of GyroSubsystem
     */
 
-    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem) { //add parameters
+    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) { //add parameters
         //Robot is initially facing the hub. We then shoot the ball. Next we will turn the robot so that it can go back
         //and collect the second ball and then shoot it
         //addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
@@ -66,5 +69,6 @@ public class TwoBallAuton extends ParallelCommandGroup {
             new WaitCommand(5)
         ));
         addCommands(new RunIntake(intakeSubsystem, 1));
+        addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
 }
