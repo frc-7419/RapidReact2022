@@ -28,8 +28,6 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("Shooter Running", false);
-    // redo math?
-    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
     
   }
 
