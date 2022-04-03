@@ -97,6 +97,10 @@ public class NewDriveBaseSubsystem extends SubsystemBase {
     drive.arcadeDrive(xSpeed, zRotation, squareInputs);
   }
 
+  public void tankDrive(double leftSpeed, double rightSpeed, boolean squareInputs) {
+    drive.tankDrive(leftSpeed, rightSpeed, squareInputs);
+  }
+
   public void setAllDefaultInversions() {
     right.setInverted(true);
     left.setInverted(false);

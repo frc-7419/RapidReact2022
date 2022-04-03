@@ -8,7 +8,7 @@ public class IntakeSolenoidSubsystem extends SubsystemBase{
     private Solenoid intakeSolenoid; 
 
     public IntakeSolenoidSubsystem() {
-        intakeSolenoid = new Solenoid(1, PneumaticsModuleType.REVPH, 8);
+        intakeSolenoid = new Solenoid(30, PneumaticsModuleType.REVPH, 8);
     }
 
     @Override
