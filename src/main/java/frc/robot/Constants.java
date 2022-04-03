@@ -17,16 +17,29 @@ package frc.robot;
 public final class Constants {
 
     public static enum CanIds {
+        // 2020 drive train ids
+        // leftFalcon1(5),
+        // rightFalcon1(2),
+        // leftFalcon2(4),
+        // rightFalcon2(3)
 
-        // 2020 robot constants
-        leftFalcon1(5),
+        // 2022 drive train ids
+        leftFalcon1(4),
+        leftFalcon2(5),
         rightFalcon1(2),
-        leftFalcon2(4),
         rightFalcon2(3),
-        topShooterFalcon(10), 
         bottomShooterFalcon(14),
+        topShooterFalcon(10),
+        intakeSpark(32),  
+        loaderVictor(16),
+        turretFalcon(62),
+        feederVictor(23),
+        armSpark1(11),
+        armSpark2(12),
+        rightElevatorFalcon(50),
+        leftElevatorFalcon(51), 
         ;
-
+        
         public final int id;
         private CanIds(int id) {
             this.id = id;
@@ -35,7 +48,7 @@ public final class Constants {
 
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters
-        public static final double kCameraHeight = 0.8128;
+        public static final double kCameraHeight = 0.84; // inches
         public static final double mountingAngle = 55; 
         public static final double m = 1.0; 
         public static final double n = 0.48; //arbitrary
@@ -46,6 +59,7 @@ public final class Constants {
 
     public static class RobotConstants {
         public static final double TalonFXTicksPerRotation = 2048;
+
         public static final double BottomShooterWheelRadius = 0.0508; // meters
         public static final double TopShooterWheelRadius = 0.0508;
 
@@ -62,8 +76,42 @@ public final class Constants {
         public static final double BottomShooterKa = 0.0060832;
     }
 
+    public static class PowerConstants {
+        //drive
+        // public static final double DriveBaseLeftStraight = .45;
+        // public static final double DriveBaseRightTurn = .35; //.6
+        // public static final double DriveBaseLeftTurn = .35; //.6
+        // public static final double DriveBaseRightStraight = .45;
+
+        public static final double DriveBaseStraight = .55;
+        public static final double DriveBaseTurn = .35; 
+        // public static final double DriveBaseLeftStraight = -.15;
+        // public static final double DriveBaseRightTurn = .1; 
+        // public static final double DriveBaseLeftTurn = .1; 
+        // public static final double DriveBaseRightStraight = -.15;
+
+
+        //intake
+        public static final double intakeMultiplier = 1.0; 
+    }
+
     public static class PIDConstants {
-        //shooter, meters
+        //drive
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
+
+        //gyro
+        public static final double GyrokP = 0.085;
+        public static final double GyrokI = 0;
+        public static final double GyrokD = 0;
+
+        // turret PID gains
+        public static final double TurretKp = 0.0065;
+        public static final double TurretKi = 0;
+        public static final double TurretKd = 0;
+
+        //shooter
         public static final double TopShooterkP = .0014651; //insert here
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
@@ -72,36 +120,11 @@ public final class Constants {
         public static final double BottomShooterkI = 0;
         public static final double BottomShooterkD = 0;
 
-        
+        //elevator
+        public static final double ElevatorKp = 0.0035;
+        public static final double ElevatorKf = -0.10459;
     }
 
-    // old 
-
-    // public static final double[][] kSpeedToFf = {
-    //     {1000, .09},
-    //     {2000, .065},
-    //     {3000, .0575},
-    //     {4000, .0545},
-    //     {5000, .0525},
-    //     {6000, .051},
-    //     {7000, .0505},
-    //     {8000, .0495},
-    //     {9000, .049},
-    //     {10000, .0485},
-    //     {11000, .0482},
-    //     {12000, .0478},
-    //     {13000, .0475},
-    //     {14000, .0474},
-    //     {15000, .0474},
-    //     {16000, .0474},
-    //     {17000, .0472},
-    //     {18000, .047},
-    //     {19000, .047},
-    //     {20000, .047},
-    //     {21000, .0472},
-    //     {22000, .0472},
-    // };   
-    
     public static final double[][] kRawVelocityToTopFf = {
         {1000, 0.06365},
         {1500, 0.058615},
