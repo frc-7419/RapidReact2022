@@ -12,6 +12,8 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.intake.DeployIntake;
+import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -31,30 +33,40 @@ public class TwoBallAuton extends ParallelCommandGroup {
     instead of 'null' for the gyro command, substitute it with your instance of GyroSubsystem
     */
 
-    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) { //add parameters
+    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) { //add parameters
         //Robot is initially facing the hub. We then shoot the ball. Next we will turn the robot so that it can go back
         //and collect the second ball and then shoot it
         //addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
         addCommands(sequence(
-            new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withTimeout(2.1), // mainting the specific velocity (to be tuned));
+
+            parallel(
+                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withTimeout(2.1), // mainting the specific velocity (to be tuned));
+                new DeployIntake(intakeSolenoidSubsystem)
+            ).withTimeout(1),
+
             parallel(
                 new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5),
+
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn. 
             //Decorator where if the command doesn't finish in that time interval it will move on
+
             new WaitCommand(0.1),
+
             race(
                 new StraightWithMotionMagic(driveBaseSubsystem, 50),
                 new RunLoader(loaderSubsystem, 0.6)
             ).withTimeout(3), //The robot will ideally be positioned toward
+
             //the middle of the tarmac so it will have to move straight about half of the distance between the hub and the ball
             //to reach the ball
             new WaitCommand(0.2),
 
             //Here, we will collect the ball and then turn around and then shoot it 
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn
+
             new WaitCommand(0.25),
             //new StraightWithMotionMagic(driveBaseSubsystem, 50)); //The robot will ideally be positioned toward
             //here after moving 58.08 inches, it will return back to its orignal position and then shoot
@@ -65,6 +77,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
                 new GetToTargetVelocity(shooterSubsystem, 7900*1.4, 9900*1.4, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
                 new RunFeeder(feederSubsystem, 0.5)
             ).withTimeout(3),
+            
             //changed the kD to 0.0001685
             new WaitCommand(5)
         ));
