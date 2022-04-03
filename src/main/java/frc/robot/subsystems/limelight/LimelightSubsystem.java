@@ -32,7 +32,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle)));
+    distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
     // SmartDashboard.putNumber("tv", tv.getDouble(0));
     // SmartDashboard.putNumber("tx", tx.getDouble(0));
     // SmartDashboard.putNumber("ty", ty.getDouble(0));
