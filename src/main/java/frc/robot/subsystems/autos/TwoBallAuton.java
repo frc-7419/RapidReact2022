@@ -58,11 +58,11 @@ public class TwoBallAuton extends ParallelCommandGroup {
             race(
                 new StraightWithMotionMagic(driveBaseSubsystem, 50),
                 new RunLoader(loaderSubsystem, 0.6)
-            ).withTimeout(3), //The robot will ideally be positioned toward
+            ).withTimeout(4.3), //The robot will ideally be positioned toward
 
             //the middle of the tarmac so it will have to move straight about half of the distance between the hub and the ball
             //to reach the ball
-            new WaitCommand(0.2),
+            new WaitCommand(0.3),
 
             //Here, we will collect the ball and then turn around and then shoot it 
             new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn
@@ -82,6 +82,6 @@ public class TwoBallAuton extends ParallelCommandGroup {
             new WaitCommand(5)
         ));
         addCommands(new RunIntake(intakeSubsystem, 1));
-        addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+        //addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
 }
