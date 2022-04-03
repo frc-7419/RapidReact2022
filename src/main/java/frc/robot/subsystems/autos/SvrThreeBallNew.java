@@ -14,6 +14,8 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.intake.DeployIntake;
+import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -29,11 +31,12 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
 
   public SvrThreeBallNew(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, 
   ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,
-  FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem) {
+  FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
     addCommands(
       // start with robot turned towards first ball and turret turned ~80 degrees clockwise
       parallel(
-        // run align turret, loader, and intake continuously 
+
+        // run align turret, loader, and intake continuously
         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
 
         //new TurnTurret(turretSubsystem, 90),  // can use this in the absense of limelight, otherwise use AlignTurretDefault
@@ -42,6 +45,9 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
         new RunIntake(intakeSubsystem, 1),
 
         sequence(
+
+            new DeployIntake(intakeSolenoidSubsystem),
+            
             // get to target velocity
             new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget()),
             
