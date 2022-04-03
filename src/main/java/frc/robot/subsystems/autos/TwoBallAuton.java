@@ -15,6 +15,7 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.intake.RetractIntake;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
@@ -23,6 +24,7 @@ import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurret;
 import frc.robot.subsystems.turret.AlignTurretDefault;
+import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class TwoBallAuton extends ParallelCommandGroup {
@@ -40,12 +42,12 @@ public class TwoBallAuton extends ParallelCommandGroup {
         addCommands(sequence(
 
             parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withTimeout(2.1), // mainting the specific velocity (to be tuned));
-                new DeployIntake(intakeSolenoidSubsystem)
+                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withTimeout(2.1) // mainting the specific velocity (to be tuned));
+                //new DeployIntake(intakeSolenoidSubsystem)
             ).withTimeout(2.1),
 
             parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900*0.94, 9900*0.94, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5),
@@ -55,21 +57,32 @@ public class TwoBallAuton extends ParallelCommandGroup {
 
             new WaitCommand(0.1),
 
+            //new RetractIntake(intakeSolenoidSubsystem).withTimeout(0.5), new stuff we added on saturday in an attempt to get 2 ball working again
+
             race(
                 new StraightWithMotionMagic(driveBaseSubsystem, 50),
                 new RunLoader(loaderSubsystem, 0.6)
-            ).withTimeout(4.3), //The robot will ideally be positioned toward
+            ).withTimeout(3.5), //The robot will ideally be positioned toward
 
-            //the middle of the tarmac so it will have to move straight about half of the distance between the hub and the ball
-            //to reach the ball
+            // race( this is all new stuff we added on saturday in an attempt to get 2 ball working again
+            //     new StraightWithMotionMagic(driveBaseSubsystem, 20),
+            //     new RunLoader(loaderSubsystem, 1),
+            //     new DeployIntake(intakeSolenoidSubsystem)
+            // ).withTimeout(1.5), //The robot will ideally be positioned toward
+            //new RunFeeder(feederSubsystem, -0.5).withTimeout(0.5), --------------
+            
             new WaitCommand(0.3),
 
-            //Here, we will collect the ball and then turn around and then shoot it 
-            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn
+
+            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
+
+            // parallel( new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
+            //           new BrakeTurret(turretSubsystem)
+            // ),
+            //180 degree turn
 
             new WaitCommand(0.25),
-            //new StraightWithMotionMagic(driveBaseSubsystem, 50)); //The robot will ideally be positioned toward
-            //here after moving 58.08 inches, it will return back to its orignal position and then shoot
+            
             new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget()), // mainting the specific velocity (to be tuned)
             
             parallel(
@@ -81,7 +94,9 @@ public class TwoBallAuton extends ParallelCommandGroup {
             //changed the kD to 0.0001685
             new WaitCommand(5)
         ));
-        addCommands(new RunIntake(intakeSubsystem, 1));
+
+        //addCommands(new RetractIntake(intakeSolenoidSubsystem));
+        //addCommands(new RunIntake(intakeSubsystem, 1));
         //addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     }
 }
