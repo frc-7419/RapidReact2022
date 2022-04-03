@@ -37,7 +37,6 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     // SmartDashboard.putBoolean("Shooter Running", false);
 
     // redo math?
-    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
     
     topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
     bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
