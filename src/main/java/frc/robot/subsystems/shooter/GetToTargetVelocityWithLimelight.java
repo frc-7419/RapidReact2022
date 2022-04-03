@@ -33,8 +33,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     bottomShooterReferencePoints = new InterpolatedTreeMap();
 
     // config reference points from constants file
-    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToTopShooterRawVelocity, topShooterReferencePoints);
-    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToBottomShooterRawVelocity, bottomShooterReferencePoints);
+    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToTopShooterVelocity, topShooterReferencePoints);
+    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToBottomShooterVelocity, bottomShooterReferencePoints);
   }
 
   @Override

@@ -123,6 +123,18 @@ public final class Constants {
         public static final double ElevatorKf = -0.10459;
     }
 
+    public static final Double[][] kDistanceToTopShooterVelocity = {
+        {2.44, 50.0},
+        {2.9, 38.0},
+        {3.66, 42.0}
+    };
+
+    public static final Double[][] kDistanceToBottomShooterVelocity = {
+        {2.44, 20.0},
+        {2.9, 35.0},
+        {3.66, 40.0}
+    };
+
     public static final Double[][] kRawVelocityToTopFf = {
         {1000.0, 0.06365},
         {1500.0, 0.058615},
@@ -179,15 +191,5 @@ public final class Constants {
         {13000.0, 0.0481},
         {13500.0, 0.0515},
         {14000.0, 0.05}
-    };
-
-    public static final Double[][] kDistanceToTopShooterRawVelocity = {
-        {0.0, 0.0},
-        {0.0, 0.0}
-    };
-
-    public static final Double[][] kDistanceToBottomShooterRawVelocity = {
-        {0.0, 0.0},
-        {0.0, 0.0}
     };
 }
