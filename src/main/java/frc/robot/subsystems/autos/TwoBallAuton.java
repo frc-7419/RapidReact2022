@@ -45,7 +45,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
             ).withTimeout(2.1),
 
             parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 7900*0.94, 9900*0.94, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5),
