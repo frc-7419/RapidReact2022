@@ -16,10 +16,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private InterpolatedTreeMap topShooterReferencePoints;
   private InterpolatedTreeMap bottomShooterReferencePoints;
 
-  private double bKp;
-  private double bKi;
-  private double tKp;
-  private double tKi;
+  private double bKp = 0;
+  private double tKp = 0;
 
   private double topTargetVelocity;
   private double bottomTargetVelocity;
@@ -42,11 +40,13 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     topTargetVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
     bottomTargetVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
 
+    shooterSubsystem.setTopPIDF(tKp, 0, 0, 0);
+    shooterSubsystem.setBottomPIDF(bKp, 0, 0, 0);
+
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
-    shooterSubsystem.setTopPIDF(tKp, 0, 0, 0);
-    shooterSubsystem.setBottomPIDF(bKp, 0, 0, 0);
+    
   }
 
   @Override
@@ -54,12 +54,13 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     topTargetVelocity = topShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
     bottomTargetVelocity = bottomShooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
 
-    shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
-    shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
-
     shooterSubsystem.setTopPIDF(tKp, 0, 0 , 0);
     shooterSubsystem.setBottomPIDF(bKp, 0, 0, 0);
 
+    shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
+    shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
+
+  
     // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
     // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
