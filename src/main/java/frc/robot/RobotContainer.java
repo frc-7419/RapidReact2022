@@ -89,7 +89,7 @@ public class RobotContainer {
     //   .toggleWhenActive(new GetToTargetVelocity(shooterSubsystem, 10, 10));
 
     new JoystickButton(joystick2, XboxController.Button.kY.value)
-      .toggleWhenPressed(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+      .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
 
 
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)

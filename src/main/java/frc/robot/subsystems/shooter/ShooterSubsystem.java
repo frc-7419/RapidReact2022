@@ -145,13 +145,13 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
     public double getBottomOutputVoltage(){return bottomFalcon.getMotorOutputVoltage();}
 
-    public double computeTopkF(double nativeUnitsVelocitySetpoint) {
-        return (topShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
-    }
+    // public double computeTopkF(double nativeUnitsVelocitySetpoint) {
+    //     return (topShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
+    // }
 
-    public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
-        return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
-    }
+    // public double computeBottomkF(double nativeUnitsVelocitySetpoint) {
+    //     return (bottomShooterFeedforwardReferencePoints.get(nativeUnitsVelocitySetpoint)).doubleValue();
+    // }
 
     public void configInterpolatedTreeMapReferencePoints(Double[][] referencePoints, InterpolatedTreeMap interpolatedTreeMap) {
         for (Double[] i : referencePoints) {

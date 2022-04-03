@@ -45,8 +45,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
-    shooterSubsystem.setTopPIDF(tKp, tKi, 0, shooterSubsystem.computeTopkF(topTargetVelocity));
-    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, shooterSubsystem.computeBottomkF(bottomTargetVelocity));
+    shooterSubsystem.setTopPIDF(tKp, 0, 0, 0);
+    shooterSubsystem.setBottomPIDF(bKp, 0, 0, 0);
   }
 
   @Override
@@ -57,11 +57,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
-    shooterSubsystem.setTopPIDF(tKp, tKi, 0, shooterSubsystem.computeTopkF(topTargetVelocity));
-    shooterSubsystem.setBottomPIDF(bKp, bKi, 0, shooterSubsystem.computeBottomkF(bottomTargetVelocity));
-    
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, topTargetVelocity);
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, bottomTargetVelocity);
+    shooterSubsystem.setTopPIDF(tKp, 0, 0 , 0);
+    shooterSubsystem.setBottomPIDF(bKp, 0, 0, 0);
 
     // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
