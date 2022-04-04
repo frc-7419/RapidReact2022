@@ -44,7 +44,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
             ).withTimeout(1.5),
 
             // turn 180 while braking turret
-            new ParallelCommandGroup(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
+            parallel(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
                 .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
             new WaitCommand(0.25),
