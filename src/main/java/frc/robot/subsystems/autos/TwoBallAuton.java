@@ -45,11 +45,10 @@ public class TwoBallAuton extends ParallelCommandGroup {
             new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
             // move forward and running intake + loader
-            race(
-                new StraightWithMotionMagic(driveBaseSubsystem, 50),
+            parallel(
                 new RunIntake(intakeSubsystem, 1),
                 new RunLoader(loaderSubsystem, 0.6)
-            ),
+            ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)),
             
             new WaitCommand(0.3),
 
