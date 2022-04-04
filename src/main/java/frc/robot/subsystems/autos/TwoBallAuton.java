@@ -52,7 +52,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5),
 
-            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn. 
+            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn. 
             //Decorator where if the command doesn't finish in that time interval it will move on
 
             new WaitCommand(0.1),
@@ -74,7 +74,7 @@ public class TwoBallAuton extends ParallelCommandGroup {
             new WaitCommand(0.3),
 
 
-            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
+            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
 
             // parallel( new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
             //           new BrakeTurret(turretSubsystem)

@@ -5,7 +5,7 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
@@ -17,6 +17,6 @@ public class Turn180 extends SequentialCommandGroup {
 
   public Turn180(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem) {
     
-    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, Constants.PIDConstants.GyrokP180, Constants.PIDConstants.GyrokI180, Constants.PIDConstants.GyrokD180));
+    addCommands(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180));
   }
 }

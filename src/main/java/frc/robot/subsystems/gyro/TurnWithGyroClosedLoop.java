@@ -12,6 +12,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   private DriveBaseSubsystem driveBaseSubsystem;
   private GyroSubsystem gyroSubsystem;
   private double target;
+  private double tolerance;
   private double kP;
   private double kI;
   private double kD;
@@ -25,10 +26,11 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target, double kP, double kI, double kD) {
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target, double tolerance, double kP, double kI, double kD) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;
+    this.tolerance = tolerance;
     this.kP = kP;
     this.kI = kI;
     this.kD = kD;
@@ -40,7 +42,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     initAngle = gyroSubsystem.getGyroAngle();
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(initAngle + target);
-    pidController.setTolerance(0.5); 
+    pidController.setTolerance(tolerance); 
     SmartDashboard.putNumber("turn setpoint", target);
   } 
 

@@ -42,7 +42,7 @@ public class ShootGetSecondBallShootOneTurn extends ParallelCommandGroup {
                     new RunLoader(loaderSubsystem, 0.3).withTimeout(3)
                 ),
                 race(
-                    new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180).withTimeout(4),
+                    new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180).withTimeout(4),
                     new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049) // getting the specific velocity
                 ),
                 // shoot both balls
