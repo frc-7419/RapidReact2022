@@ -1,7 +1,10 @@
 //period 6 file
 package frc.robot.subsystems.autos;
 
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -29,74 +32,47 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class TwoBallAuton extends ParallelCommandGroup {
 
-    /* comments from Karan:
-    you dont need to declare GyroSubsystem since its alr being injected
-    we're not using ReadyToShooter, remove it from the constructor, it wont let your code build
-    instead of 'null' for the gyro command, substitute it with your instance of GyroSubsystem
-    */
-
-    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) { //add parameters
-        //Robot is initially facing the hub. We then shoot the ball. Next we will turn the robot so that it can go back
-        //and collect the second ball and then shoot it
-        //addCommands(new AlignTurret(turretSubsystem, limelightSubsystem));
+    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
         addCommands(sequence(
+            new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget())), // mainting the specific velocity (to be tuned));
 
+            // shoot preload
             parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).withTimeout(2.1) // mainting the specific velocity (to be tuned));
-                //new DeployIntake(intakeSolenoidSubsystem)
-            ).withTimeout(2.1),
-
-            parallel(
-                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5),
 
-            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180), //180 degree turn. 
-            //Decorator where if the command doesn't finish in that time interval it will move on
+            // turn 180 while braking turret
+            new ParallelCommandGroup(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
+                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
-            new WaitCommand(0.1),
+            new WaitCommand(0.25),
 
-            //new RetractIntake(intakeSolenoidSubsystem).withTimeout(0.5), new stuff we added on saturday in an attempt to get 2 ball working again
-
+            // deploy intake while moving forward and running intake + loader
             race(
+                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
                 new StraightWithMotionMagic(driveBaseSubsystem, 50),
+                new RunIntake(intakeSubsystem, 1),
                 new RunLoader(loaderSubsystem, 0.6)
-            ).withTimeout(3.5), //The robot will ideally be positioned toward
-
-            // race( this is all new stuff we added on saturday in an attempt to get 2 ball working again
-            //     new StraightWithMotionMagic(driveBaseSubsystem, 20),
-            //     new RunLoader(loaderSubsystem, 1),
-            //     new DeployIntake(intakeSolenoidSubsystem)
-            // ).withTimeout(1.5), //The robot will ideally be positioned toward
-            //new RunFeeder(feederSubsystem, -0.5).withTimeout(0.5), --------------
+            ).withTimeout(3.5),
             
             new WaitCommand(0.3),
 
-
-            new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
-
-            // parallel( new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
-            //           new BrakeTurret(turretSubsystem)
-            // ),
-            //180 degree turn
+            // turn 180 by braking 180
+            new ParallelCommandGroup(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
+                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
             new WaitCommand(0.25),
             
             new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049).withInterrupt(() -> shooterSubsystem.bothOnTarget()), // mainting the specific velocity (to be tuned)
             
+            // shoot ball
             parallel(
-                new RunLoader(loaderSubsystem, 1),
                 new GetToTargetVelocity(shooterSubsystem, 7900*1.4, 9900*1.4, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
-            ).withTimeout(3),
-            
-            //changed the kD to 0.0001685
-            new WaitCommand(5)
-        ));
-
-        //addCommands(new RetractIntake(intakeSolenoidSubsystem));
-        //addCommands(new RunIntake(intakeSubsystem, 1));
-        //addCommands(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+            ).withTimeout(3)
+        );
     }
 }
