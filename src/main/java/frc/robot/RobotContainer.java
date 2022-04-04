@@ -5,6 +5,7 @@ import com.team7419.joystick.DoubleButton;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLEDColor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -66,6 +67,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   // private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   // PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
+  private final SetLEDColor setLEDColor = new SetLEDColor(ledSubsystem);
   
   private final NewDriveBaseSubsystem newDriveBaseSubsystem = new NewDriveBaseSubsystem();
   // private final NewTankDrive newTankDrive = new NewTankDrive(joystick1, newDriveBaseSubsystem, .75);
@@ -140,8 +142,9 @@ public class RobotContainer {
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
     // shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
-    // elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
+    elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
+    ledSubsystem.setDefaultCommand(setLEDColor);
   }
 }
 
