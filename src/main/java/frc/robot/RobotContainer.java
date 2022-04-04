@@ -5,7 +5,6 @@ import com.team7419.joystick.DoubleButton;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.led.LEDSubsystem;
-import frc.robot.subsystems.led.SetLEDColor;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -55,6 +54,7 @@ public class RobotContainer {
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
+  private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.2);
@@ -66,7 +66,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   // private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   // PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
-
+  
   private final NewDriveBaseSubsystem newDriveBaseSubsystem = new NewDriveBaseSubsystem();
   // private final NewTankDrive newTankDrive = new NewTankDrive(joystick1, newDriveBaseSubsystem, .75);
   private final NewArcadeDrive newArcadeDrive = new NewArcadeDrive(joystick1, newDriveBaseSubsystem, 0.95, 0.75);

@@ -12,6 +12,7 @@ public class LEDSubsystem extends SubsystemBase {
   /** Creates a new LEDSubsystem. */
   public AddressableLED led;
   public AddressableLEDBuffer ledBuffer;
+  private int rainbowFirstPixelHue = 0;
 
   public LEDSubsystem() {
     led = new AddressableLED(0);
@@ -21,7 +22,10 @@ public class LEDSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    rainbowLED(rainbowFirstPixelHue);
+    startLed();
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
   }
   public AddressableLED getLed(){
     return led;
