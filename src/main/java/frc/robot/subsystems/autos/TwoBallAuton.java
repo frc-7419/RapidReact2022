@@ -39,20 +39,25 @@ public class TwoBallAuton extends ParallelCommandGroup {
             parallel(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
                 .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
-            new WaitCommand(0.25),
+            new WaitCommand(0.25),  
+            
+            // deploy intake
+            new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
-            // deploy intake while moving forward and running intake + loader
+            // move forward and running intake + loader
             race(
-                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
                 new StraightWithMotionMagic(driveBaseSubsystem, 50),
                 new RunIntake(intakeSubsystem, 1),
                 new RunLoader(loaderSubsystem, 0.6)
-            ).withTimeout(3.5),
+            ),
             
             new WaitCommand(0.3),
 
+            // retract intake
+            new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+
             // turn 180 by braking 180
-            parallel(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
+            new BrakeTurret(turretSubsystem)
                 .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
             new WaitCommand(0.25),
