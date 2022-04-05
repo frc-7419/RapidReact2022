@@ -14,18 +14,11 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
   private ShooterSubsystem shooterSubsystem;
   private LimelightSubsystem limelightSubsystem;
 
-  private double kP;
-  private double kI;
-  private double tkF;
-  private double bkF;
-
   private double initialVelocity;
 
-  // private double targetRPM;
   private double topTargetRPM;
   private double bottomTargetRPM;
 
-  
   public GetToTargetVelocityWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelightSubsystem = limelightSubsystem;
@@ -34,28 +27,16 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void initialize() {
-    // SmartDashboard.putBoolean("Shooter Running", false);
-
-    // redo math?
-    initialVelocity = Math.sqrt(LimelightConstants.g/(2*limelightSubsystem.getA()*(Math.pow(Math.cos(Math.toRadians(limelightSubsystem.getBeta())),2))));
-    
-    topTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.topShooterWheelRadius);
-    bottomTargetRPM = UnitConversions.mpsToRPM(initialVelocity, RobotConstants.bottomShooterWheelRadius);
-
-    shooterSubsystem.setTopPIDF(kP, kI, 0, shooterSubsystem.computeTopkF(topTargetRPM));
-    shooterSubsystem.setBottomPIDF(kP, kI, 0, shooterSubsystem.computeBottomkF(bottomTargetRPM));
-    
-    shooterSubsystem.setTopTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.setBottomTargetRawVelocity(UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    SmartDashboard.putBoolean("Shooter Running", false);
     
   }
 
   @Override
   public void execute() {
-    // SmartDashboard.putBoolean("Shooter Running", true);
+    SmartDashboard.putBoolean("Shooter Running", true);
 
-    shooterSubsystem.getTopTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(topTargetRPM, 2048));
-    shooterSubsystem.getBottomTalon().set(ControlMode.Velocity, UnitConversions.rpmToRawSensorVelocity(bottomTargetRPM, 2048));
+    shooterSubsystem.setTopClosedLoopVelocity(initialVelocity);
+    shooterSubsystem.setBottomClosedLoopVelocity(initialVelocity);
 
     // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
@@ -64,8 +45,8 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Shooter Running", false);
     shooterSubsystem.off();
-    // SmartDashboard.putBoolean("Shooter Running", false);
   }
 
   @Override

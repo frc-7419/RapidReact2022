@@ -28,12 +28,14 @@ public final class Constants {
         leftFalcon2(5),
         rightFalcon1(2),
         rightFalcon2(3),
-        bottomShooterFalcon(10),
-        topShooterFalcon(14),
-        intakeSpark(15),  
+        bottomShooterFalcon(14),
+        topShooterFalcon(10),
+        intakeSpark(32),  
         loaderVictor(16),
-        turretSpark(21),
-        feederVictor(25),
+        turretFalcon(62),
+        feederVictor(23),
+        armSpark1(11),
+        armSpark2(12),
         rightElevatorFalcon(50),
         leftElevatorFalcon(51), 
         ;
@@ -46,33 +48,30 @@ public final class Constants {
 
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters
-        public static final double kCameraHeight = 0.8128;
-        public static final double mountingAngle = 55; 
-        public static final double m = 1.0; 
-        public static final double n = 0.48; //arbitrary
-        public static final double r1 = 0.37; //arbitrary
-        public static final double g = -9.8;  
+        public static final double kCameraHeight = 1.07; // inches
+        public static final double mountingAngle = 50;
         public static final double focalLength = 2.9272781257541;
     }
 
     public static class RobotConstants {
         public static final double TalonFXTicksPerRotation = 2048;
 
-        public static final double turretRadius = 1.5625; // placeholder value, will change
-        public static final double turretGearRatio = 100/12;
+        public static final double BottomShooterWheelRadius = 0.0508; // meters
+        public static final double TopShooterWheelRadius = 0.0508;
 
-        public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
-        public static final double topShooterWheelRadius = 1.5;
+        public static final double RotationsPerMeter = 1/(2*Math.PI*0.0508);
 
         // top shooter kS, kV, kA
-        public static final double TopShooterKs = 0.73569/(2048*6);
-        public static final double TopShooterKv = 0.10952/(2048*6);
-        public static final double TopShooterKa = 0.0056306/(2048*6);
+        public static final double TopShooterKs = 0.56452;
+        public static final double TopShooterKv = 0.11144;
+        public static final double TopShooterKa = 0.026061;
 
-        // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.57654/(2048*6);
-        public static final double BottomShooterKv = 0.10892/(2048*6);
-        public static final double BottomShooterKa = 0.0044231/(2048*6);
+        // bottom shooter kS, kV, kA, meters
+        public static final double BottomShooterKs = 0.67661;
+        public static final double BottomShooterKv = 0.10994;
+        public static final double BottomShooterKa = 0.0060832;
+
+        public static final double trackWidth = 0.69; // meters
     }
 
     public static class PowerConstants {
@@ -82,8 +81,8 @@ public final class Constants {
         // public static final double DriveBaseLeftTurn = .35; //.6
         // public static final double DriveBaseRightStraight = .45;
 
-        public static final double DriveBaseStraight = .275;
-        public static final double DriveBaseTurn = .275; 
+        public static final double DriveBaseStraight = .55;
+        public static final double DriveBaseTurn = .35; 
         // public static final double DriveBaseLeftStraight = -.15;
         // public static final double DriveBaseRightTurn = .1; 
         // public static final double DriveBaseLeftTurn = .1; 
@@ -95,24 +94,33 @@ public final class Constants {
     }
 
     public static class PIDConstants {
+        //drive
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
+
         //gyro
         public static final double GyrokP = 0.085;
         public static final double GyrokI = 0;
         public static final double GyrokD = 0;
 
         // turret PID gains
-        public static final double TurretKp = 0.006;
+        public static final double TurretKp = 0.0065;
         public static final double TurretKi = 0;
         public static final double TurretKd = 0;
 
         //shooter
-        public static final double BottomShooterkP = 0.17054/(2048*6);
+        public static final double TopShooterkP = .0014651; //insert here
+        public static final double TopShooterkI = 0;
+        public static final double TopShooterkD = 0;
+
+        public static final double BottomShooterkP = 0.00039888;
         public static final double BottomShooterkI = 0;
         public static final double BottomShooterkD = 0;
 
-        public static final double TopShooterkP = 0.10603/(2048*6);
-        public static final double TopShooterkI = 0;
-        public static final double TopShooterkD = 0;
+        //elevator
+        public static final double ElevatorKp = 0.0035;
+        public static final double ElevatorKf = -0.10459;
     }
 
     public static final double[][] kRawVelocityToTopFf = {
