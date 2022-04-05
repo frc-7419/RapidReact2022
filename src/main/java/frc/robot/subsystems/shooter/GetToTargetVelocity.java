@@ -32,7 +32,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("Shooter Running", false);
+    // SmartDashboard.putBoolean("Shooter Running", false);
     
     // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
