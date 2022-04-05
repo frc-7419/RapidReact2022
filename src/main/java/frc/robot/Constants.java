@@ -124,15 +124,19 @@ public final class Constants {
     }
 
     public static final Double[][] kDistanceToTopShooterVelocity = {
-        {2.44, 50.0},
-        {2.9, 38.0},
-        {3.66, 42.0}
+        {1.03, 31.5},
+        {1.3, 37.0},
+        {1.6, 37.0},
+        {1.9, 42.0},
+        {2.2, 45.0}
     };
 
     public static final Double[][] kDistanceToBottomShooterVelocity = {
-        {2.44, 20.0},
-        {2.9, 35.0},
-        {3.66, 40.0}
+        {1.03, 31.0},
+        {1.3, 30.0},
+        {1.6, 35.0},
+        {1.9, 40.0},
+        {2.2, 43.0}
     };
 
     public static final Double[][] kRawVelocityToTopFf = {
