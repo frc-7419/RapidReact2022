@@ -67,13 +67,13 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
             new WaitCommand(0.25),
             
-            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 45, 43))
+            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 42, 40))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.5), // gttv while aligning turret
             
             // shoot second ball
             parallel(
                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                new GetToTargetVelocity(shooterSubsystem, 45, 43), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 42, 40), // mainting the specific velocity (to be tuned)
                 new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
             ).withTimeout(3),
