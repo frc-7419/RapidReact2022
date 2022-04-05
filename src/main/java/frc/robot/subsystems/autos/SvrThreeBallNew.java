@@ -77,12 +77,12 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
       parallel(
         new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
         new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem)).deadlineWith(
-        new StraightWithMotionMagic(driveBaseSubsystem, 116.17)).withInterrupt(() -> shooterSubsystem.bothOnTarget()
-      ),
+        new StraightWithMotionMagic(driveBaseSubsystem, 116.17)
+      ).withInterrupt(() -> shooterSubsystem.bothOnTarget()),
 
       new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).deadlineWith(
         new StraightWithMotionMagic(driveBaseSubsystem, -50)
-      )
+      ).andThen(() -> new RunFeeder(feederSubsystem, 1))
       
       
 
