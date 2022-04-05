@@ -86,12 +86,12 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
-        // this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
+        this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
     }
     public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
         this.bottomTargetVelocity = velocityMetersPerSecond;
-        // this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
+        this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
     }
 
@@ -103,17 +103,17 @@ public class ShooterSubsystem extends SubsystemBase{
         TalonFuncs.setPIDFConstants(0, bottomFalcon, kP, kI, kD, kF);
     }
 
-    // public boolean topOnTarget() {
-    //     return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < rawVelocityThreshold;
-    // }
+    public boolean topOnTarget() {
+        return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < rawVelocityThreshold;
+    }
 
-    // public boolean bottomOnTarget() {
-    //     return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < rawVelocityThreshold;
-    // }
+    public boolean bottomOnTarget() {
+        return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < rawVelocityThreshold;
+    }
 
-    // public boolean bothOnTarget() {
-    //     return topOnTarget() && bottomOnTarget();
-    // }
+    public boolean bothOnTarget() {
+        return topOnTarget() && bottomOnTarget();
+    }
 
     public void setTopPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
