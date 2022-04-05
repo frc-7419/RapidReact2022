@@ -63,11 +63,11 @@ public class ShooterSubsystem extends SubsystemBase{
         // SmartDashboard.putNumber("tMPS", topFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
         // SmartDashboard.putNumber("bMPS", bottomFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
 
-        SmartDashboard.putNumber("tMPS", getCurrentTopVelocity());
-        SmartDashboard.putNumber("bMPS", getCurrentBottomVelocity());
+        // SmartDashboard.putNumber("tMPS", getCurrentTopVelocity());
+        // SmartDashboard.putNumber("bMPS", getCurrentBottomVelocity());
 
-        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
-        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
+        // SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
+        // SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
     }
 
     public void configShooterOutputs() {
@@ -86,12 +86,12 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
-        this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
+        // this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         topFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
     }
     public void setBottomClosedLoopVelocity(double velocityMetersPerSecond) {
         this.bottomTargetVelocity = velocityMetersPerSecond;
-        this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
+        // this.bottomTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         bottomFalcon.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, bottomFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
     }
 
@@ -103,17 +103,17 @@ public class ShooterSubsystem extends SubsystemBase{
         TalonFuncs.setPIDFConstants(0, bottomFalcon, kP, kI, kD, kF);
     }
 
-    public boolean topOnTarget() {
-        return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < rawVelocityThreshold;
-    }
+    // public boolean topOnTarget() {
+    //     return Math.abs(getCurrentTopRawVelocity() - topTargetRawVelocity) < rawVelocityThreshold;
+    // }
 
-    public boolean bottomOnTarget() {
-        return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < rawVelocityThreshold;
-    }
+    // public boolean bottomOnTarget() {
+    //     return Math.abs(getCurrentBottomRawVelocity() - bottomTargetRawVelocity) < rawVelocityThreshold;
+    // }
 
-    public boolean bothOnTarget() {
-        return topOnTarget() && bottomOnTarget();
-    }
+    // public boolean bothOnTarget() {
+    //     return topOnTarget() && bottomOnTarget();
+    // }
 
     public void setTopPower(double power) {
         topFalcon.set(ControlMode.PercentOutput, power);
@@ -135,8 +135,8 @@ public class ShooterSubsystem extends SubsystemBase{
     public double getCurrentTopRawVelocity(){return topFalcon.getSelectedSensorVelocity(0);}
     public double getCurrentBottomRawVelocity(){return bottomFalcon.getSelectedSensorVelocity(0);}
 
-    public double getCurrentTopVelocity(){return topFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter);}
-    public double getCurrentBottomVelocity(){return bottomFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter);}
+    // public double getCurrentTopVelocity(){return topFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter);}
+    // public double getCurrentBottomVelocity(){return bottomFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter);}
 
     public double getTopPercentOutput() {return topFalcon.getMotorOutputPercent();}
     public double getBottomPercentOutput() {return bottomFalcon.getMotorOutputPercent();}
