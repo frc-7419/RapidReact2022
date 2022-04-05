@@ -11,8 +11,6 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.autos.ShootGetSecondBallShootOneTurn;
-import frc.robot.subsystems.autos.Turn180;
 import frc.robot.subsystems.autos.TwoBallAuton;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -27,7 +25,7 @@ import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
-import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
@@ -60,7 +58,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
+  // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
 
 
   // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick);
@@ -73,12 +71,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final ShootGetSecondBallShootOneTurn shootGetSecondBallShootOneTurn = new ShootGetSecondBallShootOneTurn(driveBaseSubsystem, gyroSubsystem, turretSubsystem, limelightSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem);
-  // private final ShootGetSecondBallShoot shootGetSecondBallShoot = new ShootGetSecondBallShoot(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem);
-  private final TwoBallAuton twoBallAuton = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, intakeSolenoidSubsystem);
-  private final UnBrake unBrake = new UnBrake(driveBaseSubsystem);
-  private final Turn180 turn180 = new Turn180(driveBaseSubsystem, gyroSubsystem);
+  private final TwoBallAuton twoBallAuton = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -95,7 +88,7 @@ public class RobotContainer {
       // .whileHeld(new GetToTargetVelocity(shooterSubsystem, 9850, 6150, 0.0485, 0.0495));
 
       new JoystickButton(joystick2, XboxController.Button.kX.value)
-      .whileHeld(new GetToTargetVelocity(shooterSubsystem, 8530, 8160, 0.04876, 0.04772));
+      .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8530, 8160, 0.04876, 0.04772));
     
     // toggle to maintain elevator position
     new DoubleButton(
@@ -105,7 +98,7 @@ public class RobotContainer {
 
       // lower hub shot, consistent
     new JoystickButton(joystick2, XboxController.Button.kA.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
+    .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
       
     // long
     // new JoystickButton(joystick2, XboxController.Button.kY.value)
@@ -113,7 +106,7 @@ public class RobotContainer {
 
     // new long
     new JoystickButton(joystick2, XboxController.Button.kY.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
+    .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
     // new DoubleButton(
     //   new JoystickButton(joystick2, XboxController.Button.kY.value), 

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
-public class GetToTargetVelocity extends CommandBase {
+public class GetToTargetVelocityArbitraryFeedforward extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
 
@@ -24,7 +24,7 @@ public class GetToTargetVelocity extends CommandBase {
   private double topTargetRawAcceleration;
   private double bottomTargetRawAcceleration;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity, double tKf, double bKf) {
+  public GetToTargetVelocityArbitraryFeedforward(ShooterSubsystem shooterSubsystem, double topTargetRawVelocity, double bottomTargetRawVelocity, double tKf, double bKf) {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetRawVelocity = topTargetRawVelocity;
     this.bottomTargetRawVelocity = bottomTargetRawVelocity;

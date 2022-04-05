@@ -25,22 +25,12 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ts = networkTable.getEntry("ts"); // Skew or rotation (-90 degrees to 0 degrees)
 
   private double kCameraHeight = LimelightConstants.kCameraHeight;
-  private double kTargetHeight = LimelightConstants.kTargetHeight;
-  private double n = LimelightConstants.n;
-  private double m = LimelightConstants.m;
-  private double r1 = LimelightConstants.r1;
+  private double kTargetHeight = LimelightConstants.kTargetHeight;;
 
   private double theta;
   private double distance;
-  private double b;
-  private double a;
-  private double alpha;
-  private double beta;
   
-  
-  public LimelightSubsystem() {
-  
-  }
+  public LimelightSubsystem() {}
 
 
   @Override
@@ -49,18 +39,12 @@ public class LimelightSubsystem extends SubsystemBase {
 
     distance = (kTargetHeight-kCameraHeight)/Math.tan(Math.toRadians(theta));
 
-    b = ((kTargetHeight-kCameraHeight)*((-Math.pow(distance,2)*n)-(2*distance*m*r1)+(Math.pow(m,2)*Math.pow(r1,2))))
-                          /((distance*m*r1)*((m*r1)-distance));
-    a = (((kTargetHeight-kCameraHeight)*(1+n))-(b*(distance-(m*r1))))/(Math.pow((distance-(m*r1)),2));
-    alpha = Math.atan((b-Math.tan(Math.toRadians(theta)))/(1+(b*Math.tan(Math.toRadians(theta)))));
-    beta = theta + alpha;
-
     // SmartDashboard.putNumber("tv", tv.getDouble(0));
     // SmartDashboard.putNumber("tx", tx.getDouble(0));
     // SmartDashboard.putNumber("ty", ty.getDouble(0));
     // SmartDashboard.putNumber("ta", ta.getDouble(0));
     // SmartDashboard.putNumber("theta", getTheta());
-    // SmartDashboard.putNumber("distance", getDistance());
+    SmartDashboard.putNumber("distance", getDistance());
   }
 
   @Override
@@ -84,10 +68,6 @@ public class LimelightSubsystem extends SubsystemBase {
   }
   
   public double getTheta() {return theta;}
-  
   public double getDistance() {return distance;}
-  public double getA() {return a;}
-  public double getAlpha() {return alpha;}
-  public double getBeta() {return beta;}
 
 }
