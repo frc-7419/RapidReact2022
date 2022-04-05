@@ -28,13 +28,13 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
     public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
         addCommands(
-            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049))
+            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.5), // gttv while aligning turret
 
             // shoot preload
             parallel(
                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
+                new GetToTargetVelocity(shooterSubsystem, 37, 30),
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
             ).withTimeout(1.5), // tune time
@@ -67,13 +67,13 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
             new WaitCommand(0.25),
             
-            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049))
+            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 45, 43))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.5), // gttv while aligning turret
             
             // shoot second ball
             parallel(
                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                new GetToTargetVelocity(shooterSubsystem, 7900*1.4, 9900*1.4, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 45, 43), // mainting the specific velocity (to be tuned)
                 new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
             ).withTimeout(3),
