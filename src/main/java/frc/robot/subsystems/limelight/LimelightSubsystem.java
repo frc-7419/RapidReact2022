@@ -25,20 +25,16 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ts = networkTable.getEntry("ts"); // Skew or rotation (-90 degrees to 0 degrees)
 
   private double kCameraHeight = LimelightConstants.kCameraHeight;
-  private double kTargetHeight = LimelightConstants.kTargetHeight;;
+  private double kTargetHeight = LimelightConstants.kTargetHeight;
 
   private double theta;
   private double distance;
   
   public LimelightSubsystem() {}
 
-
   @Override
   public void periodic() {
-    theta = LimelightConstants.mountingAngle + getTy();
-
-    distance = (kTargetHeight-kCameraHeight)/Math.tan(Math.toRadians(theta));
-
+    distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
     // SmartDashboard.putNumber("tv", tv.getDouble(0));
     // SmartDashboard.putNumber("tx", tx.getDouble(0));
     // SmartDashboard.putNumber("ty", ty.getDouble(0));

@@ -25,6 +25,9 @@ public class TurretSubsystem extends SubsystemBase {
     turret = new TalonFX(CanIds.turretFalcon.id);
     forwardLimitSwitch = new DigitalInput(1);
     reverseLimitSwitch = new DigitalInput(2);
+    turret.configFactoryDefault();
+    turret.configReverseSoftLimitEnable(false, 0);
+    turret.configForwardSoftLimitEnable(false, 0);
   }
 
   @Override
