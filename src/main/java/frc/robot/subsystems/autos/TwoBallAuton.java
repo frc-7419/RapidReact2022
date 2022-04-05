@@ -27,8 +27,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
     public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
         addCommands(
-            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),  new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049))
-            .withInterrupt(() -> shooterSubsystem.bothOnTarget()), // mainting the specific velocity (to be tuned));
+            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049))
+                .withInterrupt(() -> shooterSubsystem.bothOnTarget()), // gttv while aligning turret
 
             // shoot preload
             parallel(
@@ -36,7 +36,7 @@ public class TwoBallAuton extends SequentialCommandGroup {
                 new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
                 new RunFeeder(feederSubsystem, 1),
                 new RunLoader(loaderSubsystem, 1)
-            ).withTimeout(1.5),
+            ).withTimeout(1.5), // tune time
 
             // turn 180 while braking turret
             parallel(new BrakeTurret(turretSubsystem), new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem))
@@ -53,21 +53,23 @@ public class TwoBallAuton extends SequentialCommandGroup {
                 new RunLoader(loaderSubsystem, 0.6)
             ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)),
             
-            new WaitCommand(0.3),
+            new WaitCommand(0.25),
 
             // retract intake
             new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
-            // turn 180 by braking 180
+            // turn 180 while braking turret
             new BrakeTurret(turretSubsystem)
                 .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
             new WaitCommand(0.25),
             
-            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049)).withInterrupt(() -> shooterSubsystem.bothOnTarget()), // mainting the specific velocity (to be tuned)
+            parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1.25, 9900*1.25, 0.04874, 0.049))
+                .withInterrupt(() -> shooterSubsystem.bothOnTarget()), // gttv while aligning turret
             
-            // shoot ball
+            // shoot second ball
             parallel(
+                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                 new GetToTargetVelocity(shooterSubsystem, 7900*1.4, 9900*1.4, 0.04874, 0.049), // mainting the specific velocity (to be tuned)
                 new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
