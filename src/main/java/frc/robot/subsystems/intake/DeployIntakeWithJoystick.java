@@ -22,7 +22,7 @@ public class DeployIntakeWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick.getXButtonPressed()) {
+    if (joystick.getBButtonPressed()) {
       intakeSolenoidSubsystem.toggleSolenoid();
     }
   }
