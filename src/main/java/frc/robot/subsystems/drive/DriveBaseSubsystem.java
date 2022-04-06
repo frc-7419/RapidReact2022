@@ -5,28 +5,33 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+
 import frc.robot.Constants.CanIds;
 import frc.robot.Constants.RobotConstants;
 
 public class DriveBaseSubsystem extends SubsystemBase {
   
-  private WPI_TalonFX left1;
-	private WPI_TalonFX right1;
-	private WPI_TalonFX left2;
-  private WPI_TalonFX right2;
+  private final WPI_TalonFX left1, right1, left2, right2;
+  private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
 
-  private DifferentialDrive drive;
-  private DifferentialDriveKinematics kinematics;
-  private DifferentialDriveOdometry odometry;
+  private final DifferentialDrive drive;
+  private final DifferentialDriveKinematics kinematics;
+  private final DifferentialDriveOdometry odometry;
 
-  MotorControllerGroup left;
-  MotorControllerGroup right;
+  private final MotorControllerGroup left;
+  private final MotorControllerGroup right;
   
   public DriveBaseSubsystem() {
     left1 = new WPI_TalonFX(CanIds.leftFalcon1.id);
@@ -38,37 +43,60 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right = new MotorControllerGroup(right1, right2);
 
     factoryResetAll();
-    right.setInverted(true);
+    setAllDefaultInversions();
 
     drive = new DifferentialDrive(left, right);
     kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(RobotConstants.trackWidth));
-    // odometry = new DifferentialDriveOdometry(gyroAngle)
+    resetEncoders();
+    odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
   }
 
   @Override
-  public void periodic() {}
-
+  public void periodic() {
+    odometry.update(gyro.getRotation2d(), getLeftDistance(), getRightDistance());
+  }
   public enum TurnDirection {
     LEFT,
     RIGHT,
   }
 
-  // accessors
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
   public TalonFX getLeftFollow(){return left2;}
   public TalonFX getRightFollow(){return right2;}
-  // motor groups
+
+
   public MotorControllerGroup getLeftGroup(){return left;}
   public MotorControllerGroup getRightGroup(){return right;}
-  // differential drive
   public DifferentialDrive getDrive(){return drive;}
+  public double getHeading() {
+    return gyro.getRotation2d().getDegrees();
+  }
+  public double getLeftDistance() {
+    return left1.getSelectedSensorPosition()/2048;
+  }
+  public double getRightDistance() {
+    return right1.getSelectedSensorPosition()/2048;
+  }
 
-  public void setLeftPower(double power){
+  public double getLeftVelocity() {
+    return left1.getSelectedSensorVelocity();
+  }
+  public double getRightVelocity() {
+    return right1.getSelectedSensorVelocity();
+  }
+  public Pose2d getPose() {
+    return odometry.getPoseMeters();
+  }
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftVelocity()/2048, getRightVelocity()/2048);
+  }
+
+  public void setLeftPower(double power) {
     left.set(power);
   }
 
-  public void setRightPower(double power){
+  public void setRightPower(double power) {
     right.set(power);
   }
 
@@ -90,15 +118,26 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
   public void coast(){setAllMode(NeutralMode.Coast);}
 
-  public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
-  public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
-
   public void arcadeDrive(double xSpeed, double zRotation, boolean squareInputs) {
     drive.arcadeDrive(xSpeed, zRotation, squareInputs);
   }
+  
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    left.setVoltage(leftVolts);
+    right.setVoltage(rightVolts);
+    drive.feed();
+  }
 
-  public void tankDrive(double leftSpeed, double rightSpeed, boolean squareInputs) {
-    drive.tankDrive(leftSpeed, rightSpeed, squareInputs);
+  public void resetEncoders() {
+    left1.setSelectedSensorPosition(0);
+    left2.setSelectedSensorPosition(0);
+    right1.setSelectedSensorPosition(0);
+    right2.setSelectedSensorPosition(0);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    odometry.resetPosition(pose, gyro.getRotation2d());
   }
 
   public void setAllDefaultInversions() {
