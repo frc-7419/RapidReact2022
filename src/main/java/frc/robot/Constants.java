@@ -44,7 +44,11 @@ public final class Constants {
     }
 
     public static class DriveConstants {
-        public static final double trackWidth = Units.inchesToMeters(27); // I think SysId will give an empirical value for this
+        public static final double gearRatio = (50/14)*(48/16);
+        public static final double wheelDiameter = Units.inchesToMeters(6);
+        public static final double wheelCircumference = Math.PI*wheelDiameter;
+        public static final double unitsPerMeter = ((2048*gearRatio)/wheelCircumference);
+        public static final double trackWidth = Units.inchesToMeters(21.8685); // I think SysId will give an empirical value for this; changed to exact value from cad
         public static final double kRamseteB = 0;
         public static final double kRamseteZeta = 0;
         public static final double ks = 0;
@@ -52,6 +56,8 @@ public final class Constants {
         public static final double ka = 0;
         public static final DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(trackWidth);
         public static final double kPDriveVelocity = 0;
+        public static final double maxVelocity = Units.inchesToMeters(13*12);
+        public static final double maxAcceleration = Units.inchesToMeters(7*12);
     }
 
 

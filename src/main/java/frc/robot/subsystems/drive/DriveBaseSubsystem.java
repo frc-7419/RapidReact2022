@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 import frc.robot.Constants.CanIds;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.RobotConstants;
 
 public class DriveBaseSubsystem extends SubsystemBase {
@@ -82,10 +83,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
     return gyro.getRotation2d().getDegrees();
   }
   public double getLeftDistance() {
-    return left1.getSelectedSensorPosition()/2048;
+    return left1.getSelectedSensorPosition()/DriveConstants.unitsPerMeter;
   }
   public double getRightDistance() {
-    return right1.getSelectedSensorPosition()/2048;
+    return right1.getSelectedSensorPosition()/DriveConstants.unitsPerMeter;
   }
 
   public double getLeftVelocity() {
@@ -98,7 +99,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     return odometry.getPoseMeters();
   }
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getLeftVelocity()/2048, getRightVelocity()/2048);
+    return new DifferentialDriveWheelSpeeds(getLeftVelocity()/DriveConstants.unitsPerMeter, getRightVelocity()/ DriveConstants.unitsPerMeter);
   }
 
   public void setLeftPower(double power) {
