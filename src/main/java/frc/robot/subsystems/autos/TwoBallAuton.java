@@ -65,16 +65,16 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
             // turn 180 while braking turret
             new BrakeTurret(turretSubsystem)
-                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
+                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 182, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
             
             parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 43, 40))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget())
-                .withTimeout(0.75), // gttv while aligning turret
+                .withTimeout(1.15), // gttv while aligning turret
             
             // shoot second ball
             parallel(
                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                new GetToTargetVelocity(shooterSubsystem, 44, 40), // mainting the specific velocity (to be tuned)
+                new GetToTargetVelocity(shooterSubsystem, 45.5, 43), // mainting the specific velocity (to be tuned)
                 new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
             ).withTimeout(1.5),
