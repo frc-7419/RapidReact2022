@@ -160,7 +160,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     odometry.resetPosition(pose, gyro.getRotation2d());
   }
 
-  public void factoryResetAll(){
+  public void factoryResetAll() {
     right1.configFactoryDefault();
     right2.configFactoryDefault();
     left1.configFactoryDefault();

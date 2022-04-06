@@ -12,8 +12,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimelightSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  
   // set up a new instance of NetworkTables (the api/library used to read values from limelight)
   NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
   
@@ -30,10 +28,7 @@ public class LimelightSubsystem extends SubsystemBase {
   private double theta;
   private double distance;
   
-  public LimelightSubsystem() {
-  
-  }
-
+  public LimelightSubsystem() {}
 
   @Override
   public void periodic() {
@@ -67,7 +62,5 @@ public class LimelightSubsystem extends SubsystemBase {
   }
   
   public double getTheta() {return theta;}
-  
   public double getDistance() {return distance;}
-
 }
