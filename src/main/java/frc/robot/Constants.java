@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -45,6 +48,18 @@ public final class Constants {
             this.id = id;
         }
     }
+
+    public static class DriveConstants {
+        public static final double trackWidth = Units.inchesToMeters(27); // I think SysId will give an empirical value for this
+        public static final double kRamseteB = 0;
+        public static final double kRamseteZeta = 0;
+        public static final double ks = 0;
+        public static final double kv = 0;
+        public static final double ka = 0;
+        public static final DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(trackWidth);
+        public static final double kPDriveVelocity = 0;
+    }
+
 
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters

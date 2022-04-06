@@ -27,17 +27,26 @@ public class DriveBaseSubsystem extends SubsystemBase {
   private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
 
   private final DifferentialDrive drive;
-  private final DifferentialDriveKinematics kinematics;
   private final DifferentialDriveOdometry odometry;
 
   private final MotorControllerGroup left;
   private final MotorControllerGroup right;
+
+  private final double kSaturationVoltage = 11.0;
   
   public DriveBaseSubsystem() {
     left1 = new WPI_TalonFX(CanIds.leftFalcon1.id);
 		right1 = new WPI_TalonFX(CanIds.rightFalcon1.id);
 		left2 = new WPI_TalonFX(CanIds.leftFalcon2.id);
     right2 = new WPI_TalonFX(CanIds.rightFalcon2.id);
+    left1.enableVoltageCompensation(true);
+    right1.enableVoltageCompensation(true);
+    left2.enableVoltageCompensation(true);
+    right2.enableVoltageCompensation(true);
+    left1.configVoltageCompSaturation(kSaturationVoltage);
+    right1.configVoltageCompSaturation(kSaturationVoltage);
+    left2.configVoltageCompSaturation(kSaturationVoltage);
+    right2.configVoltageCompSaturation(kSaturationVoltage);
 
     left = new MotorControllerGroup(left1, left2);
     right = new MotorControllerGroup(right1, right2);
@@ -46,8 +55,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
     setAllDefaultInversions();
 
     drive = new DifferentialDrive(left, right);
-    kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(RobotConstants.trackWidth));
     resetEncoders();
+    zeroHeading();
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
   }
 
@@ -123,9 +132,16 @@ public class DriveBaseSubsystem extends SubsystemBase {
   }
   
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    left.setVoltage(leftVolts);
-    right.setVoltage(rightVolts);
+    left1.set(ControlMode.PercentOutput, (leftVolts/kSaturationVoltage));
+    right1.set(ControlMode.PercentOutput, (rightVolts/kSaturationVoltage));
+    left2.set(ControlMode.PercentOutput, (leftVolts / kSaturationVoltage));
+    left2.set(ControlMode.PercentOutput, (leftVolts / kSaturationVoltage));
     drive.feed();
+  }
+
+  public void setAllDefaultInversions() {
+    right.setInverted(true);
+    left.setInverted(false);
   }
 
   public void resetEncoders() {
@@ -135,14 +151,13 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right2.setSelectedSensorPosition(0);
   }
 
+  public void zeroHeading() {
+    gyro.reset();
+  }
+
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
     odometry.resetPosition(pose, gyro.getRotation2d());
-  }
-
-  public void setAllDefaultInversions() {
-    right.setInverted(true);
-    left.setInverted(false);
   }
 
   public void factoryResetAll(){
