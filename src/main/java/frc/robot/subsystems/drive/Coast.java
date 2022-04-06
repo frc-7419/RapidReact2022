@@ -6,17 +6,19 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class UnBrake extends CommandBase {
+public class Coast extends CommandBase {
   /** Creates a new UnBrake. */
   private DriveBaseSubsystem driveBaseSubsystem;
-  public UnBrake(DriveBaseSubsystem driveBaseSubsystem) {
+  public Coast(DriveBaseSubsystem driveBaseSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveBaseSubsystem.coast();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -26,7 +28,9 @@ public class UnBrake extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    driveBaseSubsystem.coast();
+  }
 
   // Returns true when the command should end.
   @Override

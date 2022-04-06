@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
-import frc.robot.subsystems.drive.UnBrake;
+import frc.robot.subsystems.drive.Coast;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -29,7 +29,7 @@ public class TwoBallAuton extends SequentialCommandGroup {
     public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
         addCommands(
             parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
-                .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.5), // gttv while aligning turret
+                .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.75), // gttv while aligning turret
 
             // shoot preload
             parallel(
@@ -43,7 +43,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
             // turn 180 while braking turret
             new BrakeTurret(turretSubsystem)
-                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 178, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
+                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 175, 3, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
+                .withTimeout(1.5),
 
             new WaitCommand(0.25),  
             
@@ -54,7 +55,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
             parallel(
                 new RunIntake(intakeSubsystem, 1),
                 new RunLoader(loaderSubsystem, 0.6)
-            ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)).withTimeout(2.5),
+            ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50))
+            .withTimeout(2.5),
             
             new WaitCommand(0.25),
 
@@ -64,11 +66,10 @@ public class TwoBallAuton extends SequentialCommandGroup {
             // turn 180 while braking turret
             new BrakeTurret(turretSubsystem)
                 .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
-
-            new WaitCommand(0.25),
             
             parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 43, 40))
-                .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.5), // gttv while aligning turret
+                .withInterrupt(() -> shooterSubsystem.bothOnTarget())
+                .withTimeout(0.75), // gttv while aligning turret
             
             // shoot second ball
             parallel(
@@ -76,7 +77,9 @@ public class TwoBallAuton extends SequentialCommandGroup {
                 new GetToTargetVelocity(shooterSubsystem, 44, 40), // mainting the specific velocity (to be tuned)
                 new RunLoader(loaderSubsystem, 1),
                 new RunFeeder(feederSubsystem, 0.5)
-            ).withTimeout(3)
+            ).withTimeout(1.5),
+
+            new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
         );
     }
 }

@@ -32,8 +32,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     left2.follow(left1);
     right2.follow(right1);
-    
-    coast();
   }
 
   @Override
