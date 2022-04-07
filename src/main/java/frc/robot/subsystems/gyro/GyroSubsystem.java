@@ -28,6 +28,6 @@ public class GyroSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        // SmartDashboard.putNumber("gyro angle", this.getGyroAngle());
+        SmartDashboard.putNumber("robot pitch", ahrs.getPitch());
     }
 }
