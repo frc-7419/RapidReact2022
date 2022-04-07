@@ -45,8 +45,6 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
-
-    
   }
 
   @Override
