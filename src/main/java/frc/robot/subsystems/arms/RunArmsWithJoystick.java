@@ -28,7 +28,7 @@ public class RunArmsWithJoystick extends CommandBase {
     //run with bumpers
     if (joystick.getRightY() != 0) {
       armsSubsystem.coast();
-      armsSubsystem.setPower(joystick.getRightY() * 0.14);
+      armsSubsystem.setPower(joystick.getRightY() * 0.16);
     } else {
       armsSubsystem.setPower(0);
       armsSubsystem.brake();

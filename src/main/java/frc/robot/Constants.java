@@ -115,7 +115,8 @@ public final class Constants {
 
         //elevator
         public static final double ElevatorKp = 0.0035;
-        public static final double ElevatorKf = -0.10459;
+        // public static final double ElevatorKf = -0.10459;
+        public static final double ElevatorKf = -0.20459;
     }
 
     public static final Double[][] kDistanceToTopShooterVelocity = {

@@ -34,11 +34,11 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if (joystick.getRightTriggerAxis() > 0) {
-      intakeSubsystem.setPower(joystick.getRightTriggerAxis());
+      intakeSubsystem.setPower(1);
       loaderSubsystem.setPower(loaderPower*.6);
     }
     else if (joystick.getLeftTriggerAxis() > 0) {
-        intakeSubsystem.setPower(-joystick.getLeftTriggerAxis());
+        intakeSubsystem.setPower(-1);
         loaderSubsystem.setPower(-loaderPower*.4);
       }
     else {

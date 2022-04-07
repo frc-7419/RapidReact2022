@@ -35,15 +35,17 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-    boolean squareInputs = true; // square joystick inputs
-    double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
-    double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
-    // double xSpeed = -joystick.getLeftY() * kStraight * kSlowStraight;
-    // double zRotation = joystick.getRightX() * kTurn * kSlowTurn;
-    // double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
-    // double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
-
-    driveBaseSubsystem.arcadeDrive(xSpeed, zRotation, squareInputs);
+    if (Math.abs(joystick.getRightX()) > 0 || Math.abs(joystick.getRightY()) > 0) {
+      driveBaseSubsystem.coast();
+      boolean squareInputs = true; // square joystick inputs
+      double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
+      double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
+      driveBaseSubsystem.arcadeDrive(xSpeed, zRotation, squareInputs);
+    }
+    else {
+      driveBaseSubsystem.setAll(0);
+      driveBaseSubsystem.brake();
+    }
   }
 
   @Override
