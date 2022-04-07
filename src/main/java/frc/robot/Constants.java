@@ -18,15 +18,9 @@ public final class Constants {
 
     public static enum CanIds {
         // 2020 drive train ids
-        // leftFalcon1(5),
-        // rightFalcon1(2),
-        // leftFalcon2(4),
-        // rightFalcon2(3)
-
-        // 2022 drive train ids
-        leftFalcon1(4),
-        leftFalcon2(5),
+        leftFalcon1(5),
         rightFalcon1(2),
+        leftFalcon2(4),
         rightFalcon2(3),
         topShooterFalcon(10), 
         bottomShooterFalcon(14),
@@ -99,10 +93,11 @@ public final class Constants {
         public static final double DriveBaseMotionMagickI = 0;
         public static final double DriveBaseMotionMagickD = 0;
 
-        //gyro
-        public static final double GyrokP = 0.085;
-        public static final double GyrokI = 0;
-        public static final double GyrokD = 0;
+        /* turn with gyro gain. add your own here */
+
+        public static final double GyrokP180 = 0.0035;
+        public static final double GyrokI180 = 0.000655;
+        public static final double GyrokD180 = 0.0004;
 
         // turret PID gains
         public static final double TurretKp = 0.0065;
@@ -196,4 +191,4 @@ public final class Constants {
         {13500.0, 0.0515},
         {14000.0, 0.05}
     };
-}
+};

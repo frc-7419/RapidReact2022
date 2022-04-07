@@ -19,7 +19,7 @@ public class GyroSubsystem extends SubsystemBase {
 		} catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true); 
         }
-        // SmartDashboard.putNumber("init angle", ahrs.getAngle());
+        SmartDashboard.putNumber("init angle", ahrs.getAngle());
     }
 
     public double getGyroAngle() {

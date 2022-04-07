@@ -2,8 +2,9 @@ package frc.robot;
 
 import com.team7419.joystick.DoubleButton;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -23,7 +24,6 @@ import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeederWithJoystick;
 import frc.robot.subsystems.gyro.GyroSubsystem;
-import frc.robot.subsystems.intake.DeployIntakeWithJoystick;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.led.LEDSubsystem;
@@ -37,14 +37,24 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * subsystems, commands, and button mappings) should be declared here.
+ */
 public class RobotContainer {
+  // The robot's subsystems and commands are defined here...
+
+  // private final XboxController joystick = new XboxController(0);
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
@@ -55,9 +65,9 @@ public class RobotContainer {
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-  private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
+  // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.2);
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
+  // private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
   private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1, 1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
@@ -107,8 +117,8 @@ public class RobotContainer {
   }
 
   private void smartDashboardBindings() {
-    SmartDashboard.putNumber("tTargetVelocity", 10);
-    SmartDashboard.putNumber("bTargetVelocity", 10);
+    // SmartDashboard.putNumber("tTargetVelocity", 10);
+    // SmartDashboard.putNumber("bTargetVelocity", 10);
 
     SmartDashboard.putNumber("bKp", PIDConstants.BottomShooterkP);
     SmartDashboard.putNumber("tKp", PIDConstants.TopShooterkP);
@@ -123,9 +133,13 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new WaitCommand(0);
+    //return shootGetSecondBallShoot;
+    return twoBallAuton;
+    //return unBrake;
+    //return turn180;
   }
-    
+
+  // set default commands here
   public void setDefaultCommands() {
     // driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     newDriveBaseSubsystem.setDefaultCommand(newArcadeDrive);
