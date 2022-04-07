@@ -22,15 +22,8 @@ public final class Constants {
         rightFalcon1(2),
         leftFalcon2(4),
         rightFalcon2(3),
-
-        // 2022 drive train ids
-        // leftFalcon1(4),
-        // leftFalcon2(5),
-        // rightFalcon1(2),
-        // rightFalcon2(3),
-
-        bottomShooterFalcon(10),
-        topShooterFalcon(14),
+        topShooterFalcon(10), 
+        bottomShooterFalcon(14),
         intakeSpark(32),  
         loaderVictor(16),
         turretFalcon(62),
@@ -49,33 +42,28 @@ public final class Constants {
 
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters
-        public static final double kCameraHeight = 0.84; // inches
-        public static final double mountingAngle = 55; 
-        public static final double m = 1.0; 
-        public static final double n = 0.48; //arbitrary
-        public static final double r1 = 0.37; //arbitrary
-        public static final double g = -9.8;  
+        public static final double kCameraHeight = 1.07; // meters
+        public static final double mountingAngle = 50;
         public static final double focalLength = 2.9272781257541;
     }
 
     public static class RobotConstants {
         public static final double TalonFXTicksPerRotation = 2048;
 
-        public static final double turretRadius = 1.5625; // placeholder value, will change
-        public static final double turretGearRatio = 100/12;
+        public static final double BottomShooterWheelRadius = 0.0508; // meters
+        public static final double TopShooterWheelRadius = 0.0508;
 
-        public static final double bottomShooterWheelRadius = 1.5; // placeholder value, will change
-        public static final double topShooterWheelRadius = 1.5;
+        public static final double RotationsPerMeter = 1/(2*Math.PI*0.0508);
 
         // top shooter kS, kV, kA
-        public static final double TopShooterKs = 0.73569/(2048*6);
-        public static final double TopShooterKv = 0.10952/(2048*6);
-        public static final double TopShooterKa = 0.0056306/(2048*6);
+        public static final double TopShooterKs = 0.56452;
+        public static final double TopShooterKv = 0.11144;
+        public static final double TopShooterKa = 0.026061;
 
-        // bottom shooter kS, kV, kA
-        public static final double BottomShooterKs = 0.57654/(2048*6);
-        public static final double BottomShooterKv = 0.10892/(2048*6);
-        public static final double BottomShooterKa = 0.0044231/(2048*6);
+        // bottom shooter kS, kV, kA, meters
+        public static final double BottomShooterKs = 0.67661;
+        public static final double BottomShooterKv = 0.10994;
+        public static final double BottomShooterKa = 0.0060832;;
 
         public static final double trackWidth = 0.69; // meters
     }
@@ -107,143 +95,106 @@ public final class Constants {
 
         /* turn with gyro gain. add your own here */
 
-        // public static final double GyrokP180 = 0.001;
-        // public static final double GyrokI180 = 0.001;
-        // public static final double GyrokD180 = 0.0001;
-        public static final double GyrokP30 = 0.0085;
-        public static final double GyrokI30 = 0;
-        public static final double GyrokD30 = 0.0001;
+        public static final double GyrokP180 = 0.0035;
+        public static final double GyrokI180 = 0.000655;
+        public static final double GyrokD180 = 0.0004;
+
+        public static final double GyrokP115 = 0.005;
+        public static final double GyrokI115 = 0.0;
+        public static final double GyrokD115 = 0.0000083;
+
+        // 0.005	0	0.0000083
 
         // turret PID gains
         public static final double TurretKp = 0.0065;
         public static final double TurretKi = 0;
         public static final double TurretKd = 0;
 
-        //shooter
-        public static final double BottomShooterkP = 0.17054/(2048*6);
-        public static final double BottomShooterkI = 0;
-        public static final double BottomShooterkD = 0;
-
-        public static final double TopShooterkP = 0.10603/(2048*6);
+        //shooter, meters
+        public static final double TopShooterkP = .0014651; //insert here
         public static final double TopShooterkI = 0;
         public static final double TopShooterkD = 0;
 
-
-        
-        //Auton PIDs
-
-        // 180
-        public static final double kP180 = 0.0035;
-        public static final double kI180 = 0.000655;
-        public static final double kD180 = 0.0004;
-
-        // 115
-        public static final double kP115 = 0.005;
-        public static final double kI115 = 0;
-        public static final double kD115 = 0.0000083;
-
-        // 65
-
-        /* 
-        These constants are actually for 63.5, so just need do modify a bit when tuning auton.
-         */
-        public static final double kP65 = 0.007; 
-        public static final double kI65 = 0.0002;
-        public static final double kD65 = 0.00030;
-        
-
-
-
+        public static final double BottomShooterkP = 0.00039888;
+        public static final double BottomShooterkI = 0;
+        public static final double BottomShooterkD = 0;
 
         //elevator
         public static final double ElevatorKp = 0.0035;
         public static final double ElevatorKf = -0.10459;
-
-        // turn with gyro
-        public static final double GyrokP = 0.006;
-        public static final double GyrokI = 0.00;
-        public static final double GyrokD = 0.0002;
-
-        public static final double GyrokP63 = 0.007;
-        public static final double GyrokI63 = 0.0002;
-        public static final double GyrokD63 = 0.0003;
-
-        public static final double GyrokP32 = 0.0085;
-        public static final double GyrokI32 = 0.00;
-        public static final double GyrokD32 = 0.0001;
-
-        public static final double GyrokP80 = 0.0064;
-        public static final double GyrokI80 = 0.000155;
-        public static final double GyrokD80 = 0.00025;
-
-        public static final double GyrokP85 = 0.0064;
-        public static final double GyrokI85 = 0.000155;
-        public static final double GyrokD85 = 0.00025;
-
-        public static final double GyrokP90 = 0.0064;
-        public static final double GyrokI90 = 0.000155;
-        public static final double GyrokD90 = 0.00025;
-
-        public static final double GyrokP115 = 0.005;
-        public static final double GyrokI115 = 0;
-        public static final double GyrokD115 = 0.0000083;
-
-        public static final double GyrokP180 = 0.0035;
-        public static final double GyrokI180 = 0.000655;
-        public static final double GyrokD180 = 0.0004;
-
-        public static final double GyrokP185 = 0.0035;
-        public static final double GyrokI185 = 0.000655;
-        public static final double GyrokD185 = 0.0004;
-
-        public static final double GyrokP122 = 0.0072;
-        public static final double GyrokI122 = 0.00048;
-        public static final double GyrokD122 = 0.00050;
-
-        public static final double GyrokP135 = 0.0047;
-        public static final double GyrokI135 = 0;
-        public static final double GyrokD135 = 0.0000083;
-        
-        public static final double GyrokP45 = 0.007;
-        public static final double GyrokI45 = 0;
-        public static final double GyrokD45 = 0.0001;
     }
 
-    public static final double[][] kRawVelocityToTopFf = {
-        {1000, 0.06365},
-        {1500, 0.058615},
-        {2000, 0.0555},
-        {2500, 0.0535},
-        {3000, 0.0525},
-        {3500, 0.0506},
-        {4000, 0.0495},
-        {4500, 0.049425},
-        {5000, 0.0488},
-        {5500, 0.0491},
-        {6000, 0.048305},
-        {6500, 0.048305},
-        {7000, 0.0486},
-        {7500, 0.048875},
-        {8000, 0.04874},
-        {8500, 0.04876}
+    public static final Double[][] kDistanceToTopShooterVelocity = {
+        {1.03, 31.5},
+        {1.3, 37.0},
+        {1.6, 37.0},
+        {1.9, 42.0},
+        {2.2, 45.0}
     };
 
-    public static final double[][] kRawVelocityToBottomFf = {
-        {1000, 0.0615},
-        {1500, 0.0552},
-        {2000, 0.05},
-        {2500, 0.04815},
-        {3000, 0.04775},
-        {3500, 0.04735},
-        {4000, 0.047545},
-        {4500, 0.0473445},
-        {5000, 0.0471},
-        {5500, 0.0475},
-        {6000, 0.047385},
-        {6500, 0.0477425},
-        {7000, 0.0477425},
-        {7500, 0.047761},
-        {8000, 0.04772},
-        {8500, 0.047827}
+    public static final Double[][] kDistanceToBottomShooterVelocity = {
+        {1.03, 31.0},
+        {1.3, 30.0},
+        {1.6, 35.0},
+        {1.9, 40.0},
+        {2.2, 43.0}
     };
-}
+
+    public static final Double[][] kRawVelocityToTopFf = {
+        {1000.0, 0.06365},
+        {1500.0, 0.058615},
+        {2000.0, 0.0555},
+        {2500.0, 0.0535},
+        {3000.0, 0.0525},
+        {3500.0, 0.0506},
+        {4000.0, 0.0495},
+        {4500.0, 0.049425},
+        {5000.0, 0.0488},
+        {5500.0, 0.0491},
+        {6000.0, 0.048305},
+        {6500.0, 0.048305},
+        {7000.0, 0.0486},
+        {7500.0, 0.048875},
+        {8000.0, 0.04874},
+        {8500.0, 0.04876},
+        {9000.0, 0.048},
+        {10000.0, 0.04785},
+        {10500.0, 0.04775},
+        {11000.0, 0.04775},
+        {12000.0, 0.049},
+        {12500.0, 0.0491},
+        {13000.0, 0.0484},
+        {13500.0, 0.0525},
+        {14000.0, 0.0545}
+    };
+
+    public static final Double[][] kRawVelocityToBottomFf = {
+        {1000.0, 0.0615},
+        {1500.0, 0.0552},
+        {2000.0, 0.05},
+        {2500.0, 0.04815},
+        {3000.0, 0.04775},
+        {3500.0, 0.04735},
+        {4000.0, 0.047545},
+        {4500.0, 0.0473445},
+        {5000.0, 0.0471},
+        {5500.0, 0.0475},
+        {6000.0, 0.047385},
+        {6500.0, 0.0477425},
+        {7000.0, 0.0477425},
+        {7500.0, 0.047761},
+        {8000.0, 0.04772},
+        {8500.0, 0.047827},
+        {9000.0, 0.04735},
+        {9500.0, 0.04725},
+        {10000.0, 0.04725},
+        {10500.0, 0.04725},
+        {11000.0, 0.0472},
+        {11500.0, 0.0472},
+        {12000.0, 0.0485},
+        {12500.0, 0.0486},
+        {13000.0, 0.0481},
+        {13500.0, 0.0515},
+        {14000.0, 0.05}
+    };
+};

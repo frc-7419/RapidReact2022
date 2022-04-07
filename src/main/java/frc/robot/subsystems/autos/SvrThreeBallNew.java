@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.drive.Coast;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
-import frc.robot.subsystems.drive.UnBrake;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -37,13 +37,13 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
   ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,
   FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
     addCommands(
-      parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049))
+      parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget()), // gttv while aligning turret
 
       // shoot preload
       parallel(
           new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-          new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
+          new GetToTargetVelocity(shooterSubsystem, 37, 30),
           new RunFeeder(feederSubsystem, 1),
           new RunLoader(loaderSubsystem, 1)
       ).withTimeout(1.5), // tune time
@@ -75,12 +75,12 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
       new WaitCommand(0.25),
 
       parallel(
-        new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049),
+        new GetToTargetVelocity(shooterSubsystem, 45.5, 43),
         new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem)).deadlineWith(
         new StraightWithMotionMagic(driveBaseSubsystem, 116.17)
       ).withInterrupt(() -> shooterSubsystem.bothOnTarget()),
 
-      new GetToTargetVelocity(shooterSubsystem, 7900*1, 9900*1, 0.04874, 0.049).deadlineWith(
+      new GetToTargetVelocity(shooterSubsystem, 45.5, 43).deadlineWith(
         new StraightWithMotionMagic(driveBaseSubsystem, -50)
       ).andThen(() -> new RunFeeder(feederSubsystem, 1))
       
@@ -155,7 +155,7 @@ public class SvrThreeBallNew extends SequentialCommandGroup {
       
     );
 
-    addCommands(new UnBrake(driveBaseSubsystem));
+    addCommands(new Coast(driveBaseSubsystem));
   }
 }
 
