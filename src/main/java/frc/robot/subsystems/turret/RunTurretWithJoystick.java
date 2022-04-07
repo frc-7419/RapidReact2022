@@ -46,7 +46,7 @@ public class RunTurretWithJoystick extends CommandBase {
       turretSubsystem.coast();
       turretSubsystem.setPower(kSpeed*joystick.getLeftX());
     }
-    else if (limelightSubsystem.getTv() == 1.0) {
+    else if (tv == 1.0) {
       pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
       pidOutput = pidController.calculate(tx);
       turretSubsystem.setPower(pidOutput);
