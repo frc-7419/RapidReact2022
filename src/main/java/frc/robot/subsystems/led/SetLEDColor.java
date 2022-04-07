@@ -49,7 +49,8 @@ public class SetLEDColor extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ledSubsystem.stopLed();
+    ledSubsystem.setLEDColor(255, 255, 0);
+    // ledSubsystem.stopLed();
   }
 
   // Returns true when the command should end.
