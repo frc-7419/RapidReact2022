@@ -20,9 +20,6 @@ public class ShooterSubsystem extends SubsystemBase{
     
     private SimpleMotorFeedforward topFeedforward;
     private SimpleMotorFeedforward bottomFeedforward;
-    
-    private InterpolatedTreeMap topShooterFeedforwardReferencePoints;
-    private InterpolatedTreeMap bottomShooterFeedforwardReferencePoints;
 
     private double bottomTargetVelocity = 0; // MPS
     private double topTargetVelocity = 0; 
