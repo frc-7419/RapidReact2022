@@ -1,4 +1,4 @@
-// package frc.robot.subsystems.shooter;
+package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.InterpolatedTreeMap;
@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
-// public class GetToTargetVelocityWithLimelight extends CommandBase {
+public class GetToTargetVelocityWithLimelight extends CommandBase {
 
-//   private ShooterSubsystem shooterSubsystem;
-//   private LimelightSubsystem limelightSubsystem;
+  private ShooterSubsystem shooterSubsystem;
+  private LimelightSubsystem limelightSubsystem;
 
   private InterpolatedTreeMap topShooterReferencePoints;
   private InterpolatedTreeMap bottomShooterReferencePoints;
@@ -58,10 +58,9 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
-  
-    // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
-    // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
-    // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
+    SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
+    SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
+    SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
   }
 
   @Override

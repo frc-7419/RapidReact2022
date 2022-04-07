@@ -42,8 +42,8 @@ public class ShooterSubsystem extends SubsystemBase{
         bottomFalcon.configVoltageCompSaturation(maxVoltage); // "full output" will now scale to 11 Volts for all control modes when enabled.
         bottomFalcon.enableVoltageCompensation(true); // turn on/off feature
 
-        topFalcon.configVoltageCompSaturation(maxVoltage);
-        topFalcon.enableVoltageCompensation(true); 
+        topFalcon.configVoltageCompSaturation(maxVoltage); // "full output" will now scale to 11 Volts for all control modes when enabled.
+        topFalcon.enableVoltageCompensation(true); // turn on/off feature
 
         bottomFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         topFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
