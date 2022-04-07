@@ -12,8 +12,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimelightSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  
   // set up a new instance of NetworkTables (the api/library used to read values from limelight)
   NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
   
@@ -30,15 +28,11 @@ public class LimelightSubsystem extends SubsystemBase {
   private double theta;
   private double distance;
   
-  
   public LimelightSubsystem() {}
-
 
   @Override
   public void periodic() {
-
     distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
-
     // SmartDashboard.putNumber("tv", tv.getDouble(0));
     // SmartDashboard.putNumber("tx", tx.getDouble(0));
     // SmartDashboard.putNumber("ty", ty.getDouble(0));
