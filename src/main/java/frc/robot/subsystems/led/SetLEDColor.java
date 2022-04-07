@@ -28,8 +28,8 @@ public class SetLEDColor extends CommandBase {
   public void execute() {
     // ledSubsystem.rainbowLED(rainbowFirstPixelHue);
     ledSubsystem.snakeRED(rainbowFirstPixelHue);
-    ledSubsystem.startLed();
     rainbowFirstPixelHue += 3;
+    ledSubsystem.startLed();
     // rainbowFirstPixelHue %= 180;
   }
 
