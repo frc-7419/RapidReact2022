@@ -32,7 +32,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("Shooter Running", false);
+    // SmartDashboard.putBoolean("Shooter Running", false);
     
     // bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     // bKi = SmartDashboard.getNumber("bKi", PIDConstants.BottomShooterkI);
@@ -40,8 +40,8 @@ public class GetToTargetVelocity extends CommandBase {
     // tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
     // tKi = SmartDashboard.getNumber("tKi", PIDConstants.TopShooterkI);
 
-    shooterSubsystem.setTopPIDF(bKp, bKi, 0, 0);
-    shooterSubsystem.setBottomPIDF(tKp, tKi, 0, 0);
+    shooterSubsystem.setTopPIDF(0, 0, 0, 0);
+    shooterSubsystem.setBottomPIDF(0, 0, 0, 0);
   }
 
   @Override
