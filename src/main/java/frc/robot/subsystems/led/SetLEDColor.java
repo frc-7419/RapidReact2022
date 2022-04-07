@@ -10,6 +10,7 @@ public class SetLEDColor extends CommandBase {
   /** Creates a new SetLEDColor. */
   private LEDSubsystem ledSubsystem;
   private int rainbowFirstPixelHue = 0;
+
   public SetLEDColor(LEDSubsystem ledSubsystem) {
     this.ledSubsystem = ledSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,12 +26,11 @@ public class SetLEDColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    // ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    ledSubsystem.snakeRED(rainbowFirstPixelHue);
     ledSubsystem.startLed();
     rainbowFirstPixelHue += 3;
-    rainbowFirstPixelHue %= 180;
-    // ledSubsystem.setLEDColor(0, 0, 255);
-    // ledSubsystem.startLed();
+    // rainbowFirstPixelHue %= 180;
   }
 
   // Called once the command ends or is interrupted.

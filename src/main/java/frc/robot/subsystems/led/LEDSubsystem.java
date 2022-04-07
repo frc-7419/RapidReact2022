@@ -58,4 +58,11 @@ public class LEDSubsystem extends SubsystemBase {
     // Increase by certain number to make the rainbow "move" (change from 3 to greater number if needed)
     
   }
+  public void snakeRED(int rainbowFirstPixelHue) {
+    for (var i = 0; i < ledBuffer.getLength(); i++) {
+      ledBuffer.setHSV(i, rainbowFirstPixelHue, 100, 100);
+    }
+   
+   led.setData(ledBuffer);
+  }
 }
