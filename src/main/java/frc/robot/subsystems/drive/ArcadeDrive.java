@@ -44,7 +44,6 @@ public class ArcadeDrive extends CommandBase {
     }
     else {
       driveBaseSubsystem.setAll(0);
-      driveBaseSubsystem.brake();
     }
   }
 
