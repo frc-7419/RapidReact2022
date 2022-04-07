@@ -6,15 +6,14 @@ package frc.robot.subsystems.feeder;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 
 public class RunFeederWithJoystick extends CommandBase {
   private FeederSubsystem feederSubsystem;
-  private double power;
   private XboxController joystick;
 
-  public RunFeederWithJoystick(FeederSubsystem feederSubsystem, XboxController joystick, double power) {
+  public RunFeederWithJoystick(FeederSubsystem feederSubsystem, XboxController joystick) {
     this.feederSubsystem = feederSubsystem;
-    this.power = power;
     this.joystick = joystick;
     addRequirements(feederSubsystem);
   }
@@ -27,9 +26,9 @@ public class RunFeederWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if(joystick.getLeftBumper()) {
-      feederSubsystem.setPower(power);
+      feederSubsystem.setPower(Constants.PowerConstants.FeederVoltage);
     } else if (joystick.getRightBumper()) {
-      feederSubsystem.setPower(-power);
+      feederSubsystem.setPower(-Constants.PowerConstants.FeederVoltage);
     }
     else {
       feederSubsystem.setPower(0);

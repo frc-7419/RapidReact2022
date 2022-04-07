@@ -76,7 +76,9 @@ public final class Constants {
         // public static final double DriveBaseRightStraight = .45;
 
         public static final double DriveBaseStraight = .55;
-        public static final double DriveBaseTurn = .35; 
+        public static final double DriveBaseTurn = .35;
+        public static final double FeederVoltage = 11*0.6
+        ; 
         // public static final double DriveBaseLeftStraight = -.15;
         // public static final double DriveBaseRightTurn = .1; 
         // public static final double DriveBaseLeftTurn = .1; 

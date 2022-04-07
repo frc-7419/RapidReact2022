@@ -32,9 +32,9 @@ public class RunTurretWithJoystick extends CommandBase {
   public void initialize() {
     turretSubsystem.coast();
 
-    pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
-    pidController.setSetpoint(0);
-    pidController.setTolerance(1);
+    // pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
+    // pidController.setSetpoint(0);
+    // pidController.setTolerance(1);
   }
 
   @Override
@@ -44,13 +44,13 @@ public class RunTurretWithJoystick extends CommandBase {
 
     if (joystick.getLeftX() != 0) {
       turretSubsystem.coast();
-      turretSubsystem.setPower(kSpeed*joystick.getLeftX());
+      turretSubsystem.setPower(kSpeed*-joystick.getLeftX());
     }
-    else if (tv == 1.0) {
-      pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
-      pidOutput = pidController.calculate(tx);
-      turretSubsystem.setPower(pidOutput);
-    }
+    // else if (tv == 1.0) {
+    //   pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
+    //   pidOutput = pidController.calculate(tx);
+    //   turretSubsystem.setPower(pidOutput);
+    // }
     else {
       turretSubsystem.setPower(0);
       turretSubsystem.brake();
