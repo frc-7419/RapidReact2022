@@ -15,7 +15,7 @@ public class PathTestAuton extends SequentialCommandGroup {
         addCommands(
             parallel(
                 new FollowTrajectory(driveBaseSubsystem, PathPlanner.loadPath(String.format(
-                        "testauton"), DriveConstants.maxVelocity, DriveConstants.maxAcceleration)),
+                        "autontest"), DriveConstants.maxVelocity, DriveConstants.maxAcceleration)),
                 new RunIntake(intakeSubsystem, 1),
                 new RunLoader(loaderSubsystem, 0.6)
             )

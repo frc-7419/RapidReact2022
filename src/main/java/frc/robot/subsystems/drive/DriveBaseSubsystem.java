@@ -10,6 +10,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -63,7 +64,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    odometry.update(gyro.getRotation2d(), getLeftDistance(), getRightDistance());
+    odometry.update(new Rotation2d(-gyro.getRotation2d().getRadians()), getLeftDistance(), getRightDistance());
   }
   public enum TurnDirection {
     LEFT,
@@ -86,14 +87,14 @@ public class DriveBaseSubsystem extends SubsystemBase {
     return left1.getSelectedSensorPosition()/DriveConstants.unitsPerMeter;
   }
   public double getRightDistance() {
-    return right1.getSelectedSensorPosition()/DriveConstants.unitsPerMeter;
+    return -right1.getSelectedSensorPosition()/DriveConstants.unitsPerMeter;
   }
 
   public double getLeftVelocity() {
     return left1.getSelectedSensorVelocity();
   }
   public double getRightVelocity() {
-    return right1.getSelectedSensorVelocity();
+    return -right1.getSelectedSensorVelocity();
   }
   public Pose2d getPose() {
     return odometry.getPoseMeters();

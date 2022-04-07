@@ -12,6 +12,7 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
+import frc.robot.subsystems.autos.PathTestAuton;
 import frc.robot.subsystems.autos.TwoBallAuton;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -79,6 +80,7 @@ public class RobotContainer {
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final TwoBallAuton twoBallAuton = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem);
+  private final PathTestAuton pathTestAuton = new PathTestAuton(driveBaseSubsystem, intakeSubsystem, loaderSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -113,8 +115,9 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+    return pathTestAuton;
     //return shootGetSecondBallShoot;
-    return twoBallAuton;
+    // return twoBallAuton;
     //return unBrake;
     //return turn180;
   }
