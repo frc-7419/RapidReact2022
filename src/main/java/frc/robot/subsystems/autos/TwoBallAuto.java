@@ -24,9 +24,9 @@ import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
-public class TwoBallAuton extends SequentialCommandGroup {
+public class TwoBallAuto extends SequentialCommandGroup {
 
-    public TwoBallAuton(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
+    public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem) {
         addCommands(
             parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
                 .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.75), // gttv while aligning turret
