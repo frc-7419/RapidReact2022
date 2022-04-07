@@ -57,7 +57,7 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
 
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
-
+  
     SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
     SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
