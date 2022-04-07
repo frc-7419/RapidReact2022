@@ -31,6 +31,7 @@ import frc.robot.subsystems.led.SetLEDColor;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
@@ -89,11 +90,11 @@ public class RobotContainer {
 
     // edge of tarmac
     new JoystickButton(joystick2, XboxController.Button.kX.value)
-    .whileHeld(new GetToTargetVelocity(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
+    .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
     // lower hub shot, consistent
     new JoystickButton(joystick2, XboxController.Button.kA.value)
-      .whileHeld(new GetToTargetVelocity(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
+      .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
       .whileHeld(new CoastArms(armsSubsystem));
