@@ -13,6 +13,8 @@ public class SetLEDColor extends CommandBase {
 
   private int rainbowFirstPixelHue = 0;
 
+  private double limelightTolerance = 3.0;
+
   public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem) {
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
@@ -32,12 +34,12 @@ public class SetLEDColor extends CommandBase {
     // ledSubsystem.startLed();
     // rainbowFirstPixelHue += 3;
     // rainbowFirstPixelHue %= 180;
-    if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) < 1) {
-      ledSubsystem.setLEDColor(0, 255, 0);
+    if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
+      ledSubsystem.setLEDColor(0, 0, 255);
       // ledSubsystem.startLed();
     }
-    else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > 1) {
-      ledSubsystem.setLEDColor(0, 0, 255);
+    else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) >= limelightTolerance) {
+      ledSubsystem.setLEDColor(0, 255, 0);
       // ledSubsystem.startLed();
     }
     else {
