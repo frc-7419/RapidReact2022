@@ -64,7 +64,7 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
-  private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem);
   private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final ThreeBallAuto threeBallAuto = new ThreeBallAuto(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
@@ -110,15 +110,19 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    autonChooser.addOption("2 Ball", twoBallAuto);
-    autonChooser.addOption("3 Ball", threeBallAuto);
+    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    // autonChooser.addOption("2 Ball", twoBallAuto);
+    // autonChooser.addOption("3 Ball", threeBallAuto);
     // autonChooser.addOption("5 Ball", fiveBallAuto);
-    SmartDashboard.putData(autonChooser);
+    // SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
-    return autonChooser.getSelected();
+    return oneBallAuto;
+    // return twoBallAuto;
+    // return threeBallAuto;
+
+    // return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {
