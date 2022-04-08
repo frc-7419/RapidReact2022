@@ -2,7 +2,6 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class OldArcadeDrive extends CommandBase {
@@ -10,8 +9,6 @@ public class OldArcadeDrive extends CommandBase {
   private OldDriveBaseSubsystem oldDriveBaseSubsystem;
   private double kStraight;
   private double kTurn;
-  private double kSlowStraight;
-  private double kSlowTurn;
   private XboxController joystick;
   
   // Limits *acceleration* not max speed; basically kD
@@ -35,12 +32,19 @@ public class OldArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-    if (Math.abs(joystick.getRightX()) > 0 || Math.abs(joystick.getRightY()) > 0) {
+    double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
+    double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
+    
+    if (Math.abs(joystick.getRightY()) > 0) {
       oldDriveBaseSubsystem.coast();
-      boolean squareInputs = true; // square joystick inputs
-      double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
-      double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
-      oldDriveBaseSubsystem.arcadeDrive(xSpeed, zRotation, squareInputs);
+      
+      // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
+      // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
+
+      double leftPower = xSpeed + zRotation;
+      double rightPower = xSpeed - zRotation;
+      oldDriveBaseSubsystem.setLeftPower(leftPower);
+      oldDriveBaseSubsystem.setRightPower(rightPower);
     }
     else {
       oldDriveBaseSubsystem.setAll(0);
