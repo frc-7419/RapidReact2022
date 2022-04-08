@@ -15,10 +15,12 @@ public class FeederSubsystem extends SubsystemBase {
 
   public FeederSubsystem() {
     feeder = new TalonSRX(CanIds.feederVictor.id);
+    feeder.configVoltageCompSaturation(11);
+    feeder.enableVoltageCompensation(true);
   }
 
   public void setPower(double power) {
-    feeder.set(ControlMode.PercentOutput, power);
+    feeder.set(ControlMode.PercentOutput, power/11);
   }
 
   @Override

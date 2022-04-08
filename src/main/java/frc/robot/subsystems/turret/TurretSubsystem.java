@@ -11,10 +11,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import frc.robot.Constants.CanIds;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
 public class TurretSubsystem extends SubsystemBase {
@@ -34,17 +32,32 @@ public class TurretSubsystem extends SubsystemBase {
 
   public TurretSubsystem() {
     turret = new TalonFX(CanIds.turretFalcon.id);
-    forwardLimitSwitch = new DigitalInput(0);
-    reverseLimitSwitch = new DigitalInput(1);
+    forwardLimitSwitch = new DigitalInput(1);
+    reverseLimitSwitch = new DigitalInput(2);
+    turret.configFactoryDefault();
+    turret.configReverseSoftLimitEnable(false, 0);
+    turret.configForwardSoftLimitEnable(false, 0);
+  }
 
-    // because sample code 
-    turret.configMotionCruiseVelocity(15000, 0);
-    turret.configMotionAcceleration(6000, 0);
-    turret.configMotionCruiseVelocity(15000, 0);
-    turret.configMotionAcceleration(6000, 0);  
-    //                                     P     I  D  F
-    TalonFuncs.setPIDFConstants(0, turret, 0.01, 0, 0, 0);
-    
+  @Override
+  public void periodic() {
+    // if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
+    //   reverseLimitDetected = true;
+    //   turret.configReverseSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+    //   turret.configReverseSoftLimitEnable(true, 0);
+    // } 
+    // if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
+    //   forwardLimitDetected = true;
+    //   turret.configForwardSoftLimitThreshold(turret.getSelectedSensorPosition(), 0);
+    //   turret.configForwardSoftLimitEnable(true, 0);
+    // } 
+    // SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
+
+    // SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
+
+    // SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
+    // SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
+    // SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
   }
 
   public void setPower(double power) {
@@ -72,29 +85,5 @@ public class TurretSubsystem extends SubsystemBase {
     //                      average of forward + reverse = 0                             add the desired angle
     double setpoint = (forwardLimitPosition + reverseLimitPosition)/2 + UnitConversions.degreesToTicks(angle, GEAR_RATIO, 2048);
     turret.set(ControlMode.MotionMagic, setpoint);
-  }
-
-  @Override
-  public void periodic() {
-    if (getReverseLimitSwitch().get() && !reverseLimitDetected) {
-      reverseLimitDetected = true;
-      reverseLimitPosition = turret.getSelectedSensorPosition();
-      turret.configReverseSoftLimitThreshold(reverseLimitPosition-ANGLE_THRESHOLD, 0);
-      turret.configReverseSoftLimitEnable(true, 0);
-    } 
-    if (getForwardLimitSwitch().get() && !forwardLimitDetected) {
-      forwardLimitDetected = true;
-      forwardLimitPosition = turret.getSelectedSensorPosition();
-      turret.configForwardSoftLimitThreshold(forwardLimitPosition+ANGLE_THRESHOLD, 0);
-      turret.configForwardSoftLimitEnable(true, 0);
-    } 
-    SmartDashboard.putBoolean("Reverse Limit Detected", reverseLimitDetected);
-
-    SmartDashboard.putBoolean("Forward Limit Detected", forwardLimitDetected);
-
-    SmartDashboard.putBoolean("Forward Limit Switch", forwardLimitSwitch.get());
-    SmartDashboard.putBoolean("Reverse Limit Switch", reverseLimitSwitch.get());
-    SmartDashboard.putNumber("Turret Encoder Position", turret.getSelectedSensorPosition());
-    
   }
 }

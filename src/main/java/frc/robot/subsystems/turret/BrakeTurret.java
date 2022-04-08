@@ -7,16 +7,18 @@ package frc.robot.subsystems.turret;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class BrakeTurret extends CommandBase {
-  /** Creates a new BrakeTurret. */
-  TurretSubsystem turretSubsystem;
+  private TurretSubsystem turretSubsystem;
+
   public BrakeTurret(TurretSubsystem turretSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.turretSubsystem = turretSubsystem;
+    addRequirements(turretSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    turretSubsystem.brake();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

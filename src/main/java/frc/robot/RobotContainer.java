@@ -24,6 +24,8 @@ import frc.robot.subsystems.feeder.RunFeederWithJoystick;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLEDColor;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
@@ -37,12 +39,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
@@ -56,7 +52,6 @@ public class RobotContainer {
   private final TurretSubsystem turretSubsystem = new TurretSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -105,6 +100,14 @@ public class RobotContainer {
     // // autonChooser.addOpton("3 Ball", threeBallAuto);
     // // autonChooser.addOption("5 Ball", fiveBallAuto);
     // SmartDashboard.putData(autonChooser);
+  }
+
+  private void configureAutoSelector() {
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    autonChooser.addOption("2 Ball", twoBallAuto);
+    // autonChooser.addOpton("3 Ball", threeBallAuto);
+    // autonChooser.addOption("5 Ball", fiveBallAuto);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {

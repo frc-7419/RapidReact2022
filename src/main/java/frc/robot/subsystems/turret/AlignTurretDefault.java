@@ -52,7 +52,6 @@ public class AlignTurretDefault extends CommandBase {
     if (tv == 1.0) {
       pidController = new PIDController(kP, kI, kD);
       pidOutput = pidController.calculate(tx);
-      // SmartDashboard.putNumber("pid output", pidOutput);
       turretSubsystem.setPower(pidOutput);
     }
   }

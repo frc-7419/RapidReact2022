@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunElevatorWithJoystick extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
-  private XboxController joystick;
+  private XboxController joystick1;
+  private XboxController joystick2;
 
-  public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick) {
+  public RunElevatorWithJoystick(ElevatorSubsystem elevatorSubsystem, XboxController joystick1, XboxController joystick2) {
     this.elevatorSubsystem = elevatorSubsystem;
-    this.joystick = joystick;
+    this.joystick1 = joystick1;
+    this.joystick2 = joystick2;
     addRequirements(elevatorSubsystem);
   }
 
@@ -30,14 +32,16 @@ public class RunElevatorWithJoystick extends CommandBase {
 
     // SmartDashboard.putNumber("joystick out", joystick.getLeftY());
 
-    if (joystick.getLeftY() != 0) {
+    if (joystick1.getLeftY() != 0) {
       elevatorSubsystem.coast();
-      elevatorSubsystem.setPower(-joystick.getLeftY() * 0.32);
+      elevatorSubsystem.setPower(-joystick1.getLeftY() * 0.32);
+    } else if (joystick2.getLeftY() != 0) {
+      elevatorSubsystem.coast();
+      elevatorSubsystem.setPower(-joystick2.getLeftY() * 0.32);
     } else {
       elevatorSubsystem.setPower(0);
       elevatorSubsystem.brake();
-    }
-      
+    }  
   }
 
   @Override

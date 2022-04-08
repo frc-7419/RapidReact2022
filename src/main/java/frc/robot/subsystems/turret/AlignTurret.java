@@ -7,7 +7,6 @@ import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class AlignTurret extends CommandBase {
-  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private TurretSubsystem turretSubsystem;
   private LimelightSubsystem limelightSubsystem;
