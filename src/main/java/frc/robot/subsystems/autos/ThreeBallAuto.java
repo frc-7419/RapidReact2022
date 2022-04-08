@@ -58,7 +58,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
         // deploy intake
         new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
-        // move forward and running intake + loader
+        // move forward while running intake + loader
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6)
