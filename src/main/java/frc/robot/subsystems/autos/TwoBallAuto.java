@@ -56,7 +56,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
                 parallel(
                     new RunIntake(intakeSubsystem, 1),
                     new RunLoader(loaderSubsystem, 0.6)
-                ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50))
+                ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 46))
                 .withTimeout(2.5),
                 
                 new WaitCommand(0.25),
