@@ -45,7 +45,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
 
-        // retract turret
+        // retract intake
         new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
         // turn 180 while braking turret
