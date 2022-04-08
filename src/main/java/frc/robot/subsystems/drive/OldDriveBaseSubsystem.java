@@ -16,8 +16,8 @@ public class OldDriveBaseSubsystem extends SubsystemBase {
   
   public OldDriveBaseSubsystem() {
     left1 = new TalonFX(CanIds.leftFalcon1.id);
-	  right1 = new TalonFX(CanIds.rightFalcon1.id);
-	  left2 = new TalonFX(CanIds.leftFalcon2.id);
+	right1 = new TalonFX(CanIds.rightFalcon1.id);
+	left2 = new TalonFX(CanIds.leftFalcon2.id);
     right2 = new TalonFX(CanIds.rightFalcon2.id);
 
     factoryResetAll();
