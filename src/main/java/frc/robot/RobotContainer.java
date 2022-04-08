@@ -81,10 +81,11 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
       .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     
+    // joystick 1 brake turret during hang
     new JoystickButton(joystick1, XboxController.Button.kB.value)
       .whileHeld(new BrakeTurret(turretSubsystem));
 
-      // any distance
+      // any distance, interpolation
     new JoystickButton(joystick2, XboxController.Button.kY.value)
       .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
 
@@ -96,6 +97,7 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kA.value)
       .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
+      // coast arms during hanging
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
       .whileHeld(new CoastArms(armsSubsystem));
 
