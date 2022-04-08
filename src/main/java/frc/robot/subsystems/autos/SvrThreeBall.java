@@ -70,26 +70,39 @@ public class SvrThreeBall extends ParallelCommandGroup {
         new WaitCommand(0.25),
 
         // retract intake
-        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+        // new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
         // turn 117 while braking turret
         new BrakeTurret(turretSubsystem)
-            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 117, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
-            .withTimeout(2.5),
+            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 116.5, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
+            .withTimeout(1.25),
 
-        new WaitCommand(0.25),
+        new WaitCommand(0.15),
 
         // deploy intake
-        new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+        // new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
         // move forward 116.17 and gttv
-        new GetToTargetVelocity(shooterSubsystem, 45.5, 43)
-          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 130))
-          .withTimeout(2.5),
+        parallel(
+            new RunIntake(intakeSubsystem, 1),
+            new RunLoader(loaderSubsystem, 0.6))
+        .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 132.5))
+        .withTimeout(2.5),
 
-        parallel(new GetToTargetVelocity(shooterSubsystem, 45.5, 43), new AlignTurretDefault(turretSubsystem, limelightSubsystem))
-          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -55))
-          .withTimeout(1.5),
+        new WaitCommand(0.15),
+
+        // new AlignTurretDefault(turretSubsystem, limelightSubsystem)
+        //   .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -60))
+        //   .withTimeout(1),
+
+         // turn 117 while braking turret
+         new BrakeTurret(turretSubsystem)
+         .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 63.5, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
+         .withTimeout(0.85),
+        
+        // gttv and align
+        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
+          .withTimeout(0.75), // gttv while aligning turret
         
         // shoot ball
         parallel(

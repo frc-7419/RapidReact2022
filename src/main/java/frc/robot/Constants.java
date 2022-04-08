@@ -97,6 +97,10 @@ public final class Constants {
 
         /* turn with gyro gain. add your own here */
 
+        public static final double GyrokP63 = 0.007;
+        public static final double GyrokI63 = 0.0002;
+        public static final double GyrokD63 = 0.0003;
+
         public static final double GyrokP180 = 0.0035;
         public static final double GyrokI180 = 0.000655;
         public static final double GyrokD180 = 0.0004;
