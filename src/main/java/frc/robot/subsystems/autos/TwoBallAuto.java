@@ -11,6 +11,7 @@ import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.led.LEDSubsystem;
@@ -26,7 +27,7 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class TwoBallAuto extends ParallelCommandGroup {
 
-    public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, LEDSubsystem ledSubsystem) {
+    public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, LEDSubsystem ledSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
         addCommands(
             sequence(
                 parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
@@ -40,7 +41,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
                     new RunLoader(loaderSubsystem, 1)
                 ).withTimeout(1.5), // tune time
                 
-                // new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+                new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
                 // turn 180 while braking turret
                 new BrakeTurret(turretSubsystem)
@@ -50,7 +51,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
                 new WaitCommand(0.25),  
                 
                 // deploy intake
-                // new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
                 // move forward and running intake + loader
                 parallel(
@@ -62,7 +63,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
                 new WaitCommand(0.25),
 
                 // retract intake
-                // new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+                new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
                 // turn 180 while braking turret
                 new BrakeTurret(turretSubsystem)
