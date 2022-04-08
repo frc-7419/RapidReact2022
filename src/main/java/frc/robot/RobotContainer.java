@@ -29,7 +29,6 @@ public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
   private final OldDriveBaseSubsystem oldDriveBaseSubsystem = new OldDriveBaseSubsystem();
-  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
@@ -43,9 +42,7 @@ public class RobotContainer {
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
   private final SvrThreeBall svrThreeBallNew = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, oldDriveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, 
-  ledSubsystem);
-
-  private final Coast coast = new Coast(driveBaseSubsystem);
+  ledSubsystem); 
   
 
   public RobotContainer() {

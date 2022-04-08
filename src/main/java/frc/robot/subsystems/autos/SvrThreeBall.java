@@ -72,7 +72,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
         // retract intake
         new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
-        // turn 180 while braking turret
+        // turn 117 while braking turret
         new BrakeTurret(turretSubsystem)
             .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 117, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
             .withTimeout(2.5),
@@ -84,17 +84,17 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
         // move forward 116.17 and gttv
         new GetToTargetVelocity(shooterSubsystem, 45.5, 43)
-          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 126.17))
-          .withTimeout(3),
+          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 130))
+          .withTimeout(2.5),
 
         parallel(new GetToTargetVelocity(shooterSubsystem, 45.5, 43), new AlignTurretDefault(turretSubsystem, limelightSubsystem))
-          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -50))
-          .withTimeout(2),
+          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -55))
+          .withTimeout(1.5),
         
         // shoot ball
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 37, 30),
+            new GetToTargetVelocity(shooterSubsystem, 40, 35),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time

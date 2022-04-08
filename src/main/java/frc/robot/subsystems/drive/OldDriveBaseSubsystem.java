@@ -9,10 +9,10 @@ import frc.robot.Constants.CanIds;
 
 public class OldDriveBaseSubsystem extends SubsystemBase {
   
-  public TalonFX left1;
-	public TalonFX right1;
+    public TalonFX left1;
+    public TalonFX right1;
 	public TalonFX left2;
-  public TalonFX right2;
+    public TalonFX right2;
   
   public OldDriveBaseSubsystem() {
     left1 = new TalonFX(CanIds.leftFalcon1.id);
