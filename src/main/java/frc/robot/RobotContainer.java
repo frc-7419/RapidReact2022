@@ -45,6 +45,7 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
@@ -55,19 +56,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  // private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
 
-
-  // private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, joystick2, 0.2);
-  // private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
-  private final AlignTurretDefault alignTurretDefault = new AlignTurretDefault(turretSubsystem, limelightSubsystem);
-  // private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
-  private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1, 1);
-  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
-  private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
-  PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
   private final SvrThreeBall svrThreeBallNew = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem);
 
   public RobotContainer() {
@@ -100,14 +89,6 @@ public class RobotContainer {
     // // autonChooser.addOpton("3 Ball", threeBallAuto);
     // // autonChooser.addOption("5 Ball", fiveBallAuto);
     // SmartDashboard.putData(autonChooser);
-  }
-
-  private void configureAutoSelector() {
-    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    autonChooser.addOption("2 Ball", twoBallAuto);
-    // autonChooser.addOpton("3 Ball", threeBallAuto);
-    // autonChooser.addOption("5 Ball", fiveBallAuto);
-    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {

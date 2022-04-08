@@ -7,16 +7,13 @@ package frc.robot.subsystems.autos;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants;
 import frc.robot.Constants.PIDConstants;
-import frc.robot.subsystems.drive.Coast;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
 import frc.robot.subsystems.gyro.GyroSubsystem;
 import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
-import frc.robot.subsystems.intake.DeployIntake;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
@@ -50,7 +47,7 @@ public class SvrThreeBall extends SequentialCommandGroup {
 
       // turn 180 while braking turret
       new BrakeTurret(turretSubsystem)
-          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
+          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
 
       new WaitCommand(0.25),  
             
@@ -70,7 +67,7 @@ public class SvrThreeBall extends SequentialCommandGroup {
 
       // turn 180 while braking turret
       new BrakeTurret(turretSubsystem)
-          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115)),
+          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, 0.5, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115)),
 
       new WaitCommand(0.25),
 

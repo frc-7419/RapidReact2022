@@ -12,7 +12,6 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class RunTurretWithJoystick extends CommandBase {
   private TurretSubsystem turretSubsystem;
-  private LimelightSubsystem limelightSubsystem;
   private XboxController joystick;
   private PIDController pidController;
   private double kSpeed;
@@ -20,9 +19,8 @@ public class RunTurretWithJoystick extends CommandBase {
 
   private double tx, tv;
 
-  public RunTurretWithJoystick(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick, double kSpeed) {
+  public RunTurretWithJoystick(TurretSubsystem turretSubsystem, XboxController joystick, double kSpeed) {
     this.turretSubsystem = turretSubsystem;
-    this.limelightSubsystem = limelightSubsystem;
     this.joystick = joystick;
     this.kSpeed = kSpeed;
     addRequirements(turretSubsystem);
@@ -39,9 +37,6 @@ public class RunTurretWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    tx = limelightSubsystem.getTx();
-    tv = limelightSubsystem.getTv();
-
     if (joystick.getLeftX() != 0) {
       turretSubsystem.coast();
       turretSubsystem.setPower(kSpeed*-joystick.getLeftX());

@@ -1,4 +1,4 @@
-// package frc.robot.subsystems.autos;
+package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -20,5 +20,4 @@ public class OneBallAuto extends SequentialCommandGroup {
             new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
         );
     }
-    
-// }
+}
