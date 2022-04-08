@@ -48,6 +48,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
 
   @Override
   public void execute() {
+    driveBaseSubsystem.coast();
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBaseSubsystem.setLeftPower(pidOutput);
     driveBaseSubsystem.setRightPower(-pidOutput);

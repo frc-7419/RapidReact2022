@@ -41,7 +41,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
         // shoot preload
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 35, 30),
+            new GetToTargetVelocity(shooterSubsystem, 33, 31),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
@@ -54,7 +54,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
             .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
             .withTimeout(1.25),
 
-        new WaitCommand(0.25),  
+        new WaitCommand(0.15),  
               
         // deploy intake
         new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
@@ -63,7 +63,8 @@ public class SvrThreeBall extends ParallelCommandGroup {
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6)
-        ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)),
+        ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50))
+        .withTimeout(2),
         
         new WaitCommand(0.25),
 
