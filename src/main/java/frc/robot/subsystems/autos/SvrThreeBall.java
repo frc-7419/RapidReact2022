@@ -107,7 +107,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
         // shoot ball
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 40, 35),
+            new GetToTargetVelocity(shooterSubsystem, 41.5, 36.5),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
