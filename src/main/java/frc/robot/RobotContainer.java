@@ -12,7 +12,7 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
-import frc.robot.subsystems.autos.TwoBallAuton;
+import frc.robot.subsystems.autos.TwoBallAuto;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.Coast;
@@ -73,7 +73,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
   PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
-  private final TwoBallAuton twoBallAuton = new TwoBallAuton(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem);
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -109,7 +109,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     //return shootGetSecondBallShoot;
-    return twoBallAuton;
+    return twoBallAuto;
     //return unBrake;
     //return turn180;
   }
