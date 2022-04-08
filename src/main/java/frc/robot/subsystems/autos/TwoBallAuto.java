@@ -36,7 +36,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
                 // shoot preload
                 parallel(
                     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                    new GetToTargetVelocity(shooterSubsystem, 37, 30),
+                    new GetToTargetVelocity(shooterSubsystem, 35, 30),
                     new RunFeeder(feederSubsystem, 1),
                     new RunLoader(loaderSubsystem, 1)
                 ).withTimeout(1.5), // tune time
