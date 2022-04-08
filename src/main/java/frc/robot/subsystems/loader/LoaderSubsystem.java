@@ -27,6 +27,9 @@ public class LoaderSubsystem extends SubsystemBase {
     loader.configPeakCurrentLimit(15, 0);
     loader.configPeakCurrentDuration(100, 0);
     loader.enableCurrentLimit(true);
+
+    // loader.configVoltageCompSaturation(11);
+    // loader.enableVoltageCompensation(true);
   }
 
   @Override
@@ -46,6 +49,10 @@ public class LoaderSubsystem extends SubsystemBase {
   
   public void setPower(double power) {
     loader.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setVoltage(double voltage) {
+    loader.set(ControlMode.PercentOutput, voltage / 11);
   }
 
   public TalonSRX getLoaderMotor() {
