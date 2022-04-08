@@ -5,6 +5,7 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
@@ -17,6 +18,8 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLEDColor;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
@@ -26,9 +29,9 @@ import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
-public class SvrThreeBall extends SequentialCommandGroup {
+public class SvrThreeBall extends ParallelCommandGroup {
 
-  public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
+  public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
     addCommands(
       // gttv and align turret
       parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
@@ -91,6 +94,7 @@ public class SvrThreeBall extends SequentialCommandGroup {
       
       new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
     );
+    addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
   }
 }
 
