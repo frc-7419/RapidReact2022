@@ -6,10 +6,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.OldDriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
   
-  private DriveBaseSubsystem driveBaseSubsystem;
+  private OldDriveBaseSubsystem driveBaseSubsystem;
   private GyroSubsystem gyroSubsystem;
   private double target;
   private double tolerance;
@@ -26,7 +27,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target, double tolerance, double kP, double kI, double kD) {
+  public TurnWithGyroClosedLoop(OldDriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target, double tolerance, double kP, double kI, double kD) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;

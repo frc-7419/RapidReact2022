@@ -11,6 +11,7 @@ public class Coast extends CommandBase {
   private DriveBaseSubsystem driveBaseSubsystem;
   public Coast(DriveBaseSubsystem driveBaseSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
+    addRequirements(driveBaseSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

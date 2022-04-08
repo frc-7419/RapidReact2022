@@ -5,7 +5,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.autos.SvrThreeBall;
+import frc.robot.subsystems.drive.ArcadeDrive;
+import frc.robot.subsystems.drive.Coast;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.OldDriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -25,6 +28,7 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
+  private final OldDriveBaseSubsystem oldDriveBaseSubsystem = new OldDriveBaseSubsystem();
   private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSolenoidSubsystem intakeSolenoidSubsystem = new IntakeSolenoidSubsystem();
   private final GyroSubsystem gyroSubsystem = new GyroSubsystem();
@@ -38,8 +42,10 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-  private final SvrThreeBall svrThreeBallNew = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, 
+  private final SvrThreeBall svrThreeBallNew = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, oldDriveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, 
   ledSubsystem);
+
+  private final Coast coast = new Coast(driveBaseSubsystem);
   
 
   public RobotContainer() {
@@ -82,6 +88,8 @@ public class RobotContainer {
   }
 
   // set default commands here
-  public void setDefaultCommands() {}
+  public void setDefaultCommands() {
+    // driveBaseSubsystem.setDefaultCommand(coast);
+  }
 }
 

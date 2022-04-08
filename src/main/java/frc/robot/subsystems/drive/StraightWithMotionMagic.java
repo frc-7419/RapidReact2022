@@ -18,7 +18,7 @@ import frc.robot.Constants.PIDConstants;
 
 public class StraightWithMotionMagic extends CommandBase {
   
-    private DriveBaseSubsystem driveBaseSubsystem;
+    private OldDriveBaseSubsystem driveBaseSubsystem;
     private double setpoint;
     private double leftMastOutput;
     private double rightMastOutput;
@@ -30,7 +30,7 @@ public class StraightWithMotionMagic extends CommandBase {
      * @param driveBaseSubsystem
      * @param setpoint in inches
      */
-    public StraightWithMotionMagic(DriveBaseSubsystem driveBaseSubsystem, double setpoint) {
+    public StraightWithMotionMagic(OldDriveBaseSubsystem driveBaseSubsystem, double setpoint) {
         // this.setpoint = setpoint;
         this.driveBaseSubsystem = driveBaseSubsystem;
         this.setpoint = setpoint;

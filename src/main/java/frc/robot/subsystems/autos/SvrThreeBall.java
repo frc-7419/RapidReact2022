@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.OldDriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
@@ -31,7 +32,7 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class SvrThreeBall extends ParallelCommandGroup {
 
-  public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
+  public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, OldDriveBaseSubsystem oldDriveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
     addCommands(
       sequence(
         // gttv and align turret
@@ -51,10 +52,10 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
         // turn 180 while braking turret
         new BrakeTurret(turretSubsystem)
-            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
+            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
             .withTimeout(1.25),
 
-        new WaitCommand(0.15),  
+        new WaitCommand(0.25),  
               
         // deploy intake
         new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
@@ -63,7 +64,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6)
-        ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50))
+        ).deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 50))
         .withTimeout(2),
         
         new WaitCommand(0.25),
@@ -73,7 +74,8 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
         // turn 180 while braking turret
         new BrakeTurret(turretSubsystem)
-            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, 0.5, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115)),
+            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 117, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
+            .withTimeout(2.5),
 
         new WaitCommand(0.25),
 
@@ -82,10 +84,12 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
         // move forward 116.17 and gttv
         new GetToTargetVelocity(shooterSubsystem, 45.5, 43)
-          .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 116.17)),
+          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 126.17))
+          .withTimeout(3),
 
         parallel(new GetToTargetVelocity(shooterSubsystem, 45.5, 43), new AlignTurretDefault(turretSubsystem, limelightSubsystem))
-          .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -50)),
+          .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -50))
+          .withTimeout(2),
         
         // shoot ball
         parallel(
@@ -95,7 +99,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
         
-        new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
+        new InstantCommand(oldDriveBaseSubsystem::coast, oldDriveBaseSubsystem)
       ));
       
       addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
