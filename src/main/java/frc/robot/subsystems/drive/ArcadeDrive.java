@@ -2,48 +2,52 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ArcadeDrive extends CommandBase {
 
-  private DriveBaseSubsystem driveBaseSubsystem;
+  private DriveBaseSubsystem oldDriveBaseSubsystem;
   private double kStraight;
   private double kTurn;
-  private double kSlowStraight;
-  private double kSlowTurn;
   private XboxController joystick;
   
   // Limits *acceleration* not max speed; basically kD
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   private final SlewRateLimiter rotLimiter = new SlewRateLimiter(100);
 
-  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn) {
+  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem oldDriveBaseSubsystem, double kStraight, double kTurn) {
     this.joystick = joystick;
-    this.driveBaseSubsystem = driveBaseSubsystem;
+    this.oldDriveBaseSubsystem = oldDriveBaseSubsystem;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
-    addRequirements(driveBaseSubsystem);
+    addRequirements(oldDriveBaseSubsystem);
 }
 
   @Override
   public void initialize() {
-    driveBaseSubsystem.factoryResetAll();    
-    driveBaseSubsystem.setAllDefaultInversions();
-    driveBaseSubsystem.coast(); 
+    oldDriveBaseSubsystem.factoryResetAll();    
+    oldDriveBaseSubsystem.setAllDefaultInversions();
+    oldDriveBaseSubsystem.coast(); 
   }
 
   @Override
   public void execute() {
-    if (Math.abs(joystick.getRightX()) > 0 || Math.abs(joystick.getRightY()) > 0) {
-      driveBaseSubsystem.coast();
-      boolean squareInputs = true; // square joystick inputs
-      double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
-      double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
-      driveBaseSubsystem.arcadeDrive(xSpeed, zRotation, squareInputs);
+    double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
+    double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
+    
+    if (Math.abs(joystick.getRightY()) > 0) {
+      oldDriveBaseSubsystem.coast();
+      
+      // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
+      // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
+
+      double leftPower = xSpeed + zRotation;
+      double rightPower = xSpeed - zRotation;
+      oldDriveBaseSubsystem.setLeftPower(leftPower);
+      oldDriveBaseSubsystem.setRightPower(rightPower);
     }
     else {
-      driveBaseSubsystem.setAll(0);
+      oldDriveBaseSubsystem.setAll(0);
     }
   }
 
@@ -54,7 +58,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBaseSubsystem.setAll(0);
+    oldDriveBaseSubsystem.setAll(0);
   }
 
 }

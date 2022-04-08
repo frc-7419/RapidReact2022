@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
@@ -59,8 +60,6 @@ public class RobotContainer {
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
-  // private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 
-  // PowerConstants.DriveBaseStraight, PowerConstants.DriveBaseTurn);
   private final SetLEDColor setLEDColor = new SetLEDColor(ledSubsystem, limelightSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
@@ -111,15 +110,16 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    autonChooser.addOption("2 Ball", twoBallAuto);
-    autonChooser.addOption("3 Ball", threeBallAuto);
+    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    // autonChooser.addOption("2 Ball", twoBallAuto);
+    // autonChooser.addOption("3 Ball", threeBallAuto);
     // autonChooser.addOption("5 Ball", fiveBallAuto);
-    SmartDashboard.putData(autonChooser);
+    // SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
-    return autonChooser.getSelected();
+    // return autonChooser.getSelected();
+    return new WaitCommand(0);
   }
 
   public void setDefaultCommands() {
