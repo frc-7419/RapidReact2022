@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PIDConstants;
-import frc.robot.subsystems.drive.OldDriveBaseSubsystem;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeeder;
@@ -30,7 +30,7 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class ThreeBallAuto extends ParallelCommandGroup {
 
-  public ThreeBallAuto(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, OldDriveBaseSubsystem oldDriveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
+  public ThreeBallAuto(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
     addCommands(
       sequence(
         // gttv and align turret
@@ -50,7 +50,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
 
         // turn 180 while braking turret
         new BrakeTurret(turretSubsystem)
-            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
+            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
             .withTimeout(1.25),
 
         new WaitCommand(0.25),  
@@ -62,7 +62,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6)
-        ).deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 50))
+        ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50))
         .withTimeout(2),
         
         new WaitCommand(0.25),
@@ -72,7 +72,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
 
         // turn 117 while braking turret
         new BrakeTurret(turretSubsystem)
-            .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 116.5, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
+            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 116.5, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
             .withTimeout(1.25),
 
         new WaitCommand(0.15),
@@ -84,18 +84,18 @@ public class ThreeBallAuto extends ParallelCommandGroup {
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6))
-        .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 132.5))
+        .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 132.5))
         .withTimeout(2.5),
 
         new WaitCommand(0.3),
 
         // new AlignTurretDefault(turretSubsystem, limelightSubsystem)
-        //   .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -60))
+        //   .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60))
         //   .withTimeout(1),
 
          // turn 117 while braking turret
          new BrakeTurret(turretSubsystem)
-         .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 69, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
+         .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 69, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
          .withTimeout(0.85),
         
         // gttv and align
@@ -110,7 +110,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(2.15), // tune time
         
-        new InstantCommand(oldDriveBaseSubsystem::coast, oldDriveBaseSubsystem)
+        new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
       ));
       
       addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));

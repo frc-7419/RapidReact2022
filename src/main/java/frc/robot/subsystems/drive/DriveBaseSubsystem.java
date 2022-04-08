@@ -25,8 +25,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveOdometry odometry;
 
-  MotorControllerGroup left;
-  MotorControllerGroup right;
+  private MotorControllerGroup left;
+  private MotorControllerGroup right;
   
   public DriveBaseSubsystem() {
     left1 = new WPI_TalonFX(CanIds.leftFalcon1.id);
@@ -38,7 +38,15 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right = new MotorControllerGroup(right1, right2);
 
     factoryResetAll();
-    right.setInverted(true);
+
+    left2.follow(left1);
+    right2.follow(right1);
+
+    right1.setInverted(true);
+    right2.setInverted(true);
+
+    right1.setSensorPhase(false);
+    right2.setSensorPhase(false);
 
     drive = new DifferentialDrive(left, right);
     kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(RobotConstants.trackWidth));
@@ -48,33 +56,40 @@ public class DriveBaseSubsystem extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public enum TurnDirection {
-    LEFT,
-    RIGHT,
-  }
-
   // accessors
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
   public TalonFX getLeftFollow(){return left2;}
   public TalonFX getRightFollow(){return right2;}
+
   // motor groups
   public MotorControllerGroup getLeftGroup(){return left;}
   public MotorControllerGroup getRightGroup(){return right;}
+
   // differential drive
   public DifferentialDrive getDrive(){return drive;}
 
-  public void setLeftPower(double power){
+  public void setLeft(double power){
     left.set(power);
   }
 
-  public void setRightPower(double power){
+  public void setRight(double power){
     right.set(power);
   }
 
+  public void setLeftPower(double power) {
+    left1.set(ControlMode.PercentOutput, power);
+    left2.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setRightPower(double power) {
+    right1.set(ControlMode.PercentOutput, power);
+    right2.set(ControlMode.PercentOutput, power);
+  }
+
   public void setAll(double power){
-    setLeftPower(power);
-    setRightPower(power);
+    setLeft(power);
+    setRight(power);
   }
 
   public void stop(){setAll(0);}
@@ -102,8 +117,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
   }
 
   public void setAllDefaultInversions() {
-    right.setInverted(true);
-    left.setInverted(false);
+    right1.setInverted(true);
+    right2.setInverted(true);
+    left1.setInverted(false);
+    left2.setInverted(false);
   }
 
   public void factoryResetAll(){

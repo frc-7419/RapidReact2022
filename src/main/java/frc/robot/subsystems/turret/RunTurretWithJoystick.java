@@ -7,7 +7,6 @@ package frc.robot.subsystems.turret;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class RunTurretWithJoystick extends CommandBase {

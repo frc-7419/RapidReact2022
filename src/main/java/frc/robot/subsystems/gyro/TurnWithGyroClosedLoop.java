@@ -1,10 +1,7 @@
 package frc.robot.subsystems.gyro;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 
 public class TurnWithGyroClosedLoop extends CommandBase {
@@ -43,7 +40,6 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(initAngle + target);
     pidController.setTolerance(tolerance); 
-    // SmartDashboard.putNumber("turn setpoint", target);
   } 
 
   @Override
@@ -51,8 +47,6 @@ public class TurnWithGyroClosedLoop extends CommandBase {
     pidOutput = pidController.calculate(gyroSubsystem.getGyroAngle());
     driveBaseSubsystem.setLeftPower(pidOutput);
     driveBaseSubsystem.setRightPower(-pidOutput);
-    // SmartDashboard.putNumber("gyro turn error", pidController.getPositionError());
-    // SmartDashboard.putNumber("robot turned", gyroSubsystem.getGyroAngle() - initAngle);
   }
 
   @Override

@@ -2,20 +2,20 @@ package frc.robot;
 
 import com.team7419.joystick.DoubleButton;
 
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.PIDConstants;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.OneBallAuto;
+import frc.robot.subsystems.autos.ThreeBallAuto;
 import frc.robot.subsystems.autos.TwoBallAuto;
-import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
@@ -68,6 +68,7 @@ public class RobotContainer {
   private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem);
   private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem);
+  private final ThreeBallAuto threeBallAuto = new ThreeBallAuto(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -110,7 +111,7 @@ public class RobotContainer {
   private void configureAutoSelector() {
     autonChooser.setDefaultOption("Preload Default", oneBallAuto);
     autonChooser.addOption("2 Ball", twoBallAuto);
-    // autonChooser.addOpton("3 Ball", threeBallAuto);
+    autonChooser.addOption("3 Ball", threeBallAuto);
     // autonChooser.addOption("5 Ball", fiveBallAuto);
     SmartDashboard.putData(autonChooser);
   }

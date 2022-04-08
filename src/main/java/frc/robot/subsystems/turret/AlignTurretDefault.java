@@ -13,9 +13,7 @@ public class AlignTurretDefault extends CommandBase {
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
-  private double kP;
-  private double kI;
-  private double kD;
+  private double kP, kI, kD;
 
   private double pidOutput;
   private double tx;

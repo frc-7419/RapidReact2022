@@ -1,7 +1,6 @@
 package frc.robot.subsystems.turret;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -12,9 +11,7 @@ public class AlignTurret extends CommandBase {
   private LimelightSubsystem limelightSubsystem;
   private PIDController pidController;
   
-  private double kP;
-  private double kI;
-  private double kD;
+  private double kP, kI, kD;
 
   private double pidOutput;
   private double tx;
