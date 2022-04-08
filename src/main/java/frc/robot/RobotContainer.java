@@ -110,16 +110,15 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball", twoBallAuto);
-    // autonChooser.addOption("3 Ball", threeBallAuto);
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    autonChooser.addOption("2 Ball", twoBallAuto);
+    autonChooser.addOption("3 Ball", threeBallAuto);
     // autonChooser.addOption("5 Ball", fiveBallAuto);
-    // SmartDashboard.putData(autonChooser);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
-    // return autonChooser.getSelected();
-    return new WaitCommand(0);
+    return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {
