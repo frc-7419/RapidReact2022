@@ -110,7 +110,8 @@ public final class Constants {
         public static final double GyrokD180 = 0.0004;
 
         // turret PID gains
-        public static final double TurretKp = 0.0065;
+        // public static final double TurretKp = 0.0065;
+        public static final double TurretKp = 0.0075;
         public static final double TurretKi = 0;
         public static final double TurretKd = 0;
 
