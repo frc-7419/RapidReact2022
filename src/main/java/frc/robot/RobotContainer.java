@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.arms.ArmsSubsystem;
-import frc.robot.subsystems.autos.SvrThreeBall;
+import frc.robot.subsystems.autos.ThreeBallAuto;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.Coast;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
@@ -41,7 +41,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-  private final SvrThreeBall svrThreeBallNew = new SvrThreeBall(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, oldDriveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, 
+  private final ThreeBallAuto threeBallAuto = new ThreeBallAuto(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, oldDriveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, 
   ledSubsystem); 
   
 
@@ -78,15 +78,10 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    //return shootGetSecondBallShoot;
-    return svrThreeBallNew;
-    //return coast;
-    //return turn180;
+    return threeBallAuto;
   }
 
   // set default commands here
-  public void setDefaultCommands() {
-    // driveBaseSubsystem.setDefaultCommand(coast);
-  }
+  public void setDefaultCommands() {}
 }
 
