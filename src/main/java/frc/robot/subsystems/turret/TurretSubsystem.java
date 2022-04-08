@@ -15,16 +15,16 @@ import frc.robot.Constants.CanIds;
 
 public class TurretSubsystem extends SubsystemBase {
   private TalonFX turret;
-  private DigitalInput forwardLimitSwitch;
-  private DigitalInput reverseLimitSwitch;
+  // private DigitalInput forwardLimitSwitch;
+  // private DigitalInput reverseLimitSwitch;
 
   private boolean forwardLimitDetected = false;
   private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
     turret = new TalonFX(CanIds.turretFalcon.id);
-    forwardLimitSwitch = new DigitalInput(1);
-    reverseLimitSwitch = new DigitalInput(2);
+    // forwardLimitSwitch = new DigitalInput(1);
+    // reverseLimitSwitch = new DigitalInput(2);
     turret.configFactoryDefault();
     turret.configReverseSoftLimitEnable(false, 0);
     turret.configForwardSoftLimitEnable(false, 0);
@@ -63,10 +63,10 @@ public class TurretSubsystem extends SubsystemBase {
     turret.setNeutralMode(NeutralMode.Coast);
   }
 
-  public DigitalInput getForwardLimitSwitch() {
-    return forwardLimitSwitch;
-  } 
-  public DigitalInput getReverseLimitSwitch() {
-    return reverseLimitSwitch;
-  }
+  // public DigitalInput getForwardLimitSwitch() {
+  //   return forwardLimitSwitch;
+  // } 
+  // public DigitalInput getReverseLimitSwitch() {
+  //   return reverseLimitSwitch;
+  // }
 }

@@ -28,14 +28,8 @@ public class AlignTurretDefault extends CommandBase {
   }
 
   @Override
-  public void initialize() {
-    SmartDashboard.putString("command status", "pid");
-
-    kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
-    kI = SmartDashboard.getNumber("kI", PIDConstants.TurretKi);
-    kD = SmartDashboard.getNumber("kD", PIDConstants.TurretKd); 
-
-    pidController = new PIDController(kP, kI, kD);
+  public void initialize() { 
+    pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
   }
@@ -45,12 +39,8 @@ public class AlignTurretDefault extends CommandBase {
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 
-    kP = SmartDashboard.getNumber("kP", PIDConstants.TurretKp);
-    kI = SmartDashboard.getNumber("kI", PIDConstants.TurretKi);
-    kD = SmartDashboard.getNumber("kD", PIDConstants.TurretKd); 
-
     if (tv == 1.0) {
-      pidController = new PIDController(kP, kI, kD);
+      pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
       pidOutput = pidController.calculate(tx);
       turretSubsystem.setPower(pidOutput);
     }

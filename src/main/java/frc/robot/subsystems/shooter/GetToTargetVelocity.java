@@ -13,9 +13,7 @@ public class GetToTargetVelocity extends CommandBase {
   private ShooterSubsystem shooterSubsystem;
 
   private double bKp;
-  private double bKi;
   private double tKp;
-  private double tKi;
 
   private double topTargetVelocity;
   private double bottomTargetVelocity;
@@ -46,7 +44,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Shooter Running", true);
+    // SmartDashboard.putBoolean("Shooter Running", true);
 
     bKp = SmartDashboard.getNumber("bKp", PIDConstants.BottomShooterkP);
     tKp = SmartDashboard.getNumber("tKp", PIDConstants.TopShooterkP);
@@ -57,9 +55,9 @@ public class GetToTargetVelocity extends CommandBase {
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
 
-    SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
-    SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
-    SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
+    // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
+    // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
+    // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
   }
 
   @Override
