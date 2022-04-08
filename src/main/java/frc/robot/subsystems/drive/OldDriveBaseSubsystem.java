@@ -8,16 +8,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class OldDriveBaseSubsystem extends SubsystemBase {
-  
     public TalonFX left1;
     public TalonFX right1;
-	public TalonFX left2;
+	  public TalonFX left2;
     public TalonFX right2;
   
   public OldDriveBaseSubsystem() {
     left1 = new TalonFX(CanIds.leftFalcon1.id);
-	right1 = new TalonFX(CanIds.rightFalcon1.id);
-	left2 = new TalonFX(CanIds.leftFalcon2.id);
+	  right1 = new TalonFX(CanIds.rightFalcon1.id);
+	  left2 = new TalonFX(CanIds.leftFalcon2.id);
     right2 = new TalonFX(CanIds.rightFalcon2.id);
 
     factoryResetAll();
