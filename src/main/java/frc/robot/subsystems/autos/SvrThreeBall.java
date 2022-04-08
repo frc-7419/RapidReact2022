@@ -89,7 +89,7 @@ public class SvrThreeBall extends ParallelCommandGroup {
         .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, 132.5))
         .withTimeout(2.5),
 
-        new WaitCommand(0.15),
+        new WaitCommand(0.3),
 
         // new AlignTurretDefault(turretSubsystem, limelightSubsystem)
         //   .deadlineWith(new StraightWithMotionMagic(oldDriveBaseSubsystem, -60))
@@ -97,20 +97,20 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
          // turn 117 while braking turret
          new BrakeTurret(turretSubsystem)
-         .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 63.5, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
+         .deadlineWith(new TurnWithGyroClosedLoop(oldDriveBaseSubsystem, gyroSubsystem, 69, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
          .withTimeout(0.85),
         
         // gttv and align
         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
-          .withTimeout(0.75), // gttv while aligning turret
+          .withTimeout(0.5), // gttv while aligning turret
         
         // shoot ball
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 41.5, 36.5),
+            new GetToTargetVelocity(shooterSubsystem, 43, 36),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
-        ).withTimeout(1.5), // tune time
+        ).withTimeout(2.15), // tune time
         
         new InstantCommand(oldDriveBaseSubsystem::coast, oldDriveBaseSubsystem)
       ));
