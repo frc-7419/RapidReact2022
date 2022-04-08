@@ -93,7 +93,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
         //   .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60))
         //   .withTimeout(1),
 
-         // turn 117 while braking turret
+         // turn 69 while braking turret
          new BrakeTurret(turretSubsystem)
          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 69, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
          .withTimeout(0.85),
