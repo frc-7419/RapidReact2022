@@ -33,68 +33,71 @@ public class SvrThreeBall extends ParallelCommandGroup {
 
   public SvrThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
     addCommands(
-      // gttv and align turret
-      parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
-        .withInterrupt(() -> shooterSubsystem.bothOnTarget()).withTimeout(0.75), // gttv while aligning turret
+      sequence(
+        // gttv and align turret
+        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
+          .withTimeout(0.75), // gttv while aligning turret
 
-      // shoot preload
-      parallel(
-          new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-          new GetToTargetVelocity(shooterSubsystem, 37, 30),
-          new RunFeeder(feederSubsystem, 1),
-          new RunLoader(loaderSubsystem, 1)
-      ).withTimeout(1.5), // tune time
+        // shoot preload
+        parallel(
+            new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+            new GetToTargetVelocity(shooterSubsystem, 35, 30),
+            new RunFeeder(feederSubsystem, 1),
+            new RunLoader(loaderSubsystem, 1)
+        ).withTimeout(1.5), // tune time
 
-      // retract turret
-      new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+        // retract turret
+        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
-      // turn 180 while braking turret
-      new BrakeTurret(turretSubsystem)
-          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 0.5, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)),
+        // turn 180 while braking turret
+        new BrakeTurret(turretSubsystem)
+            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
+            .withTimeout(1.25),
 
-      new WaitCommand(0.25),  
-            
-      // deploy intake
-      new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+        new WaitCommand(0.25),  
+              
+        // deploy intake
+        new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
-      // move forward and running intake + loader
-      parallel(
-          new RunIntake(intakeSubsystem, 1),
-          new RunLoader(loaderSubsystem, 0.6)
-      ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)),
+        // move forward and running intake + loader
+        parallel(
+            new RunIntake(intakeSubsystem, 1),
+            new RunLoader(loaderSubsystem, 0.6)
+        ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 50)),
+        
+        new WaitCommand(0.25),
+
+        // retract intake
+        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+
+        // turn 180 while braking turret
+        new BrakeTurret(turretSubsystem)
+            .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, 0.5, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115)),
+
+        new WaitCommand(0.25),
+
+        // deploy intake
+        new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+
+        // move forward 116.17 and gttv
+        new GetToTargetVelocity(shooterSubsystem, 45.5, 43)
+          .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 116.17)),
+
+        parallel(new GetToTargetVelocity(shooterSubsystem, 45.5, 43), new AlignTurretDefault(turretSubsystem, limelightSubsystem))
+          .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -50)),
+        
+        // shoot ball
+        parallel(
+            new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+            new GetToTargetVelocity(shooterSubsystem, 37, 30),
+            new RunFeeder(feederSubsystem, 1),
+            new RunLoader(loaderSubsystem, 1)
+        ).withTimeout(1.5), // tune time
+        
+        new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
+      ));
       
-      new WaitCommand(0.25),
-
-      // retract intake
-      new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
-
-      // turn 180 while braking turret
-      new BrakeTurret(turretSubsystem)
-          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 115, 0.5, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115)),
-
-      new WaitCommand(0.25),
-
-      // deploy intake
-      new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
-
-      // move forward 116.17 and gttv
-      new GetToTargetVelocity(shooterSubsystem, 45.5, 43)
-        .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 116.17)),
-
-      parallel(new GetToTargetVelocity(shooterSubsystem, 45.5, 43), new AlignTurretDefault(turretSubsystem, limelightSubsystem))
-        .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -50)),
-      
-      // shoot ball
-      parallel(
-          new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-          new GetToTargetVelocity(shooterSubsystem, 37, 30),
-          new RunFeeder(feederSubsystem, 1),
-          new RunLoader(loaderSubsystem, 1)
-      ).withTimeout(1.5), // tune time
-      
-      new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
-    );
-    addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
+      addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
   }
 }
 
