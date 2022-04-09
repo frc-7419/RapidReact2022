@@ -67,8 +67,9 @@ public class TwoBallAutoInterpolation extends ParallelCommandGroup {
                 new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
                 // turn 180 while braking turret
-                new BrakeTurret(turretSubsystem)
-                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 182, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
+               // turn 185 while braking turret
+               new BrakeTurret(turretSubsystem)
+                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 185, 1.5, PIDConstants.GyrokP185, PIDConstants.GyrokI185, PIDConstants.GyrokD185)).withTimeout(2),
                 
 
                 // exact shooter velocities:

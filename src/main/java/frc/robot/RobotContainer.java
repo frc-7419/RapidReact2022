@@ -66,7 +66,7 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
-  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
@@ -114,23 +114,23 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
-    // autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
-    // autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
-    // autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
-    // SmartDashboard.putData(autonChooser);
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
+    autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
+    autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
+    autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
-    return threeBallAutoExactVelocities;
+    // return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;
     // return threeBallAuto;
 
-    // return autonChooser.getSelected();
+    return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {
