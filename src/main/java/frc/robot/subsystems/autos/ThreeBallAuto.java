@@ -23,6 +23,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
@@ -80,7 +81,7 @@ public class ThreeBallAuto extends ParallelCommandGroup {
         // deploy intake
         // new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
-        // move forward 116.17 and gttv
+        // move forward 132.5 in
         parallel(
             new RunIntake(intakeSubsystem, 1),
             new RunLoader(loaderSubsystem, 0.6))
@@ -98,14 +99,26 @@ public class ThreeBallAuto extends ParallelCommandGroup {
          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 69, 2, PIDConstants.GyrokP63, PIDConstants.GyrokI63, PIDConstants.GyrokD63))
          .withTimeout(0.85),
         
-        // gttv and align
-        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
+        // gttv and align, exact velocity
+        // parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
+        //   .withTimeout(0.5),
+
+        // gttv with limelight and align
+        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
           .withTimeout(0.5), // gttv while aligning turret
         
-        // shoot ball
+        // shoot both balls with exact velocity
+        // parallel(
+        //     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+        //     new GetToTargetVelocity(shooterSubsystem, 43, 36),
+        //     new RunFeeder(feederSubsystem, 1),
+        //     new RunLoader(loaderSubsystem, 1)
+        // ).withTimeout(2.15), // tune time
+
+        // shoot both balls with limelight velocity
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 43, 36),
+            new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(2.15), // tune time

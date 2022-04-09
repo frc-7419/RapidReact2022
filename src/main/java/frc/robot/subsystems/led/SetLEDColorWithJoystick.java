@@ -48,7 +48,7 @@ public class SetLEDColorWithJoystick extends CommandBase {
       // ledSubsystem.startLed();
     }
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
-      // yellow?
+      // yellow-ish white
       ledSubsystem.setLEDColor(255, 100, 150);
       // ledSubsystem.startLed();
     }

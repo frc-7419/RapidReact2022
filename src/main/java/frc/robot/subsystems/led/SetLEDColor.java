@@ -35,14 +35,17 @@ public class SetLEDColor extends CommandBase {
     // rainbowFirstPixelHue += 3;
     // rainbowFirstPixelHue %= 180;
     if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
+      // green
       ledSubsystem.setLEDColor(0, 0, 255);
       // ledSubsystem.startLed();
     }
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
-      ledSubsystem.setLEDColor(0, 255, 0);
+      // yellow-ish white
+      ledSubsystem.setLEDColor(255, 100, 150);
       // ledSubsystem.startLed();
     }
     else {
+      // red
       ledSubsystem.setLEDColor(255, 0, 0);
       // ledSubsystem.startLed();
     }
