@@ -94,10 +94,10 @@ public class ThreeBallAutoInterpolation extends ParallelCommandGroup {
         //   .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60))
         //   .withTimeout(1),
 
-         // turn 80 while braking turret
-         new BrakeTurret(turretSubsystem)
-         .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 80, 2, PIDConstants.GyrokP80, PIDConstants.GyrokI80, PIDConstants.GyrokD80))
-         .withTimeout(0.85),
+          // turn 90 while braking turret
+          new BrakeTurret(turretSubsystem)
+          .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 90, 2, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90))
+          .withTimeout(0.95),
         
         // gttv and align, exact velocity
         // parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
