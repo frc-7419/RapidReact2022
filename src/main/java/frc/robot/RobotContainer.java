@@ -119,9 +119,9 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return oneBallAuto;
+    // return oneBallAuto;
     // return twoBallAuto;
-    // return threeBallAuto;
+    return threeBallAuto;
 
     // return autonChooser.getSelected();
   }
