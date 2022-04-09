@@ -70,7 +70,7 @@ public class TwoBallAutoExactVelocities extends ParallelCommandGroup {
                     .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 182, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
                 
                 // exact shooter velocities:
-                parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 43, 40))
+                parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 45.5, 43))
                     .withInterrupt(() -> shooterSubsystem.bothOnTarget())
                     .withTimeout(1.15), // gttv while aligning turret
                 
