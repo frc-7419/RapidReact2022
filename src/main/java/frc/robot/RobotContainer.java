@@ -120,8 +120,8 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return oneBallAuto;
-    // return twoBallAuto;
-    return threeBallAuto;
+    return twoBallAuto;
+    // return threeBallAuto;
 
     // return autonChooser.getSelected();
   }
