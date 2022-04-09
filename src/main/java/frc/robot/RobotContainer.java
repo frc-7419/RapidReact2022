@@ -13,8 +13,8 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.OneBallAuto;
-import frc.robot.subsystems.autos.ThreeBallAuto;
-import frc.robot.subsystems.autos.TwoBallAuto;
+import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
+import frc.robot.subsystems.autos.TwoBallAutoExactVelocities;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
@@ -65,10 +65,10 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
-  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem);
-  private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
-  private final ThreeBallAuto threeBallAuto = new ThreeBallAuto(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
+  private final TwoBallAutoExactVelocities twoBallAuto = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
+  private final ThreeBallAutoExactVelocities threeBallAuto = new ThreeBallAutoExactVelocities(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -111,11 +111,10 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball", twoBallAuto);
-    // autonChooser.addOption("3 Ball", threeBallAuto);
-    // autonChooser.addOption("5 Ball", fiveBallAuto);
-    // SmartDashboard.putData(autonChooser);
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    autonChooser.addOption("2 Ball", twoBallAuto);
+    autonChooser.addOption("3 Ball", threeBallAuto);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {

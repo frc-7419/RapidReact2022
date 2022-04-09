@@ -26,9 +26,9 @@ import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.TurretSubsystem;
 
-public class TwoBallAuto extends ParallelCommandGroup {
+public class TwoBallAutoInterpolation extends ParallelCommandGroup {
 
-    public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, LEDSubsystem ledSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
+    public TwoBallAutoInterpolation(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, LEDSubsystem ledSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
         addCommands(
             sequence(
                 parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
