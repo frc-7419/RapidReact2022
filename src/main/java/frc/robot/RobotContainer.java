@@ -15,8 +15,8 @@ import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
 import frc.robot.subsystems.autos.ThreeBallAutoInterpolation;
-// import frc.robot.subsystems.autos.TwoBallAutoExactVelocities;
-// import frc.robot.subsystems.autos.TwoBallAutoInterpolation;
+import frc.robot.subsystems.autos.TwoBallAutoExactVelocities;
+import frc.robot.subsystems.autos.TwoBallAutoInterpolation;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
@@ -66,10 +66,10 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
-  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem);
-  // private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
-  // private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
+  private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
+  private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final ThreeBallAutoExactVelocities threeBallAutoExactVelocities = new ThreeBallAutoExactVelocities(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
   private final ThreeBallAutoInterpolation threeBallAutoInterpolation = new ThreeBallAutoInterpolation(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
 
@@ -114,23 +114,23 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
-    // autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
-    // autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
-    // autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
-    // SmartDashboard.putData(autonChooser);
+    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
+    autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
+    autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
+    autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
-    return oneBallAuto;
+    // return oneBallAuto;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;
     // return threeBallAuto;
 
-    // return autonChooser.getSelected();
+    return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {
