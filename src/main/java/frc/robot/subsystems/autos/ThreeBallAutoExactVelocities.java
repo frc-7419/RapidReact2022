@@ -40,7 +40,7 @@ public class ThreeBallAutoExactVelocities extends ParallelCommandGroup {
         // shoot preload
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 33, 31),
+            new GetToTargetVelocity(shooterSubsystem, 37, 30),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
