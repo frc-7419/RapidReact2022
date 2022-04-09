@@ -18,21 +18,21 @@ public class BrakeArms extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("Arm Brake Cmd", true);
+    // SmartDashboard.putBoolean("Arm Brake Cmd", true);
     armsSubsystem.brake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Arm Brake Cmd", true);
+    // SmartDashboard.putBoolean("Arm Brake Cmd", true);
     armsSubsystem.brake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("Arm Brake Cmd", false);
+    // SmartDashboard.putBoolean("Arm Brake Cmd", false);
     armsSubsystem.coast();
   }
 

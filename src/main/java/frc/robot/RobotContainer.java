@@ -60,13 +60,13 @@ public class RobotContainer {
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick2, 0.16);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
-  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1, joystick2);
+  private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, joystick1, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
-  private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
@@ -100,10 +100,6 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kA.value)
       .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
-      // brake arms toggle
-    new JoystickButton(joystick2, XboxController.Button.kStart.value)
-      .toggleWhenPressed(new BrakeArms(armsSubsystem));
-
       // coast arms during hanging
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
       .whileHeld(new CoastArms(armsSubsystem));
@@ -118,23 +114,23 @@ public class RobotContainer {
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
-    autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
-    autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
-    autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
-    SmartDashboard.putData(autonChooser);
+    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
+    // autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
+    // autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
+    // autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
+    // autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
+    // SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
-    // return threeBallAutoExactVelocities;
+    return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;
     // return threeBallAuto;
 
-    return autonChooser.getSelected();
+    // return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {

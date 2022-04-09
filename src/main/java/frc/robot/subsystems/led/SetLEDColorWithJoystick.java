@@ -24,10 +24,6 @@ public class SetLEDColorWithJoystick extends CommandBase {
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(ledSubsystem);
-    
-    // purple
-    ledSubsystem.setLEDColor(255, 0, 0);
-    ledSubsystem.startLed();
   }
 
   // Called when the command is initially scheduled.
