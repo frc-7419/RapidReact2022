@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class SetLEDColorWithJoystick extends CommandBase {
-  private XboxController joystick;
+  private XboxController joystick1;
+  private XboxController joystick2;
   private LEDSubsystem ledSubsystem;
   private LimelightSubsystem limelightSubsystem;
   
@@ -17,11 +18,16 @@ public class SetLEDColorWithJoystick extends CommandBase {
 
   private double limelightTolerance = 7.5;
 
-  public SetLEDColorWithJoystick(XboxController joystick, LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem) {
-    this.joystick = joystick;
+  public SetLEDColorWithJoystick(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick1, XboxController joystick2) {
+    this.joystick1 = joystick1;
+    this.joystick2 = joystick2;
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(ledSubsystem);
+    
+    // purple
+    ledSubsystem.setLEDColor(255, 0, 0);
+    ledSubsystem.startLed();
   }
 
   // Called when the command is initially scheduled.
@@ -37,21 +43,30 @@ public class SetLEDColorWithJoystick extends CommandBase {
     // ledSubsystem.startLed();
     // rainbowFirstPixelHue += 3;
     // rainbowFirstPixelHue %= 180;
-    if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance && joystick.getYButton()) {
+
+    // while braking turret during hang
+    if (joystick1.getBButton()) {
+      // rainbow
+      ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+      ledSubsystem.startLed();
+      rainbowFirstPixelHue += 3;
+      rainbowFirstPixelHue %= 180;
+    } 
+    else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance && joystick2.getYButton()) {
       // green
       ledSubsystem.setLEDColor(0, 0, 255);
       // ledSubsystem.startLed();
-    }
+    } 
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
       // blue
       ledSubsystem.setLEDColor(0, 255, 0);
       // ledSubsystem.startLed();
-    }
+    } 
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
       // yellow-ish white
       ledSubsystem.setLEDColor(255, 100, 150);
       // ledSubsystem.startLed();
-    }
+    } 
     else {
       // red
       ledSubsystem.setLEDColor(255, 0, 0);

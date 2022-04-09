@@ -43,11 +43,11 @@ public class RunTurretWithJoystick extends CommandBase {
 
     if (joystick.getLeftTriggerAxis() != 0) {
       turretSubsystem.coast();
-      turretSubsystem.setPower(kSpeed*0.5*joystick.getLeftTriggerAxis());
+      turretSubsystem.setPower(kSpeed*joystick.getLeftTriggerAxis());
     }
     else if (joystick.getRightTriggerAxis() != 0) {
       turretSubsystem.coast();
-      turretSubsystem.setPower(kSpeed*0.5*-joystick.getRightTriggerAxis());
+      turretSubsystem.setPower(kSpeed*-joystick.getRightTriggerAxis());
     }                                                                                                                                                                                                           
     // else if (tv == 1.0) {
     //   pidController = new PIDController(PIDConstants.TurretKp, 0, 0);

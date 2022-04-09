@@ -16,8 +16,8 @@ public class TurretSubsystem extends SubsystemBase {
   // private DigitalInput forwardLimitSwitch;
   // private DigitalInput reverseLimitSwitch;
 
-  private boolean forwardLimitDetected = false;
-  private boolean reverseLimitDetected = false;
+  // private boolean forwardLimitDetected = false;
+  // private boolean reverseLimitDetected = false;
 
   public TurretSubsystem() {
     turret = new TalonFX(CanIds.turretFalcon.id);

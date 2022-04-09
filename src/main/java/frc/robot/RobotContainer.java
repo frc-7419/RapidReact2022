@@ -57,11 +57,11 @@ public class RobotContainer {
 
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, 1);
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick2, 0.2);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick2, 0.16);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick1, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
-  private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(joystick2, ledSubsystem, limelightSubsystem);
+  private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, joystick1, joystick2);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
@@ -83,7 +83,7 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
       .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     
-    // joystick 1 brake turret during hang
+    // brake turret during hang
     new JoystickButton(joystick1, XboxController.Button.kB.value)
       .whileHeld(new BrakeTurret(turretSubsystem));
 
