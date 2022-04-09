@@ -6,9 +6,9 @@ package frc.robot.subsystems.arms;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class CoastArms extends CommandBase {
+public class BrakeArms extends CommandBase {
   private ArmsSubsystem armsSubsystem;
-  public CoastArms(ArmsSubsystem armsSubsystem) {
+  public BrakeArms(ArmsSubsystem armsSubsystem) {
     this.armsSubsystem = armsSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.armsSubsystem);
@@ -17,13 +17,13 @@ public class CoastArms extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    armsSubsystem.coast();
+    armsSubsystem.brake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armsSubsystem.coast();
+    armsSubsystem.brake();
   }
 
   // Called once the command ends or is interrupted.

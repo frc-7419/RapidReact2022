@@ -28,6 +28,7 @@ public class ArmsSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
   public void setPower(double power) {
     leftArm.set(power);
     rightArm.set(power);
@@ -46,4 +47,8 @@ public class ArmsSubsystem extends SubsystemBase {
     rightArm.setIdleMode(IdleMode.kCoast);
     flash();
   }
+  
+  // public IdleMode getIdleMode() {
+  //   return leftArm.getIdleMode();
+  // }
 }

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.BrakeArms;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.OneBallAuto;
@@ -98,6 +99,10 @@ public class RobotContainer {
     // lower hub shot, consistent
     new JoystickButton(joystick2, XboxController.Button.kA.value)
       .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
+
+      // brake arms toggle
+    new JoystickButton(joystick2, XboxController.Button.kStart.value)
+      .toggleWhenPressed(new BrakeArms(armsSubsystem));
 
       // coast arms during hanging
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
