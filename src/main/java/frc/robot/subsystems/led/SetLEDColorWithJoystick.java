@@ -16,7 +16,7 @@ public class SetLEDColorWithJoystick extends CommandBase {
   
   private int rainbowFirstPixelHue = 0;
 
-  private double limelightTolerance = 7.5;
+  private double limelightTolerance = 3.5;
 
   public SetLEDColorWithJoystick(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick1, XboxController joystick2) {
     this.joystick1 = joystick1;

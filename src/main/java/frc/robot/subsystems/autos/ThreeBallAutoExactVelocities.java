@@ -93,10 +93,10 @@ public class ThreeBallAutoExactVelocities extends ParallelCommandGroup {
         //   .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60))
         //   .withTimeout(1),
 
-         // turn 90 while braking turret
-         new BrakeTurret(turretSubsystem)
-         .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 90, 2, PIDConstants.GyrokP90, PIDConstants.GyrokI90, PIDConstants.GyrokD90))
-         .withTimeout(0.95),
+         // turn 117 while braking turret
+        new BrakeTurret(turretSubsystem)
+        .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 111.5, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
+        .withTimeout(1.25),
         
         // gttv and align, exact velocity
         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
