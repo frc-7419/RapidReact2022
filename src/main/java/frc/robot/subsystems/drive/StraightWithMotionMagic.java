@@ -12,7 +12,6 @@ import com.team7419.TalonFuncs;
 import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 
