@@ -41,15 +41,15 @@ public class RunTurretWithJoystick extends CommandBase {
     tx = limelightSubsystem.getTx();
     tv = limelightSubsystem.getTv();
 
-    if (joystick.getLeftX() != 0) {
-      turretSubsystem.coast();
-      turretSubsystem.setPower(kSpeed*joystick.getLeftX());
-    }
-    else if (joystick.getRightX() != 0) {
-      turretSubsystem.coast();
-      turretSubsystem.setPower(kSpeed*-joystick.getRightX());
-    }
-    else if (joystick.getLeftTriggerAxis() != 0) {
+    // if (joystick.getLeftX() != 0) {
+    //   turretSubsystem.coast();
+    //   turretSubsystem.setPower(kSpeed*-joystick.getLeftX());
+    // }
+    // else if (joystick.getRightX() != 0) {
+    //   turretSubsystem.coast();
+    //   turretSubsystem.setPower(kSpeed*joystick.getRightX());
+    // }
+    if (joystick.getLeftTriggerAxis() != 0) {
       turretSubsystem.coast();
       turretSubsystem.setPower(kSpeed*joystick.getLeftTriggerAxis());
     }

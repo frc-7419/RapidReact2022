@@ -65,11 +65,12 @@ public class TwoBallAutoExactVelocities extends ParallelCommandGroup {
                 // retract intake
                 new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
-                // turn 180 while braking turret
+                // turn 185 while braking turret
                 new BrakeTurret(turretSubsystem)
-                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 182, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(2),
+                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 185, 1.5, PIDConstants.GyrokP185, PIDConstants.GyrokI185, PIDConstants.GyrokD185)).withTimeout(2),
                 
                 // exact shooter velocities:
+
                 parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 45.5, 43))
                     .withInterrupt(() -> shooterSubsystem.bothOnTarget())
                     .withTimeout(1.15), // gttv while aligning turret

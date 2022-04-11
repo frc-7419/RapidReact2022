@@ -24,10 +24,6 @@ public class SetLEDColorWithJoystick extends CommandBase {
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(ledSubsystem);
-    
-    // purple
-    ledSubsystem.setLEDColor(255, 0, 0);
-    ledSubsystem.startLed();
   }
 
   // Called when the command is initially scheduled.
@@ -54,23 +50,28 @@ public class SetLEDColorWithJoystick extends CommandBase {
     } 
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance && joystick2.getYButton()) {
       // green
-      ledSubsystem.setLEDColor(0, 0, 255);
-      // ledSubsystem.startLed();
+      // ledSubsystem.setLEDColor(0, 0, 255);
+
+      // red
+      ledSubsystem.setLEDColor(255, 0, 0);
+
+      // purple
+      // ledSubsystem.setLEDColor(255, 255, 0);
     } 
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
       // blue
       ledSubsystem.setLEDColor(0, 255, 0);
-      // ledSubsystem.startLed();
     } 
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
       // yellow-ish white
       ledSubsystem.setLEDColor(255, 100, 150);
-      // ledSubsystem.startLed();
     } 
     else {
+       // green
+       ledSubsystem.setLEDColor(0, 0, 255);
+      
       // red
-      ledSubsystem.setLEDColor(255, 0, 0);
-      // ledSubsystem.startLed();
+      // ledSubsystem.setLEDColor(255, 0, 0);
     }
   }
 
@@ -78,7 +79,13 @@ public class SetLEDColorWithJoystick extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // purple
-    ledSubsystem.setLEDColor(255, 255, 0);
+    // ledSubsystem.setLEDColor(255, 255, 0);
+
+    // rainbow
+    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    ledSubsystem.startLed();
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
     // ledSubsystem.stopLed();
   }
 

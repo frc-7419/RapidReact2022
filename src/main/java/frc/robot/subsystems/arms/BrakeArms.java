@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.arms;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class BrakeArms extends CommandBase {
@@ -17,18 +18,21 @@ public class BrakeArms extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // SmartDashboard.putBoolean("Arm Brake Cmd", true);
     armsSubsystem.brake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // SmartDashboard.putBoolean("Arm Brake Cmd", true);
     armsSubsystem.brake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // SmartDashboard.putBoolean("Arm Brake Cmd", false);
     armsSubsystem.coast();
   }
 

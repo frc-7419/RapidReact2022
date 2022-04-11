@@ -100,6 +100,10 @@ public final class Constants {
         public static final double GyrokI32 = 0.00;
         public static final double GyrokD32 = 0.0001;
 
+        public static final double GyrokP45 = 0.007;
+        public static final double GyrokI45 = 0;
+        public static final double GyrokD45 = 0.0001;
+
         public static final double GyrokP63 = 0.007;
         public static final double GyrokI63 = 0.0002;
         public static final double GyrokD63 = 0.0003;
@@ -120,14 +124,6 @@ public final class Constants {
         public static final double GyrokI115 = 0.0;
         public static final double GyrokD115 = 0.0000083;
 
-        public static final double GyrokP180 = 0.0035;
-        public static final double GyrokI180 = 0.000655;
-        public static final double GyrokD180 = 0.0004;
-
-        public static final double GyrokP185 = 0.0035;
-        public static final double GyrokI185 = 0.000655;
-        public static final double GyrokD185 = 0.0004;
-
         public static final double GyrokP122 = 0.0072;
         public static final double GyrokI122 = 0.00048;
         public static final double GyrokD122 = 0.00050;
@@ -136,9 +132,15 @@ public final class Constants {
         public static final double GyrokI135 = 0;
         public static final double GyrokD135 = 0.0000083;
 
-        public static final double GyrokP45 = 0.007;
-        public static final double GyrokI45 = 0;
-        public static final double GyrokD45 = 0.0001;
+        public static final double GyrokP180 = 0.0035;
+        public static final double GyrokI180 = 0.000655;
+        public static final double GyrokD180 = 0.0004;
+
+        public static final double GyrokP185 = 0.0035;
+        public static final double GyrokI185 = 0.000655;
+        public static final double GyrokD185 = 0.0004;
+
+        
 
         // turret PID gains
         // public static final double TurretKp = 0.0065;
