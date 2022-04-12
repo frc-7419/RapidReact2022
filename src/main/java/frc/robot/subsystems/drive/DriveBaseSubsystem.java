@@ -70,12 +70,27 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right2.set(ControlMode.PercentOutput, voltage/11);
   }
 
-  public void setAll(double voltage){
+  public void setAllVoltage(double voltage){
     setLeftVoltage(voltage);
     setRightVoltage(voltage);
   }
 
-  public void stop(){setAll(0);}
+  public void setLeftPower(double power){
+    left1.set(ControlMode.PercentOutput, power);
+    left2.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setRightPower(double power){
+    right1.set(ControlMode.PercentOutput, power);
+    right2.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setAllPower(double power){
+    setLeftPower(power);
+    setRightPower(power);
+  }
+
+  public void stop(){setAllPower(0);}
 
   public void setAllMode(NeutralMode mode){
     right1.setNeutralMode(mode);

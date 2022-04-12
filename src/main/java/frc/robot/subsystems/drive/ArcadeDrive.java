@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ArcadeDrive extends CommandBase {
 
-  private DriveBaseSubsystem oldDriveBaseSubsystem;
+  private DriveBaseSubsystem driveBaseSubsystem;
   private double kStraight;
   private double kTurn;
   private XboxController joystick;
@@ -15,19 +15,19 @@ public class ArcadeDrive extends CommandBase {
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   // private final SlewRateLimiter rotLimiter = new SlewRateLimiter(70);
 
-  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem oldDriveBaseSubsystem, double kStraight, double kTurn) {
+  public ArcadeDrive(XboxController joystick, DriveBaseSubsystem driveBaseSubsystem, double kStraight, double kTurn) {
     this.joystick = joystick;
-    this.oldDriveBaseSubsystem = oldDriveBaseSubsystem;
+    this.driveBaseSubsystem = driveBaseSubsystem;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
-    addRequirements(oldDriveBaseSubsystem);
+    addRequirements(driveBaseSubsystem);
 }
 
   @Override
   public void initialize() {
-    oldDriveBaseSubsystem.factoryResetAll();    
-    oldDriveBaseSubsystem.setAllDefaultInversions();
-    oldDriveBaseSubsystem.coast(); 
+    driveBaseSubsystem.factoryResetAll();    
+    driveBaseSubsystem.setAllDefaultInversions();
+    driveBaseSubsystem.coast(); 
   }
 
   @Override
@@ -37,7 +37,7 @@ public class ArcadeDrive extends CommandBase {
     double zRotation = joystick.getRightX() * kTurn;
     
     if (Math.abs(joystick.getRightY()) > 0) {
-      oldDriveBaseSubsystem.coast();
+      driveBaseSubsystem.coast();
       
       // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
       // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
@@ -45,15 +45,15 @@ public class ArcadeDrive extends CommandBase {
       // double leftPower = xSpeed + zRotation;
       // double rightPower = xSpeed - zRotation;
 
-      double leftVoltage = xSpeed + zRotation;
-      double rightVoltage = xSpeed - zRotation;
+      double leftPower = xSpeed + zRotation;
+      double rightPower = xSpeed - zRotation;
 
       
-      oldDriveBaseSubsystem.setLeftVoltage(leftVoltage);
-      oldDriveBaseSubsystem.setRightVoltage(rightVoltage);
+      driveBaseSubsystem.setLeftPower(leftPower);
+      driveBaseSubsystem.setRightPower(rightPower);
     }
     else {
-      oldDriveBaseSubsystem.setAll(0);
+      driveBaseSubsystem.setAllPower(0);
     }
   }
 
@@ -64,7 +64,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    oldDriveBaseSubsystem.setAll(0);
+    driveBaseSubsystem.setAllPower(0);
   }
 
 }
