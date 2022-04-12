@@ -3,42 +3,77 @@ package frc.robot.subsystems.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 public class DriveBaseSubsystem extends SubsystemBase {
-  
-  public TalonFX left1;
-	public TalonFX right1;
-	public TalonFX left2;
-  public TalonFX right2;
+    public TalonFX left1;
+    public TalonFX right1;
+	  public TalonFX left2;
+    public TalonFX right2;
   
   public DriveBaseSubsystem() {
     left1 = new TalonFX(CanIds.leftFalcon1.id);
-		right1 = new TalonFX(CanIds.rightFalcon1.id);
-		left2 = new TalonFX(CanIds.leftFalcon2.id);
+	  right1 = new TalonFX(CanIds.rightFalcon1.id);
+	  left2 = new TalonFX(CanIds.leftFalcon2.id);
     right2 = new TalonFX(CanIds.rightFalcon2.id);
 
     factoryResetAll();
-    
+
     right1.setInverted(true);
     right1.setSensorPhase(false);
     right2.setInverted(true);
     right2.setSensorPhase(false);
 
+    left1.setInverted(false);
+    left2.setInverted(false);
+
     left2.follow(left1);
     right2.follow(right1);
+
+    left1.configVoltageCompSaturation(11);
+    left1.enableVoltageCompensation(true);
+
+    left2.configVoltageCompSaturation(11);
+    left2.enableVoltageCompensation(true);
+
+    right1.configVoltageCompSaturation(11);
+    right2.enableVoltageCompensation(true);
+
+    right2.configVoltageCompSaturation(11);
+    right2.enableVoltageCompensation(true);
   }
 
   @Override
   public void periodic() {
   }
-  
+
+  public enum TurnDirection {
+    LEFT,
+    RIGHT,
+  }
+
   // accessors
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
   public TalonFX getLeftFollow(){return left2;}
   public TalonFX getRightFollow(){return right2;}
+
+  public void setLeftVoltage(double voltage){
+    left1.set(ControlMode.PercentOutput, voltage/11);
+    left2.set(ControlMode.PercentOutput, voltage/11);
+  }
+
+  public void setRightVoltage(double voltage){
+    right1.set(ControlMode.PercentOutput, voltage/11);
+    right2.set(ControlMode.PercentOutput, voltage/11);
+  }
+
+  public void setAllVoltage(double voltage){
+    setLeftVoltage(voltage);
+    setRightVoltage(voltage);
+  }
 
   public void setLeftPower(double power){
     left1.set(ControlMode.PercentOutput, power);
@@ -50,12 +85,12 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right2.set(ControlMode.PercentOutput, power);
   }
 
-  public void setAll(double power){
+  public void setAllPower(double power){
     setLeftPower(power);
     setRightPower(power);
   }
 
-  public void stop(){setAll(0);}
+  public void stop(){setAllPower(0);}
 
   public void setAllMode(NeutralMode mode){
     right1.setNeutralMode(mode);
@@ -78,7 +113,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     left2.setInverted(false);
   }
 
-  public void factoryResetAll(){
+  public void factoryResetAll() {
     right1.configFactoryDefault();
     right2.configFactoryDefault();
     left1.configFactoryDefault();
