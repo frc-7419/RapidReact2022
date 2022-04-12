@@ -26,6 +26,9 @@ public class TurretSubsystem extends SubsystemBase {
     turret.configFactoryDefault();
     turret.configReverseSoftLimitEnable(false, 0);
     turret.configForwardSoftLimitEnable(false, 0);
+
+    turret.configVoltageCompSaturation(11);
+    turret.enableVoltageCompensation(true);
   }
 
   @Override
@@ -52,6 +55,11 @@ public class TurretSubsystem extends SubsystemBase {
   public void setPower(double power) {
     coast();
     turret.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setVoltage(double voltage) {
+    coast();
+    turret.set(ControlMode.PercentOutput, voltage/11);
   }
 
   public void brake() {

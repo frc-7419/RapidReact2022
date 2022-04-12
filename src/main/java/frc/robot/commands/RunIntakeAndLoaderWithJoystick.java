@@ -13,30 +13,26 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
   private XboxController joystick;
   private IntakeSubsystem intakeSubsystem;
   private LoaderSubsystem loaderSubsystem;
-  private double loaderPower;
 
-  public RunIntakeAndLoaderWithJoystick(XboxController joystick, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, double loaderPower) {
+  public RunIntakeAndLoaderWithJoystick(XboxController joystick, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
     this.joystick = joystick;
     this.intakeSubsystem = intakeSubsystem;
     this.loaderSubsystem = loaderSubsystem;
-    this.loaderPower = loaderPower;
     addRequirements(intakeSubsystem, loaderSubsystem);
   }
 
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
     if (joystick.getRightTriggerAxis() > 0) {
       intakeSubsystem.setPower(1);
-      loaderSubsystem.setPower(loaderPower*.6);
+      loaderSubsystem.setPower(0.6);
     }
     else if (joystick.getLeftTriggerAxis() > 0) {
         intakeSubsystem.setPower(-1);
-        loaderSubsystem.setPower(-loaderPower*.4);
+        loaderSubsystem.setPower(-0.4);
       }
     else {
       intakeSubsystem.setPower(0);

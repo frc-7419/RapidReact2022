@@ -125,8 +125,19 @@ public class ShooterSubsystem extends SubsystemBase{
         topFalcon.set(ControlMode.PercentOutput, voltage/11);
         bottomFalcon.set(ControlMode.PercentOutput, voltage/11);
     }
+
+    public void setTopPower(double power) {
+        topFalcon.set(ControlMode.PercentOutput, power);
+    }
+    public void setBottomPower(double power) {
+        bottomFalcon.set(ControlMode.PercentOutput, power);
+    }
+    public void setBothPower(double power) {
+        setTopPower(power);
+        setBottomPower(power);
+    }
     public void off() {
-        setBothVoltage(0);
+        setBothPower(0);
     }
 
     public double getTopOutputVoltage(){return topFalcon.getMotorOutputVoltage();}
