@@ -19,6 +19,8 @@ import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLEDColor;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
@@ -31,8 +33,8 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 
 public class HoustonFourBall extends ParallelCommandGroup {
 
-  public HoustonFourBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, FeederSubsystem feederSubsystem) {
-    sequence(
+  public HoustonFourBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, FeederSubsystem feederSubsystem, LEDSubsystem ledSubsystem) {
+    addCommands(sequence(
       //deploy intake and move forward to intake ball
       new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
       
@@ -88,9 +90,15 @@ public class HoustonFourBall extends ParallelCommandGroup {
         new GetToTargetVelocity(shooterSubsystem, 37, 30),
         new RunLoader(loaderSubsystem, 1),
         new RunFeeder(feederSubsystem, 1)
-      ).withTimeout(1.5)
+      ).withTimeout(1.5),
 
-    );
+      new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
+
+
+    ));
+    addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
+
+
   }
 }
 
