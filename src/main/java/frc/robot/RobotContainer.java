@@ -28,7 +28,7 @@ public class RobotContainer {
   // private final XboxController joystick = new XboxController(0);
   private final DriveBaseSubsystem driveBase = new DriveBaseSubsystem();
   private final GyroSubsystem gyro = new GyroSubsystem();
-  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 180);
+  private final TurnWithGyroClosedLoop turnWithGyroClosedLoop = new TurnWithGyroClosedLoop(driveBase, gyro, 2.5, 180);
 
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -38,9 +38,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    SmartDashboard.putNumber("kp", PIDConstants.GyrokP);
-    SmartDashboard.putNumber("ki", PIDConstants.GyrokI);
-    SmartDashboard.putNumber("kd", PIDConstants.GyrokD);
+    SmartDashboard.putNumber("kP", PIDConstants.GyrokP);
+    SmartDashboard.putNumber("kI", PIDConstants.GyrokI);
+    SmartDashboard.putNumber("kD", PIDConstants.GyrokD);
+    SmartDashboard.putNumber("tolerance", 2.5);
     SmartDashboard.putNumber("target", 180);
     SmartDashboard.putBoolean("at setpoint", false);
   }

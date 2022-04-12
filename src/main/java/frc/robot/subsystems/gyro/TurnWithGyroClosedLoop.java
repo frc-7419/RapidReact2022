@@ -18,6 +18,7 @@ public class TurnWithGyroClosedLoop extends CommandBase {
   private PIDController pidController;
   private double pidOutput;
   private double initAngle;
+  private double tolerance;
 
   /**
    * LEFT IS POSITIVE
@@ -25,23 +26,25 @@ public class TurnWithGyroClosedLoop extends CommandBase {
    * @param gyro
    * @param angle
    */
-  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double target) {
+  public TurnWithGyroClosedLoop(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, double tolerance, double target) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.gyroSubsystem = gyroSubsystem;
     this.target = target;
+    this.tolerance = tolerance;
   }
 
   @Override
   public void initialize() {
     driveBaseSubsystem.coast();
     initAngle = gyroSubsystem.getGyroAngle();
-    double kp = SmartDashboard.getNumber("kp", PIDConstants.GyrokP);
-    double ki = SmartDashboard.getNumber("ki", PIDConstants.GyrokI);
-    double kd = SmartDashboard.getNumber("kd", PIDConstants.GyrokD);
-    pidController = new PIDController(kp, ki, kd);
-    target = SmartDashboard.getNumber("target", 180);
+    kP = SmartDashboard.getNumber("kP", PIDConstants.GyrokP);
+    kI = SmartDashboard.getNumber("kI", PIDConstants.GyrokI);
+    kD = SmartDashboard.getNumber("kD", PIDConstants.GyrokD);
+    pidController = new PIDController(kP, kI, kD);
+    tolerance = SmartDashboard.getNumber("tolerance", tolerance);
+    target = SmartDashboard.getNumber("target", target);
     pidController.setSetpoint(initAngle + target);
-    pidController.setTolerance(0.5); 
+    pidController.setTolerance(tolerance); 
   } 
 
   @Override
