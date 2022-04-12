@@ -31,6 +31,18 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     left2.follow(left1);
     right2.follow(right1);
+
+    left1.configVoltageCompSaturation(11);
+    left1.enableVoltageCompensation(true);
+
+    left2.configVoltageCompSaturation(11);
+    left2.enableVoltageCompensation(true);
+
+    right1.configVoltageCompSaturation(11);
+    right2.enableVoltageCompensation(true);
+
+    right2.configVoltageCompSaturation(11);
+    right2.enableVoltageCompensation(true);
   }
 
   @Override
@@ -48,19 +60,19 @@ public class DriveBaseSubsystem extends SubsystemBase {
   public TalonFX getLeftFollow(){return left2;}
   public TalonFX getRightFollow(){return right2;}
 
-  public void setLeftPower(double power){
-    left1.set(ControlMode.PercentOutput, power);
-    left2.set(ControlMode.PercentOutput, power);
+  public void setLeftVoltage(double voltage){
+    left1.set(ControlMode.PercentOutput, voltage/11);
+    left2.set(ControlMode.PercentOutput, voltage/11);
   }
 
-  public void setRightPower(double power){
-    right1.set(ControlMode.PercentOutput, power);
-    right2.set(ControlMode.PercentOutput, power);
+  public void setRightVoltage(double voltage){
+    right1.set(ControlMode.PercentOutput, voltage/11);
+    right2.set(ControlMode.PercentOutput, voltage/11);
   }
 
-  public void setAll(double power){
-    setLeftPower(power);
-    setRightPower(power);
+  public void setAll(double voltage){
+    setLeftVoltage(voltage);
+    setRightVoltage(voltage);
   }
 
   public void stop(){setAll(0);}

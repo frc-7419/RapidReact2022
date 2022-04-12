@@ -45,12 +45,12 @@ public class ArcadeDrive extends CommandBase {
       // double leftPower = xSpeed + zRotation;
       // double rightPower = xSpeed - zRotation;
 
-      double leftPower = xSpeed + zRotation;
-      double rightPower = xSpeed - zRotation;
+      double leftVoltage = xSpeed + zRotation;
+      double rightVoltage = xSpeed - zRotation;
 
       
-      oldDriveBaseSubsystem.setLeftPower(leftPower);
-      oldDriveBaseSubsystem.setRightPower(rightPower);
+      oldDriveBaseSubsystem.setLeftVoltage(leftVoltage);
+      oldDriveBaseSubsystem.setRightVoltage(rightVoltage);
     }
     else {
       oldDriveBaseSubsystem.setAll(0);
