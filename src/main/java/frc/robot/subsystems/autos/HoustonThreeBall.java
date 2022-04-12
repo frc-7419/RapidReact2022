@@ -110,17 +110,19 @@ public class HoustonThreeBall extends SequentialCommandGroup {
         //   .withTimeout(1),
 
         // turn 110 while braking turret
-        new BrakeTurret(turretSubsystem)
-        .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 110, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
-        .withTimeout(1.15),
+        // new BrakeTurret(turretSubsystem)
+        // .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 110, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
+        // .withTimeout(1.15),
         
         // gttv and align, exact velocity
         // parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
         //   .withTimeout(0.5),
 
         // gttv with limelight and align
-        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
-          .withTimeout(0.5), // gttv while aligning turret
+        parallel(
+          new AlignTurretDefault(turretSubsystem, limelightSubsystem), 
+          new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
+          .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60)), // gttv while aligning turret
         
         // shoot both balls with exact velocity
         // parallel(
@@ -133,9 +135,7 @@ public class HoustonThreeBall extends SequentialCommandGroup {
         // shoot both balls with limelight velocity
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
-            new RunFeeder(feederSubsystem, 1),
-            new RunLoader(loaderSubsystem, 1)
+            new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
         ).withTimeout(2.15), // tune time
         
         new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
