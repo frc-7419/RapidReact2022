@@ -26,21 +26,21 @@ public class RunFeederWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if(joystick.getLeftBumper()) {
-      feederSubsystem.setPower(Constants.PowerConstants.FeederVoltage);
+      feederSubsystem.setVoltage(Constants.PowerConstants.FeederVoltage);
     } else if (joystick.getRightBumper()) {
-      feederSubsystem.setPower(-Constants.PowerConstants.FeederVoltage);
+      feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
     }
     else {
-      feederSubsystem.setPower(0);
+      feederSubsystem.setVoltage(0);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    feederSubsystem.setPower(0);
+    feederSubsystem.setVoltage(0);
   }
-
+  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

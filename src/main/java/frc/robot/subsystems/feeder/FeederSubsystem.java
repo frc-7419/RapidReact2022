@@ -19,8 +19,8 @@ public class FeederSubsystem extends SubsystemBase {
     feeder.enableVoltageCompensation(true);
   }
 
-  public void setPower(double power) {
-    feeder.set(ControlMode.PercentOutput, power/11);
+  public void setVoltage(double voltage) {
+    feeder.set(ControlMode.PercentOutput, voltage/11);
   }
 
   @Override

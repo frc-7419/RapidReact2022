@@ -28,8 +28,8 @@ public class LoaderSubsystem extends SubsystemBase {
     loader.configPeakCurrentDuration(100, 0);
     loader.enableCurrentLimit(true);
 
-    // loader.configVoltageCompSaturation(11);
-    // loader.enableVoltageCompensation(true);
+    loader.configVoltageCompSaturation(11);
+    loader.enableVoltageCompensation(true);
   }
 
   @Override

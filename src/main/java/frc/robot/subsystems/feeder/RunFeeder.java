@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunFeeder extends CommandBase {
   /** Creates a new RunFeeder. */
   private FeederSubsystem feederSubsystem;
-  private double power;
-  public RunFeeder(FeederSubsystem feederSubsystem, double power) {
+  private double voltage;
+  public RunFeeder(FeederSubsystem feederSubsystem, double voltage) {
     this.feederSubsystem = feederSubsystem;
-    this.power = power;
+    this.voltage = voltage;
     addRequirements(feederSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,13 +24,13 @@ public class RunFeeder extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    feederSubsystem.setPower(power);
+    feederSubsystem.setVoltage(voltage);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    feederSubsystem.setPower(0);
+    feederSubsystem.setVoltage(0);
   }
 
   // Returns true when the command should end.

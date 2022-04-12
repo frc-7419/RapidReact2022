@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunLoaderWithJoystick extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
   private XboxController joystick;
-  private double power;
+  private double voltage;
 
-  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem, XboxController joystick, double power) {
+  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem, XboxController joystick, double voltage) {
     this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
-    this.power = power;
+    this.voltage = voltage;
     addRequirements(loaderSubsystem);
   }
 
@@ -26,15 +26,15 @@ public class RunLoaderWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if (joystick.getLeftBumper()) {
-      loaderSubsystem.setPower(power);
+      loaderSubsystem.setVoltage(voltage);
       loaderSubsystem.coast();
     }
     else if (joystick.getRightBumper()) {
-      loaderSubsystem.setPower(-power);
+      loaderSubsystem.setVoltage(voltage);
       loaderSubsystem.coast();
     }
     else {
-      loaderSubsystem.setPower(0);
+      loaderSubsystem.setVoltage(voltage);
       // loaderSubsystem.brake();
     }
   }

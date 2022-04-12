@@ -11,8 +11,8 @@ public class RunShooterWithJoystick extends CommandBase {
   /** Creates a new RunShooterWithJoystick. */
   private ShooterSubsystem shooterSubsystem;
   private XboxController joystick;
-  private double powerTop = 0;
-  private double powerBottom = 0;
+  private double voltageTop = 0;
+  private double voltageBottom = 0;
   private double stepInterval = 0.005;
 
   public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController joystick) {
@@ -38,24 +38,24 @@ public class RunShooterWithJoystick extends CommandBase {
   public void execute() {
       int dPadValue = joystick.getPOV();
       if (dPadValue == Direction.UP.direction) {
-        powerTop += stepInterval;
+        voltageTop += stepInterval;
       } else if (dPadValue == Direction.DOWN.direction) {
-        powerTop -= stepInterval;
+        voltageTop -= stepInterval;
       } else if (dPadValue == Direction.RIGHT.direction) {
-        powerBottom += stepInterval;
+        voltageBottom += stepInterval;
       } else if (dPadValue == Direction.LEFT.direction) {
-        powerBottom -= stepInterval;
+        voltageBottom -= stepInterval;
       }
-      shooterSubsystem.setTopPower(powerTop);
-      shooterSubsystem.setBottomPower(powerBottom);
+      shooterSubsystem.setTopVoltage(voltageTop);
+      shooterSubsystem.setBottomVoltage(voltageBottom);
       // if (-joystick.getRightY() > 0) {
-      //   shooterSubsystem.setBothPower(-joystick.getRightY());
+      //   shooterSubsystem.setBothvoltage(-joystick.getRightY());
         
       // }
       if (joystick.getBButtonPressed()) {
-        shooterSubsystem.setBothPower(0);
-        powerTop = 0;
-        powerBottom = 0;
+        shooterSubsystem.setBothVoltage(0);
+        voltageTop = 0;
+        voltageBottom = 0;
       }
   }
 

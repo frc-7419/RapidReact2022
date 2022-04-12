@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunLoader extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
-  private double power;
+  private double voltage;
 
-  public RunLoader(LoaderSubsystem loaderSubsystem, double power) {
+  public RunLoader(LoaderSubsystem loaderSubsystem, double voltage) {
     this.loaderSubsystem = loaderSubsystem;
-    this.power = power;
+    this.voltage = voltage;
     addRequirements(loaderSubsystem);
   }
 
@@ -22,7 +22,7 @@ public class RunLoader extends CommandBase {
 
   @Override
   public void execute() {
-    loaderSubsystem.setPower(power);
+    loaderSubsystem.setVoltage(voltage);
   }
 
   @Override
