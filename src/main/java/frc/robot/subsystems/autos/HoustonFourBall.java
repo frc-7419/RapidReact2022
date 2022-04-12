@@ -70,13 +70,12 @@ public class HoustonFourBall extends ParallelCommandGroup {
         new RunLoader(loaderSubsystem, 1)
       ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 187)), //calculate value for going straight all the way to the terminal
 
-      //will do turn, forward shoot other 2 balls
-      //forward 187 inches
-      // wait 1 second for human player
       new WaitCommand(1),
+      //will do turn, forward shoot other 2 balls forward 187 inches
+      
       //turn and go back
       new BrakeTurret(turretSubsystem).deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(0.25),
-      new StraightWithMotionMagic(driveBaseSubsystem, 187),
+      new StraightWithMotionMagic(driveBaseSubsystem, 160),
 
       //align turret, get to target velo, shoot 2 balls
       parallel(
