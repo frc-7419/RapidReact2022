@@ -28,18 +28,12 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     left2.follow(left1);
     right2.follow(right1);
-    
   }
 
   @Override
   public void periodic() {
   }
-
-  public enum TurnDirection{
-    LEFT,
-    RIGHT,
-  }
-
+  
   // accessors
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
