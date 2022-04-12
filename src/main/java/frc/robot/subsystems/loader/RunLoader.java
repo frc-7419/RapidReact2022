@@ -27,7 +27,7 @@ public class RunLoader extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    loaderSubsystem.setPower(0);
+    loaderSubsystem.setVoltage(0);
   }
 
   @Override
