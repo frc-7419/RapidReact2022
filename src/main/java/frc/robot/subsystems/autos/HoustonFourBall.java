@@ -71,6 +71,7 @@ public class HoustonFourBall extends ParallelCommandGroup {
       ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 0)) //calculate value for going straight all the way to the terminal
 
       //will do turn, forward shoot other 2 balls
+      // forward 187 inches
       
 
     );
