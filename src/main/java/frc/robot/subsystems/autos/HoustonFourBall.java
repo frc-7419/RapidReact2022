@@ -4,13 +4,73 @@
 
 package frc.robot.subsystems.autos;
 
+import javax.management.InstanceAlreadyExistsException;
+
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.PIDConstants;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
+import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.feeder.FeederSubsystem;
+import frc.robot.subsystems.feeder.RunFeeder;
+import frc.robot.subsystems.gyro.GyroSubsystem;
+import frc.robot.subsystems.gyro.TurnWithGyroClosedLoop;
+import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
+import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.limelight.LimelightSubsystem;
+import frc.robot.subsystems.loader.LoaderSubsystem;
+import frc.robot.subsystems.loader.RunLoader;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.turret.AlignTurretDefault;
+import frc.robot.subsystems.turret.BrakeTurret;
+import frc.robot.subsystems.turret.TurretSubsystem;
 
 
 public class HoustonFourBall extends ParallelCommandGroup {
 
-  public HoustonFourBall() {
+  public HoustonFourBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, FeederSubsystem feederSubsystem) {
     sequence(
+      //deploy intake and move forward to intake ball
+      new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+      
+      parallel(
+        new RunIntake(intakeSubsystem, 1),
+        new RunLoader(loaderSubsystem, 0.6)
+      ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 46)), 
+
+      //brake turret, turn 180
+      new WaitCommand(0.25),
+      new BrakeTurret(turretSubsystem).deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(0.25),
+      new WaitCommand(0.15),
+
+      //align turret, get to target velo, shoot 2 balls
+      parallel(
+        new AlignTurretDefault(turretSubsystem, limelightSubsystem), 
+        new GetToTargetVelocity(shooterSubsystem, 37, 30)
+      ).withTimeout(0.75),
+
+      parallel(
+        new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+        new GetToTargetVelocity(shooterSubsystem, 37, 30),
+        new RunLoader(loaderSubsystem, 1),
+        new RunFeeder(feederSubsystem, 1)
+      ).withTimeout(1.5),
+
+      //brake turret, turn 180 to face the terminal
+      new WaitCommand(0.25),
+      new BrakeTurret(turretSubsystem).deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)).withTimeout(0.25),
+      new WaitCommand(0.15),
+
+      parallel(
+        new RunIntake(intakeSubsystem, 1),
+        new RunLoader(loaderSubsystem, 1)
+      ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 0)) //calculate value for going straight all the way to the terminal
+
+      //will do turn, forward shoot other 2 balls
+      
 
     );
   }
