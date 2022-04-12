@@ -36,6 +36,7 @@ public class HoustonFourBall extends ParallelCommandGroup {
       //deploy intake and move forward to intake ball
       new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
       
+      // run intake and loader in parallel
       parallel(
         new RunIntake(intakeSubsystem, 1),
         new RunLoader(loaderSubsystem, 0.6)
