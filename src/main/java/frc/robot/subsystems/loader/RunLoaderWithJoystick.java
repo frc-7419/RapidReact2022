@@ -34,7 +34,7 @@ public class RunLoaderWithJoystick extends CommandBase {
       loaderSubsystem.coast();
     }
     else {
-      loaderSubsystem.setVoltage(voltage);
+      loaderSubsystem.setVoltage(0);
       // loaderSubsystem.brake();
     }
   }
