@@ -6,11 +6,8 @@ package frc.robot.subsystems.loader;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
@@ -30,6 +27,9 @@ public class LoaderSubsystem extends SubsystemBase {
     loader.configPeakCurrentLimit(15, 0);
     loader.configPeakCurrentDuration(100, 0);
     loader.enableCurrentLimit(true);
+
+    loader.configVoltageCompSaturation(11);
+    loader.enableVoltageCompensation(true);
   }
 
   @Override
@@ -49,6 +49,10 @@ public class LoaderSubsystem extends SubsystemBase {
   
   public void setPower(double power) {
     loader.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setVoltage(double voltage) {
+    loader.set(ControlMode.PercentOutput, voltage / 11);
   }
 
   public TalonSRX getLoaderMotor() {
