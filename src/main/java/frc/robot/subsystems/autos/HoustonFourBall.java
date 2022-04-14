@@ -25,6 +25,7 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
@@ -52,15 +53,10 @@ public class HoustonFourBall extends ParallelCommandGroup {
       //align turret, get to target velo, shoot 2 balls
       parallel(
         new AlignTurretDefault(turretSubsystem, limelightSubsystem), 
-        new GetToTargetVelocity(shooterSubsystem, 37, 30)
+        new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
       ).withTimeout(0.75),
 
-      parallel(
-        new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-        new GetToTargetVelocity(shooterSubsystem, 37, 30),
-        new RunLoader(loaderSubsystem, 1),
-        new RunFeeder(feederSubsystem, 1)
-      ).withTimeout(1.5),
+      new AllignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
 
       //brake turret, turn 180 to face the terminal
       new WaitCommand(0.25),
@@ -82,15 +78,10 @@ public class HoustonFourBall extends ParallelCommandGroup {
       //align turret, get to target velo, shoot 2 balls
       parallel(
         new AlignTurretDefault(turretSubsystem, limelightSubsystem), 
-        new GetToTargetVelocity(shooterSubsystem, 37, 30)
+        new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
       ).withTimeout(0.75),
 
-      parallel(
-        new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-        new GetToTargetVelocity(shooterSubsystem, 37, 30),
-        new RunLoader(loaderSubsystem, 1),
-        new RunFeeder(feederSubsystem, 1)
-      ).withTimeout(1.5),
+      new AllignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
 
       new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
 

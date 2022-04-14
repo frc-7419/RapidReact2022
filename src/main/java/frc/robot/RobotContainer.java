@@ -12,6 +12,7 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.BrakeArms;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
+import frc.robot.subsystems.autos.HoustonFourBall;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.OneBallAutoWait;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
@@ -68,6 +69,7 @@ public class RobotContainer {
 
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  private final HoustonFourBall houstonFourBall = new HoustonFourBall(turretSubsystem, limelightSubsystem, shooterSubsystem, intakeSolenoidSubsystem, intakeSubsystem, loaderSubsystem, driveBaseSubsystem, gyroSubsystem, feederSubsystem, ledSubsystem);
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
   private final OneBallAutoWait oneBallAutoWait = new OneBallAutoWait(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
@@ -125,7 +127,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return oneBallAutoWait;
+    return houstonFourBall;
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
