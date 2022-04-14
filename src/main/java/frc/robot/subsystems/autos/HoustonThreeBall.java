@@ -43,8 +43,8 @@ public class HoustonThreeBall extends SequentialCommandGroup {
     */
     addCommands(
       sequence(
-        // retract intake
-        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+        // deploy intake
+        new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
         // gttv and align turret
         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
@@ -64,9 +64,6 @@ public class HoustonThreeBall extends SequentialCommandGroup {
             .withTimeout(1.25),
 
         new WaitCommand(0.25),  
-              
-        // deploy intake
-        new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
 
         // move forward while running intake + loader
         parallel(
