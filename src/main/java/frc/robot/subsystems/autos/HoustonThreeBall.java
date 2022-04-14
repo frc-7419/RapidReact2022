@@ -35,34 +35,28 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 public class HoustonThreeBall extends SequentialCommandGroup {
   /** Creates a new HoustonThreeBall. */
   public HoustonThreeBall(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, IntakeSubsystem intakeSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem, LEDSubsystem ledSubsystem) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-
-
-  
+    
     /*
     Steps needed for Houston:
     - Tune the interpolated tuning table
     - Adjust the values below as needed
-
     */
-
     addCommands(
       sequence(
+        // retract intake
+        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+
         // gttv and align turret
-        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
+        parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
           .withTimeout(0.75), // gttv while aligning turret
 
         // shoot preload
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-            new GetToTargetVelocity(shooterSubsystem, 37, 30),
+            new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
             new RunFeeder(feederSubsystem, 1),
             new RunLoader(loaderSubsystem, 1)
         ).withTimeout(1.5), // tune time
-
-        // retract intake
-        new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
 
         // turn 180 while braking turret
         new BrakeTurret(turretSubsystem)
@@ -105,43 +99,30 @@ public class HoustonThreeBall extends SequentialCommandGroup {
 
         new WaitCommand(0.3),
 
-        // new AlignTurretDefault(turretSubsystem, limelightSubsystem)
-        //   .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60))
-        //   .withTimeout(1),
-
-        // turn 110 while braking turret
-        // new BrakeTurret(turretSubsystem)
-        // .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 110, 2, PIDConstants.GyrokP115, PIDConstants.GyrokI115, PIDConstants.GyrokD115))
-        // .withTimeout(1.15),
-        
-        // gttv and align, exact velocity
-        // parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
-        //   .withTimeout(0.5),
-
         // gttv with limelight and align
         parallel(
           new AlignTurretDefault(turretSubsystem, limelightSubsystem), 
           new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
           .deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -60)), // gttv while aligning turret
-        
-        // shoot both balls with exact velocity
-        // parallel(
-        //     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-        //     new GetToTargetVelocity(shooterSubsystem, 43, 36),
-        //     new RunFeeder(feederSubsystem, 1),
-        //     new RunLoader(loaderSubsystem, 1)
-        // ).withTimeout(2.15), // tune time
 
         // shoot both balls with limelight velocity
         parallel(
             new AlignTurretDefault(turretSubsystem, limelightSubsystem),
             new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
         ).withTimeout(2.15), // tune time
-        
+
+               // shoot both balls with exact velocity
+        parallel(
+          new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+          new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
+          new RunFeeder(feederSubsystem, 1),
+          new RunLoader(loaderSubsystem, 1)
+        ).withTimeout(2.15), // tune time
+
         new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
       ));
       
       addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
-
+     
   }
 }
