@@ -56,7 +56,7 @@ public class HoustonFourBall extends ParallelCommandGroup {
         new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
       ).withTimeout(0.75),
 
-      new AllignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
+      new AlignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
 
       //brake turret, turn 180 to face the terminal
       new WaitCommand(0.25),
@@ -81,7 +81,7 @@ public class HoustonFourBall extends ParallelCommandGroup {
         new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
       ).withTimeout(0.75),
 
-      new AllignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
+      new AlignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem).withTimeout(1.5),
 
       new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
 

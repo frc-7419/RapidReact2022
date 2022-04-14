@@ -20,9 +20,9 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AllignAndShootWithLimelight extends ParallelCommandGroup {
+public class AlignAndShootWithLimelight extends ParallelCommandGroup {
   /** Creates a new AllignAndShoot. */
-  public AllignAndShootWithLimelight(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,FeederSubsystem feederSubsystem) {
+  public AlignAndShootWithLimelight(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,FeederSubsystem feederSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
