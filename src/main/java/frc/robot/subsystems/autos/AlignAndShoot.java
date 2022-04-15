@@ -21,12 +21,14 @@ import frc.robot.subsystems.turret.TurretSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AlignAndShoot extends ParallelCommandGroup {
   /** Creates a new AllignAndShoot. */
-  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,FeederSubsystem feederSubsystem) {
+  public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, double topVelocity, double bottomVelocity) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
     new AlignTurretDefault(turretSubsystem, limelightSubsystem);
-    new GetToTargetVelocity(shooterSubsystem, 37, 30);
+    new GetToTargetVelocity(shooterSubsystem, topVelocity, bottomVelocity);
     new RunLoader(loaderSubsystem, 1);
     new RunFeeder(feederSubsystem, 1);
+
   }
 }
