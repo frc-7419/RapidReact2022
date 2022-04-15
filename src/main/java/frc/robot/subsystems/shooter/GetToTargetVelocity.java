@@ -5,7 +5,7 @@ import frc.robot.Constants.PIDConstants;
 
 public class GetToTargetVelocity extends CommandBase {
 
-  private ShooterSubsystem shooterSubsystem;
+  private ShooterSubsystem shooterSubsystem; 
 
   private double bKp, tKp;
 

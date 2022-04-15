@@ -30,7 +30,7 @@ public class RunLoaderWithJoystick extends CommandBase {
       loaderSubsystem.coast();
     }
     else if (joystick.getRightBumper()) {
-      loaderSubsystem.setPower(-power);
+      loaderSubsystem.setPower(power);
       loaderSubsystem.coast();
     }
     else {

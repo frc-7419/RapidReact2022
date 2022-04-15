@@ -10,6 +10,7 @@ public class RunFeeder extends CommandBase {
   /** Creates a new RunFeeder. */
   private FeederSubsystem feederSubsystem;
   private double power;
+  
   public RunFeeder(FeederSubsystem feederSubsystem, double power) {
     this.feederSubsystem = feederSubsystem;
     this.power = power;
@@ -30,7 +31,7 @@ public class RunFeeder extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    feederSubsystem.setPower(0);
+    feederSubsystem.setVoltage(0);
   }
 
   // Returns true when the command should end.
