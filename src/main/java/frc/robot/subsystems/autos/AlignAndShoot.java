@@ -24,13 +24,9 @@ public class AlignAndShoot extends ParallelCommandGroup {
   public AlignAndShoot(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shooterSubsystem, LoaderSubsystem loaderSubsystem,FeederSubsystem feederSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      parallel(
-        new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-        new GetToTargetVelocity(shooterSubsystem, 37, 30),
-        new RunLoader(loaderSubsystem, 1),
-        new RunFeeder(feederSubsystem, 1)
-      )
-    );
+    new AlignTurretDefault(turretSubsystem, limelightSubsystem);
+    new GetToTargetVelocity(shooterSubsystem, 37, 30);
+    new RunLoader(loaderSubsystem, 1);
+    new RunFeeder(feederSubsystem, 1);
   }
 }
