@@ -30,6 +30,7 @@ import frc.robot.subsystems.intake.DeployIntakeWithJoystick;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.led.LEDSubsystem;
+import frc.robot.subsystems.led.SetLED1Color;
 import frc.robot.subsystems.led.SetLEDColorWithJoystick;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
@@ -63,7 +64,8 @@ public class RobotContainer {
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
-  private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, joystick1, joystick2);
+  private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
+  private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto

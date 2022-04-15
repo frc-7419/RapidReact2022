@@ -113,7 +113,7 @@ public class ThreeBallAutoExactVelocities extends ParallelCommandGroup {
         new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
       ));
       
-      addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
+      addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem, driveBaseSubsystem));
   }
 }
 

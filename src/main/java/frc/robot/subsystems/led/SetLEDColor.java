@@ -5,19 +5,22 @@
 package frc.robot.subsystems.led;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class SetLEDColor extends CommandBase {
   private LEDSubsystem ledSubsystem;
   private LimelightSubsystem limelightSubsystem;
+  private DriveBaseSubsystem driveBaseSubsystem;
 
   private int rainbowFirstPixelHue = 0;
 
   private double limelightTolerance = 7.5;
 
-  public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem) {
+  public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystemm, DriveBaseSubsystem driveBaseSubsystem) {
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
+    this.driveBaseSubsystem = driveBaseSubsystem;
     addRequirements(ledSubsystem);
   }
 
@@ -49,6 +52,11 @@ public class SetLEDColor extends CommandBase {
       ledSubsystem.setLEDColor(255, 0, 0);
       // ledSubsystem.startLed();
     }
+
+    int value = (int)(getAverageVelocity()/9000)*150+ 100;
+    ledSubsystem.rainbowLED1(rainbowFirstPixelHue, value);
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
   }
 
   // Called once the command ends or is interrupted.
@@ -56,6 +64,7 @@ public class SetLEDColor extends CommandBase {
   public void end(boolean interrupted) {
     // purple
     ledSubsystem.setLEDColor(255, 255, 0);
+    ledSubsystem.setLED1Color(255, 255, 0);
     // ledSubsystem.stopLed();
   }
 
@@ -63,5 +72,9 @@ public class SetLEDColor extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public double getAverageVelocity() {
+    return Math.abs(driveBaseSubsystem.getLeftVelocity() + driveBaseSubsystem.getRightVelocity())/2;
   }
 }

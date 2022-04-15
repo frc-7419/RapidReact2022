@@ -41,7 +41,7 @@ public class OneBallAutoWait extends ParallelCommandGroup {
                 new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
             )
         );
-        addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem));
+        addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem, driveBaseSubsystem));
     }
     
 }

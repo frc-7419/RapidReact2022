@@ -28,10 +28,7 @@ public class SetLED1Color extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int value = (int)(getAverageVelocity()/9000)*100+ 100;
-    ledSubsystem.rainbowLED1(firstRainbowPixelHue, value);
-    firstRainbowPixelHue += 3;
-    firstRainbowPixelHue %= 180;
+
   }
 
   // Called once the command ends or is interrupted.
@@ -48,7 +45,5 @@ public class SetLED1Color extends CommandBase {
     return false;
   }
 
-  public double getAverageVelocity() {
-    return Math.abs(driveBaseSubsystem.getLeftVelocity() + driveBaseSubsystem.getRightVelocity())/2;
-  }
+
 }
