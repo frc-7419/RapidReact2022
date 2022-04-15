@@ -1,6 +1,8 @@
 //period 6 file
 package frc.robot.subsystems.autos;
 
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -31,72 +33,29 @@ public class HoustonTwoBall extends ParallelCommandGroup {
     public HoustonTwoBall(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem, ShooterSubsystem shooterSubsystem, FeederSubsystem feederSubsystem, LoaderSubsystem loaderSubsystem, IntakeSubsystem intakeSubsystem, TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, LEDSubsystem ledSubsystem, IntakeSolenoidSubsystem intakeSolenoidSubsystem) {
         addCommands(
             sequence(
-                parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 37, 30))
-                    .withTimeout(0.75), // gttv while aligning turret
-
-                // shoot preload
-                parallel(
-                    new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                    new GetToTargetVelocity(shooterSubsystem, 37, 30),
-                    new RunFeeder(feederSubsystem, 1),
-                    new RunLoader(loaderSubsystem, 1)
-                ).withTimeout(1.5), // tune time
-                
-                new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
-
-                // turn 180 while braking turret
-                new BrakeTurret(turretSubsystem)
-                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 175, 3, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
-                    .withTimeout(1.5),
-
-                new WaitCommand(0.25),  
-                
-                // deploy intake
+                // Deploy intake
                 new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
-
-                // move forward and running intake + loader
+                
+                // Drive 46 inches while runing the intake and loader to intake the second cargo
                 parallel(
                     new RunIntake(intakeSubsystem, 1),
                     new RunLoader(loaderSubsystem, 0.6)
                 ).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, 46))
                 .withTimeout(2.5),
-                
-                new WaitCommand(0.25),
 
-                // retract intake
-                new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
+                // Turn 180 degrees while breaking the turret
+                new BrakeTurret(turretSubsystem)
+                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 3, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
+                    .withTimeout(1.5),
 
-                // turn 180 while braking turret
-               // turn 185 while braking turret
-               new BrakeTurret(turretSubsystem)
-                    .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 185, 1.5, PIDConstants.GyrokP185, PIDConstants.GyrokI185, PIDConstants.GyrokD185)).withTimeout(2),
-                
+                new WaitCommand(0.25),  
 
-                // exact shooter velocities:
-                // parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocity(shooterSubsystem, 43, 40))
-                //     .withInterrupt(() -> shooterSubsystem.bothOnTarget())
-                //     .withTimeout(1.15), // gttv while aligning turret
-
-                // gttv using limelight
+                // Allign turret and get to velocity with limelight
                 parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem), new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem))
-                    .withInterrupt(() -> shooterSubsystem.bothOnTarget())
-                    .withTimeout(1.15), // gttv while aligning turret
-                
-                // // shoot second ball, exact velocities:
-                // parallel(
-                //     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                //     new GetToTargetVelocity(shooterSubsystem, 45.5, 43), // mainting the specific velocity
-                //     new RunLoader(loaderSubsystem, 1),
-                //     new RunFeeder(feederSubsystem, 0.5)
-                // ).withTimeout(1.5),
+                    .withTimeout(0.75), 
 
-                // shoot second ball, using limelight velocity
-                parallel(
-                    new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                    new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem), // mainting the specific velocity
-                    new RunLoader(loaderSubsystem, 1),
-                    new RunFeeder(feederSubsystem, 0.5)
-                ).withTimeout(1.5),
+                // Allign and shoot with limelight
+                new AlignAndShootWithLimelight(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem),
 
                 new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
             )
