@@ -18,9 +18,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer robotContainer;
 
-  private AddressableLED led = new AddressableLED(0);
-  private AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(60);
-  private int rainbowFirstPixelHue = 0;
+  // private AddressableLED led = new AddressableLED(0);
+  // private AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(60);
+  // private int rainbowFirstPixelHue = 0;
 
   @Override
   public void robotInit() {
@@ -41,14 +41,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    led.setLength(ledBuffer.getLength());
-    for (var i = 0; i < ledBuffer.getLength(); i++) {
-      final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
-      // Set the HSV value to led
-      ledBuffer.setHSV(i, hue, 255, 128);
-    }
-    rainbowFirstPixelHue += 3;
-    rainbowFirstPixelHue %= 180;
+    // led.setLength(ledBuffer.getLength());
+    // for (var i = 0; i < ledBuffer.getLength(); i++) {
+    //   final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+    //   // Set the HSV value to led
+    //   ledBuffer.setHSV(i, hue, 255, 128);
+    // }
+    // rainbowFirstPixelHue += 3;
+    // rainbowFirstPixelHue %= 180;
   }
 
   @Override

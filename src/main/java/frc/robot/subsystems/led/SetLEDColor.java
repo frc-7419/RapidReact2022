@@ -17,7 +17,7 @@ public class SetLEDColor extends CommandBase {
 
   private double limelightTolerance = 7.5;
 
-  public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystemm, DriveBaseSubsystem driveBaseSubsystem) {
+  public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem, DriveBaseSubsystem driveBaseSubsystem) {
     this.ledSubsystem = ledSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     this.driveBaseSubsystem = driveBaseSubsystem;
@@ -52,11 +52,10 @@ public class SetLEDColor extends CommandBase {
       ledSubsystem.setLEDColor(255, 0, 0);
       // ledSubsystem.startLed();
     }
-
-    int value = (int)(getAverageVelocity()/9000)*150+ 100;
-    ledSubsystem.rainbowLED1(rainbowFirstPixelHue, value);
-    rainbowFirstPixelHue += 3;
-    rainbowFirstPixelHue %= 180;
+    // int value = (int)(getAverageVelocity()/9000)*150+ 100;
+    // ledSubsystem.rainbowLED1(rainbowFirstPixelHue, value);
+    // rainbowFirstPixelHue += 3;
+    // rainbowFirstPixelHue %= 180;
   }
 
   // Called once the command ends or is interrupted.
@@ -64,7 +63,7 @@ public class SetLEDColor extends CommandBase {
   public void end(boolean interrupted) {
     // purple
     ledSubsystem.setLEDColor(255, 255, 0);
-    ledSubsystem.setLED1Color(255, 255, 0);
+    // ledSubsystem.setLED1Color(255, 255, 0);
     // ledSubsystem.stopLed();
   }
 

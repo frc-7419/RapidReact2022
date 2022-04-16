@@ -17,7 +17,7 @@ public class SetLEDColorWithJoystick extends CommandBase {
   private DriveBaseSubsystem driveBaseSubsystem;
   
   private int rainbowFirstPixelHue = 0;
-  private int rainbowFirstPixelHue1 = 0;
+  // private int rainbowFirstPixelHue1 = 0;
 
   private double limelightTolerance = 3.5;
 
@@ -78,10 +78,10 @@ public class SetLEDColorWithJoystick extends CommandBase {
       // ledSubsystem.setLEDColor(255, 0, 0);
     }
 
-    int value = (int)(getAverageVelocity()/9000)*150+ 100;
-    ledSubsystem.rainbowLED1(rainbowFirstPixelHue1, value);
-    rainbowFirstPixelHue1 += 3;
-    rainbowFirstPixelHue1 %= 180;
+    // int value = (int)(getAverageVelocity()/9000)*150+ 100;
+    // ledSubsystem.rainbowLED1(rainbowFirstPixelHue1, value);
+    // rainbowFirstPixelHue1 += 3;
+    // rainbowFirstPixelHue1 %= 180;
   }
 
   // Called once the command ends or is interrupted.
