@@ -27,8 +27,8 @@ public class TurretSubsystem extends SubsystemBase {
     turret.configReverseSoftLimitEnable(false, 0);
     turret.configForwardSoftLimitEnable(false, 0);
 
-    turret.configVoltageCompSaturation(11);
-    turret.enableVoltageCompensation(true);
+    // turret.configVoltageCompSaturation(11);
+    // turret.enableVoltageCompensation(true);
   }
 
   @Override
