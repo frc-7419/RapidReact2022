@@ -125,8 +125,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return oneBallAutoWait;
-    // return oneBallAuto;
+    // return oneBallAutoWait;
+    return oneBallAuto;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;

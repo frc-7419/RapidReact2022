@@ -144,9 +144,9 @@ public final class Constants {
 
         // turret PID gains
         // public static final double TurretKp = 0.0065;
-        public static final double TurretKp = 0.015;
-        public static final double TurretKi = 0.01;
-        public static final double TurretKd = 0.0;
+        public static final double TurretKp = 0.019;
+        public static final double TurretKi = 0.001;
+        public static final double TurretKd = 0.00075;
 
         //shooter, meters
         public static final double TopShooterkP = .0014651; //insert here

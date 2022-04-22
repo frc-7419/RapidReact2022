@@ -27,7 +27,7 @@ public class AlignTurretDefault extends CommandBase {
 
   @Override
   public void initialize() { 
-    pidController = new PIDController(PIDConstants.TurretKp, 0, 0);
+    pidController = new PIDController(PIDConstants.TurretKp, PIDConstants.TurretKi, PIDConstants.TurretKd);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
   }
@@ -38,7 +38,6 @@ public class AlignTurretDefault extends CommandBase {
     tv = limelightSubsystem.getTv();
 
     if (tv == 1.0) {
-      pidController = new PIDController(PIDConstants.TurretKp, PIDConstants.TurretKi, PIDConstants.TurretKd);
       pidOutput = pidController.calculate(tx);
       turretSubsystem.setPower(pidOutput);
     }

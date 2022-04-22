@@ -13,6 +13,7 @@ import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
+import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.TurretSubsystem;
@@ -31,7 +32,7 @@ public class OneBallAuto extends ParallelCommandGroup {
                 // shoot preload
                 parallel(
                     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                    new GetToTargetVelocity(shooterSubsystem, 37, 30),
+                    new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
                     new RunFeeder(feederSubsystem, 1),
                     new RunLoader(loaderSubsystem, 1)
                 ).withTimeout(1.5), // tune time
