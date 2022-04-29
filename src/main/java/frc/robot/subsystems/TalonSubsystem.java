@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -14,11 +15,11 @@ public class TalonSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
   private TalonSRX talon1;
-  private TalonSRX talon2;
+  private VictorSPX victor1;
   
   public TalonSubsystem() {
     talon1 = new TalonSRX(50);
-    //talon2 = new TalonSRX(48); for a second motor 
+    victor1 = new VictorSPX(40); 
   } 
 
   @Override
@@ -33,7 +34,7 @@ public class TalonSubsystem extends SubsystemBase {
 
   public void setPower(double power) {
     talon1.set(ControlMode.PercentOutput, power);
-    //talon2.set(ControlMode.PercentOutput, power); for a second motor
+    victor1.set(ControlMode.PercentOutput, power);
 
   }
 
