@@ -13,9 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class TalonSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
-  private TalonSRX talon;
+  private TalonSRX talon1;
+  private TalonSRX talon2;
+  
   public TalonSubsystem() {
-    talon = new TalonSRX(50);
+    talon1 = new TalonSRX(50);
+    //talon2 = new TalonSRX(48); for a second motor 
   } 
 
   @Override
@@ -29,7 +32,9 @@ public class TalonSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    talon.set(ControlMode.PercentOutput, power);
+    talon1.set(ControlMode.PercentOutput, power);
+    //talon2.set(ControlMode.PercentOutput, power); for a second motor
+
   }
 
 }
