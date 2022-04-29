@@ -1,35 +1,25 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.encoders.RunTalon;
-import frc.robot.subsystems.encoders.TalonSubsystem;
+import frc.robot.subsystems.RunTalon;
+import frc.robot.subsystems.TalonSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.Command;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
-public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final XboxController joystick = new XboxController(0);
-  private final TalonSubsystem talonSubsystem = new TalonSubsystem();
-  private final RunTalon runTalon = new RunTalon(talonSubsystem, joystick);
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+public class RobotContainer {
+  private final TalonSubsystem talonSubsystem;
+  private final RunTalon runTalon;
+  private final XboxController joystick1;
+
   public RobotContainer() {
-    // Configure the button bindings
+    joystick1 = new XboxController(0);
+    talonSubsystem = new TalonSubsystem();
+    runTalon = new RunTalon(talonSubsystem, joystick1);
     configureButtonBindings();
   }
 
