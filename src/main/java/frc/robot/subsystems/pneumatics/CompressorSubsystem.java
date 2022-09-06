@@ -16,10 +16,10 @@ public class CompressorSubsystem extends SubsystemBase {
   private double current;
 
   public CompressorSubsystem() {
-    compressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    compressor.enableDigital();
-    pressureSwitch = compressor.getPressureSwitchValue();
-    current = compressor.getCurrent();
+    // compressor = new Compressor(1, PneumaticsModuleType.REVPH);
+    // compressor.enableDigital();
+    // pressureSwitch = compressor.getPressureSwitchValue();
+    // current = compressor.getCurrent();
   }
 
   public void start() { 

@@ -68,7 +68,7 @@ public class RobotContainer {
 
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
-  private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
+  private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSubsystem, intakeSolenoidSubsystem);
   private final OneBallAutoWait oneBallAutoWait = new OneBallAutoWait(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
