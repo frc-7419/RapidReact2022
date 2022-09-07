@@ -59,7 +59,7 @@ public class TwoBallAutoDemo extends ParallelCommandGroup {
                 new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem),
                 
                 new BrakeTurret(turretSubsystem)
-                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 1.5, PIDConstants.GyrokP180, PIDConstants.GyrokP180, PIDConstants.GyrokP180)),
+                .deadlineWith(new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokP180, PIDConstants.GyrokP180)),
 
                 parallel(
                     new StraightWithMotionMagic(driveBaseSubsystem, 48),
