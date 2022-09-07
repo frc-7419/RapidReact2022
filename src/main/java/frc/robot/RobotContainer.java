@@ -15,6 +15,7 @@ import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.OneBallAutoWait;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
 import frc.robot.subsystems.autos.ThreeBallAutoInterpolation;
+import frc.robot.subsystems.autos.TwoBallAutoDemo;
 import frc.robot.subsystems.autos.TwoBallAutoExactVelocities;
 import frc.robot.subsystems.autos.TwoBallAutoInterpolation;
 import frc.robot.subsystems.drive.ArcadeDrive;
@@ -70,6 +71,7 @@ public class RobotContainer {
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSubsystem, intakeSolenoidSubsystem);
   private final OneBallAutoWait oneBallAutoWait = new OneBallAutoWait(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
+  private final TwoBallAutoDemo twoBallAutoDemo = new TwoBallAutoDemo(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSubsystem, intakeSolenoidSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final TwoBallAutoInterpolation twoBallAutoInterpolation = new TwoBallAutoInterpolation(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
   private final ThreeBallAutoExactVelocities threeBallAutoExactVelocities = new ThreeBallAutoExactVelocities(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
@@ -126,7 +128,8 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return oneBallAutoWait;
-    return oneBallAuto;
+    //return oneBallAuto;
+    return twoBallAutoDemo;
     // return twoBallAutoExactVelocities;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;
