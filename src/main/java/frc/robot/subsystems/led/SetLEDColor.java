@@ -10,16 +10,16 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 
 public class SetLEDColor extends CommandBase {
   private LEDSubsystem ledSubsystem;
-  private LimelightSubsystem limelightSubsystem;
+  // private LimelightSubsystem limelightSubsystem;
   private DriveBaseSubsystem driveBaseSubsystem;
 
   private int rainbowFirstPixelHue = 0;
 
-  private double limelightTolerance = 7.5;
+  // private double limelightTolerance = 7.5;
 
   public SetLEDColor(LEDSubsystem ledSubsystem, LimelightSubsystem limelightSubsystem, DriveBaseSubsystem driveBaseSubsystem) {
     this.ledSubsystem = ledSubsystem;
-    this.limelightSubsystem = limelightSubsystem;
+    // this.limelightSubsystem = limelightSubsystem;
     this.driveBaseSubsystem = driveBaseSubsystem;
     addRequirements(ledSubsystem);
   }
@@ -33,25 +33,25 @@ public class SetLEDColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // ledSubsystem.rainbowLED(rainbowFirstPixelHue);
-    // ledSubsystem.startLed();
-    // rainbowFirstPixelHue += 3;
-    // rainbowFirstPixelHue %= 180;
-    if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
-      // green
-      ledSubsystem.setLEDColor(0, 0, 255);
-      // ledSubsystem.startLed();
-    }
-    else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
-      // yellow-ish white
-      ledSubsystem.setLEDColor(255, 100, 150);
-      // ledSubsystem.startLed();
-    }
-    else {
-      // red
-      ledSubsystem.setLEDColor(255, 0, 0);
-      // ledSubsystem.startLed();
-    }
+    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    ledSubsystem.startLed();
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
+    // if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance) {
+    //   // green
+    //   ledSubsystem.setLEDColor(0, 0, 255);
+    //   // ledSubsystem.startLed();
+    // }
+    // else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) > limelightTolerance) {
+    //   // yellow-ish white
+    //   ledSubsystem.setLEDColor(255, 100, 150);
+    //   // ledSubsystem.startLed();
+    // }
+    // else {
+    //   // red
+    //   ledSubsystem.setLEDColor(255, 0, 0);
+    //   // ledSubsystem.startLed();
+    // }
     // int value = (int)(getAverageVelocity()/9000)*150+ 100;
     // ledSubsystem.rainbowLED1(rainbowFirstPixelHue, value);
     // rainbowFirstPixelHue += 3;
@@ -62,8 +62,14 @@ public class SetLEDColor extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // purple
-    ledSubsystem.setLEDColor(255, 255, 0);
+    // ledSubsystem.setLEDColor(255, 255, 0);
     // ledSubsystem.setLED1Color(255, 255, 0);
+
+    //rainbow
+    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    ledSubsystem.startLed();
+    rainbowFirstPixelHue += 3;
+    rainbowFirstPixelHue %= 180;
     // ledSubsystem.stopLed();
   }
 
