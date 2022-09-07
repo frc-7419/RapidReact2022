@@ -62,14 +62,14 @@ public class SetLEDColor extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // purple
-    // ledSubsystem.setLEDColor(255, 255, 0);
+    ledSubsystem.setLEDColor(255, 255, 0);
     // ledSubsystem.setLED1Color(255, 255, 0);
 
     //rainbow
-    ledSubsystem.rainbowLED(rainbowFirstPixelHue);
-    ledSubsystem.startLed();
-    rainbowFirstPixelHue += 3;
-    rainbowFirstPixelHue %= 180;
+    // ledSubsystem.rainbowLED(rainbowFirstPixelHue);
+    // ledSubsystem.startLed();
+    // rainbowFirstPixelHue += 3;
+    // rainbowFirstPixelHue %= 180;
     // ledSubsystem.stopLed();
   }
 
