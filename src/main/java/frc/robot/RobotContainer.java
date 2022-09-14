@@ -11,7 +11,7 @@ import com.team7419.joystick.DoubleButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.shooter.RunShooterWithJoystick;
-import frc.robot.subsystems.shooter.BasicShooterSubsystem;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.Constants.PIDConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -19,9 +19,9 @@ import frc.robot.subsystems.shooter.GetToTargetVelocity;
 
 public class RobotContainer {
   private final XboxController joystick = new XboxController(0);
-  private final BasicShooterSubsystem basicShooterSubsystem = new BasicShooterSubsystem();
+  private final ShooterSubsystem ShooterSubsystem = new ShooterSubsystem();
   
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(basicShooterSubsystem, joystick);
+  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(ShooterSubsystem, joystick);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -44,6 +44,6 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands(){
-    basicShooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    ShooterSubsystem.setDefaultCommand(runShooterWithJoystick);
   }
 }
