@@ -7,21 +7,30 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.led.RainbowAnimation;
+
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
+
   private RobotContainer robotContainer;
+
+  // private AddressableLED led = new AddressableLED(0);
+  // private AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(60);
+  // private int rainbowFirstPixelHue = 0;
 
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    // CameraServer.startAutomaticCapture();
   }
 
   
   @Override
   public void robotPeriodic() {
-    // RobotContainer.arcade.start();
     CommandScheduler.getInstance().run();
   }
 
@@ -32,12 +41,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    // led.setLength(ledBuffer.getLength());
+    // for (var i = 0; i < ledBuffer.getLength(); i++) {
+    //   final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+    //   // Set the HSV value to led
+    //   ledBuffer.setHSV(i, hue, 255, 128);
+    // }
+    // rainbowFirstPixelHue += 3;
+    // rainbowFirstPixelHue %= 180;
   }
 
   @Override
   public void autonomousInit() {
-    // uncomment the following line once you return an autonomous command in getAutonomousCommand()
-    // robotContainer.getAutonomousCommand().schedule();
+    robotContainer.getAutonomousCommand().schedule();
   }
 
   @Override
@@ -46,17 +62,13 @@ public class Robot extends TimedRobot {
   
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when teleop starts running. 
-    // Uncomment this once you have an auto command to run to make sure it doesnt keep running in teleop
-    // robotContainer.getAutonomousCommand().cancel();
+    robotContainer.getAutonomousCommand().cancel();
     robotContainer.setDefaultCommands();
-
   }
 
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-
   }
 
   @Override

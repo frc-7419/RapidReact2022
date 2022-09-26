@@ -2,7 +2,6 @@ package com.team7419;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public abstract class TalonFuncs {
 

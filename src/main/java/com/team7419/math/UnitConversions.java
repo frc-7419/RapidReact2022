@@ -18,7 +18,7 @@ public class UnitConversions {
     public static double rpmToMPS(double rpm, double radius) {
         return (2 * Math.PI * radius) / 60;
     }
-
+    
     public static double mpsToRawSensorVelocity(double mps, double ticksPerRotation, double radius) {
         return rpmToRawSensorVelocity(mpsToRPM(mps, radius), ticksPerRotation);
     }
@@ -27,12 +27,16 @@ public class UnitConversions {
         return inches * 0.0254;
     }
 
-    public static double metersToInches(double meters) {
+    public static double metersToInches(double meters) { 
         return meters * 39.3701;
     }
 
     public static double rawSensorVelocityToRPM(double rawVelocity, double ticksPerRotation) {
-        return rawVelocity * (1 / ticksPerRotation) * 600;
+        return rawVelocity * (1/ticksPerRotation) * 600;
+    }
+
+    public static double rawSensorVelocityToMPS(double rawSensorVelocity, double ticksPerRotation, double radius) {
+        return rawSensorVelocity * (1/2048) * (2 * Math.PI * radius) * 0.1;
     }
 
     public static double rpmToRawSensorVelocity(double rpm, double ticksPerRotation) {
