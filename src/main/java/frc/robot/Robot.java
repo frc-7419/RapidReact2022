@@ -7,10 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.led.RainbowAnimation;
-
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -18,38 +14,22 @@ public class Robot extends TimedRobot {
 
   private RobotContainer robotContainer;
 
-  // private AddressableLED led = new AddressableLED(0);
-  // private AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(60);
-  // private int rainbowFirstPixelHue = 0;
-
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
     // CameraServer.startAutomaticCapture();
   }
 
-  
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
 
+  @Override
+  public void disabledInit() {}
 
   @Override
-  public void disabledInit() {
-  }
-
-  @Override
-  public void disabledPeriodic() {
-    // led.setLength(ledBuffer.getLength());
-    // for (var i = 0; i < ledBuffer.getLength(); i++) {
-    //   final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
-    //   // Set the HSV value to led
-    //   ledBuffer.setHSV(i, hue, 255, 128);
-    // }
-    // rainbowFirstPixelHue += 3;
-    // rainbowFirstPixelHue %= 180;
-  }
+  public void disabledPeriodic() {}
 
   @Override
   public void autonomousInit() {
@@ -59,7 +39,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
-  
+
   @Override
   public void teleopInit() {
     robotContainer.getAutonomousCommand().cancel();

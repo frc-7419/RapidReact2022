@@ -104,7 +104,4 @@ public class SetLEDColorWithJoystick extends CommandBase {
     return false;
   }
 
-  public double getAverageVelocity() {
-    return Math.abs(driveBaseSubsystem.getLeftVelocity() + driveBaseSubsystem.getRightVelocity())/2;
-  }
 }

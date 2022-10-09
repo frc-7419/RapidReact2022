@@ -2,6 +2,7 @@ package frc.robot.subsystems.shooter;
 
 import com.team7419.InterpolatedTreeMap;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
@@ -56,6 +57,9 @@ public class GetToTargetVelocityWithLimelight extends CommandBase {
     shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
     shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
   
+    SmartDashboard.putNumber("Top Error", shooterSubsystem.getTopError());
+    SmartDashboard.putNumber("Bottom Error", shooterSubsystem.getBottomError());
+
     // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
     // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
     // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());

@@ -115,6 +115,14 @@ public class ShooterSubsystem extends SubsystemBase{
         return topOnTarget() && bottomOnTarget();
     }
 
+    public double getTopError() {
+        return getCurrentTopRawVelocity() - topTargetRawVelocity;
+    }
+
+    public double getBottomError() {
+        return getCurrentBottomRawVelocity() - bottomTargetRawVelocity;
+    }
+
     public void setTopVoltage(double voltage) {
         topFalcon.set(ControlMode.PercentOutput, voltage/11);
     }

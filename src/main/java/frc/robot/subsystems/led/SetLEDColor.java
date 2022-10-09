@@ -73,7 +73,4 @@ public class SetLEDColor extends CommandBase {
     return false;
   }
 
-  public double getAverageVelocity() {
-    return Math.abs(driveBaseSubsystem.getLeftVelocity() + driveBaseSubsystem.getRightVelocity())/2;
-  }
 }

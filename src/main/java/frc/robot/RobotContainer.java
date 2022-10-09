@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
@@ -63,7 +64,6 @@ public class RobotContainer {
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
-  // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
 
   // auto
@@ -84,42 +84,44 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // align turret
     new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
-      .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
-    
+        .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+
     // brake turret during hang
     new JoystickButton(joystick1, XboxController.Button.kB.value)
-      .whileHeld(new BrakeTurret(turretSubsystem));
+        .whileHeld(new BrakeTurret(turretSubsystem));
 
-      // any distance, interpolation
+    // any distance, interpolation
     new JoystickButton(joystick2, XboxController.Button.kY.value)
-      .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+        .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
 
     // edge of tarmac
-    new JoystickButton(joystick2, XboxController.Button.kX.value)
-    .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
+    new POVButton(joystick2, 0)
+        .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
     // lower hub shot, consistent
-    new JoystickButton(joystick2, XboxController.Button.kA.value)
-      .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
+    new POVButton(joystick2, 90)
+        .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
-      // coast arms during hanging
+    // coast arms during hanging
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
-      .whileHeld(new CoastArms(armsSubsystem));
+        .whileHeld(new CoastArms(armsSubsystem));
 
     // toggle to maintain elevator position
     new DoubleButton(
-      new JoystickButton(joystick2, XboxController.Button.kA.value),
-      new JoystickButton(joystick2, XboxController.Button.kB.value))
-      .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+        new JoystickButton(joystick2, XboxController.Button.kA.value),
+        new JoystickButton(joystick2, XboxController.Button.kB.value))
+            .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
   }
 
   private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
     // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
+    // autonChooser.addOption("2 Ball Exact Velocities",
+    // twoBallAutoExactVelocities);
     // autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
-    // autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
+    // autonChooser.addOption("3 Ball Exact Velocities",
+    // threeBallAutoExactVelocities);
     // autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
     // SmartDashboard.putData(autonChooser);
   }
@@ -140,7 +142,7 @@ public class RobotContainer {
     driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
     intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
-    loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
+    loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
     feederSubsystem.setDefaultCommand(runFeederWithJoystick);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
@@ -148,4 +150,3 @@ public class RobotContainer {
     ledSubsystem.setDefaultCommand(setLEDColorWithJoystick);
   }
 }
-

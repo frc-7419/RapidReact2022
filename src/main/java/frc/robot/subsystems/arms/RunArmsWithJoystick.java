@@ -25,7 +25,6 @@ public class RunArmsWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //run with bumpers
     if (joystick.getRightY() != 0) {
       armsSubsystem.coast();
       armsSubsystem.setPower(joystick.getRightY() * 0.20);

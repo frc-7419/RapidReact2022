@@ -16,18 +16,15 @@ public class ArmsSubsystem extends SubsystemBase {
   private CANSparkMax leftArm;
   private CANSparkMax rightArm;
   
-  /** Creates a new ArmsSubsystem. */
   public ArmsSubsystem() {
-    this.leftArm = new CANSparkMax(CanIds.armSpark1.id, MotorType.kBrushless); //temporary ID
+    this.leftArm = new CANSparkMax(CanIds.armSpark1.id, MotorType.kBrushless);
     this.rightArm = new CANSparkMax(CanIds.armSpark2.id, MotorType.kBrushless);
     rightArm.setInverted(true);
     // brake();
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 
   public void setPower(double power) {
     leftArm.set(power);

@@ -26,7 +26,7 @@ public class RunLoaderWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if (joystick.getLeftBumper()) {
-      loaderSubsystem.setPower(power);
+      loaderSubsystem.setPower(-power);
       loaderSubsystem.coast();
     }
     else if (joystick.getRightBumper()) {

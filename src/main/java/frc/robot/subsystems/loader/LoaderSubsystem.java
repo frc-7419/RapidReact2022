@@ -18,18 +18,18 @@ public class LoaderSubsystem extends SubsystemBase {
     loader = new TalonSRX(CanIds.loaderVictor.id);
     loader.configFactoryDefault();
     loader.setInverted(true);
-    loader.setSensorPhase(false);
+    loader.setSensorPhase(true);
 
     // enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)
     // loaderSubsystem.getLoaderMotor().configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 30, 15, 0.5));
     // loaderSubsystem.getLoaderMotor().configContinuousCurrentLimit(3);
-    loader.configContinuousCurrentLimit(10, 0);
-    loader.configPeakCurrentLimit(15, 0);
-    loader.configPeakCurrentDuration(100, 0);
-    loader.enableCurrentLimit(true);
+    // loader.configContinuousCurrentLimit(10, 0);
+    // loader.configPeakCurrentLimit(15, 0);
+    // loader.configPeakCurrentDuration(100, 0);
+    // loader.enableCurrentLimit(true);
 
-    loader.configVoltageCompSaturation(11);
-    loader.enableVoltageCompensation(true);
+    // loader.configVoltageCompSaturation(11);
+    // loader.enableVoltageCompensation(true);
   }
 
   @Override
@@ -49,13 +49,5 @@ public class LoaderSubsystem extends SubsystemBase {
   
   public void setPower(double power) {
     loader.set(ControlMode.PercentOutput, power);
-  }
-
-  public void setVoltage(double voltage) {
-    loader.set(ControlMode.PercentOutput, voltage / 11);
-  }
-
-  public TalonSRX getLoaderMotor() {
-    return loader;
   }
 }
