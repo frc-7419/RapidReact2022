@@ -23,6 +23,7 @@ import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.robot.subsystems.elevator.MaintainElevatorPosition;
 import frc.robot.subsystems.elevator.RunElevatorWithJoystick;
+import frc.robot.subsystems.elevator.SetElevatorPosition;
 import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.feeder.RunFeederWithJoystick;
 import frc.robot.subsystems.gyro.GyroSubsystem;
@@ -111,9 +112,15 @@ public class RobotContainer {
         new JoystickButton(joystick2, XboxController.Button.kA.value),
         new JoystickButton(joystick2, XboxController.Button.kB.value))
             .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+
+    new JoystickButton(joystick1, XboxController.Button.kA.value)
+      .whileHeld(new SetElevatorPosition(elevatorSubsystem, 4096, 0.0001));
   }
 
-  private void smartDashboardBindings() {}
+  private void smartDashboardBindings() {
+    SmartDashboard.putNumber("elevatorkP", 0.0001);
+    SmartDashboard.putNumber("elevatorSetpoint", 4096);
+  }
 
   private void configureAutoSelector() {
     // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
