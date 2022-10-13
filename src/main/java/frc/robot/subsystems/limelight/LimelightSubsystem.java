@@ -101,5 +101,4 @@ public class LimelightSubsystem extends SubsystemBase {
     networkTable.getEntry("ledMode").setNumber(state);
   }
 
-
 }
