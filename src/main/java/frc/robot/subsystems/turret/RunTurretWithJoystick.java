@@ -20,7 +20,7 @@ public class RunTurretWithJoystick extends CommandBase {
   private double tx, tv;
 
   public RunTurretWithJoystick(TurretSubsystem turretSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick, double kSpeed) {
-    turretSubsystem = turretSubsystem;
+    this.turretSubsystem = turretSubsystem;
     this.limelightSubsystem = limelightSubsystem;
     this.joystick = joystick;
     this.kSpeed = kSpeed;
