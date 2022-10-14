@@ -30,6 +30,6 @@ public class AlignAndShootWithLimelight extends ParallelCommandGroup {
       new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
       new RunLoader(loaderSubsystem, 1),
       new RunFeeder(feederSubsystem, 1)
-    )
+    );
   }
 }

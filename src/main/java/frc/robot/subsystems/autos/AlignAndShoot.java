@@ -29,7 +29,7 @@ public class AlignAndShoot extends ParallelCommandGroup {
       new GetToTargetVelocity(shooterSubsystem, topVelocity, bottomVelocity),
       new RunLoader(loaderSubsystem, 1),
       new RunFeeder(feederSubsystem, 1)
-    )
+    );
 
   }
 }
