@@ -24,7 +24,7 @@ public final class Constants {
         // motor2(3),
         // motorX(x)...
 
-        // 2020 robot constants
+        // update 9419 CANID constantsrobot constants
         leftFalcon1(5),
         rightFalcon1(2),
         leftFalcon2(4),
