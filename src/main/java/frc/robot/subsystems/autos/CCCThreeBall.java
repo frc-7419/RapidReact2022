@@ -24,9 +24,9 @@ import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 
-public class CCCTwoBall extends ParallelCommandGroup {
+public class CCCThreeBall extends ParallelCommandGroup {
 
-    public CCCTwoBall(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem,
+    public CCCThreeBall(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem,
             ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, FeederSubsystem feederSubsystem,
             LoaderSubsystem loaderSubsystem, LEDSubsystem ledSubsystem, TurretSubsystem turretSubsystem,
             IntakeSolenoidSubsystem intakeSolenoidSubsystem, IntakeSubsystem intakeSubsystem) {
