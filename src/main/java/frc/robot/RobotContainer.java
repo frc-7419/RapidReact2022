@@ -64,7 +64,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
   // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
 
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();

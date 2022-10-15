@@ -32,29 +32,24 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-    double xSpeed = -speedLimiter.calculate(joystick.getRightY() * kStraight);
+    double xSpeed = -speedLimiter.calculate(joystick.getLeftY() * kStraight);
     // double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
     double zRotation = joystick.getRightX() * kTurn;
     
-    if (Math.abs(joystick.getRightY()) > 0) {
-      driveBaseSubsystem.coast();
-      
-      // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
-      // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
+    driveBaseSubsystem.coast();
+    
+    // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
+    // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
 
-      // double leftPower = xSpeed + zRotation;
-      // double rightPower = xSpeed - zRotation;
+    // double leftPower = xSpeed + zRotation;
+    // double rightPower = xSpeed - zRotation;
 
-      double leftPower = xSpeed + zRotation;
-      double rightPower = xSpeed - zRotation;
+    double leftPower = xSpeed + zRotation;
+    double rightPower = xSpeed - zRotation;
 
-      
-      driveBaseSubsystem.setLeftPower(leftPower);
-      driveBaseSubsystem.setRightPower(rightPower);
-    }
-    else {
-      driveBaseSubsystem.setAllPower(0);
-    }
+    
+    driveBaseSubsystem.setLeftPower(leftPower);
+    driveBaseSubsystem.setRightPower(rightPower);
   }
 
   @Override
