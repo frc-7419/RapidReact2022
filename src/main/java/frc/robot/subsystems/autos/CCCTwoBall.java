@@ -44,9 +44,14 @@ public class CCCTwoBall extends ParallelCommandGroup {
                     .withTimeout(0.75),
 
                 parallel(
+                    new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+                    new GetToTargetVelocity(shooterSubsystem, 38, 32),
                     new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid, intakeSolenoidSubsystem),
+                    new RunLoader(loaderSubsystem, 1),
                     new RunIntake(intakeSubsystem, 1)
-                ),
+                    
+                    
+                ).withTimeout(2),
                     
                 parallel(
                     new AlignTurretDefault(turretSubsystem, limelightSubsystem),
@@ -58,9 +63,9 @@ public class CCCTwoBall extends ParallelCommandGroup {
 
                 parallel(
                     new InstantCommand(intakeSolenoidSubsystem::retractSolenoid, intakeSolenoidSubsystem)
-                ).withTimeout(2),
+                ).withTimeout(2)
                 
-                new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
+                // new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
             )
         );
         addCommands(new SetLEDColor(ledSubsystem, limelightSubsystem, driveBaseSubsystem));
