@@ -58,7 +58,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
     driveBaseSubsystem.setRightPower(pidOutput);
 
     distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
-    distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
+    distanceToTarget = 1.426*distanceToTarget - 52.372;// linear regression needs to be updated for 9419
     SmartDashboard.putNumber("distance", distanceToTarget);
 
     if(Math.abs(driveBaseSubsystem.getLeftVelocity()) < velocityThreshold){
