@@ -26,9 +26,9 @@ import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.intake.IntakeSolenoidSubsystem;
 import frc.robot.subsystems.intake.RunIntake;
 
-public class CCCTwoBall extends ParallelCommandGroup {
+public class CCCTwoBallQuals extends ParallelCommandGroup {
 
-    public CCCTwoBall(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem,
+    public CCCTwoBallQuals(DriveBaseSubsystem driveBaseSubsystem, GyroSubsystem gyroSubsystem,
             ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, FeederSubsystem feederSubsystem,
             LoaderSubsystem loaderSubsystem, LEDSubsystem ledSubsystem, TurretSubsystem turretSubsystem,
             IntakeSolenoidSubsystem intakeSolenoidSubsystem, IntakeSubsystem intakeSubsystem) {
@@ -37,33 +37,24 @@ public class CCCTwoBall extends ParallelCommandGroup {
 
                         // new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 9850, 6150,
                         // 0.0485, 0.0495).withTimeout(2),
-                        new StraightWithMotionMagic(driveBaseSubsystem, -45),
+                        new StraightWithMotionMagic(driveBaseSubsystem, -50),
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                         new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
-                                ).withTimeout(2), // gttv while aligning turret
+                                )
+                                        .withTimeout(0.75), // gttv while aligning turret
 
                         // parallel(new RunLoader(loaderSubsystem, 1.0), new
                         // GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 9850, 6150, 0.0485,
                         // 0.0495)).withTimeout(2.5),
 
                         // shoot preload
-                        // path planner
                         parallel(
                                 
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                                 new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
                                 new StraightWithMotionMagic(driveBaseSubsystem, 6),
                                 new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(1),
-                        
-                        parallel(
-                        
-                                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
-                                new StraightWithMotionMagic(driveBaseSubsystem, 6),
-                                new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(1),
-                                // tune time
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(4), // tune time
                         // new StraightWithMotionMagic(driveBaseSubsystem, 5),
                         // parallel(
                         //         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
