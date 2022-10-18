@@ -57,9 +57,6 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("topCurrent", topFalcon.getStatorCurrent());
-        SmartDashboard.putNumber("bottomCurrent", bottomFalcon.getStatorCurrent());
-        SmartDashboard.putBoolean("didCurrentSpike", this.didCurrentSpike());  
         // SmartDashboard.putNumber("tRV", getCurrentTopRawVelocity());
         // SmartDashboard.putNumber("bRV", getCurrentBottomRawVelocity());
 
@@ -73,13 +70,6 @@ public class ShooterSubsystem extends SubsystemBase{
         // SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
     }
 
-    public boolean didCurrentSpike(){
-        if(topFalcon.getStatorCurrent()>1 && bottomFalcon.getStatorCurrent()>1){
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public void configShooterOutputs() {
         topFalcon.configNominalOutputForward(0, 0);
