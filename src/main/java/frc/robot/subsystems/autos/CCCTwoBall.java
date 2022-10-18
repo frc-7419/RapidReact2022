@@ -37,7 +37,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
 
                         // new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 9850, 6150,
                         // 0.0485, 0.0495).withTimeout(2),
-                        new StraightWithMotionMagic(driveBaseSubsystem, -45),
+                        new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                         new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
                                 ).withTimeout(2), // gttv while aligning turret
@@ -51,11 +51,15 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         parallel(
                                 
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
-                                new StraightWithMotionMagic(driveBaseSubsystem, 6),
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8050, 9500, 0.04874, 0.049),
                                 new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(1),
-                        
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.25),
+
+                        parallel(
+                                new RunFeeder(feederSubsystem, -0.9),
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8000, 9900, 0.04874, 0.049)
+                        ).withTimeout(2),
+
                         parallel(
                         
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
@@ -84,7 +88,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         // parallel(
                         //         new InstantCommand(intakeSolenoidSubsystem::retractSolenoid,
                         //                 intakeSolenoidSubsystem)).withTimeout(2),
-
+        new StraightWithMotionMagic(driveBaseSubsystem, -10),
             new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
         // new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
         ));
