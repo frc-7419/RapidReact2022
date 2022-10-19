@@ -29,6 +29,9 @@ public class ArmsSubsystem extends SubsystemBase {
     this.limitSwitch = new DigitalInput(0);
     this.encoder = leftArm.getEncoder();
     rightArm.setInverted(true);
+    
+    leftArm.enableVoltageCompensation(11);
+    rightArm.enableVoltageCompensation(11);
     // brake();
   }
 

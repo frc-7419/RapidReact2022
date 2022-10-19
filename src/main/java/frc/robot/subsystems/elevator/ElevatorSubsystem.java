@@ -27,6 +27,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     
     elevatorLeft.setInverted(true);
     elevatorRight.setInverted(InvertType.OpposeMaster);
+
+    elevatorLeft.configVoltageCompSaturation(11);
+    elevatorLeft.enableVoltageCompensation(true);
+    elevatorRight.configVoltageCompSaturation(11);
+    elevatorRight.enableVoltageCompensation(true);
   }
 
   @Override
