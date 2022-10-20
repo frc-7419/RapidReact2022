@@ -13,16 +13,13 @@ public class SetElevatorPosition extends CommandBase {
   private double pos;
   private double kp;
   private PIDController pidController;
-  /** Creates a new SetElevatorPosition. */
   public SetElevatorPosition(ElevatorSubsystem elevatorSubsystem, double pos, double kp) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.pos = pos;
     this.kp = kp;
     addRequirements(elevatorSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     kp = SmartDashboard.getNumber("elevatorkP", 0.0001);
