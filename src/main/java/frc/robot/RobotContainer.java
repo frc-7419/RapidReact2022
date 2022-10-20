@@ -115,18 +115,20 @@ public class RobotContainer {
     //         .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
 
     new JoystickButton(joystick1, XboxController.Button.kA.value)
-      .whileHeld(new SetElevatorPosition(elevatorSubsystem, 4096, 0.0001));
+      .whileHeld(new SetElevatorPosition(elevatorSubsystem, 4096, 0.0001, 0));
     
     new JoystickButton(joystick1, XboxController.Button.kB.value)
-      .whileHeld(new SetArmPosition(armsSubsystem, 2, 0.0001));
+      .whileHeld(new SetArmPosition(armsSubsystem, 2, 0.0001, 0));
   }
 
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("elevatorkP", 0.0001);
     SmartDashboard.putNumber("elevatorSetpoint", 4096);
+    SmartDashboard.putNumber("elevatorFf", 0);
 
     SmartDashboard.putNumber("armKp", 0.0001);
     SmartDashboard.putNumber("armSetpoint", 2);
+    SmartDashboard.putNumber("armFf", 0);
   }
 
   private void configureAutoSelector() {

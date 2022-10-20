@@ -40,6 +40,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("output", elevatorLeft.getMotorOutputPercent());
   }
 
+  public double getOutput() {
+    return elevatorLeft.getMotorOutputPercent();
+  }
+
   public void setPower(double power) {
     elevatorLeft.set(ControlMode.PercentOutput, power);
     elevatorRight.set(ControlMode.PercentOutput, power);

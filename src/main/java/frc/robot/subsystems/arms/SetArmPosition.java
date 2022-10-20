@@ -14,11 +14,14 @@ public class SetArmPosition extends CommandBase {
   private double pos;
   private double kP;
   private PIDController pidController;
+  private double ff;
 
-  public SetArmPosition(ArmsSubsystem armSubsystem, double pos, double kP) {
+
+  public SetArmPosition(ArmsSubsystem armSubsystem, double pos, double kP, double ff) {
     this.armSubsystem = armSubsystem;
     this.pos = pos;
     this.kP = kP;
+    this.ff = ff;
     addRequirements(armSubsystem);
   }
 
@@ -27,6 +30,7 @@ public class SetArmPosition extends CommandBase {
   public void initialize() {
     kP = SmartDashboard.getNumber("armKp", 0.0001);
     pos = SmartDashboard.getNumber("armSetpoint", 2);
+    ff = SmartDashboard.getNumber("armFf", 0);
 
     pidController = new PIDController(kP, 0, 0);
     pidController.setSetpoint(pos);
@@ -38,7 +42,7 @@ public class SetArmPosition extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double output = pidController.calculate(armSubsystem.getPosition());
+    double output = pidController.calculate(armSubsystem.getPosition()) + ff;
     armSubsystem.setPower(output);
   }
 

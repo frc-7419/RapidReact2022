@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -12,11 +15,14 @@ public class SetElevatorPosition extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private double pos;
   private double kp;
+  private double ff;
+
   private PIDController pidController;
-  public SetElevatorPosition(ElevatorSubsystem elevatorSubsystem, double pos, double kp) {
+  public SetElevatorPosition(ElevatorSubsystem elevatorSubsystem, double pos, double kp, double ff) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.pos = pos;
     this.kp = kp;
+    this.ff = ff;
     addRequirements(elevatorSubsystem);
   }
 
@@ -24,6 +30,9 @@ public class SetElevatorPosition extends CommandBase {
   public void initialize() {
     kp = SmartDashboard.getNumber("elevatorkP", 0.0001);
     pos = SmartDashboard.getNumber("elevatorSetpoint", 4096);
+    ff = SmartDashboard.getNumber("elevatorFf", 0);
+
+    elevatorSubsystem.setPIDFConstants(kp, 0, 0, 0);
 
     pidController = new PIDController(kp, 0, 0);
     pidController.setSetpoint(pos);
@@ -35,15 +44,15 @@ public class SetElevatorPosition extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double output = pidController.calculate(elevatorSubsystem.getElevatorPosition());
-    SmartDashboard.putNumber("elevatorOutput", output);
-    elevatorSubsystem.setPower(output);
+    elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, pos, DemandType.ArbitraryFeedForward, ff);
+    SmartDashboard.putNumber("elevatorOutput", elevatorSubsystem.getOutput());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     elevatorSubsystem.brake();
+    elevatorSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.
