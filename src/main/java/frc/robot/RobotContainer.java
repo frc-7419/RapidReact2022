@@ -12,6 +12,7 @@ import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
+import frc.robot.subsystems.arms.SetArmPosition;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.OneBallAutoWait;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
@@ -83,43 +84,49 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // align turret
-    new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
-        .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
+    // // align turret
+    // new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
+    //     .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
 
-    // brake turret during hang
-    new JoystickButton(joystick1, XboxController.Button.kB.value)
-        .whileHeld(new BrakeTurret(turretSubsystem));
+    // // brake turret during hang
+    // new JoystickButton(joystick1, XboxController.Button.kB.value)
+    //     .whileHeld(new BrakeTurret(turretSubsystem));
 
-    // any distance, interpolation
-    new JoystickButton(joystick2, XboxController.Button.kY.value)
-        .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
+    // // any distance, interpolation
+    // new JoystickButton(joystick2, XboxController.Button.kY.value)
+    //     .whileHeld(new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem));
 
-    // edge of tarmac
-    new POVButton(joystick2, 0)
-        .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
+    // // edge of tarmac
+    // new POVButton(joystick2, 0)
+    //     .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049));
 
-    // lower hub shot, consistent
-    new POVButton(joystick2, 90)
-        .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
+    // // lower hub shot, consistent
+    // new POVButton(joystick2, 90)
+    //     .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
-    // coast arms during hanging
-    new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
-        .whileHeld(new CoastArms(armsSubsystem));
+    // // coast arms during hanging
+    // new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
+    //     .whileHeld(new CoastArms(armsSubsystem));
 
-    // toggle to maintain elevator position
-    new DoubleButton(
-        new JoystickButton(joystick2, XboxController.Button.kA.value),
-        new JoystickButton(joystick2, XboxController.Button.kB.value))
-            .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+    // // toggle to maintain elevator position
+    // new DoubleButton(
+    //     new JoystickButton(joystick2, XboxController.Button.kA.value),
+    //     new JoystickButton(joystick2, XboxController.Button.kB.value))
+    //         .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
 
     new JoystickButton(joystick1, XboxController.Button.kA.value)
       .whileHeld(new SetElevatorPosition(elevatorSubsystem, 4096, 0.0001));
+    
+    new JoystickButton(joystick1, XboxController.Button.kB.value)
+      .whileHeld(new SetArmPosition(armsSubsystem, 2, 0.0001));
   }
 
   private void smartDashboardBindings() {
     SmartDashboard.putNumber("elevatorkP", 0.0001);
     SmartDashboard.putNumber("elevatorSetpoint", 4096);
+
+    SmartDashboard.putNumber("armKp", 0.0001);
+    SmartDashboard.putNumber("armSetpoint", 2);
   }
 
   private void configureAutoSelector() {

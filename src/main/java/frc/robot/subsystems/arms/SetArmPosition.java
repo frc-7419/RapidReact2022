@@ -5,6 +5,7 @@
 package frc.robot.subsystems.arms;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SetArmPosition extends CommandBase {
@@ -24,9 +25,12 @@ public class SetArmPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    kP = SmartDashboard.getNumber("armKp", 0.0001);
+    pos = SmartDashboard.getNumber("armSetpoint", 2);
+
     pidController = new PIDController(kP, 0, 0);
     pidController.setSetpoint(pos);
-    pidController.setTolerance(0.1);
+    pidController.setTolerance(0);
 
     armSubsystem.coast();
   }
