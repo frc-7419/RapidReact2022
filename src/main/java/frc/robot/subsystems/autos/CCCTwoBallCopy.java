@@ -16,6 +16,8 @@ import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.loader.RunLoader;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
+import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
@@ -35,42 +37,58 @@ public class CCCTwoBallCopy extends ParallelCommandGroup {
 
                         // new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 9850, 6150,
                         // 0.0485, 0.0495).withTimeout(2),
+                        new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocity(shooterSubsystem, 35, 32)
-                                )
-                                        .withTimeout(0.75), // gttv while aligning turret
+                        new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8100, 10200, 0.04874, 0.049)
+                                ).withTimeout(2), // gttv while aligning turret
 
                         // parallel(new RunLoader(loaderSubsystem, 1.0), new
                         // GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 9850, 6150, 0.0485,
                         // 0.0495)).withTimeout(2.5),
 
                         // shoot preload
+                        // path planner
                         parallel(
+                                
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocity(shooterSubsystem, 34, 33),
-                                new RunFeeder(feederSubsystem, 1),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(4), // tune time
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8050, 9500, 0.04874, 0.049),
+                                new RunFeeder(feederSubsystem, 0.9),
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.25),
 
                         parallel(
+                                new RunFeeder(feederSubsystem, -0.9),
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8000, 9900, 0.04874, 0.049)
+                        ).withTimeout(2),
+
+                        parallel(
+                        
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocity(shooterSubsystem, 38, 32),
-                                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid,
-                                        intakeSolenoidSubsystem),
-                                new RunLoader(loaderSubsystem, 0.5),
-                                new RunIntake(intakeSubsystem, 1)
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9700, 0.04874, 0.049),
+                                new StraightWithMotionMagic(driveBaseSubsystem, 6),
+                                new RunFeeder(feederSubsystem, 0.9),
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(1),
+                                // tune time
+                        // new StraightWithMotionMagic(driveBaseSubsystem, 5),
+                        // parallel(
+                        //         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+                        //         new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
+                        //         // new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid,
+                        //         //         intakeSolenoidSubsystem),
+                        //         new RunLoader(loaderSubsystem, 0.5),
+                        //         new RunIntake(intakeSubsystem, 1)
 
-                        ).withTimeout(3),
+                        // ).withTimeout(3),
 
-                        parallel(
-                                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocity(shooterSubsystem, 36, 32),
-                                new RunFeeder(feederSubsystem, 1),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(3), // tune time
+                        // parallel(
+                        //         new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+                        //         new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
+                        //         new RunFeeder(feederSubsystem, 1),
+                        //         new RunLoader(loaderSubsystem, 1)).withTimeout(3), // tune time
 
-                        parallel(
-                                new InstantCommand(intakeSolenoidSubsystem::retractSolenoid,
-                                        intakeSolenoidSubsystem)).withTimeout(2),
-
+                        // parallel(
+                        //         new InstantCommand(intakeSolenoidSubsystem::retractSolenoid,
+                        //                 intakeSolenoidSubsystem)).withTimeout(2),
+        new StraightWithMotionMagic(driveBaseSubsystem, 40),
             new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
         // new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
         ));

@@ -12,6 +12,7 @@ import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.CCCTwoBall;
+import frc.robot.subsystems.autos.CCCTwoBallCopy;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.OneBallAutoWait;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
@@ -76,10 +77,10 @@ public class RobotContainer {
   private final ThreeBallAutoExactVelocities threeBallAutoExactVelocities = new ThreeBallAutoExactVelocities(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
   private final ThreeBallAutoInterpolation threeBallAutoInterpolation = new ThreeBallAutoInterpolation(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
   private final CCCTwoBall cccTwoBall = new CCCTwoBall(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
-  
+  private final CCCTwoBallCopy cccTwoBallCopy = new CCCTwoBallCopy(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
   public RobotContainer() {
     configureButtonBindings();
-    smartDashboardBindings();
+    // smartDashboardBindings();
     configureAutoSelector();
   }
 
@@ -115,7 +116,7 @@ public class RobotContainer {
       .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
   }
 
-  private void smartDashboardBindings() {}
+  // private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
     // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
@@ -131,7 +132,8 @@ public class RobotContainer {
 
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
-    return cccTwoBall;
+    //return cccTwoBall;
+     return cccTwoBallCopy;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;

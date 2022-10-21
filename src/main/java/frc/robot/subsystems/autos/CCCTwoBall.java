@@ -39,7 +39,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         // 0.0485, 0.0495).withTimeout(2),
                         new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                        new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049)
+                        new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8100, 10200, 0.04874, 0.049)
                                 ).withTimeout(2), // gttv while aligning turret
 
                         // parallel(new RunLoader(loaderSubsystem, 1.0), new
@@ -53,7 +53,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                                 new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8050, 9500, 0.04874, 0.049),
                                 new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.25),
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.37),
 
                         parallel(
                                 new RunFeeder(feederSubsystem, -0.9),
@@ -63,10 +63,28 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         parallel(
                         
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9900, 0.04874, 0.049),
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9700, 0.04874, 0.049),
                                 new StraightWithMotionMagic(driveBaseSubsystem, 6),
                                 new RunFeeder(feederSubsystem, 0.9),
                                 new RunLoader(loaderSubsystem, 1)).withTimeout(1),
+                        new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180),
+
+                        parallel(
+                                new StraightWithMotionMagic(driveBaseSubsystem, 15),
+                                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid),
+                                new RunIntake(intakeSubsystem, 1),
+                                new RunLoader(loaderSubsystem, 0.5)
+                                // new AlignTurretDefault(turretSubsystem, limelightSubsystem)
+                        ).withTimeout(2),
+                        parallel(
+                                new RunFeeder(feederSubsystem, 0.9),
+                                new RunLoader(loaderSubsystem, 1), // tune time
+                                new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180)
+                        ).withTimeout(2),
+                        parallel(
+                                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
+                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 10050, 0.04874, 0.049)
+                        ),
                                 // tune time
                         // new StraightWithMotionMagic(driveBaseSubsystem, 5),
                         // parallel(
@@ -88,7 +106,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         // parallel(
                         //         new InstantCommand(intakeSolenoidSubsystem::retractSolenoid,
                         //                 intakeSolenoidSubsystem)).withTimeout(2),
-        new StraightWithMotionMagic(driveBaseSubsystem, -10),
+        new StraightWithMotionMagic(driveBaseSubsystem, 40),
             new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)
         // new StraightWithMotionMagic(driveBaseSubsystem, -80.88)
         ));
