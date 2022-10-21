@@ -4,49 +4,52 @@
 
 package frc.robot.subsystems.arms;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class MaintainArmPosition extends CommandBase {
-  private ArmsSubsystem armsSubsystem;
-  private double kF;
+  /** Creates a new SetPosition. */
+  private ArmsSubsystem armSubsystem;
+  private double pos;
   private double kP;
-  private double setpoint;
-
   private PIDController pidController;
+  private double ff;
 
-  public MaintainArmPosition(ArmsSubsystem armsSubsystem, double setpoint, double kP, double kF) {
-    this.armsSubsystem = armsSubsystem;
-    this.setpoint = setpoint;
+
+  public MaintainArmPosition(ArmsSubsystem armSubsystem, double pos, double kP, double ff) {
+    this.armSubsystem = armSubsystem;
+    this.pos = pos;
     this.kP = kP;
-    this.kF = kF;
+    this.ff = ff;
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    kP = SmartDashboard.getNumber("armKp", 0.0001);
-    setpoint = SmartDashboard.getNumber("armSetpoint", 2);
+    // kP = SmartDashboard.getNumber("armKp", 0.0001);
+    // pos = SmartDashboard.getNumber("armSetpoint", 2);
+    // ff = SmartDashboard.getNumber("armFf", 0);
 
     pidController = new PIDController(kP, 0, 0);
-    pidController.setSetpoint(setpoint);
-    pidController.setTolerance(0);
+    pidController.setSetpoint(pos);
+    pidController.setTolerance(0.2);
 
-    armsSubsystem.coast();
+    armSubsystem.coast();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double output = pidController.calculate(armsSubsystem.getPosition()) + kF;
-    armsSubsystem.setPower(output);
+    double output = pidController.calculate(armSubsystem.getPosition()) + ff;
+    armSubsystem.setPower(output);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armsSubsystem.brake();
+    armSubsystem.brake();
   }
 
   // Returns true when the command should end.

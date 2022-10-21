@@ -28,13 +28,13 @@ public class SetArmPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    kP = SmartDashboard.getNumber("armKp", 0.0001);
-    pos = SmartDashboard.getNumber("armSetpoint", 2);
-    ff = SmartDashboard.getNumber("armFf", 0);
+    // kP = SmartDashboard.getNumber("armKp", 0.0001);
+    // pos = SmartDashboard.getNumber("armSetpoint", 2);
+    // ff = SmartDashboard.getNumber("armFf", 0);
 
     pidController = new PIDController(kP, 0, 0);
     pidController.setSetpoint(pos);
-    pidController.setTolerance(0);
+    pidController.setTolerance(0.2);
 
     armSubsystem.coast();
   }

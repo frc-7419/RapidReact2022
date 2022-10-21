@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.AutoClimb;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.arms.SetArmPosition;
@@ -66,8 +67,8 @@ public class RobotContainer {
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.95, 0.75);
-
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.75);
+  private final AutoClimb autoClimb = new AutoClimb(armsSubsystem, elevatorSubsystem);
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
@@ -119,6 +120,9 @@ public class RobotContainer {
     
     new JoystickButton(joystick1, XboxController.Button.kB.value)
       .whileHeld(new SetArmPosition(armsSubsystem, 2, 0.0001, 0));
+
+      new JoystickButton(joystick1, XboxController.Button.kY.value)
+      .whileHeld(autoClimb);
   }
 
   private void smartDashboardBindings() {

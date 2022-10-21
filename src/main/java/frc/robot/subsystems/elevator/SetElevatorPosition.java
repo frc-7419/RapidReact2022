@@ -28,23 +28,22 @@ public class SetElevatorPosition extends CommandBase {
 
   @Override
   public void initialize() {
-    kp = SmartDashboard.getNumber("elevatorkP", 0.0001);
-    pos = SmartDashboard.getNumber("elevatorSetpoint", 4096);
-    ff = SmartDashboard.getNumber("elevatorFf", 0);
-
-    elevatorSubsystem.setPIDFConstants(kp, 0, 0, 0);
+    // kp = SmartDashboard.getNumber("elevatorkP", 0.0001);
+    // pos = SmartDashboard.getNumber("elevatorSetpoint", -170000);
+    // ff = SmartDashboard.getNumber("elevatorFf", 0);
 
     pidController = new PIDController(kp, 0, 0);
     pidController.setSetpoint(pos);
-    pidController.setTolerance(0);
+    pidController.setTolerance(5000);
 
     elevatorSubsystem.coast();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    elevatorSubsystem.getElevatorLeft().set(ControlMode.MotionMagic, pos, DemandType.ArbitraryFeedForward, ff);
+    elevatorSubsystem.setPower(pidController.calculate(elevatorSubsystem.getElevatorPosition()) + ff);
     SmartDashboard.putNumber("elevatorOutput", elevatorSubsystem.getOutput());
   }
 

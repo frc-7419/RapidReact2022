@@ -37,14 +37,14 @@ public class ArmsSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (homed && limitSwitch.get()) {
+    if (!homed && !limitSwitch.get()) {
       homePos = encoder.getPosition();
       homed = true;
     }
     SmartDashboard.putBoolean("armHomed", homed);
     SmartDashboard.putNumber("armHomePos", homePos);
     SmartDashboard.putNumber("armPos", getPosition());
-    SmartDashboard.putBoolean("limitSwitch", limitSwitch.get());
+    SmartDashboard.putBoolean("limitSwitch", !limitSwitch.get());
     SmartDashboard.putNumber("Arms Motor Output", leftArm.getAppliedOutput());
   }
 
