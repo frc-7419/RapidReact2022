@@ -38,7 +38,7 @@ public class LimelightSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("ty", ty.getDouble(0));
     // SmartDashboard.putNumber("ta", ta.getDouble(0));
     // SmartDashboard.putNumber("theta", getTheta());
-    // SmartDashboard.putNumber("distance", getDistance());
+    SmartDashboard.putNumber("distance", getDistance());
   }
 
   @Override
