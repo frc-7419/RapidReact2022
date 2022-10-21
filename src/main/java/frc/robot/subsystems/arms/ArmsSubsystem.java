@@ -45,6 +45,7 @@ public class ArmsSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("armHomePos", homePos);
     SmartDashboard.putNumber("armPos", getPosition());
     SmartDashboard.putBoolean("limitSwitch", limitSwitch.get());
+    SmartDashboard.putNumber("Arms Motor Output", leftArm.getAppliedOutput());
   }
 
   public double getPosition() {
