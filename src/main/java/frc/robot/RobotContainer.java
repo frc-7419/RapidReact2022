@@ -121,7 +121,7 @@ public class RobotContainer {
     new JoystickButton(joystick1, XboxController.Button.kB.value)
       .whileHeld(new SetArmPosition(armsSubsystem, 2, 0.0001, 0));
 
-      new JoystickButton(joystick1, XboxController.Button.kY.value)
+    new JoystickButton(joystick1, XboxController.Button.kY.value)
       .whileHeld(autoClimb);
   }
 
