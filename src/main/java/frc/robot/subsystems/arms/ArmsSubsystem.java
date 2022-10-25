@@ -18,15 +18,15 @@ public class ArmsSubsystem extends SubsystemBase {
   //one motor controls both arms
   private CANSparkMax leftArm;
   private CANSparkMax rightArm;
-  private DigitalInput limitSwitch;
-  private boolean homed = false;
+  // private DigitalInput limitSwitch;
+  // private boolean homed = false;
   private RelativeEncoder encoder;
   private double homePos = 0;
   
   public ArmsSubsystem() {
     this.leftArm = new CANSparkMax(CanIds.armSpark1.id, MotorType.kBrushless);
     this.rightArm = new CANSparkMax(CanIds.armSpark2.id, MotorType.kBrushless);
-    this.limitSwitch = new DigitalInput(0);
+    // this.limitSwitch = new DigitalInput(0);
     this.encoder = leftArm.getEncoder();
     rightArm.setInverted(true);
     
@@ -37,15 +37,20 @@ public class ArmsSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (!homed && !limitSwitch.get()) {
-      homePos = encoder.getPosition();
-      homed = true;
-    }
-    SmartDashboard.putBoolean("armHomed", homed);
+    // if (!homed && !limitSwitch.get()) {
+    //   homePos = encoder.getPosition();
+    //   homed = true;
+    // }
+    // SmartDashboard.putBoolean("armHomed", homed);
     SmartDashboard.putNumber("armHomePos", homePos);
     SmartDashboard.putNumber("armPos", getPosition());
-    SmartDashboard.putBoolean("limitSwitch", !limitSwitch.get());
+    // SmartDashboard.putBoolean("limitSwitch", !limitSwitch.get());
     SmartDashboard.putNumber("Arms Motor Output", leftArm.getAppliedOutput());
+    SmartDashboard.putNumber("ArmCurrent", getCurrent());
+  }
+
+  public void zero() {
+    homePos = encoder.getPosition();
   }
 
   public double getPosition() {
@@ -69,6 +74,10 @@ public class ArmsSubsystem extends SubsystemBase {
     leftArm.setIdleMode(IdleMode.kCoast);
     rightArm.setIdleMode(IdleMode.kCoast);
     flash();
+  }
+
+  public double getCurrent() {
+    return leftArm.getOutputCurrent();
   }
   
   // public IdleMode getIdleMode() {
