@@ -16,24 +16,13 @@ public class BeamBreakSubsystem extends SubsystemBase {
   private Long startTime;
   /** Creates a new BeamBreakSubsystem. */
   public BeamBreakSubsystem() { 
-    beamBreakReceiver = new DigitalInput(5);
+    beamBreakReceiver = new DigitalInput(2);
     startTime = System.currentTimeMillis();
   }
 
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("beamBreak: ", beamBreakReceiver.get());
-    // WaitCommand(10);
-    // // This method will be called once per scheduler run
-
-    // if (detections < 2) {
-    //   if (beamBreakReceiver.get() == true) {
-    //     detections++;
-    //   }
-    // } else {
-    //   WaitCommand(10);
-    //   detections -= 2;
-    // } 
     long endTime = System.currentTimeMillis();
 
     if (detections >= 0 && detections <= 2) {

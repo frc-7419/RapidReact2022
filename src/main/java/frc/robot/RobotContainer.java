@@ -19,6 +19,7 @@ import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
 import frc.robot.subsystems.autos.ThreeBallAutoInterpolation;
 import frc.robot.subsystems.autos.TwoBallAutoExactVelocities;
 import frc.robot.subsystems.autos.TwoBallAutoInterpolation;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 import frc.robot.subsystems.drive.ArcadeDrive;
 import frc.robot.subsystems.drive.DriveBaseSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
@@ -41,6 +42,7 @@ import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
+import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 
 public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
@@ -57,6 +59,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
+  private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
   private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem);
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
