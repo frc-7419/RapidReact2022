@@ -38,6 +38,7 @@ import frc.robot.subsystems.loader.LoaderSubsystem;
 import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
+import frc.robot.subsystems.shooter.SmartShoot;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
@@ -61,7 +62,7 @@ public class RobotContainer {
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
   private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem);
+  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, feederSubsystem);
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick2, 0.16);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
@@ -70,6 +71,7 @@ public class RobotContainer {
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
   // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
+  // private final SmartShoot smartShoot = new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem);
 
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -81,6 +83,7 @@ public class RobotContainer {
   private final ThreeBallAutoInterpolation threeBallAutoInterpolation = new ThreeBallAutoInterpolation(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
   private final CCCTwoBall cccTwoBall = new CCCTwoBall(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
   private final CCCTwoBallCopy cccTwoBallCopy = new CCCTwoBallCopy(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
+
   public RobotContainer() {
     configureButtonBindings();
     // smartDashboardBindings();
@@ -111,6 +114,9 @@ public class RobotContainer {
       // coast arms during hanging
     new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
       .whileHeld(new CoastArms(armsSubsystem));
+
+    new JoystickButton(joystick2, XboxController.Button.kStart.value)
+    .whileHeld(new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem));
 
     // toggle to maintain elevator position
     new DoubleButton(

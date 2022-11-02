@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.feeder.FeederSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
 
@@ -13,12 +14,13 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
   private XboxController joystick;
   private IntakeSubsystem intakeSubsystem;
   private LoaderSubsystem loaderSubsystem;
-
-  public RunIntakeAndLoaderWithJoystick(XboxController joystick, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
+  private FeederSubsystem feederSubsystem;
+  public RunIntakeAndLoaderWithJoystick(XboxController joystick, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem) {
     this.joystick = joystick;
     this.intakeSubsystem = intakeSubsystem;
     this.loaderSubsystem = loaderSubsystem;
-    addRequirements(intakeSubsystem, loaderSubsystem);
+    this.feederSubsystem = feederSubsystem;
+    addRequirements(intakeSubsystem, loaderSubsystem, feederSubsystem);
   }
 
   @Override
@@ -29,6 +31,8 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
     if (joystick.getRightTriggerAxis() > 0) {
       intakeSubsystem.setPower(1);
       loaderSubsystem.setPower(0.6);
+      feederSubsystem.setPower(-0.5);
+
     }
     else if (joystick.getLeftTriggerAxis() > 0) {
         intakeSubsystem.setPower(-1);
@@ -37,6 +41,7 @@ public class RunIntakeAndLoaderWithJoystick extends CommandBase {
     else {
       intakeSubsystem.setPower(0);
       loaderSubsystem.setPower(0);
+      feederSubsystem.setPower(0);
       // loaderSubsystem.brake();
     }
   }
