@@ -51,7 +51,7 @@ public class SetLEDColorWithJoystick extends CommandBase {
       ledSubsystem.startLed();
       rainbowFirstPixelHue += 3;
       rainbowFirstPixelHue %= 180;
-    } 
+    }
     else if (limelightSubsystem.getTv() == 1.0 && Math.abs(limelightSubsystem.getTx()) <= limelightTolerance && joystick2.getYButton()) {
       // green
       // ledSubsystem.setLEDColor(0, 0, 255);

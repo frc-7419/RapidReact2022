@@ -27,7 +27,7 @@ public final class Constants {
         intakeSpark(32),  
         loaderVictor(16),
         turretFalcon(62),
-        feederVictor(23),
+        feederTalon(23),
         armSpark1(11),
         armSpark2(12),
         rightElevatorFalcon(50),

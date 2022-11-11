@@ -42,15 +42,14 @@ import frc.robot.subsystems.led.LEDSubsystem;
 import frc.robot.subsystems.led.SetLEDColorWithJoystick;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
+import frc.robot.subsystems.loader.SmartLoad;
 import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
-import frc.robot.subsystems.shooter.SmartShoot;
 import frc.robot.subsystems.turret.AlignTurretDefault;
 import frc.robot.subsystems.turret.BrakeTurret;
 import frc.robot.subsystems.turret.RunTurretWithJoystick;
 import frc.robot.subsystems.turret.TurretSubsystem;
-import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
 
 public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
@@ -69,9 +68,9 @@ public class RobotContainer {
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
   private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick1, intakeSubsystem, loaderSubsystem, feederSubsystem);
+  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick2, intakeSubsystem, loaderSubsystem);
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
-  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick2, 0.16);
+  private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick1, 0.16);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
   private final RunElevatorWithJoystick runElevatorWithJoystick = new RunElevatorWithJoystick(elevatorSubsystem, joystick2);
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
@@ -79,7 +78,7 @@ public class RobotContainer {
   // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
   // private final SmartShoot smartShoot = new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem);
-
+  private final SmartLoad smartLoad = new SmartLoad(feederSubsystem, loaderSubsystem, beamBreakSubsystem, ledSubsystem);
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
@@ -127,7 +126,7 @@ public class RobotContainer {
       }
 
     }).start();
-    
+
     configureAutoSelector();
   }
 
@@ -157,8 +156,8 @@ public class RobotContainer {
       .whileHeld(new CoastArms(armsSubsystem));
 
     new JoystickButton(joystick2, XboxController.Button.kStart.value)
-    .whileHeld(new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem));
-
+    .whileHeld(new SmartLoad(feederSubsystem, loaderSubsystem, beamBreakSubsystem, ledSubsystem));
+ 
     // toggle to maintain elevator position
     new DoubleButton(
       new JoystickButton(joystick2, XboxController.Button.kA.value),
