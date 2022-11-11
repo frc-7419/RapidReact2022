@@ -25,12 +25,12 @@ public class RunLoaderWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick.getLeftBumper()) {
-      loaderSubsystem.setPower(power);
+    if (joystick.getLeftTriggerAxis()!=0) {
+      loaderSubsystem.setPower(-power);
       loaderSubsystem.coast();
     }
-    else if (joystick.getRightBumper()) {
-      loaderSubsystem.setPower(-power);
+    else if (joystick.getRightTriggerAxis()!=0) {
+      loaderSubsystem.setPower(power);
       loaderSubsystem.coast();
     }
     else {
