@@ -78,7 +78,6 @@ public class RobotContainer {
   // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
   // private final SmartShoot smartShoot = new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem);
-  private final SmartLoad smartLoad = new SmartLoad(feederSubsystem, loaderSubsystem, beamBreakSubsystem, ledSubsystem);
   // auto
   // private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);

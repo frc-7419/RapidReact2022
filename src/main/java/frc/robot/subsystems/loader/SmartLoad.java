@@ -6,6 +6,7 @@ package frc.robot.subsystems.loader;
 
 import com.team7419.InterpolatedTreeMap;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.beambreak.BeamBreakSubsystem;
@@ -41,12 +42,14 @@ public class SmartLoad extends CommandBase {
   public void execute() {
     // if beam break broken, run feeder and loader in reverse until beam break is not broken
     if (beamBreakSubsystem.getBeamBreakActivated()) {
+        SmartDashboard.putBoolean("SmartLoad Finished", false);
         feederSubsystem.setPower(-0.5);
         loaderSubsystem.setPower(-0.5);
     } else {
         feederSubsystem.setPower(0);
         loaderSubsystem.setPower(0);
         ledSubsystem.setLEDColor(0, 0, 255);
+        SmartDashboard.putBoolean("SmartLoad Finished", true);
     }
   }
 
