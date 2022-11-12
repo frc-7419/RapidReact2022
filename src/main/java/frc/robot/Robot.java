@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.led.RainbowAnimation;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -25,7 +26,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
-    // CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
   }
 
   
