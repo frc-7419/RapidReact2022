@@ -21,6 +21,8 @@ import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.CCCTwoBall;
 import frc.robot.subsystems.autos.CCCTwoBallCopy;
+import frc.robot.subsystems.autos.MTTDThreeBall;
+import frc.robot.subsystems.autos.MTTDTwoBall;
 import frc.robot.subsystems.autos.OneBallAuto;
 import frc.robot.subsystems.autos.OneBallAutoWait;
 import frc.robot.subsystems.autos.ThreeBallAutoExactVelocities;
@@ -43,7 +45,6 @@ import frc.robot.subsystems.led.LEDSubsystem;
 import frc.robot.subsystems.led.SetLEDColorWithJoystick;
 import frc.robot.subsystems.limelight.LimelightSubsystem;
 import frc.robot.subsystems.loader.LoaderSubsystem;
-import frc.robot.subsystems.loader.SmartLoad;
 import frc.robot.subsystems.shooter.GetToTargetVelocityArbitraryFeedforward;
 import frc.robot.subsystems.shooter.GetToTargetVelocityWithLimelight;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -81,7 +82,7 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
   // private final SmartShoot smartShoot = new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem);
   // auto
-  // private SendableChooser<Command> autonChooser = new SendableChooser<>();
+  private SendableChooser<Command> autonChooser = new SendableChooser<>();
   private final OneBallAuto oneBallAuto = new OneBallAuto(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
   private final OneBallAutoWait oneBallAutoWait = new OneBallAutoWait(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem);
   private final TwoBallAutoExactVelocities twoBallAutoExactVelocities = new TwoBallAutoExactVelocities(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, feederSubsystem, loaderSubsystem, intakeSubsystem, turretSubsystem, limelightSubsystem, ledSubsystem, intakeSolenoidSubsystem);
@@ -90,6 +91,9 @@ public class RobotContainer {
   private final ThreeBallAutoInterpolation threeBallAutoInterpolation = new ThreeBallAutoInterpolation(turretSubsystem, limelightSubsystem, shooterSubsystem, loaderSubsystem, feederSubsystem, driveBaseSubsystem, gyroSubsystem, intakeSubsystem, intakeSolenoidSubsystem, ledSubsystem);
   private final CCCTwoBall cccTwoBall = new CCCTwoBall(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
   private final CCCTwoBallCopy cccTwoBallCopy = new CCCTwoBallCopy(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
+  private final MTTDThreeBall mttdThreeBall = new MTTDThreeBall(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
+  private final MTTDTwoBall mttdTwoBall = new MTTDTwoBall(driveBaseSubsystem, gyroSubsystem, shooterSubsystem, limelightSubsystem, feederSubsystem, loaderSubsystem, ledSubsystem, turretSubsystem, intakeSolenoidSubsystem, intakeSubsystem);
+
 
   public RobotContainer() {
     configureButtonBindings();
@@ -155,10 +159,6 @@ public class RobotContainer {
     //   // coast arms during hanging
     // new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
     //   .whileHeld(new CoastArms(armsSubsystem));
-
-    new JoystickButton(joystick2, XboxController.Button.kStart.value)
-    .whileHeld(new SmartLoad(feederSubsystem, loaderSubsystem, beamBreakSubsystem, ledSubsystem));
- 
     // toggle to maintain elevator position
     new DoubleButton(
       new JoystickButton(joystick2, XboxController.Button.kA.value),
@@ -169,12 +169,12 @@ public class RobotContainer {
   // private void smartDashboardBindings() {}
 
   private void configureAutoSelector() {
-    // autonChooser.setDefaultOption("Preload Default", oneBallAuto);
-    // autonChooser.addOption("2 Ball Exact Velocities", twoBallAutoExactVelocities);
+    autonChooser.setDefaultOption("two ball", mttdTwoBall);
+    autonChooser.addOption("three ball", mttdThreeBall);
     // autonChooser.addOption("2 Ball Interpolation", twoBallAutoInterpolation);
     // autonChooser.addOption("3 Ball Exact Velocities", threeBallAutoExactVelocities);
     // autonChooser.addOption("3 Ball Interpolation", threeBallAutoInterpolation);
-    // SmartDashboard.putData(autonChooser);
+    SmartDashboard.putData(autonChooser);
   }
 
   public Command getAutonomousCommand() {
@@ -182,14 +182,14 @@ public class RobotContainer {
 
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
-    return cccTwoBall;
+    // return mttdThreeBall;
     // return cccTwoBallCopy;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;
     // return threeBallAuto;
 
-    // return autonChooser.getSelected();
+    return autonChooser.getSelected();
   }
 
   public void setDefaultCommands() {

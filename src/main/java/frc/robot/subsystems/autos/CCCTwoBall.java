@@ -39,7 +39,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         // 0.0485, 0.0495).withTimeout(2),
                         new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                        new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8100, 10200, 0.04874, 0.049)
+                        new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
                                 ).withTimeout(2), // gttv while aligning turret
 
                         // parallel(new RunLoader(loaderSubsystem, 1.0), new
@@ -51,19 +51,19 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         parallel(
                                 
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8050, 9500, 0.04874, 0.049),
+                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
                                 new RunFeeder(feederSubsystem, 0.9),
                                 new RunLoader(loaderSubsystem, 1)).withTimeout(0.37),
 
                         parallel(
                                 new RunFeeder(feederSubsystem, -0.9),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 8000, 9900, 0.04874, 0.049)
+                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
                         ).withTimeout(2),
 
                         parallel(
                         
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 9700, 0.04874, 0.049),
+                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
                                 new StraightWithMotionMagic(driveBaseSubsystem, 6),
                                 new RunFeeder(feederSubsystem, 0.9),
                                 new RunLoader(loaderSubsystem, 1)).withTimeout(1),
@@ -83,7 +83,7 @@ public class CCCTwoBall extends ParallelCommandGroup {
                         ).withTimeout(2),
                         parallel(
                                 new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 7900, 10050, 0.04874, 0.049)
+                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)
                         ),
                                 // tune time
                         // new StraightWithMotionMagic(driveBaseSubsystem, 5),
