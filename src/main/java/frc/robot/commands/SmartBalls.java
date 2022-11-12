@@ -20,7 +20,7 @@ public class SmartBalls extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
   private FeederSubsystem feederSubsystem;
   private BeamBreakSubsystem beamBreakSubsystem;
-
+  private boolean isBalling = false;
   public SmartBalls(XboxController joystick1, XboxController joystick2, IntakeSubsystem intakeSubsystem,
       LoaderSubsystem loaderSubsystem, FeederSubsystem feederSubsystem, BeamBreakSubsystem beamBreakSubsystem) {
     this.joystick1 = joystick1;
@@ -39,21 +39,23 @@ public class SmartBalls extends CommandBase {
   @Override
   public void execute() {
     if (joystick2.getRightBumper()) {
+      isBalling = true;
       if (!beamBreakSubsystem.getBeamBreakActivated()) {
         SmartDashboard.putBoolean("SmartLoad Finished", false);
         feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
-        loaderSubsystem.setPower(-0.7);
+        loaderSubsystem.setPower(-0.6);
       } else {
-        feederSubsystem.setVoltage(-0.3*Constants.PowerConstants.FeederVoltage);
+        feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
         loaderSubsystem.setPower(0.3);
         // ledSubsystem.setLEDColor(0, 0, 255);
         SmartDashboard.putBoolean("SmartLoad Finished", true);
       }
     } else {
-      if (joystick2.getRightTriggerAxis() > 0) {
+      isBalling = false;
+      if (joystick2.getRightTriggerAxis() > 0.05) {
         intakeSubsystem.setPower(1);
         loaderSubsystem.setPower(0.6);
-      } else if (joystick2.getLeftTriggerAxis() > 0) {
+      } else if (joystick2.getLeftTriggerAxis() > 0.05) {
         intakeSubsystem.setPower(-1);
         loaderSubsystem.setPower(-0.4);
       } else {
@@ -65,7 +67,7 @@ public class SmartBalls extends CommandBase {
       feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
     } else if (joystick1.getRightBumper()) {
       feederSubsystem.setVoltage(Constants.PowerConstants.FeederVoltage);
-    } else {
+    } else if(!isBalling){
       feederSubsystem.setVoltage(0);
     }
   }

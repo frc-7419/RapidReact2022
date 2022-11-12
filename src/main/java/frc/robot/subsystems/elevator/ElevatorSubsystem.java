@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.TalonFuncs;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
@@ -26,12 +27,21 @@ public class ElevatorSubsystem extends SubsystemBase {
     
     elevatorLeft.setInverted(true);
     elevatorRight.setInverted(InvertType.OpposeMaster);
+
+    elevatorLeft.configVoltageCompSaturation(11);
+    elevatorLeft.enableVoltageCompensation(true);
+    elevatorRight.configVoltageCompSaturation(11);
+    elevatorRight.enableVoltageCompensation(true);
   }
 
   @Override
   public void periodic() {
-    // SmartDashboard.putNumber("position", elevatorLeft.getSelectedSensorPosition());
-    // SmartDashboard.putNumber("output", elevatorLeft.getMotorOutputPercent());
+    SmartDashboard.putNumber("position", elevatorLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Elevator Motor Output", elevatorLeft.getMotorOutputPercent());
+  }
+
+  public double getOutput() {
+    return elevatorLeft.getMotorOutputPercent();
   }
 
   public void setPower(double power) {

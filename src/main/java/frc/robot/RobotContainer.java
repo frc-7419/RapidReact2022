@@ -17,6 +17,7 @@ import edu.wpi.first.cscore.UsbCamera;
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
 import frc.robot.commands.SmartBalls;
 import frc.robot.subsystems.arms.ArmsSubsystem;
+import frc.robot.subsystems.arms.AutoClimb;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
 import frc.robot.subsystems.autos.CCCTwoBall;
@@ -79,6 +80,7 @@ public class RobotContainer {
   private final RunArmsWithJoystick runArmsWithJoystick = new RunArmsWithJoystick(armsSubsystem, joystick2);
   private final SetLEDColorWithJoystick setLEDColorWithJoystick = new SetLEDColorWithJoystick(ledSubsystem, limelightSubsystem, driveBaseSubsystem, joystick1, joystick2);
   // private final SetLED1Color setled1Color = new SetLED1Color(ledSubsystem, driveBaseSubsystem);
+  private final AutoClimb autoClimb = new AutoClimb(armsSubsystem, elevatorSubsystem);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(joystick1, driveBaseSubsystem, 0.6, 0.6);
   // private final SmartShoot smartShoot = new SmartShoot(shooterSubsystem, feederSubsystem, loaderSubsystem, limelightSubsystem, beamBreakSubsystem);
   // auto
@@ -137,6 +139,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // align turret
+
+    new JoystickButton(joystick1, XboxController.Button.kY.value)
+      .whileHeld(autoClimb);
+
+
     new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
       .whileHeld(new AlignTurretDefault(turretSubsystem, limelightSubsystem));
     
@@ -160,10 +167,10 @@ public class RobotContainer {
     // new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
     //   .whileHeld(new CoastArms(armsSubsystem));
     // toggle to maintain elevator position
-    new DoubleButton(
-      new JoystickButton(joystick2, XboxController.Button.kA.value),
-      new JoystickButton(joystick2, XboxController.Button.kB.value))
-      .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
+    // new DoubleButton(
+    //   new JoystickButton(joystick2, XboxController.Button.kA.value),
+    //   new JoystickButton(joystick2, XboxController.Button.kB.value))
+    //   .toggleWhenPressed(new MaintainElevatorPosition(elevatorSubsystem));
   }
 
   // private void smartDashboardBindings() {}
