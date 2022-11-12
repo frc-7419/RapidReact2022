@@ -38,14 +38,14 @@ public class SmartBalls extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick2.getStartButton()) {
-      if (beamBreakSubsystem.getBeamBreakActivated()) {
+    if (joystick2.getRightBumper()) {
+      if (!beamBreakSubsystem.getBeamBreakActivated()) {
         SmartDashboard.putBoolean("SmartLoad Finished", false);
-        feederSubsystem.setPower(-0.5);
+        feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
         loaderSubsystem.setPower(-0.5);
       } else {
-        feederSubsystem.setPower(0);
-        loaderSubsystem.setPower(0);
+        feederSubsystem.setVoltage(-0.3*Constants.PowerConstants.FeederVoltage);
+        loaderSubsystem.setPower(0.3);
         // ledSubsystem.setLEDColor(0, 0, 255);
         SmartDashboard.putBoolean("SmartLoad Finished", true);
       }

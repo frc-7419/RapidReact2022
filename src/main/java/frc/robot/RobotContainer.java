@@ -15,6 +15,7 @@ import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 
 import frc.robot.commands.RunIntakeAndLoaderWithJoystick;
+import frc.robot.commands.SmartBalls;
 import frc.robot.subsystems.arms.ArmsSubsystem;
 import frc.robot.subsystems.arms.CoastArms;
 import frc.robot.subsystems.arms.RunArmsWithJoystick;
@@ -68,7 +69,8 @@ public class RobotContainer {
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
   private final BeamBreakSubsystem beamBreakSubsystem = new BeamBreakSubsystem();
 
-  private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick2, intakeSubsystem, loaderSubsystem);
+  // private final RunIntakeAndLoaderWithJoystick runIntakeAndLoaderWithJoystick = new RunIntakeAndLoaderWithJoystick(joystick2, intakeSubsystem, loaderSubsystem);
+  private final SmartBalls smartBalls = new SmartBalls(joystick1, joystick2, intakeSubsystem, loaderSubsystem, feederSubsystem, beamBreakSubsystem);
   private final DeployIntakeWithJoystick deployIntakeWithJoystick = new DeployIntakeWithJoystick(intakeSolenoidSubsystem, joystick2);
   private final RunTurretWithJoystick runTurretWithJoystick = new RunTurretWithJoystick(turretSubsystem, limelightSubsystem, joystick1, 0.16);
   private final RunFeederWithJoystick runFeederWithJoystick = new RunFeederWithJoystick(feederSubsystem, joystick1);
@@ -150,9 +152,9 @@ public class RobotContainer {
     new JoystickButton(joystick2, XboxController.Button.kA.value)
       .whileHeld(new GetToTargetVelocityArbitraryFeedforward(shooterSubsystem, 3500, 5450, 0.042, 0.0475));
 
-      // coast arms during hanging
-    new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
-      .whileHeld(new CoastArms(armsSubsystem));
+    //   // coast arms during hanging
+    // new JoystickButton(joystick2, XboxController.Button.kRightBumper.value)
+    //   .whileHeld(new CoastArms(armsSubsystem));
 
     new JoystickButton(joystick2, XboxController.Button.kStart.value)
     .whileHeld(new SmartLoad(feederSubsystem, loaderSubsystem, beamBreakSubsystem, ledSubsystem));
@@ -180,8 +182,8 @@ public class RobotContainer {
 
     // return oneBallAuto;
     // return twoBallAutoExactVelocities;
-    //return cccTwoBall;
-     return cccTwoBallCopy;
+    return cccTwoBall;
+    // return cccTwoBallCopy;
     // return twoBallAutoInterpoloation;
     // return threeBallAutoExactVelocities;
     // return threeBallAutoInterpolation;
@@ -193,9 +195,9 @@ public class RobotContainer {
   public void setDefaultCommands() {
     driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSolenoidSubsystem.setDefaultCommand(deployIntakeWithJoystick);
-    intakeSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick);
-    loaderSubsystem.setDefaultCommand(runIntakeAndLoaderWithJoystick); 
-    feederSubsystem.setDefaultCommand(runFeederWithJoystick);
+    intakeSubsystem.setDefaultCommand(smartBalls);
+    loaderSubsystem.setDefaultCommand(smartBalls); 
+    feederSubsystem.setDefaultCommand(smartBalls);
     turretSubsystem.setDefaultCommand(runTurretWithJoystick);
     elevatorSubsystem.setDefaultCommand(runElevatorWithJoystick);
     armsSubsystem.setDefaultCommand(runArmsWithJoystick);
