@@ -42,7 +42,7 @@ public class SmartBalls extends CommandBase {
       if (!beamBreakSubsystem.getBeamBreakActivated()) {
         SmartDashboard.putBoolean("SmartLoad Finished", false);
         feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
-        loaderSubsystem.setPower(-0.5);
+        loaderSubsystem.setPower(-0.7);
       } else {
         feederSubsystem.setVoltage(-0.3*Constants.PowerConstants.FeederVoltage);
         loaderSubsystem.setPower(0.3);
