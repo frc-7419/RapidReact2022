@@ -65,12 +65,12 @@ public class MTTDThreeBall extends ParallelCommandGroup {
                                                 new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2,
                                                                 PIDConstants.GyrokP180,
                                                                 PIDConstants.GyrokI180, PIDConstants.GyrokD180),
-                                                new AlignTurretDefault(turretSubsystem, limelightSubsystem).withTimeout(0.5),
+                                                new AlignTurretDefault(turretSubsystem, limelightSubsystem).withTimeout(1.5),
                                                 parallel(
                                                                 new GetToTargetVelocityWithLimelight(shooterSubsystem,
                                                                                 limelightSubsystem),
                                                                 new RunFeeder(feederSubsystem, 0.9),
-                                                                new RunLoader(loaderSubsystem, 1)).withTimeout(1.2),
+                                                                new RunLoader(loaderSubsystem, 1)).withTimeout(1.5),
                                                 new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)));
 
         }

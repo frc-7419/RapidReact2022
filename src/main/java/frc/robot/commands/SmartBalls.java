@@ -45,7 +45,7 @@ public class SmartBalls extends CommandBase {
         feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
         loaderSubsystem.setPower(-0.6);
       } else {
-        feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
+        feederSubsystem.setVoltage(-0.3*Constants.PowerConstants.FeederVoltage);
         loaderSubsystem.setPower(0.3);
         // ledSubsystem.setLEDColor(0, 0, 255);
         SmartDashboard.putBoolean("SmartLoad Finished", true);
