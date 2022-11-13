@@ -28,9 +28,9 @@ public class AutoClimb extends SequentialCommandGroup {
         new SetElevatorPosition(elevatorSubsystem, -100000, 0.00005, 0.0615), // extend elevator three-fourths
 
         // TODO: lower kP and add kF 
-        new SetArmPosition(armsSubsystem, -1.75, 0.1, 0), // tilt back to high rung
+        new SetArmPosition(armsSubsystem, -2.1, 0.1, 0), // tilt back to high rung
 
-        new SetElevatorPosition(elevatorSubsystem, -166460, 0.000005, 0), // extend elevator fully
+        new SetElevatorPosition(elevatorSubsystem, -167500, 0.000005, 0), // extend elevator fully
         new SetArmPosition(armsSubsystem, 1.8, 0.1, 0), // slam elevator onto high rung
         
         // pull up onto high rung while pulling robot forward with arms

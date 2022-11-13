@@ -38,7 +38,7 @@ public class MTTDTwoBall extends ParallelCommandGroup {
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                                 new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
                                 new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.37),
+                                new RunLoader(loaderSubsystem, 1)).withTimeout(1.2),
                         parallel(
                                 new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid),
                                 new RunIntake(intakeSubsystem, 1), 
@@ -47,34 +47,10 @@ public class MTTDTwoBall extends ParallelCommandGroup {
                         parallel(new AlignTurretDefault(turretSubsystem, limelightSubsystem),
                                 new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
                                 new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1)).withTimeout(0.37),
-                        new StraightWithMotionMagic(driveBaseSubsystem, -40),
-                        parallel(
-                                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem),
-                                new StraightWithMotionMagic(driveBaseSubsystem, 6),
-                                new RunFeeder(feederSubsystem, 0.9),
                                 new RunLoader(loaderSubsystem, 1)).withTimeout(1),
-                                
+                        new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2, PIDConstants.GyrokP180,
                                 PIDConstants.GyrokI180, PIDConstants.GyrokD180),
-
-                        parallel(
-                                new StraightWithMotionMagic(driveBaseSubsystem, 15),
-                                new InstantCommand(intakeSolenoidSubsystem::actuateSolenoid),
-                                new RunIntake(intakeSubsystem, 1),
-                                new RunLoader(loaderSubsystem, 0.5)).withTimeout(2),
-                        parallel(
-                                new RunFeeder(feederSubsystem, 0.9),
-                                new RunLoader(loaderSubsystem, 1), // tune time
-                                new TurnWithGyroClosedLoop(driveBaseSubsystem, gyroSubsystem, 180, 2,
-                                        PIDConstants.GyrokP180, PIDConstants.GyrokI180, PIDConstants.GyrokD180))
-                                .withTimeout(2),
-                        parallel(
-                                new AlignTurretDefault(turretSubsystem, limelightSubsystem),
-                                new GetToTargetVelocityWithLimelight(shooterSubsystem, limelightSubsystem)),
-
-                        new StraightWithMotionMagic(driveBaseSubsystem, -40),
                         new InstantCommand(driveBaseSubsystem::coast, driveBaseSubsystem)));
 
     }
