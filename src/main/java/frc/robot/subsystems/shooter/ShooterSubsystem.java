@@ -57,18 +57,20 @@ public class ShooterSubsystem extends SubsystemBase{
 
     @Override
     public void periodic() {
-        // SmartDashboard.putNumber("tRV", getCurrentTopRawVelocity());
-        // SmartDashboard.putNumber("bRV", getCurrentBottomRawVelocity());
 
-        // SmartDashboard.putNumber("tMPS", topFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
-        // SmartDashboard.putNumber("bMPS", bottomFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
+        SmartDashboard.putNumber("tRV", getCurrentTopRawVelocity());
+        SmartDashboard.putNumber("bRV", getCurrentBottomRawVelocity());
+        SmartDashboard.putNumber("tMPS", topFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
+        SmartDashboard.putNumber("bMPS", bottomFalcon.getSelectedSensorVelocity(0) * 10 * (1/2048) * (1/RobotConstants.RotationsPerMeter));
 
-        // SmartDashboard.putNumber("tMPS", getCurrentTopVelocity());
-        // SmartDashboard.putNumber("bMPS", getCurrentBottomVelocity());
+        SmartDashboard.putNumber("tMPS", getCurrentTopVelocity());
+        SmartDashboard.putNumber("bMPS", getCurrentBottomVelocity());
 
-        // SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
-        // SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
+        SmartDashboard.putNumber("tError", getCurrentTopVelocity() - topTargetVelocity);
+        SmartDashboard.putNumber("bError", getCurrentBottomVelocity() - bottomTargetVelocity);
+        SmartDashboard.putBoolean("is on target", bothOnTarget());
     }
+
 
     public void configShooterOutputs() {
         topFalcon.configNominalOutputForward(0, 0);
