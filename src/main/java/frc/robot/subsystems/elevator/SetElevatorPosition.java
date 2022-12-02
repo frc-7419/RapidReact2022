@@ -11,14 +11,14 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class MaintainElevatorPosition extends CommandBase {
+public class SetElevatorPosition extends CommandBase {
   private ElevatorSubsystem elevatorSubsystem;
   private double pos;
   private double kp;
   private double ff;
 
   private PIDController pidController;
-  public MaintainElevatorPosition(ElevatorSubsystem elevatorSubsystem, double pos, double kp, double ff) {
+  public SetElevatorPosition(ElevatorSubsystem elevatorSubsystem, double pos, double kp, double ff) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.pos = pos;
     this.kp = kp;
@@ -34,6 +34,7 @@ public class MaintainElevatorPosition extends CommandBase {
 
     pidController = new PIDController(kp, 0, 0);
     pidController.setSetpoint(pos);
+    pidController.setTolerance(5000);
 
     elevatorSubsystem.coast();
 
@@ -56,6 +57,6 @@ public class MaintainElevatorPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return pidController.atSetpoint();
   }
 }

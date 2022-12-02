@@ -36,14 +36,13 @@ public class ArcadeDrive extends CommandBase {
     // double zRotation = rotLimiter.calculate(joystick.getRightX() * kTurn);
     double zRotation = joystick.getRightX() * kTurn;
     
-    // possible brake button?
-    // if (joystick.getBButton()) {
-    //   driveBaseSubsystem.setAllPower(0);
-    //   driveBaseSubsystem.brake();
-    // }
-    // else {}
-
     driveBaseSubsystem.coast();
+    
+    // double leftPower = kTurn * joystick.getRightX() + kSlowStraight * joystick.getRightY();
+    // double rightPower = -kTurn * joystick.getRightX()+ kSlowStraight * joystick.getRightY();
+
+    // double leftPower = xSpeed + zRotation;
+    // double rightPower = xSpeed - zRotation;
 
     double leftPower = xSpeed + zRotation;
     double rightPower = xSpeed - zRotation;
@@ -51,7 +50,6 @@ public class ArcadeDrive extends CommandBase {
     
     driveBaseSubsystem.setLeftPower(leftPower);
     driveBaseSubsystem.setRightPower(rightPower);
-    
   }
 
   @Override
@@ -61,8 +59,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBaseSubsystem.stop();
-    driveBaseSubsystem.coast(); // for auton testing
+    driveBaseSubsystem.setAllPower(0);
   }
 
 }

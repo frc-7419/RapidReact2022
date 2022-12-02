@@ -14,7 +14,7 @@ public class FeederSubsystem extends SubsystemBase {
   private TalonSRX feeder;
 
   public FeederSubsystem() {
-    feeder = new TalonSRX(CanIds.feederVictor.id);
+    feeder = new TalonSRX(CanIds.feederTalon.id);
     feeder.configVoltageCompSaturation(11);
     feeder.enableVoltageCompensation(true);
   }

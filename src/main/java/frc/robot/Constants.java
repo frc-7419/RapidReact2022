@@ -27,7 +27,7 @@ public final class Constants {
         intakeSpark(32),  
         loaderVictor(16),
         turretFalcon(62),
-        feederVictor(23),
+        feederTalon(23),
         armSpark1(11),
         armSpark2(12),
         rightElevatorFalcon(50),
@@ -43,7 +43,7 @@ public final class Constants {
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416; //meters
         public static final double kCameraHeight = 1.07; // meters
-        public static final double mountingAngle = 50;
+        public static final double mountingAngle = 42;
         public static final double focalLength = 2.9272781257541;
     }
 
@@ -77,7 +77,7 @@ public final class Constants {
 
         public static final double DriveBaseStraight = .55;
         public static final double DriveBaseTurn = .35;
-        public static final double FeederVoltage = 11*0.6
+        public static final double FeederVoltage = 11*0.9;
         ; 
         // public static final double DriveBaseLeftStraight = -.15;
         // public static final double DriveBaseRightTurn = .1; 
@@ -164,23 +164,29 @@ public final class Constants {
     }
 
     public static final Double[][] kDistanceToTopShooterVelocity = {
-        {0.92, 19.0},
+        {0.738, 19.5},
         // {1.03, 31.5},
-        {1.3, 37.0},
-        {1.6, 37.0},
-        {1.9, 42.0},
-        {2.2, 45.0},
-        {2.6, 50.0}
+        {1.098, 19.5},
+        {1.3, 26.0},
+        {1.5, 25.0},
+        {1.92, 28.5},
+        {2.3, 30.0},
+        {2.5, 34.6},
+        {2.7, 36.5},
+        {2.9, 38.0}
     };
 
     public static final Double[][] kDistanceToBottomShooterVelocity = {
-        {0.92, 50.0},
+        {0.738, 32.0},
         // {1.03, 31.5},
+        {1.098, 32.0},
         {1.3, 30.0},
-        {1.6, 35.0},
-        {1.9, 40.0},
-        {2.2, 43.0},
-        {2.6, 45.0}
+        {1.5, 32.0},
+        {1.92, 32.0},
+        {2.3, 35.0},
+        {2.5, 37.0},
+        {2.7, 37.0},
+        {2.9, 39.0}
     };
 
     // public static final Double[][] kRawVelocityToTopFf = {

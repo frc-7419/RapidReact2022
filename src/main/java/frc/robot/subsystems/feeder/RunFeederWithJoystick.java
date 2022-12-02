@@ -26,9 +26,9 @@ public class RunFeederWithJoystick extends CommandBase {
   @Override
   public void execute() {
     if(joystick.getLeftBumper()) {
-      feederSubsystem.setVoltage(Constants.PowerConstants.FeederVoltage);
-    } else if (joystick.getRightBumper()) {
       feederSubsystem.setVoltage(-Constants.PowerConstants.FeederVoltage);
+    } else if (joystick.getRightBumper()) {
+      feederSubsystem.setVoltage(Constants.PowerConstants.FeederVoltage);
     }
     else {
       feederSubsystem.setVoltage(0);
